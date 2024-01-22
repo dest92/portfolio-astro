@@ -1,24 +1,102 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import Badge from "../components/Badge.astro";
+import LinkedinIcon from "../components/icons/LinkedinIcon.astro";
+import SocialPill from "../components/SocialPill.astro";
+import GitHubIcon from "../components/icons/GitHubIcon.astro";
+import MailIcon from "../components/icons/MailIcon.astro";
+import Experience from "../components/Experience.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import BriefIcon from "../components/icons/BriefIcon.astro";
+import PromptIcon from "../components/icons/PromptIcon.astro";
+import Projects from "../components/Projects.astro";
+import AboutMe from "../components/AboutMe.astro";
+import ProfileCheckIcon from "../components/icons/ProfileCheckIcon.astro";
+import CVIcon from "../components/icons/CVIcon.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <section class="lg:w-[740] w-full mx-auto py-44">
+<Layout
+  title="Portfolio de Matías Acebal - Desarrollador y Programador Web - Analista en Sistemas"
+  description="Contratame para tener un recurso valioso en tu equipo"
+>
+  <main class="px-4">
+    <SectionContainer class="pb-20 py-44">
+      <img
+        src="https://avatars.githubusercontent.com/u/70166802?v=4"
+        alt="my photo"
+        class="mb-4 rounded-full size-12"
+      />
+
       <h1
-        class="text-white text-5xl font-bold justify-center flex flex-row gap-x-4"
+        class="flex flex-row justify-center pb-6 lg:pb-10 text-3xl md:text-4xl lg:text-5xl font-bold text-white gap-x-4 text-balance"
       >
         Hola! Soy Matías Acebal
-        <div class="flex justify-center items-center">
-          <Badge>Disponible para trabajar</Badge>
+        <div class="flex items-center justify-center">
+          <a
+            href="https://www.linkedin.com/in/matiasacebal/"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center justify-center hover:scale-105 transition"
+            ><Badge>Disponible para trabajar</Badge></a
+          >
         </div>
       </h1>
-      <h2>
-        Desarrollador FullStack estudiando Ingeniería en Sistemas. Apasionado de
-        la tecnología desde que tengo memoria
+      <h2 class="text-xl lg:text-2xl opacity-90 text-wrap max-w-[700px]">
+        Soy un <span class="text-yellow-400 opacity-80"
+          >desarrollador FullStack</span
+        >, estudiante de<span class="text-red-400 opacity-80">
+          Ingeniería en Sistemas</span
+        > y apasionado por la <span class="text-purple-600"
+          >ciberseguridad.
+        </span>
       </h2>
-    </section>
+      <nav class="flex mt-8 gap-4 flex-wrap">
+        <SocialPill href="https://www.linkedin.com/in/matiasacebal/">
+          <LinkedinIcon class="size-4 md:size-6" />
+          Linkedin
+        </SocialPill>
+        <SocialPill href="https://github.com/dest92">
+          <GitHubIcon class="size-4 md:size-6" />
+          GitHub
+        </SocialPill>
+        <SocialPill href="mailto:acebalmatias2019@gmail.com">
+          <MailIcon class="size-4 md:size-6" />
+          acebalmatias2019@gmail.com
+        </SocialPill>
+        <SocialPill
+          href="https://drive.google.com/uc?export=download&id=17lj43U6R6VdkmsBZo2zAhE8Uc6UmGffo"
+        >
+          <CVIcon class="size-4 md:size-6" />
+          CV
+        </SocialPill>
+      </nav>
+    </SectionContainer>
+    <SectionContainer id="experience" class="mb-6 text-2xl font-semibold">
+      <h2
+        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
+      >
+        <BriefIcon class="size-7" />
+        Experiencia laboral
+      </h2>
+      <Experience />
+    </SectionContainer>
+    <SectionContainer id="proyectos" class="mb-6 text-2xl font-semibold pt-10">
+      <h2
+        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
+      >
+        <PromptIcon class="size-8" />
+        Proyectos
+      </h2>
+      <Projects />
+    </SectionContainer>
+    <SectionContainer id="sobre-mi" class="pt-10">
+      <h2
+        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
+      >
+        <ProfileCheckIcon class="size-7" />
+        Sobre mi
+      </h2>
+      <AboutMe />
+    </SectionContainer>
   </main>
 </Layout>

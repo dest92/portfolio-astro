@@ -1,0 +1,42 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+const EXPERIENCIE = [
+  {
+    date: "Actualmente...",
+    title: "Desarrollador FullStack - Be a Champion",
+    description:
+      "Divulgo sobre programación y desarrollo web en diferentes plataformas. Galardonado como mejor creador de contenido de habla no-inglesa en 2022 y mejor comunidad en 2023 por GitHub.",
+    link: "https://www.beachampion.gg/",
+  },
+  {
+    date: "2023",
+    title: " Desarrollador FullStack Freelancer - Fitlife Manager",
+    description:
+      "Desarrollo y despliegue de un sistema integral de control. El sistema permite gestionar clientes, pagos, elementos de entrenamiento, entre otras funcionalidades.",
+  },
+  {
+    date: "2023",
+    title: "Desarrollador FullStack Freelancer - Fitlife Go",
+    description:
+      "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
+    link: "https://fitlifego.vercel.app/",
+  },
+
+  {
+    date: "2020 - Actualidad",
+    title: "Auditor Web en LDD Diario ",
+    description:
+      "Auditorías web, pruebas de penetración, revisión de logs e instalación de plugins Wordpress para segurizar la página web.",
+  },
+];
+---
+
+<ol class="relative ml-3 border-gray-200 border-s">
+  {
+    EXPERIENCIE.map((experiencie) => (
+      <li class="mb-10 ms-4">
+        <ExperienceItem {...experiencie} />
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,122 @@
+---
+import GitHub from "./icons/GitHubIcon.astro";
+import NextJS from "./icons/NextJSIcon.astro";
+import Tailwind from "./icons/TailwindIcon.astro";
+import LinkButton from "./LinkButton.astro";
+import ReactIcon from "./icons/ReactIcon.astro";
+import SupabaseIcon from "./icons/SupabaseIcon.astro";
+import BracketIcon from "./icons/BracketIcon.astro";
+
+const TAGS = {
+  NEXT: {
+    name: "Next.js",
+    class: "bg-black text-white",
+    icon: NextJS,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#003159] text-white",
+    icon: Tailwind,
+  },
+  REACT: {
+    name: "React.js",
+    class: "bg-[#0d1117] text-white",
+    icon: ReactIcon,
+  },
+  SUPABASE: {
+    name: "Supabase",
+    class: "bg-[#003159] text-white",
+    icon: SupabaseIcon,
+  },
+  ASTRO: {
+    name: "Astro",
+    class: "bg-[#FFA500] text-white",
+    icon: BracketIcon,
+  },
+};
+const PROJECTS = [
+  {
+    title: "Epic Clash - Juego de combates épicos",
+    description:
+      "Epic Clash es un juego de combate por turnos donde dos facciones luchan hasta que solo muere un equipo entero. Las facciones están compuestas por héroes y monstruos, y los jugadores pueden componer sus equipos con cualquier combinación de estos personajes. Cuando los personajes atacan, se muestran mensajes de combate, brindando una experiencia inmersiva.",
+    link: "https://epic-clash.vercel.app/",
+    github: "https://github.com/dest92/epic-clash",
+    image: "/projects/EpicClash.jpg",
+    tags: [TAGS.NEXT, TAGS.TAILWIND],
+  },
+  {
+    title: "Ley de Bases - Votación en tiempo real",
+    description:
+      "Aplicación web para votar y visualizar votos a favor de la Ley de Bases del Congreso de los Diputados.",
+    link: "https://ley-bases.vercel.app/",
+    github: "https://github.com/dest92/ley-omnibus-voting",
+    image: "/projects/bases.png",
+    tags: [TAGS.TAILWIND, TAGS.REACT, TAGS.SUPABASE, TAGS.ASTRO],
+  },
+];
+---
+
+<section class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ image, title, description, tags, link, github }) => (
+      <article>
+        <h3 class="text-2xl font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+          {title}
+        </h3>
+        <p class="text-lg mb-4 text-pretty">{description}</p>
+        <ul class="flex gap-x-2 flex-row mb-2">
+          {tags.map((tag) => (
+            <li>
+              <span
+                class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+              >
+                <tag.icon class="size-4" />
+                {tag.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <img
+          loading="lazy"
+          class="rounded shadow-2xl shadow-white/10 aspect-video"
+          src={image}
+          alt={`Captura de pantalla del proyecto ${image}`}
+        />
+        <footer class="flex gap-x-4 items-end justify-start mt-4">
+          {github && (
+            <LinkButton href={github}>
+              <GitHub class="size-6" />
+              Ver código fuente
+            </LinkButton>
+          )}
+          <LinkButton href={link}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4" />
+                <path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4" />
+                <path d="M12.5 3a16.989 16.989 0 0 1 1.828 4" />
+                <path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4" />
+                <path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4" />
+                <path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4" />
+                <path d="M2 10l1 4l1.5 -4l1.5 4l1 -4" />
+                <path d="M17 10l1 4l1.5 -4l1.5 4l1 -4" />
+                <path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4" />
+              </>
+            </svg>
+            Ir al sitio web
+          </LinkButton>
+        </footer>
+      </article>
+    ))
+  }
+</section>
