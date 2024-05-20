@@ -1,0 +1,35 @@
+---
+const certificados = [
+  { src: "/projects/hackingetico.png", description: "Hacking Ético - Platzi" },
+  {
+    src: "/projects/inteligencia.png",
+    description: "Inteligencia para la ciberseguridad - Platzi",
+  },
+  {
+    src: "/projects/reactnative.png",
+    description: "Introducción a React Native - Platzi",
+  },
+  { src: "/projects/redes.png", description: "Redes de Computadoras - Platzi" },
+];
+
+const hoverScale = 1.05; // Escala de aumento al hacer hover
+---
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+  {
+    certificados.map((certificado) => (
+      <div class="group relative overflow-hidden cursor-pointer">
+        <img
+          src={certificado.src}
+          alt={`Certificado de ${certificado.description}`}
+          class="w-full h-auto transition-transform duration-300 ease-in-out transform group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-30 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+          <p class="text-white text-center text-xl">
+            {certificado.description}
+          </p>
+        </div>
+      </div>
+    ))
+  }
+</section>
