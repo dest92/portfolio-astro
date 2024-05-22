@@ -3,20 +3,23 @@ import ExperienceItem from "./ExperienceItem.astro";
 const EXPERIENCIE = [
   {
     date: "Enero 2023 - Abril 2024",
-    title: "Desarrollador FullStack - Be a Champion",
+    company : "Be a Champion",
+    title: "Desarrollador FullStack",
     description:
       "Como Desarrollador Full Stack, mi enfoque se centró en el desarrollo de componentes con React usando NextJS como framework,server actions, revalidación de caché, refactorizaciones importantes de código, optimización, metodologías ágiles, planeación de sprints, backend con AWS.",
     link: "https://www.beachampion.gg/",
   },
   {
     date: "2023",
-    title: " Desarrollador FullStack Freelancer - Fitlife Manager",
+    title: " Desarrollador FullStack Freelancer",
+    company: "Fitlife Manager",
     description:
       "Desarrollo y despliegue de un sistema integral de control. El sistema permite gestionar clientes, pagos, elementos de entrenamiento, entre otras funcionalidades.",
   },
   {
     date: "2023",
     title: "Desarrollador FullStack Freelancer - Fitlife Go",
+    company: "Fitlife GO",
     description:
       "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
     link: "https://fitlifego.vercel.app/",
@@ -24,18 +27,19 @@ const EXPERIENCIE = [
 
   {
     date: "2020 - Actualidad",
-    title: "Auditor Web en LDD Diario ",
+    title: "Auditor Web",
+    company: "LDD Diario",
     description:
       "Auditorías web, pruebas de penetración, revisión de logs e instalación de plugins Wordpress para segurizar la página web.",
   },
 ];
 ---
 
-<ol class="relative ml-3 border-gray-200 border-s">
+<ol class="relative mt-16">
   {
     EXPERIENCIE.map((experiencie) => (
-      <li class="mb-10 ms-4">
-        <ExperienceItem {...experiencie} />
+      <li class="">
+        <ExperienceItem {...experiencie} link={experiencie.link} />
       </li>
     ))
   }

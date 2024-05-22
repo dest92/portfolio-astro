@@ -1,0 +1,18 @@
+---
+// Componente Gradient.astro
+---
+
+<div class="relative" style="padding-top: 1rem;"> <!-- Ajusta el padding según sea necesario -->
+    <slot></slot> <!-- Aquí se insertará el contenido, como un h1 -->
+  
+    <!-- Gradients positioned to appear below the slot content -->
+    <div class="absolute top-full left-20 right-20">
+      <div class="bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
+      <div class="bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+    </div>
+    <div class="absolute top-full left-60 right-60">
+      <div class="bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+      <div class="bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+    </div>
+  </div>
+  
