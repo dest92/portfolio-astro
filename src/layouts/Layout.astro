@@ -23,15 +23,27 @@ const { description, title } = Astro.props;
   </head>
 
   <body class="relative text-black dark:text-white">
+    <!-- Fondo mejorado con múltiples gradientes radiales -->
     <div
-      class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
-      bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
-      dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+      class="
+        absolute
+        top-0
+        bottom-0
+        z-[-2]
+        min-h-screen
+        w-full
+        bg-gray-50 
+        dark:bg-gray-950
+        bg-[radial-gradient(circle_at_25%_25%,rgba(217,216,255,0.5),transparent_40%),radial-gradient(circle_at_75%_75%,rgba(217,216,255,0.3),transparent_40%)]
+        dark:bg-[radial-gradient(circle_at_25%_25%,rgba(120,119,198,0.2),transparent_40%),radial-gradient(circle_at_75%_75%,rgba(120,119,198,0.2),transparent_40%)]
+      "
     >
     </div>
+
     <Header />
     <slot />
     <Footer />
+
     <style is:global>
       :root {
         color-scheme: light dark;
