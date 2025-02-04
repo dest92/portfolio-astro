@@ -1,7 +1,19 @@
 ---
 const { class: className, id } = Astro.props;
+import "aos/dist/aos.css";
 ---
 
-<section id={id} class={`lg:w-[740px] w-full mx-auto ${className}`}>
+<section
+  data-aos="fade-up"
+  data-aos-delay="50"
+  data-aos-duration="1000"
+  data-aos-easing="ease-in-out"
+  id={id}
+  class={`lg:w-[740px] w-full mx-auto ${className} `}
+>
   <slot />
 </section>
+<script>
+  import AOS from "aos";
+  AOS.init();
+</script>
