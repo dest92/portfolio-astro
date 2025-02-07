@@ -38,8 +38,7 @@ const TAGS = {
 const PROJECTS = [
   {
     title: "GreenPrint Landing Page",
-    description:
-      "Landing page para la empresa GreenPrint",
+    description: "Landing page para la empresa GreenPrint",
     link: "https://greenprint-landing.vercel.app/",
     github: "https://github.com/dest92/greenprint-landing",
     image: "/projects/landing.png",
@@ -47,8 +46,7 @@ const PROJECTS = [
   },
   {
     title: "GreenPrint Ecommerce",
-    description:
-      "Ecommerce básico para la empresa GreenPrint",
+    description: "Ecommerce básico para la empresa GreenPrint",
     link: "https://greenprint-ecommerce.vercel.app",
     github: "https://github.com/dest92/greenprint-ecommerce",
     image: "/projects/ecommerce.png",
@@ -102,7 +100,7 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group sm:flex-row sm:space-x-4 sm:space-y-0">
         <div class="w-full sm:w-1/2">
-          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-4 transition duration-500 ease-in-out transform shadow-xl overflow-hidden rounded-xl sm:rounded-xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+          <div class="intersect-once intersect:motion-preset-slide-up relative flex flex-col items-center col-span-6 row-span-5 gap-4 transition duration-500 ease-in-out transform shadow-xl overflow-hidden rounded-xl sm:rounded-xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
             <img
               alt=""
               class="object-cover object-top w-full h-56 transition duration-500 sm:h-full sm:scale-110 sm:group-hover:scale-105"
@@ -153,3 +151,9 @@ const PROJECTS = [
     ))
   }
 </div>
+
+<script>
+  import { Observer } from "tailwindcss-intersect";
+
+  Observer.start();
+</script>
