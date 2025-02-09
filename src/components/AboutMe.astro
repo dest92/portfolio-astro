@@ -1,47 +1,88 @@
 ---
-import { PinContainer } from "./3dPin";
 ---
 
-<section class="flex flex-col md:flex-row gap-8 justify-center items-center">
-  <div
-    class="[&>p]:mb-4 [&>p>strong]:text-yellow-400 [&>p>strong]:font-semibold text-pretty order-2 md:order-1"
-  >
-    <p>
-      Hola, soy Matías Acebal, Desarrollador FullStack y Analista en Sistemas.
-      Empecé a programar a los 17 años y, desde entonces, he liderado proyectos
-      como FitLife Manager, un sistema para gimnasios con más de 600 usuarios
-      activos, y he colaborado en la documentación y refactorización de
-      aplicaciones clave en startups.
-    </p>
-    <p>
-      También tengo experiencia en auditorías web y pruebas de penetración,
-      fruto de mi interés por la ciberseguridad. Actualmente, estoy finalizando
-      mi Ingeniería en Sistemas y me apasiona crear soluciones escalables y de
-      alto impacto para diversas industrias
-    </p>
+<section class="flex flex-col md:flex-row gap-12 justify-between items-start">
+  <div class="order-2 md:order-1 w-full md:w-3/5">
+    <div class="flex flex-col gap-8">
+      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
+        <h3 class="text-lg font-semibold text-yellow-600 dark:text-yellow-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
+          Mi Historia
+        </h3>
+        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
+          Hola, soy Matías Acebal, Desarrollador FullStack y Analista en Sistemas.
+          Empecé a programar a los 17 años y, desde entonces, he liderado proyectos
+          como <span class="text-yellow-600 dark:text-yellow-400 font-medium">FitLife Manager</span>, un sistema para gimnasios con más de 600 usuarios
+          activos.
+        </p>
+      </div>
+
+      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
+        <h3 class="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
+          Mi Enfoque
+        </h3>
+        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
+          Me especializo en crear soluciones escalables y de alto impacto. Mi experiencia en 
+          <span class="text-emerald-600 dark:text-emerald-400 font-medium">auditorías web y pruebas de penetración</span> 
+          refleja mi pasión por la ciberseguridad y el desarrollo seguro.
+        </p>
+      </div>
+
+      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
+        <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
+          Actualmente
+        </h3>
+        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
+          Estoy finalizando mi <span class="text-purple-600 dark:text-purple-400 font-medium">Ingeniería en Sistemas</span> 
+          mientras trabajo en proyectos que combinan innovación técnica con impacto real en 
+          diversas industrias.
+        </p>
+      </div>
+    </div>
   </div>
-  <!-- <img src="/me.jpg" class="rounded-full size-64 order-1 md:order-2" /> -->
-  <div class="order-1 md:order-2 pb-5">
-    <PinContainer
-      client:only
-      title="Mi Linkedin"
-      href="https://www.linkedin.com/in/matiasacebal/"
-    >
-      <a href="https://www.linkedin.com/in/matiasacebal/" target="_blank">
-        <div
-          class="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[20rem]"
-        >
-          <h3 class="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">
-            Desarrollador FullStack y Analista en Sistemas
+
+  <div class="order-1 md:order-2 w-full md:w-2/5">
+    <div class="md:sticky md:top-24 w-full flex justify-center">
+      <a
+        href="https://www.linkedin.com/in/matiasacebal/"
+        target="_blank"
+        rel="noopener"
+        class="group relative flex flex-col items-center rounded-2xl 
+        bg-gradient-to-b from-neutral-900/90 to-neutral-900/70 
+        backdrop-blur-sm border border-white/10 
+        shadow-lg shadow-black/20 
+        transition duration-300 
+        hover:scale-[1.02] hover:shadow-xl hover:shadow-black/20
+        w-[18rem] p-6"
+      >
+        <div class="absolute inset-0 bg-gradient-to-b from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+        
+        <img 
+          src="/me.jpg" 
+          alt="Matías Acebal" 
+          class="rounded-lg size-28 object-cover transition-transform duration-300 shadow-lg group-hover:scale-105 z-10"
+        />
+        
+        <div class="text-center mt-4 z-10">
+          <h3 class="font-bold text-base text-white mb-2">
+            Desarrollador FullStack & Analista en Sistemas
           </h3>
-          <div class="text-base !m-0 !p-0 font-normal">
-            <span class="text-slate-500"> Sí, la tecnología es mi pasión.</span>
-          </div>
-          <div class="justify-center text-center align-middle flex pt-10">
-            <img src="/me.jpg" class="rounded-full h-32 w-32" />
-          </div>
+          <p class="text-sm text-gray-300">
+            Construyendo el futuro digital, una línea de código a la vez.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2 mt-4 z-10">
+          <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+            FullStack
+          </span>
+          <span class="px-3 py-1 text-xs font-medium rounded-full bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
+            Ciberseguridad
+          </span>
+          <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">
+            Sistemas
+          </span>
         </div>
       </a>
-    </PinContainer>
+    </div>
   </div>
 </section>

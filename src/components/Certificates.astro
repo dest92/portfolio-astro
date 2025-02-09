@@ -1,36 +1,133 @@
 ---
-const certificados = [
-  { src: "/projects/hack.png", description: "Hacking Ético - Platzi" },
-  {
-    src: "/projects/inteligencia.png",
-    description: "Inteligencia para la ciberseguridad - Platzi",
-  },
-  {
-    src: "/projects/reactnative.png",
-    description: "Introducción a React Native - Platzi",
-  },
-  { src: "/projects/redes.png", description: "Redes de Computadoras - Platzi" },
-  { src: "/projects/html.jpg", description: "Curso de HTML - Udemy" },
-];
+import Modal from "./Modal.astro";
 
-const hoverScale = 1.05; // Escala de aumento al hacer hover
+const certificados = [
+  {
+    id: "cert-1",
+    src: "/projects/hack.png",
+    description: "Hacking Ético",
+    platform: "Platzi",
+    fecha: "2023",
+  },
+  {
+    id: "cert-2",
+    src: "/projects/inteligencia.png",
+    description: "Inteligencia para la ciberseguridad",
+    platform: "Platzi",
+    fecha: "2023",
+  },
+  {
+    id: "cert-3",
+    src: "/projects/reactnative.png",
+    description: "Introducción a React Native",
+    platform: "Platzi",
+    fecha: "2023",
+  },
+  {
+    id: "cert-4",
+    src: "/projects/redes.png",
+    description: "Redes de Computadoras",
+    platform: "Platzi",
+    fecha: "2023",
+  },
+  {
+    id: "cert-5",
+    src: "/projects/html.jpg",
+    description: "Desarrollo Web con HTML",
+    platform: "Udemy",
+    fecha: "2022",
+  },
+];
 ---
-<!-- Componente de Certificados con Grilla más Grande al Estilo Bento -->
-<section class="p-4 max-w-7xl mx-auto">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {
-      certificados.map(({ src, description }) => (
-        <div class="group relative cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
-          <img
-            src={src}
-            alt={`Certificado de ${description}`}
-            class="w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-black bg-opacity-40 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <p class="text-white text-xl px-3 text-center">{description}</p>
-          </div>
-        </div>
-      ))
-    }
+
+<section class="px-4">
+  <div class="max-w-4xl mx-auto">
+    <h2
+      class="text-3xl font-bold mb-12 flex items-center gap-x-3 text-gray-800 dark:text-white/80"
+    >
+      <!-- ... header existente ... -->
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        certificados.map(({ id, src, description, platform, fecha }) => (
+          <>
+            <article
+              class="group relative bg-white/50 dark:bg-gray-900/40 backdrop-blur-lg rounded-xl overflow-hidden border border-gray-200/50 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 cursor-pointer"
+              onclick={`document.getElementById('${id}').showModal()`}
+            >
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  src={src}
+                  alt={`Certificado de ${description}`}
+                  class="w-full h-full object-cover object-center transition duration-500 ease-in-out group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60" />
+              </div>
+
+              <div class="relative p-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xs font-medium px-2 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border border-yellow-200/50 dark:border-yellow-500/20">
+                    {platform}
+                  </span>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">{fecha}</span>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
+                  {description}
+                </h3>
+              </div>
+            </article>
+
+            <Modal id={id}>
+              <img
+                src={src}
+                alt={`Certificado de ${description}`}
+                class="w-full h-auto rounded-lg"
+              />
+            </Modal>
+          </>
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<style>
+  dialog::backdrop {
+    animation: fade-in 0.5s ease;
+  }
+
+  dialog[open] {
+    animation: scale-in 0.3s ease-out;
+  }
+
+  dialog:not([open]) {
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

@@ -18,63 +18,72 @@ import HonourIcon from "../components/icons/HonourIcon.astro";
 ---
 
 <Layout
-  title="Portfolio de Matías Acebal - Desarrollador y Programador Web - Analista en Sistemas"
-  description="Contratame para tener un recurso valioso en tu equipo"
+  title="Matías Acebal - Desarrollador FullStack y Analista en Sistemas"
+  description="Desarrollador FullStack, Analista en Sistemas y estudiante de Ingeniería. Especializado en desarrollo web y ciberseguridad."
 >
   <main class="px-4">
-    <SectionContainer class="pb-20 py-44">
-      <img
-        src="https://avatars.githubusercontent.com/u/70166802?v=4"
-        alt="my photo"
-        class="mb-4 rounded-full size-12"
-      />
+    <SectionContainer class="py-44 pb-32">
+      <div class="flex flex-col items-center justify-center">
+        <img
+          src="https://avatars.githubusercontent.com/u/70166802?v=4"
+          alt="Foto de perfil de Matías Acebal"
+          class="rounded-full size-16 hover:scale-105 transition-all duration-300 shadow-lg mb-6"
+          loading="eager"
+        />
 
-      <h1
-        class="flex flex-row justify-center pb-6 lg:pb-10 text-3xl md:text-4xl lg:text-5xl font-bold dark:text-white text-black gap-x-4 text-balance"
-      >
-        Hola! Soy Matías Acebal
-        <div class="flex items-center justify-center">
-          <a
+        <h1 class="flex flex-col sm:flex-row items-center justify-center gap-4 text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white text-balance text-center">
+          ¡Hola! Soy Matías Acebal
+      
+        </h1>
+
+        <h2 class="mt-6 text-xl lg:text-2xl text-black/80 dark:text-white/80 text-balance max-w-[700px] text-center leading-relaxed">
+          Soy un 
+          <span class="text-yellow-600 dark:text-yellow-400 font-semibold">
+            desarrollador FullStack
+          </span>,
+          <span class="text-emerald-600 dark:text-emerald-400 font-semibold">
+            Analista en Sistemas
+          </span>, estudiante de 
+          <span class="text-red-600 dark:text-red-400 font-semibold">
+            Ingeniería en Sistemas
+          </span> 
+          y apasionado por la 
+          <span class="text-purple-600 dark:text-purple-400 font-semibold">
+            ciberseguridad
+          </span>.
+        </h2>
+
+        <nav class="flex flex-wrap items-center justify-center gap-4 mt-8">
+          <SocialPill 
             href="https://www.linkedin.com/in/matiasacebal/"
-            target="_blank"
-            rel="noopener"
-            class="flex items-center justify-center hover:scale-105 transition"
-            ><Badge>Disponible para trabajar</Badge></a
+            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
           >
-        </div>
-      </h1>
-      <h2 class="text-xl lg:text-2xl opacity-90 text-wrap max-w-[700px]">
-        Soy un <span class="dark:text-yellow-400 text-orange-600 opacity-80"
-          >desarrollador FullStack</span
-        >
-        <span class="dark:text-emerald-400 text-emerald-600 opacity-80"
-          >, Analista en Sistemas</span
-        >, estudiante de<span class="text-red-400 opacity-80">
-          Ingeniería en Sistemas</span
-        > y apasionado por la <span class="text-purple-600"
-          >ciberseguridad.
-        </span>
-      </h2>
-      <nav class="flex mt-8 gap-4 flex-wrap">
-        <SocialPill href="https://www.linkedin.com/in/matiasacebal/">
-          <LinkedinIcon class="size-4 md:size-6" />
-          Linkedin
-        </SocialPill>
-        <SocialPill href="https://github.com/dest92">
-          <GitHubIcon class="size-4 md:size-6" />
-          GitHub
-        </SocialPill>
-        <SocialPill href="mailto:acebalmatias2019@gmail.com">
-          <MailIcon class="size-4 md:size-6" />
-          acebalmatias2019@gmail.com
-        </SocialPill>
-        <SocialPill
-          href="https://drive.google.com/file/d/1HZZDJKWN8ENUauBF27h0n1gdZkJClyON/view?usp=sharing"
-        >
-          <CVIcon class="size-4 md:size-6" />
-          CV
-        </SocialPill>
-      </nav>
+            <LinkedinIcon class="size-4 md:size-6" />
+            LinkedIn
+          </SocialPill>
+          <SocialPill 
+            href="https://github.com/dest92"
+            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
+          >
+            <GitHubIcon class="size-4 md:size-6" />
+            GitHub
+          </SocialPill>
+          <SocialPill 
+            href="mailto:acebalmatias2019@gmail.com"
+            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
+          >
+            <MailIcon class="size-4 md:size-6" />
+            Email
+          </SocialPill>
+          <SocialPill 
+            href="https://drive.google.com/file/d/1HZZDJKWN8ENUauBF27h0n1gdZkJClyON/view?usp=sharing"
+            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
+          >
+            <CVIcon class="size-4 md:size-6" />
+            CV
+          </SocialPill>
+        </nav>
+      </div>
     </SectionContainer>
     <SectionContainer id="experience" class="mb-6 text-2xl font-semibold">
       <h2
@@ -102,7 +111,7 @@ import HonourIcon from "../components/icons/HonourIcon.astro";
         class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
       >
         <HonourIcon class="size-8" />
-        Certificaciones
+        Certificaciones y cursos
       </h2>
       <Certificates />
     </SectionContainer>
