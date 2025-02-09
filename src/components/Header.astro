@@ -3,31 +3,57 @@ import DarkModeSwitcher from "./DarkModeSwitcher.astro";
 ---
 
 <header
-  class="flex justify-center items-center sticky top-0 w-full max-w-screen-xl mx-auto py-3 sm:py-5 z-10"
+  class="flex justify-center items-center w-full max-w-screen-xl mx-auto py-6 sm:py-8 px-4"
 >
   <nav
-    class="flex items-center gap-2 sm:gap-3 p-2 rounded-full bg-neutral-200 bg-opacity-60 dark:bg-neutral-800 dark:bg-opacity-60 transition-all duration-300 ease-in-out backdrop-blur-xl shadow-lg relative"
+    class="relative flex items-center w-fit gap-3 sm:gap-4 p-3 rounded-2xl bg-neutral-900/90 dark:bg-neutral-950/90 transition-all duration-300 ease-in-out backdrop-blur-md shadow-xl"
   >
-    <div class="absolute inset-0 rounded-full shadow-lg"
-      style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.3);">
+    <button
+      id="menu-toggle"
+      class="lg:hidden flex items-center text-white"
+      aria-label="Abrir menú"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </button>
+
+    <span class="lg:hidden font-semibold text-white">Portfolio</span>
+
+    <div
+      id="mobile-menu"
+      class="lg:flex items-center justify-center gap-3 sm:gap-4 absolute lg:static lg:mx-0 top-full left-0 right-0 mt-2 lg:mt-0 bg-neutral-900/90 dark:bg-neutral-950/90 lg:bg-transparent lg:dark:bg-transparent rounded-2xl lg:rounded-none p-2 lg:p-0 hidden shadow-xl lg:shadow-none z-50 min-w-[200px] lg:min-w-fit"
+    >
+      <a
+        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-2 sm:py-2.5 px-4 sm:px-5 rounded-xl text-sm sm:text-base font-medium text-center"
+        href="/#">Inicio</a
+      >
+      <a
+        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-2 sm:py-2.5 px-4 sm:px-5 rounded-xl text-sm sm:text-base font-medium text-center"
+        href="/#experience">Experiencia</a
+      >
+      <a
+        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-2 sm:py-2.5 px-4 sm:px-5 rounded-xl text-sm sm:text-base font-medium text-center"
+        href="/#proyectos">Proyectos</a
+      >
+      <a
+        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-2 sm:py-2.5 px-4 sm:px-5 rounded-xl text-sm sm:text-base font-medium text-center"
+        href="/#sobre-mi">Sobre mí</a
+      >
     </div>
-    <a
-      class="hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-300 ease-in-out py-1 sm:py-2 px-2 sm:px-4 rounded-full text-xs sm:text-sm md:text-base relative z-10"
-      href="/#">Inicio</a
-    >
-    <a
-      class="hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-300 ease-in-out py-1 sm:py-2 px-2 sm:px-4 rounded-full text-xs sm:text-sm md:text-base relative z-10"
-      href="/#experience">Experiencia</a
-    >
-    <a
-      class="hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-300 ease-in-out py-1 sm:py-2 px-2 sm:px-4 rounded-full text-xs sm:text-sm md:text-base relative z-10"
-      href="/#proyectos">Proyectos</a
-    >
-    <a
-      class="hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-300 ease-in-out py-1 sm:py-2 px-2 sm:px-4 rounded-full text-xs sm:text-sm md:text-base relative z-10"
-      href="/#sobre-mi">Sobre mí</a
-    >
-    <span class="ml-auto relative z-10">
+
+    <span class="lg:ml-4">
       <DarkModeSwitcher />
     </span>
   </nav>
