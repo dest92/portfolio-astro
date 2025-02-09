@@ -13,36 +13,40 @@ const { title, company, description, link, date } = Astro.props;
 ---
 
 <div
-  class="relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-black/20 dark:before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+  class="relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-yellow-400/30 dark:before:border-yellow-400/30 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4"
 >
   <div class="relative pb-12 md:col-span-2">
     <div class="sticky top-0">
-      <span class="text-yellow-400 -left-[42px] absolute rounded-full text-5xl"
-        >&bull;</span
-      >
+      <span 
+        class="absolute -left-[43px] h-[20px] w-[20px] rounded-full bg-yellow-400/80 shadow-sm"
+        aria-hidden="true"
+      />
 
-      <h3 class="text-xl font-bold text-yellow-400">{title}</h3>
-      <h4 class="font-semibold text-xl text-gray-600 dark:text-white">
+      <h3 class="text-xl font-bold text-yellow-600 dark:text-yellow-400">{title}</h3>
+      <h4 class="font-semibold text-xl text-gray-800 dark:text-white">
         {company}
       </h4>
-      <time class="p-0 m-0 text-sm text-gray-600/80 dark:text-white/80"
-        >{date}</time
+      <time 
+        class="inline-flex items-center rounded-full bg-yellow-100/80 dark:bg-yellow-900/30 px-3 py-1 text-sm mt-2 text-yellow-900 dark:text-yellow-300"
       >
+        {date}
+      </time>
     </div>
   </div>
   <div
-    class="relative flex flex-col gap-2 pb-4 text-gray-600 dark:text-gray-300 md:col-span-3"
+    class="relative flex flex-col gap-4 pb-4 text-gray-700 dark:text-gray-300 md:col-span-3"
   >
-    <div class="font-normal text-lg">
+    <div class="font-normal text-lg [text-wrap:pretty]">
       {description}
     </div>
+
     {
       link && (
-        <LinkInline href={link}>
-          Saber más{" "}
+        <LinkInline href={link} class="text-yellow-700 dark:text-yellow-400 hover:text-yellow-500 transition-colors">
+          Ver proyecto
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 icon icon-tabler icon-tabler-chevron-right"
+            class="w-5 icon icon-tabler icon-tabler-external-link"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -52,10 +56,10 @@ const { title, company, description, link, date } = Astro.props;
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </>
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+            <path d="M11 13l9 -9" />
+            <path d="M15 4h5v5" />
           </svg>
         </LinkInline>
       )

@@ -1,0 +1,105 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<dialog
+  id={id}
+  class="modal p-4 rounded-lg max-w-3xl w-full bg-white/90 dark:bg-gray-900/90 backdrop:bg-black/50 backdrop:backdrop-blur-sm transition-all duration-300"
+>
+  <div class="relative">
+    <button
+      class="absolute -top-2 -right-2 bg-white dark:bg-gray-800 rounded-full p-1 text-gray-600 dark:text-gray-300 hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+      onclick="closeModalWithAnimation(this.closest('dialog'))"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="size-6"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M18 6l-12 12" />
+        <path d="M6 6l12 12" />
+      </svg>
+    </button>
+    <slot />
+  </div>
+</dialog>
+
+<script>
+  // Función para cerrar con animación
+  function closeModalWithAnimation(dialog: HTMLDialogElement) {
+    if (!dialog) return;
+    dialog.classList.add('closing');
+    setTimeout(() => {
+      dialog.classList.remove('closing');
+      dialog.close();
+    }, 300);
+  }
+
+  // Manejar todos los modales en la página
+  document.addEventListener('DOMContentLoaded', () => {
+    const modals = document.querySelectorAll('dialog');
+    
+    modals.forEach(modal => {
+      // Manejar clic en el botón de cerrar
+      const closeButton = modal.querySelector('button');
+      closeButton?.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModalWithAnimation(modal);
+      });
+
+      // Manejar clic fuera del modal
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModalWithAnimation(modal);
+        }
+      });
+
+      // Manejar tecla ESC
+      modal.addEventListener('cancel', (e) => {
+        e.preventDefault();
+        closeModalWithAnimation(modal);
+      });
+
+      // Prevenir scroll cuando el modal está abierto
+      modal.addEventListener('close', () => {
+        document.documentElement.style.overflow = '';
+      });
+      
+      modal.addEventListener('show', () => {
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+  });
+</script>
+
+<style>
+  dialog::backdrop {
+    transition: all 0.5s ease;
+  }
+
+  dialog.closing::backdrop {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+
+  dialog.closing {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  dialog:not([open]) {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+</style> 

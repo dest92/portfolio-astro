@@ -95,54 +95,65 @@ const PROJECTS = [
 ];
 ---
 
-<div class="flex flex-col gap-y-16">
+<div class="grid grid-cols-1 gap-8 mx-auto">
   {
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
-      <article class="flex flex-col space-x-0 space-y-8 group sm:flex-row sm:space-x-4 sm:space-y-0">
-        <div class="w-full sm:w-1/2">
-          <div class="intersect-once intersect:motion-preset-slide-up relative flex flex-col items-center col-span-6 row-span-5 gap-4 transition duration-500 ease-in-out transform shadow-xl overflow-hidden rounded-xl sm:rounded-xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+      <article class="group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
+        <div class="grid md:grid-cols-2 gap-4 p-4">
+          <div class="relative aspect-video overflow-hidden rounded-lg">
             <img
-              alt=""
-              class="object-cover object-top w-full h-56 transition duration-500 sm:h-full sm:scale-110 sm:group-hover:scale-105"
-              loading="lazy"
               src={image}
+              alt={`Captura de pantalla del proyecto ${title}`}
+              class="object-cover w-full h-full transition duration-500 ease-in-out group-hover:scale-110"
+              loading="lazy"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-40 group-hover:opacity-30 transition-opacity duration-300" />
           </div>
-        </div>
 
-        <div class="w-full sm:w-1/2 sm:max-w-lg">
-          <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100">
-            {title}
-          </h3>
-          <div class="flex flex-wrap mt-2">
-            <ul class="flex flex-row flex-wrap mb-2 gap-x-2">
-              {tags.map((tag) => (
-                <li>
+          <div class="flex flex-col justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors duration-300">
+                {title}
+              </h3>
+
+              <div class="flex flex-wrap gap-2 mt-4">
+                {tags.map((tag) => (
                   <span
-                    class={`flex gap-x-2 rounded-full text-xs sm:text-sm ${tag.class} py-1 px-2 mt-5`}
+                    class={`flex items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 backdrop-blur transition-transform duration-300 hover:scale-105`}
                   >
                     <tag.icon class="size-4" />
                     {tag.name}
                   </span>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </div>
 
-            <div class="mt-2 text-gray-700 dark:text-gray-400 font-normal text-sm sm:text-base">
-              {description}
+              <p class="mt-4 text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
+                {description}
+              </p>
             </div>
-            <footer class="flex items-end justify-start mt-4 gap-x-4">
+
+            <footer class="flex items-center gap-4">
               {github && (
-                <LinkButton href={github}>
-                  <GitHub class="size-6" />
-                  Code
-                </LinkButton>
+                <a
+                  href={github}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-white/10 dark:hover:bg-gray-800/30 hover:scale-105 active:scale-95"
+                >
+                  <GitHub class="size-5" />
+                  Código
+                </a>
               )}
               {link && (
-                <LinkButton href={link}>
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg text-yellow-800 dark:text-yellow-300 hover:bg-yellow-500/10 dark:hover:bg-yellow-900/30 hover:scale-105 active:scale-95"
+                >
                   <Link class="size-4" />
-                  Preview
-                </LinkButton>
+                  Demo
+                </a>
               )}
             </footer>
           </div>
