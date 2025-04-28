@@ -24,9 +24,8 @@ const EXPERIENCE = [
       "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
     link: "https://fitlifego.vercel.app/",
   },
-
   {
-    date: "2020 - Actualidad",
+    date: "2020 - Diciembre 2024",
     title: "Auditor Web",
     company: "LDD Diario",
     description:
@@ -35,12 +34,26 @@ const EXPERIENCE = [
 ];
 ---
 
-<ol class="relative mt-16">
-  {
-    EXPERIENCE.map((experience) => (
-      <li class="text-gray-800 dark:text-gray-200">
+<section class="timeline-container">
+  <div class="timeline-wrapper">
+    {
+      EXPERIENCE.map((experience) => (
         <ExperienceItem {...experience} link={experience.link} />
-      </li>
-    ))
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
   }
-</ol>
+
+  .timeline-wrapper {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+</style>

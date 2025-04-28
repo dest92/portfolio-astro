@@ -12,57 +12,308 @@ interface Props {
 const { title, company, description, link, date } = Astro.props;
 ---
 
-<div
-  class="relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-yellow-400/30 dark:before:border-yellow-400/30 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4"
->
-  <div class="relative pb-12 md:col-span-2">
-    <div class="sticky top-0">
-      <span 
-        class="absolute -left-[43px] h-[20px] w-[20px] rounded-full bg-yellow-400/80 shadow-sm"
-        aria-hidden="true"
-      />
-
-      <h3 class="text-xl font-bold text-yellow-600 dark:text-yellow-400">{title}</h3>
-      <h4 class="font-semibold text-xl text-gray-800 dark:text-white">
-        {company}
-      </h4>
-      <time 
-        class="inline-flex items-center rounded-full bg-yellow-100/80 dark:bg-yellow-900/30 px-3 py-1 text-sm mt-2 text-yellow-900 dark:text-yellow-300"
-      >
-        {date}
-      </time>
-    </div>
+<div class="timeline-item group">
+  <!-- Marcador de tiempo con efecto de brillo -->
+  <div class="timeline-marker">
+    <div class="timeline-dot"></div>
+    <div class="timeline-line"></div>
   </div>
-  <div
-    class="relative flex flex-col gap-4 pb-4 text-gray-700 dark:text-gray-300 md:col-span-3"
-  >
-    <div class="font-normal text-lg [text-wrap:pretty]">
-      {description}
+  
+  <!-- Contenedor principal con efecto de cristal -->
+  <div class="timeline-content">
+    <!-- Encabezado con fecha destacada -->
+    <div class="timeline-header">
+      <div class="timeline-date">
+        <span>{date}</span>
+      </div>
+      <div class="timeline-title">
+        <h3>{title}</h3>
+        <h4>{company}</h4>
+      </div>
     </div>
-
-    {
-      link && (
-        <LinkInline href={link} class="text-yellow-700 dark:text-yellow-400 hover:text-yellow-500 transition-colors">
-          Ver proyecto
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 icon icon-tabler icon-tabler-external-link"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-            <path d="M11 13l9 -9" />
-            <path d="M15 4h5v5" />
-          </svg>
-        </LinkInline>
-      )
-    }
+    
+    <!-- Contenido de la experiencia -->
+    <div class="timeline-body">
+      <p>{description}</p>
+      
+      {
+        link && (
+          <LinkInline href={link} class="timeline-link">
+            <span>Ver proyecto</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="timeline-icon"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+              <path d="M11 13l9 -9" />
+              <path d="M15 4h5v5" />
+            </svg>
+          </LinkInline>
+        )
+      }
+    </div>
   </div>
 </div>
+
+<style>
+  /* Estilos base para la línea de tiempo */
+  .timeline-item {
+    position: relative;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+    transition: all 0.5s ease;
+  }
+  
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  
+  /* Marcador de tiempo con línea vertical */
+  .timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+    z-index: 2;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    top: 1.5rem;
+    bottom: 0;
+    left: 50%;
+    width: 0.25rem;
+    background: linear-gradient(to bottom, rgba(251, 191, 36, 0.8) 0%, rgba(251, 191, 36, 0.1) 100%);
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  .timeline-item:last-child .timeline-line {
+    display: none;
+  }
+  
+  /* Contenido principal */
+  .timeline-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid rgba(20, 6, 6, 0.1);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    transform-origin: left center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, transparent 100%);
+    z-index: -1;
+  }
+  
+  /* Encabezado con fecha */
+  .timeline-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .timeline-date {
+    display: inline-flex;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.05) 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: rgb(161, 98, 7);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    box-shadow: 0 2px 10px rgba(251, 191, 36, 0.1);
+    align-self: flex-start;
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-title h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(to right, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-title h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0;
+    color: #1f2937;
+    transition: all 0.3s ease;
+  }
+  
+  /* Cuerpo del contenido */
+  .timeline-body {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-body p {
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+    color: #4b5563;
+    font-size: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Enlace con efecto */
+  .timeline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border-radius: 0.5rem;
+    color: #b45309;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .timeline-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efectos hover */
+  .timeline-item:hover .timeline-dot {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.7);
+  }
+  
+  .timeline-item:hover .timeline-content {
+    transform: translateX(0.5rem) scale(1.01);
+    border-color: rgba(251, 191, 36, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .timeline-item:hover .timeline-date {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2);
+  }
+  
+  .timeline-item:hover .timeline-title h3 {
+    transform: translateX(0.5rem);
+  }
+  
+  .timeline-item:hover .timeline-title h4 {
+    transform: translateX(0.25rem);
+    color: #4b5563;
+  }
+  
+  .timeline-link:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.1) 100%);
+    transform: translateY(-0.25rem);
+    box-shadow: 0 5px 15px rgba(251, 191, 36, 0.15);
+  }
+  
+  .timeline-link:hover .timeline-icon {
+    transform: translateX(0.25rem);
+  }
+  
+  /* Modo oscuro */
+  @media (prefers-color-scheme: dark) {
+    .timeline-content {
+      background: rgba(17, 24, 39, 0.4);
+      border-color: rgba(251, 191, 36, 0.1);
+    }
+    
+    .timeline-title h4 {
+      color: #e5e7eb;
+    }
+    
+    .timeline-body p {
+      color: #d1d5db;
+    }
+    
+    .timeline-date {
+      color: #fbbf24;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+    }
+    
+    .timeline-link {
+      color: #fbbf24;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+    }
+    
+    .timeline-item:hover .timeline-title h4 {
+      color: #f3f4f6;
+    }
+  }
+  
+  /* Animación de entrada */
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .timeline-item {
+    animation: fadeInRight 0.8s ease forwards;
+    opacity: 0;
+  }
+  
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.9s; }
+</style>
