@@ -563,7 +563,10 @@ import NavLink from "./NavLink.astro";
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').slice(1);
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        const targetId = href.slice(1);
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {

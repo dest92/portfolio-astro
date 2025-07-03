@@ -302,9 +302,25 @@
 </style>
 
 <script>
-  const terminal = {
+  interface TerminalCommands {
+    [key: string]: () => Array<{ text: string; class: string }> | string;
+  }
+
+  interface Terminal {
+    content: HTMLElement | null;
+    input: HTMLInputElement | null;
+    cursor: HTMLElement | null;
+    history: string[];
+    historyIndex: number;
+    commands: TerminalCommands;
+    addLine: (content: any, isInput?: boolean) => void;
+    executeCommand: (cmd: string) => void;
+    init: () => void;
+  }
+
+  const terminal: Terminal = {
     content: document.getElementById('terminal-content'),
-    input: document.getElementById('terminal-input'),
+    input: document.getElementById('terminal-input') as HTMLInputElement | null,
     cursor: document.getElementById('cursor'),
     history: [],
     historyIndex: 0,
@@ -419,7 +435,9 @@
       ]
     },
     
-    addLine(content, isInput = false) {
+    addLine(content: any, isInput = false) {
+      if (!this.content) return;
+      
       const line = document.createElement('div');
       line.className = 'terminal-line';
       
@@ -435,7 +453,7 @@
       line.scrollIntoView({ behavior: 'smooth' });
     },
     
-    executeCommand(cmd) {
+    executeCommand(cmd: string) {
       const command = cmd.toLowerCase().trim();
       this.addLine(cmd, true);
       
@@ -445,7 +463,9 @@
         const result = this.commands[command]();
         
         if (result === 'CLEAR') {
-          this.content.innerHTML = '';
+          if (this.content) {
+            this.content.innerHTML = '';
+          }
           return;
         }
         
@@ -457,8 +477,8 @@
           this.addLine(result);
         }
       } else {
-        this.addLine(`bash: ${command}: command not found`, false);
-        this.addLine("Escribe 'help' para ver los comandos disponibles", false);
+        this.addLine(`bash: ${command}: command not found`);
+        this.addLine("Escribe 'help' para ver los comandos disponibles");
       }
       
       this.history.push(cmd);
@@ -466,7 +486,11 @@
     },
     
     init() {
+      if (!this.input) return;
+      
       this.input.addEventListener('keydown', (e) => {
+        if (!this.input) return;
+        
         if (e.key === 'Enter') {
           this.executeCommand(this.input.value);
           this.input.value = '';
@@ -490,8 +514,10 @@
       
       // Keep focus on terminal
       document.addEventListener('click', (e) => {
-        if (e.target.closest('.terminal-window')) {
-          this.input.focus();
+        if (e.target && (e.target as HTMLElement).closest('.terminal-window')) {
+          if (this.input) {
+            this.input.focus();
+          }
         }
       });
     }

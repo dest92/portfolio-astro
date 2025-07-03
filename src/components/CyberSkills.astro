@@ -467,9 +467,6 @@
     const container = document.getElementById('matrix-rain');
     if (!container) return;
     
-    const chars = '01010101';
-    const columns = Math.floor(container.offsetWidth / 20);
-    
     function createDrop() {
       const drop = document.createElement('div');
       drop.textContent = chars[Math.floor(Math.random() * chars.length)];
@@ -491,6 +488,7 @@
       }, 3000);
     }
     
+    const chars = '01010101';
     // Create periodic drops
     setInterval(createDrop, 200);
   }
