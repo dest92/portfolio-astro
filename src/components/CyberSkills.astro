@@ -467,6 +467,8 @@
     const container = document.getElementById('matrix-rain');
     if (!container) return;
     
+    const chars = '01010101';
+    
     function createDrop() {
       const drop = document.createElement('div');
       drop.textContent = chars[Math.floor(Math.random() * chars.length)];
@@ -479,7 +481,9 @@
       drop.style.animation = 'matrix-fall 3s linear infinite';
       drop.style.animationDelay = Math.random() * 2 + 's';
       
-      container.appendChild(drop);
+      if (container) {
+        container.appendChild(drop);
+      }
       
       setTimeout(() => {
         if (drop.parentNode) {
@@ -488,7 +492,6 @@
       }, 3000);
     }
     
-    const chars = '01010101';
     // Create periodic drops
     setInterval(createDrop, 200);
   }
