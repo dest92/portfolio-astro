@@ -1,0 +1,504 @@
+<section class="terminal-container">
+  <div class="terminal-window">
+    <!-- Terminal Header -->
+    <div class="terminal-header">
+      <div class="terminal-buttons">
+        <span class="terminal-button close"></span>
+        <span class="terminal-button minimize"></span>
+        <span class="terminal-button maximize"></span>
+      </div>
+      <div class="terminal-title">matias@portfolio:~$</div>
+    </div>
+    
+    <!-- Terminal Body -->
+    <div class="terminal-body">
+      <div class="terminal-content" id="terminal-content">
+        <div class="terminal-line">
+          <span class="terminal-prompt">guest@matias-portfolio:~$</span>
+          <span class="terminal-text">help</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output">Comandos disponibles:</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  whoami</span>
+          <span class="terminal-output"> - Información personal</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  skills</span>
+          <span class="terminal-output"> - Habilidades técnicas</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  experience</span>
+          <span class="terminal-output"> - Experiencia laboral</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  projects</span>
+          <span class="terminal-output"> - Proyectos destacados</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  contact</span>
+          <span class="terminal-output"> - Información de contacto</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  clear</span>
+          <span class="terminal-output"> - Limpiar terminal</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output terminal-command">  matrix</span>
+          <span class="terminal-output"> - ¿Te atreves? 😎</span>
+        </div>
+      </div>
+      
+      <!-- Input Line -->
+      <div class="terminal-input-line">
+        <span class="terminal-prompt">guest@matias-portfolio:~$</span>
+        <input 
+          type="text" 
+          class="terminal-input" 
+          id="terminal-input"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="terminal-cursor" id="cursor">_</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .terminal-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    perspective: 1000px;
+  }
+  
+  .terminal-window {
+    background: linear-gradient(145deg, #1a1a1a 0%, #0d1117 100%);
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transform: rotateX(2deg);
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+  
+  .terminal-window:hover {
+    transform: rotateX(0deg) translateY(-5px);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(0, 255, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .terminal-header {
+    background: linear-gradient(90deg, #2d3748 0%, #1a202c 100%);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .terminal-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .terminal-button.close {
+    background: #ff5f57;
+  }
+  
+  .terminal-button.minimize {
+    background: #ffbd2e;
+  }
+  
+  .terminal-button.maximize {
+    background: #28ca42;
+  }
+  
+  .terminal-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px currentColor;
+  }
+  
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+  
+  .terminal-body {
+    padding: 20px;
+    min-height: 400px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #00ff00;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.02) 100%);
+    position: relative;
+  }
+  
+  .terminal-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 0, 0.03) 2px,
+      rgba(0, 255, 0, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+  
+  .terminal-line {
+    margin-bottom: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+  }
+  
+  .terminal-line:nth-child(1) { animation-delay: 0.1s; }
+  .terminal-line:nth-child(2) { animation-delay: 0.2s; }
+  .terminal-line:nth-child(3) { animation-delay: 0.3s; }
+  .terminal-line:nth-child(4) { animation-delay: 0.4s; }
+  .terminal-line:nth-child(5) { animation-delay: 0.5s; }
+  .terminal-line:nth-child(6) { animation-delay: 0.6s; }
+  .terminal-line:nth-child(7) { animation-delay: 0.7s; }
+  .terminal-line:nth-child(8) { animation-delay: 0.8s; }
+  .terminal-line:nth-child(9) { animation-delay: 0.9s; }
+  
+  .terminal-prompt {
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff00;
+  }
+  
+  .terminal-text {
+    color: #ffffff;
+    margin-left: 8px;
+  }
+  
+  .terminal-output {
+    color: #a0a0a0;
+  }
+  
+  .terminal-command {
+    color: #00ffff !important;
+    font-weight: bold;
+    text-shadow: 0 0 3px #00ffff;
+  }
+  
+  .terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    position: relative;
+  }
+  
+  .terminal-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin-left: 8px;
+    flex: 1;
+    caret-color: transparent;
+  }
+  
+  .terminal-cursor {
+    color: #00ff00;
+    font-weight: bold;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+  
+  .success {
+    color: #00ff00 !important;
+  }
+  
+  .error {
+    color: #ff4444 !important;
+  }
+  
+  .warning {
+    color: #ffaa00 !important;
+  }
+  
+  .info {
+    color: #00aaff !important;
+  }
+  
+  /* Light mode adjustments */
+  @media (prefers-color-scheme: light) {
+    .terminal-window {
+      background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  :global(.light) .terminal-window {
+    background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes matrix {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+  
+  .matrix-char {
+    position: fixed;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff00;
+    z-index: 9999;
+    pointer-events: none;
+    animation: matrix 3s linear infinite;
+  }
+</style>
+
+<script>
+  const terminal = {
+    content: document.getElementById('terminal-content'),
+    input: document.getElementById('terminal-input'),
+    cursor: document.getElementById('cursor'),
+    history: [],
+    historyIndex: 0,
+    
+    commands: {
+      whoami: () => [
+        { text: "════════════════════════════════════════", class: "info" },
+        { text: "│           MATÍAS ACEBAL                │", class: "success" },
+        { text: "════════════════════════════════════════", class: "info" },
+        { text: "Rol: Desarrollador FullStack & Analista en Sistemas", class: "" },
+        { text: "Edad: 22 años", class: "" },
+        { text: "Ubicación: Argentina 🇦🇷", class: "" },
+        { text: "Estado: Finalizando Ingeniería en Sistemas", class: "" },
+        { text: "Especialidad: Desarrollo Web & Ciberseguridad", class: "warning" },
+        { text: "Años programando: 5+ años", class: "" },
+        { text: "Proyecto destacado: FitLife Manager (600+ usuarios)", class: "success" },
+      ],
+      
+      skills: () => [
+        { text: "╔═══════════════════════════════════════╗", class: "info" },
+        { text: "║            HABILIDADES TÉCNICAS       ║", class: "info" },
+        { text: "╚═══════════════════════════════════════╝", class: "info" },
+        { text: "Frontend: React, Vue.js, HTML5, CSS3, JavaScript, TypeScript", class: "success" },
+        { text: "Backend: Node.js, Python, PHP, Java", class: "success" },
+        { text: "Bases de datos: MySQL, PostgreSQL, MongoDB", class: "success" },
+        { text: "DevOps: Docker, Git, Linux, AWS", class: "warning" },
+        { text: "Ciberseguridad: Auditorías web, Pentesting, OWASP", class: "error" },
+        { text: "Otras: Astro, Tailwind CSS, Express.js", class: "" },
+      ],
+      
+      experience: () => [
+        { text: "🚀 EXPERIENCIA PROFESIONAL", class: "info" },
+        { text: "────────────────────────────────────", class: "info" },
+        { text: "💼 Desarrollador FullStack Freelance (2021-presente)", class: "success" },
+        { text: "   • Liderazgo de FitLife Manager", class: "" },
+        { text: "   • 600+ usuarios activos", class: "" },
+        { text: "   • Arquitectura escalable", class: "" },
+        { text: "", class: "" },
+        { text: "🔒 Especialista en Ciberseguridad (2022-presente)", class: "warning" },
+        { text: "   • Auditorías de seguridad web", class: "" },
+        { text: "   • Pruebas de penetración", class: "" },
+        { text: "   • Consultoría en OWASP", class: "" },
+      ],
+      
+      projects: () => [
+        { text: "🎯 PROYECTOS DESTACADOS", class: "info" },
+        { text: "═══════════════════════════════════", class: "info" },
+        { text: "🏋️ FitLife Manager", class: "success" },
+        { text: "   └─ Sistema completo para gimnasios", class: "" },
+        { text: "   └─ 600+ usuarios activos", class: "" },
+        { text: "   └─ Tech: React, Node.js, MySQL", class: "" },
+        { text: "", class: "" },
+        { text: "🔐 Security Audit Tools", class: "warning" },
+        { text: "   └─ Herramientas de auditoría web", class: "" },
+        { text: "   └─ Automatización de pentesting", class: "" },
+        { text: "   └─ Tech: Python, Bash, Linux", class: "" },
+        { text: "", class: "" },
+        { text: "🌐 Portfolio Cyberpunk", class: "error" },
+        { text: "   └─ Este mismo sitio web", class: "" },
+        { text: "   └─ Terminal interactiva", class: "" },
+        { text: "   └─ Tech: Astro, TypeScript, CSS", class: "" },
+      ],
+      
+      contact: () => [
+        { text: "📞 INFORMACIÓN DE CONTACTO", class: "info" },
+        { text: "══════════════════════════════════", class: "info" },
+        { text: "📧 Email: acebalmatias2019@gmail.com", class: "success" },
+        { text: "💼 LinkedIn: linkedin.com/in/matiasacebal", class: "success" },
+        { text: "🐱 GitHub: github.com/dest92", class: "success" },
+        { text: "📄 CV: [Enlace disponible en el sitio]", class: "warning" },
+        { text: "", class: "" },
+        { text: "💡 ¿Tienes un proyecto interesante?", class: "info" },
+        { text: "¡Contáctame y hablemos! 🚀", class: "success" },
+      ],
+      
+      clear: () => 'CLEAR',
+      
+      matrix: () => {
+        // Create matrix effect
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const char = document.createElement('div');
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.className = 'matrix-char';
+            char.style.left = Math.random() * window.innerWidth + 'px';
+            char.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            char.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(char);
+            
+            setTimeout(() => char.remove(), 3000);
+          }, i * 100);
+        }
+        
+        return [
+          { text: "Iniciando secuencia Matrix...", class: "success" },
+          { text: "Wake up, Neo... 🕶️", class: "error" },
+          { text: "The Matrix has you...", class: "warning" },
+          { text: "Follow the white rabbit 🐰", class: "info" },
+        ];
+      },
+      
+      help: () => [
+        { text: "Comandos disponibles:", class: "info" },
+        { text: "  whoami     - Información personal", class: "" },
+        { text: "  skills     - Habilidades técnicas", class: "" },
+        { text: "  experience - Experiencia laboral", class: "" },
+        { text: "  projects   - Proyectos destacados", class: "" },
+        { text: "  contact    - Información de contacto", class: "" },
+        { text: "  clear      - Limpiar terminal", class: "" },
+        { text: "  matrix     - ¿Te atreves? 😎", class: "" },
+      ]
+    },
+    
+    addLine(content, isInput = false) {
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      
+      if (isInput) {
+        line.innerHTML = `<span class="terminal-prompt">guest@matias-portfolio:~$</span><span class="terminal-text">${content}</span>`;
+      } else if (typeof content === 'string') {
+        line.innerHTML = `<span class="terminal-output">${content}</span>`;
+      } else {
+        line.innerHTML = `<span class="terminal-output ${content.class || ''}">${content.text}</span>`;
+      }
+      
+      this.content.appendChild(line);
+      line.scrollIntoView({ behavior: 'smooth' });
+    },
+    
+    executeCommand(cmd) {
+      const command = cmd.toLowerCase().trim();
+      this.addLine(cmd, true);
+      
+      if (command === '') return;
+      
+      if (this.commands[command]) {
+        const result = this.commands[command]();
+        
+        if (result === 'CLEAR') {
+          this.content.innerHTML = '';
+          return;
+        }
+        
+        if (Array.isArray(result)) {
+          result.forEach((line, index) => {
+            setTimeout(() => this.addLine(line), index * 50);
+          });
+        } else {
+          this.addLine(result);
+        }
+      } else {
+        this.addLine(`bash: ${command}: command not found`, false);
+        this.addLine("Escribe 'help' para ver los comandos disponibles", false);
+      }
+      
+      this.history.push(cmd);
+      this.historyIndex = this.history.length;
+    },
+    
+    init() {
+      this.input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.executeCommand(this.input.value);
+          this.input.value = '';
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (this.historyIndex > 0) {
+            this.historyIndex--;
+            this.input.value = this.history[this.historyIndex] || '';
+          }
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (this.historyIndex < this.history.length) {
+            this.historyIndex++;
+            this.input.value = this.history[this.historyIndex] || '';
+          }
+        }
+      });
+      
+      // Auto focus
+      this.input.focus();
+      
+      // Keep focus on terminal
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.terminal-window')) {
+          this.input.focus();
+        }
+      });
+    }
+  };
+  
+  // Initialize terminal when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    terminal.init();
+  });
+</script>

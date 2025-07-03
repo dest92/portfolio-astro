@@ -15,117 +15,532 @@ import ProfileCheckIcon from "../components/icons/ProfileCheckIcon.astro";
 import CVIcon from "../components/icons/CVIcon.astro";
 import Certificates from "../components/Certificates.astro";
 import HonourIcon from "../components/icons/HonourIcon.astro";
+
+// New cyberpunk components
+import CyberHero from "../components/CyberHero.astro";
+import InteractiveTerminal from "../components/InteractiveTerminal.astro";
+import CyberSkills from "../components/CyberSkills.astro";
 ---
 
 <Layout
-  title="Matías Acebal - Desarrollador FullStack y Analista en Sistemas"
-  description="Desarrollador FullStack, Analista en Sistemas y estudiante de Ingeniería. Especializado en desarrollo web y ciberseguridad."
+  title="Matías Acebal - Desarrollador FullStack y Especialista en Ciberseguridad"
+  description="Portfolio cyberpunk de Matías Acebal: Desarrollador FullStack, Analista en Sistemas y especialista en ciberseguridad. Experiencia en desarrollo web seguro y pentesting."
 >
-  <main class="px-4">
-    <SectionContainer class="pt-20 pb-32">
-      <div class="flex flex-col items-center justify-center">
-        <img
-          src="https://avatars.githubusercontent.com/u/70166802?v=4"
-          alt="Foto de perfil de Matías Acebal"
-          class="rounded-full size-16 hover:scale-105 transition-all duration-300 shadow-lg mb-6"
-          loading="eager"
-        />
+  <main class="cyber-portfolio">
+    <!-- Hero Section with Cyberpunk Design -->
+    <CyberHero />
 
-        <h1
-          class="flex flex-col sm:flex-row items-center justify-center gap-4 text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white text-balance text-center"
-        >
-          ¡Hola! Soy Matías Acebal
-        </h1>
-
-        <h2
-          class="mt-6 text-xl lg:text-2xl text-black/80 dark:text-white/80 text-balance max-w-[700px] text-center leading-relaxed"
-        >
-          Soy un
-          <span class="text-yellow-600 dark:text-yellow-400 font-semibold">
-            desarrollador FullStack
-          </span>,
-          <span class="text-emerald-600 dark:text-emerald-400 font-semibold">
-            Analista en Sistemas
-          </span>, estudiante de
-          <span class="text-red-600 dark:text-red-400 font-semibold">
-            Ingeniería en Sistemas
-          </span>
-          y apasionado por la
-          <span class="text-purple-600 dark:text-purple-400 font-semibold">
-            ciberseguridad
-          </span>.
+    <!-- Interactive Terminal Section -->
+    <SectionContainer id="terminal" class="terminal-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-icon">🖥️</span>
+          <span class="title-text">Terminal Interactiva</span>
+          <div class="title-glow"></div>
         </h2>
-
-        <nav class="flex flex-wrap items-center justify-center gap-4 mt-8">
-          <SocialPill
-            href="https://www.linkedin.com/in/matiasacebal/"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <LinkedinIcon class="size-4 md:size-6" />
-            LinkedIn
-          </SocialPill>
-          <SocialPill
-            href="https://github.com/dest92"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <GitHubIcon class="size-4 md:size-6" />
-            GitHub
-          </SocialPill>
-          <SocialPill
-            href="mailto:acebalmatias2019@gmail.com"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <MailIcon class="size-4 md:size-6" />
-            Email
-          </SocialPill>
-          <SocialPill
-            href="https://docs.google.com/document/d/1Dx8iu5QiYWCDjdnCShdCRWRUNa5faDEMFnTIB17ezGk/edit?usp=sharing"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <CVIcon class="size-4 md:size-6" />
-            CV
-          </SocialPill>
-        </nav>
+        <p class="cyber-section-subtitle">
+          Explora mi información usando comandos de terminal. Prueba con <code>whoami</code>, <code>skills</code>, o <code>help</code>
+        </p>
       </div>
+      <InteractiveTerminal />
     </SectionContainer>
-    <SectionContainer id="experience" class="mb-6 text-2xl font-semibold">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <BriefIcon class="size-7" />
-        Experiencia laboral
-      </h2>
+
+    <!-- Skills Section with Animated Bars -->
+    <SectionContainer id="skills" class="skills-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-icon">⚡</span>
+          <span class="title-text">Habilidades Técnicas</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Tecnologías y herramientas que domino para crear soluciones robustas y seguras
+        </p>
+      </div>
+      <CyberSkills />
+    </SectionContainer>
+
+    <!-- Experience Section with Updated Design -->
+    <SectionContainer id="experience" class="experience-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <BriefIcon class="title-icon-svg" />
+          <span class="title-text">Experiencia Laboral</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Mi trayectoria profesional desarrollando soluciones escalables y seguras
+        </p>
+      </div>
       <Experience />
     </SectionContainer>
-    <SectionContainer id="proyectos" class="mb-6 text-2xl font-semibold pt-10">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <PromptIcon class="size-8" />
-        Proyectos
-      </h2>
+
+    <!-- Projects Section -->
+    <SectionContainer id="proyectos" class="projects-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <PromptIcon class="title-icon-svg" />
+          <span class="title-text">Proyectos Destacados</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Soluciones innovadoras que combinan tecnología avanzada con seguridad
+        </p>
+      </div>
       <Projects />
     </SectionContainer>
-    <SectionContainer
-      id="certificaciones"
-      class="mb-6 text-2xl font-semibold pt-10"
-    >
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <HonourIcon class="size-8" />
-        Certificaciones y cursos
-      </h2>
+
+    <!-- Certificates Section -->
+    <SectionContainer id="certificaciones" class="certificates-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <HonourIcon class="title-icon-svg" />
+          <span class="title-text">Certificaciones y Cursos</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Formación continua en desarrollo y ciberseguridad
+        </p>
+      </div>
       <Certificates />
     </SectionContainer>
-    <SectionContainer id="sobre-mi" class="pt-10">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <ProfileCheckIcon class="size-7" />
-        Sobre mi
-      </h2>
+
+    <!-- About Me Section -->
+    <SectionContainer id="sobre-mi" class="about-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <ProfileCheckIcon class="title-icon-svg" />
+          <span class="title-text">Sobre Mí</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          La persona detrás del código: mi historia y visión
+        </p>
+      </div>
       <AboutMe />
+    </SectionContainer>
+
+    <!-- Contact CTA Section -->
+    <SectionContainer class="contact-cta-section">
+      <div class="cyber-cta-container">
+        <div class="cta-content">
+          <h2 class="cta-title">¿Listo para colaborar?</h2>
+          <p class="cta-description">
+            Transformemos tus ideas en realidad digital con soluciones seguras e innovadoras
+          </p>
+          <div class="cta-buttons">
+            <a href="mailto:acebalmatias2019@gmail.com" class="cyber-cta-button primary">
+              <MailIcon class="button-icon" />
+              <span>Hablemos</span>
+              <div class="button-glow"></div>
+            </a>
+            <a href="https://www.linkedin.com/in/matiasacebal/" target="_blank" rel="noopener" class="cyber-cta-button secondary">
+              <LinkedinIcon class="button-icon" />
+              <span>LinkedIn</span>
+              <div class="button-glow"></div>
+            </a>
+            <a href="https://github.com/dest92" target="_blank" rel="noopener" class="cyber-cta-button tertiary">
+              <GitHubIcon class="button-icon" />
+              <span>GitHub</span>
+              <div class="button-glow"></div>
+            </a>
+          </div>
+        </div>
+        <div class="cta-visual">
+          <div class="cyber-globe">
+            <div class="globe-ring ring-1"></div>
+            <div class="globe-ring ring-2"></div>
+            <div class="globe-ring ring-3"></div>
+            <div class="globe-core"></div>
+          </div>
+        </div>
+      </div>
     </SectionContainer>
   </main>
 </Layout>
+
+<style>
+  .cyber-portfolio {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .cyber-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    position: relative;
+    color: transparent;
+    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .title-icon {
+    font-size: 2rem;
+    filter: hue-rotate(120deg);
+  }
+
+  .title-icon-svg {
+    width: 2rem;
+    height: 2rem;
+    color: #059669;
+  }
+
+  .title-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    filter: blur(20px);
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  .cyber-section-subtitle {
+    font-size: 1.125rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .cyber-section-subtitle code {
+    background: rgba(0, 255, 136, 0.1);
+    color: #059669;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+  }
+
+  /* Section Spacing */
+  .terminal-section,
+  .skills-section,
+  .experience-section,
+  .projects-section,
+  .certificates-section,
+  .about-section {
+    padding: 5rem 0;
+    position: relative;
+  }
+
+  /* Contact CTA Section */
+  .contact-cta-section {
+    padding: 6rem 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 255, 136, 0.05) 0%,
+      transparent 50%,
+      rgba(0, 255, 136, 0.05) 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-cta-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-content {
+    text-align: left;
+  }
+
+  .cta-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cta-description {
+    font-size: 1.25rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 2.5rem 0;
+    max-width: 500px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cyber-cta-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: 2px solid;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-cta-button .button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .cyber-cta-button .button-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-cta-button.primary {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: rgba(0, 255, 136, 0.4);
+    color: #059669;
+  }
+
+  .cyber-cta-button.primary .button-glow {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.1));
+  }
+
+  .cyber-cta-button.secondary {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #2563eb;
+  }
+
+  .cyber-cta-button.secondary .button-glow {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+  }
+
+  .cyber-cta-button.tertiary {
+    background: rgba(107, 114, 128, 0.1);
+    border-color: rgba(107, 114, 128, 0.4);
+    color: #374151;
+  }
+
+  .cyber-cta-button.tertiary .button-glow {
+    background: linear-gradient(135deg, rgba(107, 114, 128, 0.2), rgba(107, 114, 128, 0.1));
+  }
+
+  .cyber-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .cyber-cta-button:hover .button-glow {
+    opacity: 1;
+  }
+
+  .cyber-cta-button:hover .button-icon {
+    transform: translateX(4px);
+  }
+
+  /* Cyber Globe Visual */
+  .cta-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cyber-globe {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .globe-ring {
+    position: absolute;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 50%;
+    animation: rotate-ring infinite linear;
+  }
+
+  .ring-1 {
+    width: 200px;
+    height: 200px;
+    animation-duration: 20s;
+    border-color: rgba(0, 255, 136, 0.4);
+  }
+
+  .ring-2 {
+    width: 150px;
+    height: 150px;
+    animation-duration: 15s;
+    animation-direction: reverse;
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+
+  .ring-3 {
+    width: 100px;
+    height: 100px;
+    animation-duration: 10s;
+    border-color: rgba(168, 85, 247, 0.4);
+  }
+
+  .globe-core {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
+    border-radius: 50%;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    animation: pulse-core 3s ease-in-out infinite;
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .cyber-section-subtitle {
+      color: #9ca3af;
+    }
+
+    .cta-description {
+      color: #d1d5db;
+    }
+
+    .cyber-cta-button.tertiary {
+      color: #e5e7eb;
+    }
+  }
+
+  :global(.dark) .cyber-section-subtitle {
+    color: #9ca3af;
+  }
+
+  :global(.dark) .cta-description {
+    color: #d1d5db;
+  }
+
+  :global(.dark) .cyber-cta-button.tertiary {
+    color: #e5e7eb;
+  }
+
+  /* Animations */
+  @keyframes rotate-ring {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse-core {
+    0%, 100% { 
+      transform: scale(1);
+      box-shadow: 
+        0 0 30px rgba(0, 255, 136, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    }
+    50% { 
+      transform: scale(1.1);
+      box-shadow: 
+        0 0 50px rgba(0, 255, 136, 0.8),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .cyber-cta-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 3rem;
+    }
+
+    .cta-content {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .cyber-section-title {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .terminal-section,
+    .skills-section,
+    .experience-section,
+    .projects-section,
+    .certificates-section,
+    .about-section {
+      padding: 3rem 0;
+    }
+
+    .contact-cta-section {
+      padding: 4rem 0;
+    }
+
+    .cta-buttons {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cyber-cta-button {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+
+    .cyber-globe {
+      width: 150px;
+      height: 150px;
+    }
+
+    .ring-1 {
+      width: 150px;
+      height: 150px;
+    }
+
+    .ring-2 {
+      width: 110px;
+      height: 110px;
+    }
+
+    .ring-3 {
+      width: 70px;
+      height: 70px;
+    }
+
+    .globe-core {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
