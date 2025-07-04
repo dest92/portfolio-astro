@@ -12,308 +12,657 @@ interface Props {
 const { title, company, description, link, date } = Astro.props;
 ---
 
-<div class="timeline-item group">
-  <!-- Marcador de tiempo con efecto de brillo -->
-  <div class="timeline-marker">
-    <div class="timeline-dot"></div>
-    <div class="timeline-line"></div>
-  </div>
-  
-  <!-- Contenedor principal con efecto de cristal -->
-  <div class="timeline-content">
-    <!-- Encabezado con fecha destacada -->
-    <div class="timeline-header">
-      <div class="timeline-date">
-        <span>{date}</span>
-      </div>
-      <div class="timeline-title">
-        <h3>{title}</h3>
-        <h4>{company}</h4>
-      </div>
+<article class="cyber-experience-item">
+  <!-- Cyber Timeline Connector -->
+  <div class="cyber-timeline-connector">
+    <div class="cyber-node">
+      <div class="cyber-node-core"></div>
+      <div class="cyber-node-ring"></div>
+      <div class="cyber-node-pulse"></div>
     </div>
+    <div class="cyber-timeline-line"></div>
+  </div>
+
+  <!-- Main Cyber Card -->
+  <div class="cyber-card">
+    <!-- Holographic Overlay -->
+    <div class="holographic-overlay"></div>
     
-    <!-- Contenido de la experiencia -->
-    <div class="timeline-body">
-      <p>{description}</p>
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+    
+    <!-- Card Header -->
+    <header class="cyber-card-header">
+      <div class="cyber-date-chip">
+        <span class="cyber-date-text">{date}</span>
+        <div class="cyber-date-glow"></div>
+      </div>
+      <div class="cyber-glitch-container">
+        <h3 class="cyber-title" data-text={title}>{title}</h3>
+        <h4 class="cyber-company">{company}</h4>
+      </div>
+    </header>
+
+    <!-- Card Body -->
+    <div class="cyber-card-body">
+      <div class="cyber-description-container">
+        <p class="cyber-description">{description}</p>
+      </div>
       
-      {
-        link && (
-          <LinkInline href={link} class="timeline-link">
-            <span>Ver proyecto</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="timeline-icon"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
-              <path d="M11 13l9 -9" />
-              <path d="M15 4h5v5" />
-            </svg>
+      {link && (
+        <div class="cyber-link-section">
+          <LinkInline href={link} class="cyber-action-link">
+            <span class="cyber-link-label">ACCEDER_AL_PROYECTO</span>
+            <div class="cyber-link-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </div>
+            <div class="cyber-link-spark"></div>
           </LinkInline>
-        )
-      }
+        </div>
+      )}
+    </div>
+
+    <!-- Cyber Frame Elements -->
+    <div class="cyber-frame">
+      <div class="cyber-corner cyber-corner-tl"></div>
+      <div class="cyber-corner cyber-corner-tr"></div>
+      <div class="cyber-corner cyber-corner-bl"></div>
+      <div class="cyber-corner cyber-corner-br"></div>
+    </div>
+
+    <!-- Data Stream -->
+    <div class="data-stream">
+      <div class="data-particle"></div>
+      <div class="data-particle"></div>
+      <div class="data-particle"></div>
     </div>
   </div>
-</div>
+</article>
 
 <style>
-  /* Estilos base para la línea de tiempo */
-  .timeline-item {
+  /* Variables CSS para el tema cyberpunk */
+  :root {
+    --cyber-primary: #00ffff;
+    --cyber-secondary: #ff00ff;
+    --cyber-accent: #00ff00;
+    --cyber-warning: #ffff00;
+    --cyber-bg-dark: #0a0a0a;
+    --cyber-bg-card: #111111;
+    --cyber-bg-glass: rgba(0, 255, 255, 0.05);
+    --cyber-border: rgba(0, 255, 255, 0.3);
+    --cyber-text-primary: #ffffff;
+    --cyber-text-secondary: #b0b0b0;
+    --cyber-glow: 0 0 20px;
+    --cyber-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Contenedor principal del item */
+  .cyber-experience-item {
     position: relative;
-    padding-left: 3rem;
-    padding-bottom: 3rem;
-    transition: all 0.5s ease;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: cyber-slide-in 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
-  
-  .timeline-item:last-child {
-    padding-bottom: 0;
-  }
-  
-  /* Marcador de tiempo con línea vertical */
-  .timeline-marker {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 1.5rem;
+
+  .cyber-experience-item:nth-child(1) { animation-delay: 0.1s; }
+  .cyber-experience-item:nth-child(2) { animation-delay: 0.3s; }
+  .cyber-experience-item:nth-child(3) { animation-delay: 0.5s; }
+  .cyber-experience-item:nth-child(4) { animation-delay: 0.7s; }
+
+  /* Timeline Connector */
+  .cyber-timeline-connector {
+    position: relative;
+    width: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-shrink: 0;
   }
-  
-  .timeline-dot {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
-    z-index: 2;
-    transition: all 0.3s ease;
+
+  .cyber-node {
     position: relative;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
   }
-  
-  .timeline-dot::before {
-    content: '';
+
+  .cyber-node-core {
     position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--cyber-primary);
+    border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 0.75rem;
-    height: 0.75rem;
-    background-color: white;
+    box-shadow: 
+      var(--cyber-glow) var(--cyber-primary),
+      inset 0 0 8px rgba(255, 255, 255, 0.3);
+    animation: cyber-pulse 2s ease-in-out infinite;
+  }
+
+  .cyber-node-ring {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyber-primary);
     border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+    animation: cyber-rotate 10s linear infinite;
+  }
+
+  .cyber-node-pulse {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--cyber-primary);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: cyber-node-pulse 3s ease-out infinite;
+  }
+
+  .cyber-timeline-line {
+    position: absolute;
+    top: 40px;
+    bottom: -40px;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--cyber-primary) 0%,
+      rgba(0, 255, 255, 0.5) 50%,
+      transparent 100%
+    );
+    transform: translateX(-50%);
     opacity: 0.6;
   }
-  
-  .timeline-line {
-    position: absolute;
-    top: 1.5rem;
-    bottom: 0;
-    left: 50%;
-    width: 0.25rem;
-    background: linear-gradient(to bottom, rgba(251, 191, 36, 0.8) 0%, rgba(251, 191, 36, 0.1) 100%);
-    transform: translateX(-50%);
-    z-index: 1;
-  }
-  
-  .timeline-item:last-child .timeline-line {
+
+  .cyber-experience-item:last-child .cyber-timeline-line {
     display: none;
   }
-  
-  /* Contenido principal */
-  .timeline-content {
+
+  /* Card Principal */
+  .cyber-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    border: 1px solid rgba(20, 6, 6, 0.1);
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    transform-origin: left center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    background: 
+      linear-gradient(135deg, 
+        var(--cyber-bg-card) 0%, 
+        rgba(17, 17, 17, 0.95) 100%
+      );
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cyber-border);
+    border-radius: 0;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     overflow: hidden;
+    box-shadow: var(--cyber-shadow);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 20px) 0,
+      100% 20px,
+      100% 100%,
+      20px 100%,
+      0 calc(100% - 20px)
+    );
   }
-  
-  .timeline-content::before {
-    content: '';
+
+  /* Overlay holográfico */
+  .holographic-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, transparent 100%);
-    z-index: -1;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+    z-index: 1;
   }
-  
-  /* Encabezado con fecha */
-  .timeline-header {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+
+  /* Efecto de scanlines */
+  .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Header de la card */
+  .cyber-card-header {
+    position: relative;
     margin-bottom: 1.5rem;
-    position: relative;
+    z-index: 3;
   }
-  
-  .timeline-date {
-    display: inline-flex;
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.05) 100%);
+
+  .cyber-date-chip {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary));
+    color: var(--cyber-bg-dark);
     padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    font-weight: 500;
-    font-size: 0.875rem;
-    color: rgb(161, 98, 7);
-    border: 1px solid rgba(251, 191, 36, 0.2);
-    box-shadow: 0 2px 10px rgba(251, 191, 36, 0.1);
-    align-self: flex-start;
-    transition: all 0.3s ease;
-  }
-  
-  .timeline-title h3 {
-    font-size: 1.25rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    margin: 0;
-    background: linear-gradient(to right, #f59e0b, #fbbf24);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
   }
-  
-  .timeline-title h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin: 0.25rem 0 0;
-    color: #1f2937;
-    transition: all 0.3s ease;
+
+  .cyber-date-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
   }
-  
-  /* Cuerpo del contenido */
-  .timeline-body {
+
+  .cyber-glitch-container {
     position: relative;
-    z-index: 2;
   }
-  
-  .timeline-body p {
-    margin: 0 0 1.5rem;
-    line-height: 1.6;
-    color: #4b5563;
+
+  .cyber-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cyber-primary);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    text-shadow: 
+      0 0 10px var(--cyber-primary),
+      2px 2px 0 var(--cyber-secondary);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-company {
     font-size: 1rem;
+    font-weight: 600;
+    color: var(--cyber-text-secondary);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
     position: relative;
-    z-index: 2;
+    transition: all 0.3s ease;
   }
-  
-  /* Enlace con efecto */
-  .timeline-link {
+
+  /* Body de la card */
+  .cyber-card-body {
+    position: relative;
+    z-index: 3;
+  }
+
+  .cyber-description-container {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .cyber-description {
+    color: var(--cyber-text-primary);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin: 0;
+    position: relative;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Sección de link */
+  .cyber-link-section {
+    position: relative;
+  }
+
+  .cyber-action-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.05) 100%);
-    border-radius: 0.5rem;
-    color: #b45309;
-    font-weight: 500;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+    border: 2px solid var(--cyber-primary);
+    color: var(--cyber-primary);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
     transition: all 0.3s ease;
-    border: 1px solid rgba(251, 191, 36, 0.2);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
   }
-  
-  .timeline-icon {
-    width: 1.25rem;
-    height: 1.25rem;
+
+  .cyber-link-label {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-link-arrow {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    z-index: 2;
     transition: transform 0.3s ease;
   }
-  
+
+  .cyber-link-spark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, var(--cyber-primary), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  /* Frame cyberpunk */
+  .cyber-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .cyber-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyber-primary);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-corner-tl {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+    clip-path: polygon(0 0, 100% 0, 100% 20%, 20% 20%, 20% 100%, 0 100%);
+  }
+
+  .cyber-corner-tr {
+    top: 8px;
+    right: 8px;
+    border-left: none;
+    border-bottom: none;
+    clip-path: polygon(80% 0, 100% 0, 100% 100%, 0 100%, 0 20%, 80% 20%);
+  }
+
+  .cyber-corner-bl {
+    bottom: 8px;
+    left: 8px;
+    border-right: none;
+    border-top: none;
+    clip-path: polygon(0 0, 20% 0, 20% 80%, 100% 80%, 100% 100%, 0 100%);
+  }
+
+  .cyber-corner-br {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+    clip-path: polygon(0 80%, 80% 80%, 80% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Data Stream */
+  .data-stream {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.3;
+  }
+
+  .data-particle {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--cyber-primary);
+    animation: data-flow 2s linear infinite;
+  }
+
+  .data-particle:nth-child(1) { animation-delay: 0s; }
+  .data-particle:nth-child(2) { animation-delay: 0.7s; }
+  .data-particle:nth-child(3) { animation-delay: 1.4s; }
+
   /* Efectos hover */
-  .timeline-item:hover .timeline-dot {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px rgba(251, 191, 36, 0.7);
+  .cyber-experience-item:hover .cyber-card {
+    transform: translateX(10px);
+    border-color: var(--cyber-primary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-primary);
   }
-  
-  .timeline-item:hover .timeline-content {
-    transform: translateX(0.5rem) scale(1.01);
-    border-color: rgba(251, 191, 36, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  .cyber-experience-item:hover .holographic-overlay {
+    transform: translateX(100%);
   }
-  
-  .timeline-item:hover .timeline-date {
-    transform: translateY(-0.25rem);
-    box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2);
+
+  .cyber-experience-item:hover .cyber-date-glow {
+    transform: translateX(0);
   }
-  
-  .timeline-item:hover .timeline-title h3 {
-    transform: translateX(0.5rem);
+
+  .cyber-experience-item:hover .cyber-title {
+    text-shadow: 
+      0 0 20px var(--cyber-primary),
+      4px 4px 0 var(--cyber-secondary);
+    animation: cyber-glitch 0.3s ease-in-out;
   }
-  
-  .timeline-item:hover .timeline-title h4 {
-    transform: translateX(0.25rem);
-    color: #4b5563;
+
+  .cyber-experience-item:hover .cyber-company {
+    color: var(--cyber-primary);
+    transform: translateX(5px);
   }
-  
-  .timeline-link:hover {
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.1) 100%);
-    transform: translateY(-0.25rem);
-    box-shadow: 0 5px 15px rgba(251, 191, 36, 0.15);
+
+  .cyber-experience-item:hover .cyber-corner {
+    border-color: var(--cyber-primary);
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    width: 25px;
+    height: 25px;
   }
-  
-  .timeline-link:hover .timeline-icon {
-    transform: translateX(0.25rem);
+
+  .cyber-action-link:hover {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+    box-shadow: 
+      var(--cyber-glow) var(--cyber-primary),
+      inset 0 0 20px rgba(0, 255, 255, 0.1);
+    transform: translateY(-2px);
   }
-  
-  /* Modo oscuro */
-  @media (prefers-color-scheme: dark) {
-    .timeline-content {
-      background: rgba(17, 24, 39, 0.4);
-      border-color: rgba(251, 191, 36, 0.1);
-    }
-    
-    .timeline-title h4 {
-      color: #e5e7eb;
-    }
-    
-    .timeline-body p {
-      color: #d1d5db;
-    }
-    
-    .timeline-date {
-      color: #fbbf24;
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
-    }
-    
-    .timeline-link {
-      color: #fbbf24;
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
-    }
-    
-    .timeline-item:hover .timeline-title h4 {
-      color: #f3f4f6;
-    }
+
+  .cyber-action-link:hover .cyber-link-arrow {
+    transform: translateX(4px);
   }
-  
-  /* Animación de entrada */
-  @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(-2rem);
-    }
+
+  .cyber-action-link:hover .cyber-link-spark {
+    transform: translateX(100%);
+  }
+
+  /* Animaciones */
+  @keyframes cyber-slide-in {
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
-  
-  .timeline-item {
-    animation: fadeInRight 0.8s ease forwards;
-    opacity: 0;
+
+  @keyframes cyber-pulse {
+    0%, 100% { 
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.8;
+    }
   }
-  
-  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-  .timeline-item:nth-child(2) { animation-delay: 0.3s; }
-  .timeline-item:nth-child(3) { animation-delay: 0.5s; }
-  .timeline-item:nth-child(4) { animation-delay: 0.7s; }
-  .timeline-item:nth-child(5) { animation-delay: 0.9s; }
+
+  @keyframes cyber-rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes cyber-node-pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cyber-glitch {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+  }
+
+  @keyframes data-flow {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cyber-experience-item {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem 0;
+    }
+
+    .cyber-timeline-connector {
+      width: 100%;
+      height: 60px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .cyber-timeline-line {
+      top: 50%;
+      bottom: auto;
+      left: 60px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        var(--cyber-primary) 0%,
+        rgba(0, 255, 255, 0.5) 50%,
+        transparent 100%
+      );
+      transform: translateY(-50%);
+    }
+
+    .cyber-experience-item:last-child .cyber-timeline-line {
+      display: none;
+    }
+
+    .cyber-card {
+      padding: 1.5rem;
+    }
+
+    .cyber-title {
+      font-size: 1.25rem;
+    }
+
+    .cyber-description {
+      font-size: 0.9rem;
+    }
+
+    .cyber-action-link {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-experience-item {
+      padding: 1rem 0;
+    }
+
+    .cyber-card {
+      padding: 1rem;
+    }
+
+    .cyber-title {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .cyber-company {
+      font-size: 0.9rem;
+    }
+
+    .cyber-description {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .cyber-date-chip {
+      font-size: 0.7rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    .cyber-corner {
+      width: 15px;
+      height: 15px;
+    }
+
+    .cyber-experience-item:hover .cyber-corner {
+      width: 18px;
+      height: 18px;
+    }
+  }
 </style>

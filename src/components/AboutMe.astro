@@ -1,88 +1,751 @@
 ---
 ---
 
-<section class="flex flex-col md:flex-row gap-12 justify-between items-start">
-  <div class="order-2 md:order-1 w-full md:w-3/5">
-    <div class="flex flex-col gap-8">
-      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
-        <h3 class="text-lg font-semibold text-yellow-600 dark:text-yellow-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
-          Mi Historia
-        </h3>
-        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
-          Hola, soy Matías Acebal, Desarrollador FullStack y Analista en Sistemas.
-          Empecé a programar a los 17 años y, desde entonces, he liderado proyectos
-          como <span class="text-yellow-600 dark:text-yellow-400 font-medium">FitLife Manager</span>, un sistema para gimnasios con más de 600 usuarios
-          activos.
-        </p>
-      </div>
-
-      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
-        <h3 class="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
-          Mi Enfoque
-        </h3>
-        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
-          Me especializo en crear soluciones escalables y de alto impacto. Mi experiencia en 
-          <span class="text-emerald-600 dark:text-emerald-400 font-medium">auditorías web y pruebas de penetración</span> 
-          refleja mi pasión por la ciberseguridad y el desarrollo seguro.
-        </p>
-      </div>
-
-      <div class="group hover:bg-white/5 p-4 rounded-xl transition-all duration-300">
-        <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-2 group-hover:translate-x-2 transition-transform duration-300">
-          Actualmente
-        </h3>
-        <p class="text-gray-800 dark:text-gray-300 leading-relaxed text-pretty">
-          Estoy finalizando mi <span class="text-purple-600 dark:text-purple-400 font-medium">Ingeniería en Sistemas</span> 
-          mientras trabajo en proyectos que combinan innovación técnica con impacto real en 
-          diversas industrias.
-        </p>
+<section class="cyber-about-section">
+  <div class="cyber-container">
+    <!-- Profile Card -->
+    <div class="cyber-profile-wrapper">
+      <div class="cyber-profile-card">
+        <!-- Holographic overlay -->
+        <div class="cyber-holo-overlay"></div>
+        
+        <!-- Scanlines effect -->
+        <div class="cyber-scanlines"></div>
+        
+        <!-- Profile content -->
+        <div class="cyber-profile-content">
+          <div class="cyber-avatar-container">
+            <div class="cyber-avatar-ring"></div>
+            <div class="cyber-avatar-glow"></div>
+            <img 
+              src="/me.jpg" 
+              alt="Matías Acebal" 
+              class="cyber-avatar"
+            />
+            <div class="cyber-avatar-pulse"></div>
+          </div>
+          
+          <div class="cyber-profile-info">
+            <h3 class="cyber-profile-title">
+              <span class="cyber-title-main">DESARROLLADOR_FULLSTACK</span>
+              <span class="cyber-title-sub">ANALISTA_EN_SISTEMAS</span>
+            </h3>
+            
+            <p class="cyber-profile-description">
+              Construyendo el futuro digital, una línea de código a la vez.
+            </p>
+            
+            <div class="cyber-tags">
+              <span class="cyber-tag cyber-tag-primary">FULLSTACK</span>
+              <span class="cyber-tag cyber-tag-secondary">CIBERSEGURIDAD</span>
+              <span class="cyber-tag cyber-tag-accent">SISTEMAS</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Cyber frame -->
+        <div class="cyber-frame">
+          <div class="cyber-corner cyber-corner-tl"></div>
+          <div class="cyber-corner cyber-corner-tr"></div>
+          <div class="cyber-corner cyber-corner-bl"></div>
+          <div class="cyber-corner cyber-corner-br"></div>
+        </div>
+        
+        <!-- Data streams -->
+        <div class="cyber-data-streams">
+          <div class="cyber-stream cyber-stream-1"></div>
+          <div class="cyber-stream cyber-stream-2"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="order-1 md:order-2 w-full md:w-2/5">
-    <div class="md:sticky md:top-24 w-full flex justify-center">
-      <a
-        href="https://www.linkedin.com/in/matiasacebal/"
-        target="_blank"
-        rel="noopener"
-        class="group relative flex flex-col items-center rounded-2xl 
-        bg-gradient-to-b from-neutral-900/90 to-neutral-900/70 
-        backdrop-blur-sm border border-white/10 
-        shadow-lg shadow-black/20 
-        transition duration-300 
-        hover:scale-[1.02] hover:shadow-xl hover:shadow-black/20
-        w-[18rem] p-6"
-      >
-        <div class="absolute inset-0 bg-gradient-to-b from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+    <!-- Content Cards -->
+    <div class="cyber-content-grid">
+      <!-- Historia Card -->
+      <div class="cyber-info-card">
+        <div class="cyber-card-header">
+          <div class="cyber-icon">📖</div>
+          <h3 class="cyber-card-title">MI_HISTORIA</h3>
+          <div class="cyber-header-line"></div>
+        </div>
         
-        <img 
-          src="/me.jpg" 
-          alt="Matías Acebal" 
-          class="rounded-lg size-28 object-cover transition-transform duration-300 shadow-lg group-hover:scale-105 z-10"
-        />
-        
-        <div class="text-center mt-4 z-10">
-          <h3 class="font-bold text-base text-white mb-2">
-            Desarrollador FullStack & Analista en Sistemas
-          </h3>
-          <p class="text-sm text-gray-300">
-            Construyendo el futuro digital, una línea de código a la vez.
+        <div class="cyber-card-content">
+          <p class="cyber-text">
+            Hola, soy Matías Acebal, Desarrollador FullStack y Analista en Sistemas.
+            Empecé a programar a los 17 años y, desde entonces, he liderado proyectos
+            como <span class="cyber-highlight">FitLife Manager</span>, un sistema para gimnasios con más de 600 usuarios
+            activos.
           </p>
         </div>
+        
+        <div class="cyber-card-glow cyber-glow-primary"></div>
+        <div class="cyber-card-scanlines"></div>
+      </div>
 
-        <div class="flex flex-wrap justify-center gap-2 mt-4 z-10">
-          <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
-            FullStack
-          </span>
-          <span class="px-3 py-1 text-xs font-medium rounded-full bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
-            Ciberseguridad
-          </span>
-          <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20">
-            Sistemas
-          </span>
+      <!-- Enfoque Card -->
+      <div class="cyber-info-card">
+        <div class="cyber-card-header">
+          <div class="cyber-icon">🎯</div>
+          <h3 class="cyber-card-title">MI_ENFOQUE</h3>
+          <div class="cyber-header-line"></div>
         </div>
-      </a>
+        
+        <div class="cyber-card-content">
+          <p class="cyber-text">
+            Me especializo en crear soluciones escalables y de alto impacto. Mi experiencia en 
+            <span class="cyber-highlight">auditorías web y pruebas de penetración</span> 
+            refleja mi pasión por la ciberseguridad y el desarrollo seguro.
+          </p>
+        </div>
+        
+        <div class="cyber-card-glow cyber-glow-secondary"></div>
+        <div class="cyber-card-scanlines"></div>
+      </div>
+
+      <!-- Actualmente Card -->
+      <div class="cyber-info-card">
+        <div class="cyber-card-header">
+          <div class="cyber-icon">🚀</div>
+          <h3 class="cyber-card-title">ACTUALMENTE</h3>
+          <div class="cyber-header-line"></div>
+        </div>
+        
+        <div class="cyber-card-content">
+          <p class="cyber-text">
+            Estoy finalizando mi <span class="cyber-highlight">Ingeniería en Sistemas</span> 
+            mientras trabajo en proyectos que combinan innovación técnica con impacto real en 
+            diversas industrias.
+          </p>
+        </div>
+        
+        <div class="cyber-card-glow cyber-glow-accent"></div>
+        <div class="cyber-card-scanlines"></div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Variables CSS para el tema cyberpunk */
+  :root {
+    --cyber-primary: #00ffff;
+    --cyber-secondary: #ff00ff;
+    --cyber-accent: #00ff00;
+    --cyber-warning: #ffff00;
+    --cyber-bg-dark: #0a0a0a;
+    --cyber-bg-card: #111111;
+    --cyber-bg-glass: rgba(0, 255, 255, 0.05);
+    --cyber-border: rgba(0, 255, 255, 0.3);
+    --cyber-text-primary: #ffffff;
+    --cyber-text-secondary: #b0b0b0;
+    --cyber-glow: 0 0 20px;
+    --cyber-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Contenedor principal */
+  .cyber-about-section {
+    position: relative;
+    padding: 4rem 0;
+  }
+
+  .cyber-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* Profile Card */
+  .cyber-profile-wrapper {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .cyber-profile-card {
+    position: relative;
+    background: linear-gradient(135deg, 
+      var(--cyber-bg-card) 0%, 
+      rgba(17, 17, 17, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cyber-border);
+    padding: 2rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 30px) 0,
+      100% 30px,
+      100% 100%,
+      30px 100%,
+      0 calc(100% - 30px)
+    );
+  }
+
+  .cyber-profile-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyber-primary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-primary);
+  }
+
+  /* Holographic overlay */
+  .cyber-holo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+    z-index: 1;
+  }
+
+  .cyber-profile-card:hover .cyber-holo-overlay {
+    transform: translateX(100%);
+  }
+
+  /* Scanlines effect */
+  .cyber-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .cyber-profile-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  /* Avatar */
+  .cyber-avatar-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cyber-primary);
+    position: relative;
+    z-index: 3;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-avatar-ring {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--cyber-secondary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: cyber-rotate 10s linear infinite;
+  }
+
+  .cyber-avatar-glow {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    background: radial-gradient(circle, var(--cyber-primary) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: cyber-pulse 2s ease-in-out infinite;
+  }
+
+  .cyber-avatar-pulse {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid var(--cyber-primary);
+    border-radius: 50%;
+    opacity: 0;
+    animation: cyber-avatar-pulse 3s ease-out infinite;
+  }
+
+  /* Profile info */
+  .cyber-profile-info {
+    text-align: center;
+  }
+
+  .cyber-profile-title {
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .cyber-title-main {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--cyber-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cyber-title-sub {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cyber-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px var(--cyber-secondary);
+  }
+
+  .cyber-profile-description {
+    color: var(--cyber-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Tags */
+  .cyber-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .cyber-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+  }
+
+  .cyber-tag-primary {
+    background: linear-gradient(45deg, var(--cyber-primary), rgba(0, 255, 255, 0.8));
+    color: var(--cyber-bg-dark);
+  }
+
+  .cyber-tag-secondary {
+    background: linear-gradient(45deg, var(--cyber-secondary), rgba(255, 0, 255, 0.8));
+    color: var(--cyber-bg-dark);
+  }
+
+  .cyber-tag-accent {
+    background: linear-gradient(45deg, var(--cyber-accent), rgba(0, 255, 0, 0.8));
+    color: var(--cyber-bg-dark);
+  }
+
+  .cyber-tag:hover {
+    transform: scale(1.05);
+    box-shadow: var(--cyber-glow) currentColor;
+  }
+
+  /* Frame */
+  .cyber-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .cyber-corner {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 2px solid var(--cyber-primary);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-corner-tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .cyber-corner-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .cyber-profile-card:hover .cyber-corner {
+    border-color: var(--cyber-primary);
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+  }
+
+  /* Data streams */
+  .cyber-data-streams {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cyber-stream {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: var(--cyber-primary);
+    animation: cyber-stream-flow 3s linear infinite;
+  }
+
+  .cyber-stream-1 {
+    left: 0;
+    animation-delay: 0s;
+  }
+
+  .cyber-stream-2 {
+    left: 3px;
+    animation-delay: 1.5s;
+  }
+
+  /* Content Grid */
+  .cyber-content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Info Cards */
+  .cyber-info-card {
+    position: relative;
+    background: linear-gradient(135deg, 
+      var(--cyber-bg-card) 0%, 
+      rgba(17, 17, 17, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cyber-border);
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 15px) 0,
+      100% 15px,
+      100% 100%,
+      15px 100%,
+      0 calc(100% - 15px)
+    );
+  }
+
+  .cyber-info-card:hover {
+    transform: translateX(5px);
+    border-color: var(--cyber-primary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-primary);
+  }
+
+  /* Card header */
+  .cyber-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .cyber-icon {
+    font-size: 1.5rem;
+    filter: hue-rotate(180deg) saturate(0.8);
+  }
+
+  .cyber-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--cyber-primary);
+    margin: 0;
+  }
+
+  .cyber-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cyber-primary), transparent);
+    margin-left: 1rem;
+  }
+
+  /* Card content */
+  .cyber-card-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .cyber-text {
+    color: var(--cyber-text-primary);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .cyber-highlight {
+    color: var(--cyber-primary);
+    font-weight: 700;
+    text-shadow: 0 0 5px var(--cyber-primary);
+  }
+
+  /* Card effects */
+  .cyber-card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .cyber-glow-primary {
+    background: linear-gradient(45deg, 
+      rgba(0, 255, 255, 0.1) 0%, 
+      transparent 70%
+    );
+  }
+
+  .cyber-glow-secondary {
+    background: linear-gradient(45deg, 
+      rgba(255, 0, 255, 0.1) 0%, 
+      transparent 70%
+    );
+  }
+
+  .cyber-glow-accent {
+    background: linear-gradient(45deg, 
+      rgba(0, 255, 0, 0.1) 0%, 
+      transparent 70%
+    );
+  }
+
+  .cyber-info-card:hover .cyber-card-glow {
+    opacity: 1;
+  }
+
+  .cyber-card-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.02) 2px,
+        rgba(0, 255, 255, 0.02) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Animaciones */
+  @keyframes cyber-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes cyber-pulse {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes cyber-avatar-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cyber-stream-flow {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .cyber-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .cyber-profile-wrapper {
+      position: static;
+      order: 1;
+    }
+
+    .cyber-content-grid {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cyber-about-section {
+      padding: 3rem 0;
+    }
+
+    .cyber-container {
+      padding: 0 1rem;
+      gap: 1.5rem;
+    }
+
+    .cyber-profile-card {
+      padding: 1.5rem;
+    }
+
+    .cyber-avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    .cyber-title-main {
+      font-size: 1rem;
+    }
+
+    .cyber-title-sub {
+      font-size: 0.8rem;
+    }
+
+    .cyber-info-card {
+      padding: 1.5rem;
+    }
+
+    .cyber-card-title {
+      font-size: 1rem;
+    }
+
+    .cyber-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-container {
+      padding: 0 0.5rem;
+    }
+
+    .cyber-profile-card {
+      padding: 1rem;
+    }
+
+    .cyber-avatar {
+      width: 80px;
+      height: 80px;
+    }
+
+    .cyber-title-main {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .cyber-title-sub {
+      font-size: 0.75rem;
+    }
+
+    .cyber-info-card {
+      padding: 1rem;
+    }
+
+    .cyber-card-title {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .cyber-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .cyber-tags {
+      gap: 0.3rem;
+    }
+
+    .cyber-tag {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.65rem;
+    }
+
+    .cyber-corner {
+      width: 15px;
+      height: 15px;
+    }
+  }
+</style>

@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Badge from "../components/Badge.astro";
 import LinkedinIcon from "../components/icons/LinkedinIcon.astro";
-import SocialPill from "../components/SocialPill.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import MailIcon from "../components/icons/MailIcon.astro";
 import Experience from "../components/Experience.astro";
@@ -12,120 +10,405 @@ import PromptIcon from "../components/icons/PromptIcon.astro";
 import Projects from "../components/Projects.astro";
 import AboutMe from "../components/AboutMe.astro";
 import ProfileCheckIcon from "../components/icons/ProfileCheckIcon.astro";
-import CVIcon from "../components/icons/CVIcon.astro";
 import Certificates from "../components/Certificates.astro";
 import HonourIcon from "../components/icons/HonourIcon.astro";
+
+// New cyberpunk components
+import CyberHero from "../components/CyberHero.astro";
+import InteractiveTerminal from "../components/InteractiveTerminal.astro";
+import CyberSkills from "../components/CyberSkills.astro";
 ---
 
 <Layout
-  title="Matías Acebal - Desarrollador FullStack y Analista en Sistemas"
-  description="Desarrollador FullStack, Analista en Sistemas y estudiante de Ingeniería. Especializado en desarrollo web y ciberseguridad."
+  title="Matías Acebal - Desarrollador FullStack y Especialista en Ciberseguridad"
+  description="Portfolio cyberpunk de Matías Acebal: Desarrollador FullStack, Analista en Sistemas y especialista en ciberseguridad. Experiencia en desarrollo web seguro y pentesting."
 >
-  <main class="px-4">
-    <SectionContainer class="pt-20 pb-32">
-      <div class="flex flex-col items-center justify-center">
-        <img
-          src="https://avatars.githubusercontent.com/u/70166802?v=4"
-          alt="Foto de perfil de Matías Acebal"
-          class="rounded-full size-16 hover:scale-105 transition-all duration-300 shadow-lg mb-6"
-          loading="eager"
-        />
+  <main class="cyber-portfolio">
+    <!-- Hero Section with Cyberpunk Design -->
+    <CyberHero  />
 
-        <h1
-          class="flex flex-col sm:flex-row items-center justify-center gap-4 text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white text-balance text-center"
-        >
-          ¡Hola! Soy Matías Acebal
-        </h1>
-
-        <h2
-          class="mt-6 text-xl lg:text-2xl text-black/80 dark:text-white/80 text-balance max-w-[700px] text-center leading-relaxed"
-        >
-          Soy un
-          <span class="text-yellow-600 dark:text-yellow-400 font-semibold">
-            desarrollador FullStack
-          </span>,
-          <span class="text-emerald-600 dark:text-emerald-400 font-semibold">
-            Analista en Sistemas
-          </span>, estudiante de
-          <span class="text-red-600 dark:text-red-400 font-semibold">
-            Ingeniería en Sistemas
-          </span>
-          y apasionado por la
-          <span class="text-purple-600 dark:text-purple-400 font-semibold">
-            ciberseguridad
-          </span>.
+    <!-- Interactive Terminal Section -->
+    <SectionContainer id="terminal" class="terminal-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Terminal Interactiva</span>
+          <div class="title-glow"></div>
         </h2>
-
-        <nav class="flex flex-wrap items-center justify-center gap-4 mt-8">
-          <SocialPill
-            href="https://www.linkedin.com/in/matiasacebal/"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <LinkedinIcon class="size-4 md:size-6" />
-            LinkedIn
-          </SocialPill>
-          <SocialPill
-            href="https://github.com/dest92"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <GitHubIcon class="size-4 md:size-6" />
-            GitHub
-          </SocialPill>
-          <SocialPill
-            href="mailto:acebalmatias2019@gmail.com"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <MailIcon class="size-4 md:size-6" />
-            Email
-          </SocialPill>
-          <SocialPill
-            href="https://docs.google.com/document/d/1Dx8iu5QiYWCDjdnCShdCRWRUNa5faDEMFnTIB17ezGk/edit?usp=sharing"
-            class="bg-white/5 dark:bg-white/10 hover:bg-white/10 dark:hover:bg-white/15"
-          >
-            <CVIcon class="size-4 md:size-6" />
-            CV
-          </SocialPill>
-        </nav>
+        <p class="cyber-section-subtitle">
+          Explora mi información usando comandos de terminal. Prueba con <code>whoami</code>, <code>skills</code>, o <code>help</code>
+        </p>
       </div>
+      <InteractiveTerminal />
     </SectionContainer>
-    <SectionContainer id="experience" class="mb-6 text-2xl font-semibold">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <BriefIcon class="size-7" />
-        Experiencia laboral
-      </h2>
+
+    <!-- Experience Section with Updated Design -->
+    <SectionContainer id="experience" class="experience-section mt-10">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Experiencia Laboral</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Mi trayectoria profesional desarrollando soluciones escalables y seguras
+        </p>
+      </div>
       <Experience />
     </SectionContainer>
-    <SectionContainer id="proyectos" class="mb-6 text-2xl font-semibold pt-10">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <PromptIcon class="size-8" />
-        Proyectos
-      </h2>
+
+    <!-- Projects Section -->
+    <SectionContainer id="proyectos" class="projects-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Proyectos Destacados</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Soluciones innovadoras que combinan tecnología avanzada con seguridad
+        </p>
+      </div>
       <Projects />
     </SectionContainer>
-    <SectionContainer
-      id="certificaciones"
-      class="mb-6 text-2xl font-semibold pt-10"
-    >
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <HonourIcon class="size-8" />
-        Certificaciones y cursos
-      </h2>
+
+    <!-- Certificates Section -->
+    <SectionContainer id="certificaciones" class="certificates-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Certificaciones y Cursos</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Formación continua en desarrollo y ciberseguridad
+        </p>
+      </div>
       <Certificates />
     </SectionContainer>
-    <SectionContainer id="sobre-mi" class="pt-10">
-      <h2
-        class="text-3xl font-semibold mb-6 flex gap-x-3 items-center text-black/80 dark:text-white/80"
-      >
-        <ProfileCheckIcon class="size-7" />
-        Sobre mi
-      </h2>
+
+    <!-- Skills Section with Animated Bars -->
+    <!-- 
+    <SectionContainer id="skills" class="skills-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Habilidades Técnicas</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Tecnologías y herramientas que domino para crear soluciones robustas y seguras
+        </p>
+      </div>
+      <CyberSkills />
+    </SectionContainer>
+    -->
+
+    <!-- About Me Section -->
+    <SectionContainer id="sobre-mi" class="about-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-text">Sobre Mí</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          La persona detrás del código: mi historia y visión
+        </p>
+      </div>
       <AboutMe />
+    </SectionContainer>
+
+    <!-- Contact CTA Section -->
+    <SectionContainer class="contact-cta-section">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="text-center lg:text-left order-2 lg:order-1">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+              ¿Listo para colaborar?
+            </h2>
+            <p class="text-gray-300 text-lg sm:text-xl mb-6 max-w-lg mx-auto lg:mx-0">
+              Transformemos tus ideas en realidad digital con soluciones seguras e innovadoras
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <a href="mailto:acebalmatias2019@gmail.com" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-green-400/40 bg-green-400/10 text-green-600 rounded-lg hover:bg-green-400/20 transition-all duration-300 backdrop-blur-sm">
+                <MailIcon class="w-4 h-4" />
+                <span>Hablemos</span>
+              </a>
+              <a href="https://www.linkedin.com/in/matiasacebal/" target="_blank" rel="noopener" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-blue-400/40 bg-blue-400/10 text-blue-600 rounded-lg hover:bg-blue-400/20 transition-all duration-300 backdrop-blur-sm">
+                <LinkedinIcon class="w-4 h-4" />
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/dest92" target="_blank" rel="noopener" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-gray-400/40 bg-gray-400/10 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-400/20 transition-all duration-300 backdrop-blur-sm">
+                <GitHubIcon class="w-4 h-4" />
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+          <div class="flex justify-center order-1 lg:order-2">
+            <div class="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48">
+              <div class="absolute inset-0 rounded-full border-2 border-green-400/30 animate-spin-slow"></div>
+              <div class="absolute inset-4 rounded-full border-2 border-blue-400/30 animate-spin-slow" style="animation-direction: reverse;"></div>
+              <div class="absolute inset-8 rounded-full border-2 border-purple-400/30 animate-spin-slow"></div>
+              <div class="absolute inset-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 shadow-lg shadow-green-400/20"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </SectionContainer>
   </main>
 </Layout>
+
+<style>
+  .cyber-portfolio {
+    position: relative;
+    padding-top: 80px;
+  }
+
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  
+
+
+  .cyber-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    position: relative;
+    color: transparent;
+    background: linear-gradient(135deg, #00ff41 0%, #00e838 50%, #00cc33 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(0, 255, 65, 0.8);
+  }
+  
+  .cyber-section-title::before {
+    content: '>';
+    position: absolute;
+    left: -3rem;
+    color: #00ff41;
+    font-size: 1.5em;
+    text-shadow: 0 0 30px #00ff41, 0 0 60px #00ff41;
+    animation: cyber-pulse 2s ease-in-out infinite;
+  }
+  
+  .cyber-section-title::after {
+    content: '_';
+    position: absolute;
+    right: -2rem;
+    color: #00ff41;
+    font-size: 1.2em;
+    text-shadow: 0 0 30px #00ff41, 0 0 60px #00ff41;
+    animation: cyber-blink 1s step-start infinite;
+  }
+  
+  @keyframes cyber-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+  }
+  
+  @keyframes cyber-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .title-icon {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    filter: hue-rotate(120deg);
+  }
+
+  .title-icon-svg {
+    width: clamp(1.25rem, 3vw, 1.75rem);
+    height: clamp(1.25rem, 3vw, 1.75rem);
+    color: #059669;
+  }
+
+  .title-glow {
+    position: absolute;
+    top: -10px;
+    left: -30px;
+    right: -30px;
+    bottom: -10px;
+    background: linear-gradient(135deg, #00ff41 0%, #00e838 50%, #00cc33 100%);
+    filter: blur(30px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow-pulse {
+    0% { 
+      opacity: 0.3; 
+      transform: scale(0.95); 
+      filter: blur(30px) hue-rotate(0deg);
+    }
+    100% { 
+      opacity: 0.6; 
+      transform: scale(1.1); 
+      filter: blur(40px) hue-rotate(15deg);
+    }
+  }
+
+  .cyber-section-subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.125rem);
+    color: #a1a1aa;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    padding: 0 0.5rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  
+
+
+  .cyber-section-subtitle code {
+    background: rgba(0, 255, 65, 0.15);
+    color: #00ff41;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 0.9em;
+    text-shadow: 0 0 15px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    position: relative;
+    z-index: 1;
+    animation: code-glow 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes code-glow {
+    0% { 
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      text-shadow: 0 0 15px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.4);
+    }
+    100% { 
+      box-shadow: 0 0 35px rgba(0, 255, 65, 0.6);
+      text-shadow: 0 0 25px rgba(0, 255, 65, 1), 0 0 50px rgba(0, 255, 65, 0.6);
+    }
+  }
+
+  /* Section Spacing */
+  .terminal-section,
+  .skills-section,
+  .experience-section,
+  .projects-section,
+  .certificates-section,
+  .about-section {
+    padding: 4rem 0;
+    position: relative;
+  }
+
+  /* Contact CTA Section */
+  .contact-cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 255, 136, 0.05) 0%,
+      transparent 50%,
+      rgba(0, 255, 136, 0.05) 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .cyber-section-subtitle {
+      color: #9ca3af;
+    }
+  }
+
+  :global(.dark) .cyber-section-subtitle {
+    color: #9ca3af;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .cyber-portfolio {
+      padding-top: 70px;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    .cyber-section-title {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .cyber-section-title::before {
+      left: -1.5rem;
+    }
+    
+    .cyber-section-title::after {
+      right: -1.5rem;
+    }
+
+    .terminal-section,
+    .skills-section,
+    .experience-section,
+    .projects-section,
+    .certificates-section,
+    .about-section {
+      padding: 3rem 0;
+    }
+
+    .contact-cta-section {
+      padding: 4rem 0;
+    }
+  }
+</style>
+
+<script>
+  // Ensure page starts at top
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
+    // Prevent any auto-scroll from hash or previous position
+    if (window.location.hash) {
+      window.location.hash = '';
+    }
+    
+    // Force scroll to top after a brief delay to override any other scroll behavior
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+  });
+</script>

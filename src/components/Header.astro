@@ -1,61 +1,637 @@
 ---
-import DarkModeSwitcher from "./DarkModeSwitcher.astro";
+const navItems = [
+  {
+    title: "Experiencia",
+    label: "experiencia",
+    url: "/#experiencia",
+  },
+  {
+    title: "Proyectos",
+    label: "proyectos",
+    url: "/#proyectos",
+  },
+  {
+    title: "Certificados",
+    label: "certificados",
+    url: "/#certificados",
+  },
+  {
+    title: "Skills",
+    label: "skills",
+    url: "/#skills",
+  },
+  {
+    title: "Sobre mí",
+    label: "sobre-mi",
+    url: "/#sobre-mi",
+  },
+  {
+    title: "Contacto",
+    label: "contacto",
+    url: "mailto:destripadorh@gmail.com",
+  },
+];
 ---
 
 <header
-  class="flex justify-center items-center w-full max-w-screen-xl mx-auto py-6 sm:py-8 px-4"
+  class="cyber-header fixed top-0 w-full z-50 px-4 py-3 mx-auto backdrop-blur-md bg-transparent border-b border-transparent transition-colors duration-300"
+  id="header-nav"
 >
-  <nav
-    class="relative flex items-center w-fit gap-3 sm:gap-4 p-3 rounded-2xl bg-neutral-900/90 dark:bg-neutral-950/90 transition-all duration-300 ease-in-out backdrop-blur-md shadow-xl"
-  >
-    <button
-      id="menu-toggle"
-      class="hidden"
-      aria-label="Abrir menú"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        ></path>
-      </svg>
-    </button>
+  <div class="max-w-7xl mx-auto">
+    <nav class="flex items-center justify-between">
+      <!-- Brand/Logo -->
+      <div class="cyber-brand">
+        <a
+          href="/"
+          class="brand-link flex items-center gap-3 text-lg font-bold text-gray-800 dark:text-white transition-colors duration-300"
+        >
+          <div class="brand-icon">
+            <div class="icon-matrix">
+              <span class="matrix-dot"></span>
+              <span class="matrix-dot"></span>
+              <span class="matrix-dot"></span>
+              <span class="matrix-dot"></span>
+            </div>
+          </div>
+          <span class="brand-text">Matías Acebal</span>
+          <div class="brand-glow"></div>
+        </a>
+      </div>
 
-    <span class="hidden">Portfolio</span>
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-1">
+        {
+          navItems.map((link) => (
+            <a
+              class="cyber-nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-300 rounded-lg"
+              aria-label={link.label}
+              href={link.url}
+            >
+              <span class="nav-text">{link.title}</span>
+              <div class="nav-underline"></div>
+              <div class="nav-glow"></div>
+            </a>
+          ))
+        }
+      </div>
 
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center gap-4">
+        <button
+          id="mobile-menu-btn"
+          class="cyber-mobile-btn relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+          aria-label="Abrir menú"
+        >
+          <div class="hamburger-container">
+            <span class="hamburger-line line-1"></span>
+            <span class="hamburger-line line-2"></span>
+            <span class="hamburger-line line-3"></span>
+          </div>
+          <div class="btn-circuit"></div>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
     <div
       id="mobile-menu"
-      class="flex items-center justify-center gap-1 sm:gap-4 lg:static lg:mx-0 lg:mt-0 lg:bg-transparent lg:dark:bg-transparent lg:rounded-none lg:p-0 lg:shadow-none lg:min-w-fit"
+      class="cyber-mobile-menu md:hidden absolute top-full left-0 right-0 bg-gray-900/95 dark:bg-black/95 backdrop-blur-xl border-t border-gray-200/20 dark:border-gray-700/30 opacity-0 invisible transform -translate-y-2 transition-all duration-300"
     >
-      <a
-        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-1 sm:py-2.5 px-2 sm:px-5 rounded-xl text-xs sm:text-base font-medium text-center"
-        href="/#">Inicio</a
-      >
-      <a
-        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-1 sm:py-2.5 px-2 sm:px-5 rounded-xl text-xs sm:text-base font-medium text-center"
-        href="/#experience">Experiencia</a
-      >
-      <a
-        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-1 sm:py-2.5 px-2 sm:px-5 rounded-xl text-xs sm:text-base font-medium text-center"
-        href="/#proyectos">Proyectos</a
-      >
-      <a
-        class="block lg:inline-block text-white hover:bg-neutral-800 dark:hover:bg-neutral-800 transition-all duration-300 ease-in-out py-1 sm:py-2.5 px-2 sm:px-5 rounded-xl text-xs sm:text-base font-medium text-center"
-        href="/#sobre-mi">Sobre mí</a
-      >
+      <div class="mobile-menu-content p-4">
+        <div class="mobile-nav-grid">
+          {
+            navItems.map((link, index) => (
+              <a
+                class="cyber-mobile-nav-item group block p-4 text-white hover:text-cyan-400 transition-all duration-300 rounded-lg border border-transparent hover:border-cyan-500/30"
+                href={link.url}
+                style={`animation-delay: ${index * 0.1}s`}
+              >
+                <div class="flex items-center gap-3">
+                  <div class="mobile-nav-icon">
+                    <div class="icon-dot"></div>
+                  </div>
+                  <span class="mobile-nav-text font-medium">{link.title}</span>
+                  <div class="mobile-nav-arrow ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    →
+                  </div>
+                </div>
+                <div class="mobile-nav-circuit"></div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
-
-    <span class="lg:ml-4">
-      <DarkModeSwitcher />
-    </span>
-  </nav>
+  </div>
 </header>
+
+<style>
+  .cyber-header {
+    position: relative;
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.1) 0%, 
+      rgba(0, 20, 40, 0.15) 50%, 
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  .cyber-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 255, 136, 0.05) 50%, 
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-header:hover::before {
+    opacity: 1;
+  }
+
+  /* Brand Styling */
+  .cyber-brand {
+    position: relative;
+  }
+
+  .brand-link {
+    position: relative;
+    z-index: 2;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    position: relative;
+  }
+
+  .icon-matrix {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    transform: rotate(45deg);
+  }
+
+  .matrix-dot {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #00ff88, #00ccff);
+    border-radius: 2px;
+  }
+  
+  .matrix-dot:nth-child(1) { opacity: 0.7; }
+  .matrix-dot:nth-child(2) { opacity: 0.8; }
+  .matrix-dot:nth-child(3) { opacity: 0.9; }
+  .matrix-dot:nth-child(4) { opacity: 1; }
+
+  .brand-text {
+    background: linear-gradient(135deg, #fff, #00ff88);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+  }
+
+  .brand-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .brand-link:hover .brand-glow {
+    opacity: 1;
+  }
+
+  .brand-link:hover .brand-text {
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+  }
+
+  /* Navigation Links */
+  .cyber-nav-link {
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-nav-link:hover {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    border-color: rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  }
+
+  .nav-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-underline {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00ff88, #00ccff);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+  }
+
+  .cyber-nav-link:hover .nav-underline {
+    width: 80%;
+  }
+
+  .nav-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 255, 136, 0.15) 50%, 
+      transparent 100%
+    );
+    border-radius: 8px;
+    transition: width 0.3s ease;
+  }
+
+  .cyber-nav-link:hover .nav-glow {
+    width: 100%;
+  }
+
+  /* Mobile Menu Button */
+  .cyber-mobile-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-mobile-btn:hover {
+    border-color: rgba(0, 255, 136, 0.6);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  }
+
+  .hamburger-container {
+    position: relative;
+    width: 20px;
+    height: 16px;
+    margin: auto;
+  }
+
+  .hamburger-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00ff88, #00ccff);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .line-1 { top: 0; }
+  .line-2 { top: 50%; transform: translateY(-50%); }
+  .line-3 { bottom: 0; }
+
+  .cyber-mobile-btn.active .line-1 {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .cyber-mobile-btn.active .line-2 {
+    opacity: 0;
+  }
+
+  .cyber-mobile-btn.active .line-3 {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+
+  .btn-circuit {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, 
+      rgba(0, 255, 136, 0.2) 0%, 
+      transparent 25%, 
+      transparent 75%, 
+      rgba(0, 255, 136, 0.2) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-mobile-btn:hover .btn-circuit {
+    opacity: 1;
+    animation: circuit-rotate 2s linear infinite;
+  }
+
+  /* Mobile Menu */
+  .cyber-mobile-menu {
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .cyber-mobile-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-content {
+    position: relative;
+  }
+
+  .mobile-menu-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      #00ff88 50%, 
+      transparent 100%
+    );
+    animation: scan-line 3s ease-in-out infinite;
+  }
+
+  .mobile-nav-grid {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .cyber-mobile-nav-item {
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slide-in 0.5s ease-out forwards;
+  }
+
+  .mobile-nav-icon {
+    width: 8px;
+    height: 8px;
+    position: relative;
+  }
+
+  .icon-dot {
+    width: 100%;
+    height: 100%;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+
+  .mobile-nav-circuit {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 255, 136, 0.5) 50%, 
+      transparent 100%
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .cyber-mobile-nav-item:hover .mobile-nav-circuit {
+    transform: scaleX(1);
+  }
+
+  /* Animations */
+  @keyframes circuit-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes scan-line {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes slide-in {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .cyber-header {
+      padding: 0.75rem 1rem;
+    }
+
+    .brand-text {
+      font-size: 1rem;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cyber-header {
+      padding: 0.75rem 1rem;
+    }
+
+    .brand-text {
+      font-size: 0.95rem;
+    }
+
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    .cyber-mobile-menu {
+      margin: 0 -1rem;
+    }
+
+    .mobile-menu-content {
+      padding: 1rem;
+    }
+
+    .cyber-mobile-nav-item {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-header {
+      padding: 0.625rem 0.75rem;
+    }
+
+    .brand-text {
+      font-size: 0.9rem;
+    }
+
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .cyber-mobile-btn {
+      width: 36px;
+      height: 36px;
+    }
+
+    .hamburger-container {
+      width: 18px;
+      height: 14px;
+    }
+
+    .mobile-menu-content {
+      padding: 0.75rem;
+    }
+
+    .cyber-mobile-nav-item {
+      padding: 0.625rem 0.875rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Scroll Effect Enhancement */
+  .cyber-header.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .cyber-header.scrolled::before {
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById("header-nav");
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileNavItems = document.querySelectorAll(".cyber-mobile-nav-item");
+
+    // Scroll effect
+    let ticking = false;
+    
+    function updateHeader() {
+      const scrolled = window.scrollY > 100;
+      header?.classList.toggle("scrolled", scrolled);
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", requestTick, { passive: true });
+
+    // Mobile menu toggle
+    let isMenuOpen = false;
+
+    function toggleMobileMenu() {
+      isMenuOpen = !isMenuOpen;
+      mobileMenuBtn?.classList.toggle("active", isMenuOpen);
+      mobileMenu?.classList.toggle("show", isMenuOpen);
+      
+      // Animate menu items
+      if (isMenuOpen) {
+        mobileNavItems.forEach((item, index) => {
+          (item as HTMLElement).style.animationDelay = `${index * 0.1}s`;
+          (item as HTMLElement).style.animation = "slide-in 0.5s ease-out forwards";
+        });
+      }
+    }
+
+    mobileMenuBtn?.addEventListener("click", toggleMobileMenu);
+
+    // Close mobile menu when clicking on a link
+    mobileNavItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        if (isMenuOpen) {
+          toggleMobileMenu();
+        }
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (isMenuOpen && !header?.contains(e.target as Node)) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute("href") || "");
+        if (target) {
+          const headerHeight = header?.offsetHeight || 0;
+          const targetPosition = (target as HTMLElement).offsetTop - headerHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  });
+</script>
 

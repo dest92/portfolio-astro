@@ -1,0 +1,423 @@
+---
+// Componente dedicado para el overlay de verificación
+---
+
+<!-- Verification System Overlay -->
+<div id="verificationOverlay" class="fixed inset-0 bg-black/95 backdrop-blur-sm z-[9999] hidden items-center justify-center">
+  <div class="relative w-full h-full overflow-hidden">
+    
+    <!-- Matrix Background -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="matrix-bg w-full h-full"></div>
+    </div>
+    
+    <!-- Verification Interface -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
+      
+      <!-- Main Terminal -->
+      <div class="cyber-terminal max-w-4xl w-full bg-black/80 backdrop-blur-lg rounded-lg border-2 border-cyan-400/50 shadow-2xl shadow-cyan-500/30">
+        
+        <!-- Terminal Header -->
+        <div class="flex items-center justify-between p-4 border-b border-cyan-400/30">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style="animation-delay: 0.5s"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse" style="animation-delay: 1s"></div>
+            </div>
+            <h2 class="text-lg font-bold text-cyan-400 font-mono">VERIFICATION_SYSTEM_v2.3.7</h2>
+          </div>
+          <button onclick="window.closeVerificationProcess()" class="text-red-400 hover:text-red-300 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Terminal Content -->
+        <div class="p-6 space-y-6">
+          
+          <!-- Status Display -->
+          <div class="text-center space-y-4">
+            <div class="text-4xl font-bold text-cyan-400 font-mono tracking-wider">
+              <span id="statusTitle">INICIANDO VERIFICACIÓN</span>
+            </div>
+            <div class="text-lg text-gray-400 font-mono">
+              <span id="statusSubtitle">Conectando con servidores de autenticación...</span>
+            </div>
+          </div>
+          
+          <!-- Progress Bars -->
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-mono text-cyan-400">
+                <span>DATABASE_SCAN</span>
+                <span id="progress1">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                <div id="progressBar1" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-300 cyber-glow-bar" style="width: 0%"></div>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-mono text-cyan-400">
+                <span>BLOCKCHAIN_VERIFY</span>
+                <span id="progress2">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                <div id="progressBar2" class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-300 cyber-glow-bar" style="width: 0%"></div>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-mono text-cyan-400">
+                <span>CRYPTOGRAPHIC_HASH</span>
+                <span id="progress3">0%</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                <div id="progressBar3" class="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-300 cyber-glow-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Terminal Output -->
+          <div class="bg-black/50 rounded-lg p-4 border border-cyan-400/30 min-h-[200px] max-h-[300px] overflow-y-auto">
+            <div id="terminalOutput" class="space-y-1 font-mono text-sm">
+              <div class="text-green-400">[INIT] Sistema de verificación iniciado</div>
+              <div class="text-cyan-400">[INFO] Conectando con base de datos de certificados...</div>
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div id="actionButtons" class="flex gap-4 justify-center hidden">
+            <button onclick="window.closeVerificationProcess()" class="cyber-button bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border-green-400/50 hover:from-green-500/30 hover:to-emerald-500/30">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-mono">CONTINUAR</span>
+            </button>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  // Función para cerrar con animación (disponible globalmente)
+  (window as any).closeModalWithAnimation = function(dialog: HTMLDialogElement) {
+    if (!dialog) return;
+    dialog.classList.add('closing');
+    setTimeout(() => {
+      dialog.classList.remove('closing');
+      dialog.close();
+    }, 300);
+  };
+
+  // Sistema de verificación - Funciones globales
+  (window as any).startVerificationProcess = function() {
+    console.log('Iniciando proceso de verificación...');
+    
+    // Primero cerrar el modal actual
+    const openModal = document.querySelector('dialog[open]') as HTMLDialogElement;
+    if (openModal) {
+      console.log('Cerrando modal actual...');
+      (window as any).closeModalWithAnimation(openModal);
+    }
+    
+    // Esperar a que se cierre el modal antes de mostrar la verificación
+    setTimeout(() => {
+      const overlay = document.getElementById('verificationOverlay');
+      if (!overlay) return;
+      
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      
+      // Resetear el estado
+      resetVerificationState();
+      
+      // Iniciar secuencia de verificación
+      setTimeout(() => runVerificationSequence(), 1000);
+    }, 300); // Esperar a que termine la animación de cierre del modal
+  };
+
+  (window as any).closeVerificationProcess = function() {
+    console.log('Cerrando proceso de verificación...');
+    const overlay = document.getElementById('verificationOverlay');
+    if (!overlay) return;
+    
+    overlay.classList.add('hidden');
+    overlay.classList.remove('flex');
+  };
+
+  function resetVerificationState() {
+    // Resetear barras de progreso
+    const progressBar1 = document.getElementById('progressBar1');
+    const progressBar2 = document.getElementById('progressBar2');
+    const progressBar3 = document.getElementById('progressBar3');
+    const progress1 = document.getElementById('progress1');
+    const progress2 = document.getElementById('progress2');
+    const progress3 = document.getElementById('progress3');
+    
+    if (progressBar1) progressBar1.style.width = '0%';
+    if (progressBar2) progressBar2.style.width = '0%';
+    if (progressBar3) progressBar3.style.width = '0%';
+    if (progress1) progress1.textContent = '0%';
+    if (progress2) progress2.textContent = '0%';
+    if (progress3) progress3.textContent = '0%';
+    
+    // Resetear estado
+    const statusTitle = document.getElementById('statusTitle');
+    const statusSubtitle = document.getElementById('statusSubtitle');
+    const actionButtons = document.getElementById('actionButtons');
+    
+    if (statusTitle) statusTitle.textContent = 'INICIANDO VERIFICACIÓN';
+    if (statusSubtitle) statusSubtitle.textContent = 'Conectando con servidores de autenticación...';
+    if (actionButtons) actionButtons.classList.add('hidden');
+    
+    // Limpiar terminal
+    const terminalOutput = document.getElementById('terminalOutput');
+    if (terminalOutput) {
+      terminalOutput.innerHTML = `
+        <div class="text-green-400">[INIT] Sistema de verificación iniciado</div>
+        <div class="text-cyan-400">[INFO] Conectando con base de datos de certificados...</div>
+      `;
+    }
+  }
+
+  async function runVerificationSequence() {
+    const steps = [
+      // Paso 1: Database Scan
+      {
+        progressId: 'progressBar1',
+        textId: 'progress1',
+        duration: 2500,
+        messages: [
+          { text: '[SCAN] Escaneando base de datos de certificados...', color: 'text-yellow-400', delay: 0 },
+          { text: '[SCAN] Verificando integridad de datos...', color: 'text-yellow-400', delay: 800 },
+          { text: '[SCAN] Validando firma digital...', color: 'text-yellow-400', delay: 1600 },
+          { text: '[SCAN] ✓ Base de datos verificada correctamente', color: 'text-green-400', delay: 2400 }
+        ]
+      },
+      // Paso 2: Blockchain Verify
+      {
+        progressId: 'progressBar2',
+        textId: 'progress2',
+        duration: 3000,
+        messages: [
+          { text: '[BLOCKCHAIN] Conectando con red blockchain...', color: 'text-purple-400', delay: 0 },
+          { text: '[BLOCKCHAIN] Verificando hash del certificado...', color: 'text-purple-400', delay: 1000 },
+          { text: '[BLOCKCHAIN] Validando transacciones...', color: 'text-purple-400', delay: 2000 },
+          { text: '[BLOCKCHAIN] ✓ Certificado registrado en blockchain', color: 'text-green-400', delay: 2800 }
+        ]
+      },
+      // Paso 3: Cryptographic Hash
+      {
+        progressId: 'progressBar3',
+        textId: 'progress3',
+        duration: 2000,
+        messages: [
+          { text: '[CRYPTO] Generando hash criptográfico...', color: 'text-cyan-400', delay: 0 },
+          { text: '[CRYPTO] Verificando firma RSA-2048...', color: 'text-cyan-400', delay: 600 },
+          { text: '[CRYPTO] Validando certificado SSL...', color: 'text-cyan-400', delay: 1200 },
+          { text: '[CRYPTO] ✓ Verificación criptográfica completada', color: 'text-green-400', delay: 1800 }
+        ]
+      }
+    ];
+
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i];
+      
+      // Agregar mensajes del paso
+      step.messages.forEach(msg => {
+        setTimeout(() => addTerminalMessage(msg.text, msg.color), msg.delay);
+      });
+      
+      // Animar barra de progreso
+      await animateProgressBar(step.progressId, step.textId, step.duration);
+      
+      // Pausa entre pasos
+      if (i < steps.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    }
+
+    // Finalizar verificación
+    setTimeout(() => {
+      const statusTitle = document.getElementById('statusTitle');
+      const statusSubtitle = document.getElementById('statusSubtitle');
+      const actionButtons = document.getElementById('actionButtons');
+      
+      if (statusTitle) statusTitle.textContent = 'VERIFICACIÓN COMPLETADA';
+      if (statusSubtitle) statusSubtitle.textContent = 'Certificado válido y autenticado ✓';
+      addTerminalMessage('[SUCCESS] ✓ Verificación completada exitosamente', 'text-green-400');
+      addTerminalMessage('[SUCCESS] El certificado es válido y está autenticado', 'text-green-400');
+      if (actionButtons) actionButtons.classList.remove('hidden');
+    }, 1000);
+  }
+
+  function animateProgressBar(progressId: string, textId: string, duration: number): Promise<void> {
+    return new Promise((resolve) => {
+      const bar = document.getElementById(progressId);
+      const text = document.getElementById(textId);
+      if (!bar || !text) return resolve();
+      
+      const startTime = Date.now();
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min((elapsed / duration) * 100, 100);
+        
+        bar.style.width = `${progress}%`;
+        text.textContent = `${Math.round(progress)}%`;
+        
+        if (progress < 100) {
+          requestAnimationFrame(animate);
+        } else {
+          resolve();
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    });
+  }
+
+  function addTerminalMessage(message: string, colorClass: string) {
+    const output = document.getElementById('terminalOutput');
+    if (!output) return;
+    
+    const div = document.createElement('div');
+    div.className = `${colorClass} animate-fade-in`;
+    div.textContent = message;
+    output.appendChild(div);
+    
+    // Scroll to bottom
+    output.scrollTop = output.scrollHeight;
+  }
+
+  // Cerrar verificación con ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const overlay = document.getElementById('verificationOverlay');
+      if (overlay && !overlay.classList.contains('hidden')) {
+        (window as any).closeVerificationProcess();
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Estilos para el overlay de verificación */
+  .cyber-terminal {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-terminal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.05) 2px,
+        rgba(0, 255, 255, 0.05) 4px
+      );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cyber-glow-bar {
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  .cyber-button {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px currentColor;
+  }
+
+  .cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .cyber-button:hover::before {
+    left: 100%;
+  }
+
+  .matrix-bg {
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100%);
+    animation: matrix-flow 20s linear infinite;
+  }
+
+  @keyframes matrix-flow {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100px) rotate(360deg); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cyber-terminal {
+      margin: 1rem;
+      max-width: none;
+    }
+    
+    .cyber-terminal .p-6 {
+      padding: 1rem;
+    }
+    
+    .cyber-terminal .p-4 {
+      padding: 0.75rem;
+    }
+  }
+</style> 
