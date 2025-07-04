@@ -517,10 +517,7 @@
         }
       });
       
-      // Auto focus
-      this.input.focus();
-      
-      // Keep focus on terminal
+      // Keep focus on terminal when clicked (but don't auto focus)
       document.addEventListener('click', (e) => {
         if (e.target && (e.target as HTMLElement).closest('.terminal-window')) {
           if (this.input) {
