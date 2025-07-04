@@ -39,26 +39,6 @@ const { title, description } = Astro.props;
     >
     </div>
 
-    <!-- Cyberpunk floating particles -->
-    <div class="cyber-particles fixed inset-0 z-[-1] pointer-events-none">
-      <div class="particle particle-1"></div>
-      <div class="particle particle-2"></div>
-      <div class="particle particle-3"></div>
-      <div class="particle particle-4"></div>
-      <div class="particle particle-5"></div>
-      <div class="particle particle-6"></div>
-    </div>
-
-    <!-- Circuit lines -->
-    <div class="cyber-circuits fixed inset-0 z-[-1] pointer-events-none">
-      <div class="circuit-line circuit-1"></div>
-      <div class="circuit-line circuit-2"></div>
-      <div class="circuit-line circuit-3"></div>
-    </div>
-
-    <!-- Grid overlay -->
-    <div class="cyber-grid fixed inset-0 z-[-1] pointer-events-none"></div>
-
     <Header />
     <slot />
 
@@ -134,31 +114,9 @@ const { title, description } = Astro.props;
 
       /* Fix for z-index issues */
       #header-nav {
-        animation: blur linear both 0.5s;
-        animation-timeline: scroll();
-        animation-range: 0 500px;
         z-index: 1000;
         position: fixed;
         will-change: transform;
-      }
-
-      @keyframes blur {
-        to {
-          backdrop-filter: blur(20px);
-          background: rgba(0, 0, 0, 0.8);
-          border-bottom: 1px solid rgba(0, 255, 136, 0.3);
-        }
-      }
-
-      @media (prefers-color-scheme: dark) {
-        @keyframes blur {
-          to {
-            backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 1px solid rgba(0, 255, 136, 0.4);
-            box-shadow: 0px 5px 50px -5px rgba(0, 255, 136, 0.2);
-          }
-        }
       }
 
       /* Cyber glow utility */
@@ -184,177 +142,11 @@ const { title, description } = Astro.props;
         }
       }
 
-      /* Ensure all background elements don't interfere with scrolling */
-      .cyber-particles,
-      .cyber-circuits,
-      .cyber-grid,
-      .particle,
-      .circuit-line {
-        pointer-events: none !important;
-      }
-
-      /* Cyberpunk floating particles */
-      .cyber-particles {
-        opacity: 0.6;
-      }
-
-      .particle {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: var(--cyber-primary);
-        border-radius: 50%;
-        box-shadow: 0 0 6px var(--cyber-primary);
-        animation: float-particle 20s linear infinite;
-      }
-
-      .particle-1 {
-        top: 10%;
-        left: 5%;
-        animation-delay: 0s;
-        animation-duration: 25s;
-      }
-
-      .particle-2 {
-        top: 30%;
-        right: 10%;
-        animation-delay: 5s;
-        animation-duration: 18s;
-        background: var(--cyber-secondary);
-        box-shadow: 0 0 6px var(--cyber-secondary);
-      }
-
-      .particle-3 {
-        bottom: 20%;
-        left: 15%;
-        animation-delay: 10s;
-        animation-duration: 22s;
-      }
-
-      .particle-4 {
-        top: 70%;
-        right: 25%;
-        animation-delay: 15s;
-        animation-duration: 16s;
-        background: var(--cyber-accent);
-        box-shadow: 0 0 6px var(--cyber-accent);
-      }
-
-      .particle-5 {
-        bottom: 40%;
-        right: 5%;
-        animation-delay: 8s;
-        animation-duration: 24s;
-      }
-
-      .particle-6 {
-        top: 50%;
-        left: 30%;
-        animation-delay: 12s;
-        animation-duration: 20s;
-        background: var(--cyber-secondary);
-        box-shadow: 0 0 6px var(--cyber-secondary);
-      }
-
-      @keyframes float-particle {
-        0% {
-          transform: translate(0, 0) scale(0.5);
-          opacity: 0;
-        }
-        10% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        90% {
-          opacity: 1;
-        }
-        100% {
-          transform: translate(100vw, -100vh) scale(0.5);
-          opacity: 0;
-        }
-      }
-
-      /* Circuit lines */
-      .cyber-circuits {
-        opacity: 0.3;
-      }
-
-      .circuit-line {
-        position: absolute;
-        background: linear-gradient(90deg, 
-          transparent 0%, 
-          var(--cyber-primary) 20%, 
-          var(--cyber-primary) 80%, 
-          transparent 100%
-        );
-        animation: circuit-flow 15s ease-in-out infinite;
-      }
-
-      .circuit-1 {
-        top: 20%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        animation-delay: 0s;
-      }
-
-      .circuit-2 {
-        top: 0;
-        right: 30%;
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(180deg, 
-          transparent 0%, 
-          var(--cyber-secondary) 20%, 
-          var(--cyber-secondary) 80%, 
-          transparent 100%
-        );
-        animation-delay: 5s;
-        animation-duration: 20s;
-      }
-
-      .circuit-3 {
-        bottom: 40%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, 
-          transparent 0%, 
-          var(--cyber-accent) 30%, 
-          var(--cyber-accent) 70%, 
-          transparent 100%
-        );
-        animation-delay: 10s;
-        animation-duration: 18s;
-      }
-
-      @keyframes circuit-flow {
-        0%, 100% {
-          opacity: 0.1;
-          transform: scaleX(0.5);
-        }
-        50% {
-          opacity: 0.8;
-          transform: scaleX(1);
-        }
-      }
-
-      /* Cyber grid */
-      .cyber-grid {
-        background-image: 
-          linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
-        opacity: 0.4;
-        animation: grid-pulse 10s ease-in-out infinite;
-      }
-
-      @keyframes grid-pulse {
-        0%, 100% {
-          opacity: 0.2;
-        }
-        50% {
-          opacity: 0.6;
+      /* Performance optimizations */
+      @media (max-width: 768px) {
+        * {
+          animation-duration: 0s !important;
+          transition-duration: 0.1s !important;
         }
       }
 
@@ -371,94 +163,6 @@ const { title, description } = Astro.props;
         box-shadow: 
           0 0 5px var(--cyber-primary),
           inset 0 0 5px rgba(0, 255, 136, 0.1);
-      }
-
-      /* Glitch effect */
-      .cyber-glitch {
-        position: relative;
-        animation: glitch 2s infinite;
-      }
-
-      .cyber-glitch::before,
-      .cyber-glitch::after {
-        content: attr(data-text);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .cyber-glitch::before {
-        animation: glitch-1 0.5s infinite;
-        color: var(--cyber-secondary);
-        z-index: -1;
-      }
-
-      .cyber-glitch::after {
-        animation: glitch-2 0.5s infinite;
-        color: var(--cyber-accent);
-        z-index: -2;
-      }
-
-      @keyframes glitch {
-        0%, 100% {
-          transform: translate(0);
-        }
-        20% {
-          transform: translate(-2px, 2px);
-        }
-        40% {
-          transform: translate(-2px, -2px);
-        }
-        60% {
-          transform: translate(2px, 2px);
-        }
-        80% {
-          transform: translate(2px, -2px);
-        }
-      }
-
-      @keyframes glitch-1 {
-        0% {
-          clip-path: inset(40% 0 61% 0);
-        }
-        20% {
-          clip-path: inset(92% 0 1% 0);
-        }
-        40% {
-          clip-path: inset(43% 0 1% 0);
-        }
-        60% {
-          clip-path: inset(25% 0 58% 0);
-        }
-        80% {
-          clip-path: inset(54% 0 7% 0);
-        }
-        100% {
-          clip-path: inset(58% 0 43% 0);
-        }
-      }
-
-      @keyframes glitch-2 {
-        0% {
-          clip-path: inset(25% 0 58% 0);
-        }
-        20% {
-          clip-path: inset(54% 0 7% 0);
-        }
-        40% {
-          clip-path: inset(58% 0 43% 0);
-        }
-        60% {
-          clip-path: inset(40% 0 61% 0);
-        }
-        80% {
-          clip-path: inset(92% 0 1% 0);
-        }
-        100% {
-          clip-path: inset(43% 0 1% 0);
-        }
       }
 
       /* Dark mode adjustments */

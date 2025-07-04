@@ -138,7 +138,6 @@ const PROJECTS = [
                 loading="lazy"
               />
               <div class="image-overlay"></div>
-              <div class="scan-line"></div>
             </div>
             {featured && (
               <div class="featured-badge">
@@ -193,13 +192,6 @@ const PROJECTS = [
             </div>
           </div>
         </div>
-
-        {/* Floating particles */}
-        <div class="floating-particles">
-          <div class="particle particle-1"></div>
-          <div class="particle particle-2"></div>
-          <div class="particle particle-3"></div>
-        </div>
       </article>
     ))
   }
@@ -215,25 +207,21 @@ const PROJECTS = [
 
   .cyber-project-card {
     position: relative;
-    background: linear-gradient(145deg, 
-      rgba(0, 0, 0, 0.8) 0%, 
-      rgba(0, 20, 40, 0.9) 50%, 
-      rgba(0, 0, 0, 0.8) 100%
-    );
+    background: rgba(0, 20, 40, 0.6);
     border: 1px solid rgba(0, 255, 136, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    padding: 2rem;
     backdrop-filter: blur(10px);
-    animation: card-float 6s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
   }
 
   .cyber-project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(0, 255, 136, 0.6);
+    transform: translateY(-8px);
     box-shadow: 
       0 20px 40px rgba(0, 0, 0, 0.3),
-      0 0 40px rgba(0, 255, 136, 0.2);
+      0 0 60px rgba(0, 255, 136, 0.1);
+    border-color: rgba(0, 255, 136, 0.4);
   }
 
   .cyber-project-card.featured {
@@ -359,19 +347,20 @@ const PROJECTS = [
     opacity: 1;
   }
 
-  .scan-line {
+  .holographic-overlay {
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 2px;
-    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 255, 136, 0.8) 50%,
-      transparent 100%
+      45deg,
+      transparent 30%,
+      rgba(0, 255, 136, 0.1) 50%,
+      transparent 70%
     );
-    animation: scan 3s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .featured-badge {
@@ -529,70 +518,6 @@ const PROJECTS = [
 
   .cyber-action-btn:hover .btn-glow {
     left: 100%;
-  }
-
-  .floating-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 255, 136, 0.6);
-    border-radius: 50%;
-    animation: float-particle 8s ease-in-out infinite;
-  }
-
-  .particle-1 {
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-  }
-
-  .particle-2 {
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
-  }
-
-  .particle-3 {
-    bottom: 30%;
-    left: 20%;
-    animation-delay: 4s;
-  }
-
-  @keyframes card-float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-  }
-
-  @keyframes scan {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-
-  @keyframes float-particle {
-    0%, 100% {
-      transform: translateY(0) opacity(0.3);
-    }
-    50% {
-      transform: translateY(-20px) opacity(1);
-    }
   }
 
   /* Responsive design */

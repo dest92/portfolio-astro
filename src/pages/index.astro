@@ -382,31 +382,26 @@ import CyberSkills from "../components/CyberSkills.astro";
     position: absolute;
     border: 2px solid rgba(0, 255, 136, 0.3);
     border-radius: 50%;
-    animation: rotate-ring infinite linear;
   }
-
+  
   .ring-1 {
     width: 200px;
     height: 200px;
-    animation-duration: 20s;
     border-color: rgba(0, 255, 136, 0.4);
   }
-
+  
   .ring-2 {
     width: 150px;
     height: 150px;
-    animation-duration: 15s;
-    animation-direction: reverse;
     border-color: rgba(59, 130, 246, 0.4);
   }
-
+  
   .ring-3 {
     width: 100px;
     height: 100px;
-    animation-duration: 10s;
     border-color: rgba(168, 85, 247, 0.4);
   }
-
+  
   .globe-core {
     width: 60px;
     height: 60px;
@@ -415,7 +410,6 @@ import CyberSkills from "../components/CyberSkills.astro";
     box-shadow: 
       0 0 30px rgba(0, 255, 136, 0.5),
       inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    animation: pulse-core 3s ease-in-out infinite;
   }
 
   /* Dark Mode */
@@ -443,27 +437,6 @@ import CyberSkills from "../components/CyberSkills.astro";
 
   :global(.dark) .cyber-cta-button.tertiary {
     color: #e5e7eb;
-  }
-
-  /* Animations */
-  @keyframes rotate-ring {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes pulse-core {
-    0%, 100% { 
-      transform: scale(1);
-      box-shadow: 
-        0 0 30px rgba(0, 255, 136, 0.5),
-        inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    }
-    50% { 
-      transform: scale(1.1);
-      box-shadow: 
-        0 0 50px rgba(0, 255, 136, 0.8),
-        inset 0 2px 4px rgba(255, 255, 255, 0.5);
-    }
   }
 
   /* Responsive Design */

@@ -179,19 +179,8 @@
     margin-bottom: 4px;
     display: flex;
     flex-wrap: wrap;
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
+    opacity: 1;
   }
-  
-  .terminal-line:nth-child(1) { animation-delay: 0.1s; }
-  .terminal-line:nth-child(2) { animation-delay: 0.2s; }
-  .terminal-line:nth-child(3) { animation-delay: 0.3s; }
-  .terminal-line:nth-child(4) { animation-delay: 0.4s; }
-  .terminal-line:nth-child(5) { animation-delay: 0.5s; }
-  .terminal-line:nth-child(6) { animation-delay: 0.6s; }
-  .terminal-line:nth-child(7) { animation-delay: 0.7s; }
-  .terminal-line:nth-child(8) { animation-delay: 0.8s; }
-  .terminal-line:nth-child(9) { animation-delay: 0.9s; }
   
   .terminal-prompt {
     color: #00ff00;
@@ -236,7 +225,6 @@
   .terminal-cursor {
     color: #00ff00;
     font-weight: bold;
-    animation: blink 1s infinite;
     margin-left: 2px;
   }
   
@@ -273,29 +261,6 @@
       0 0 0 1px rgba(255, 255, 255, 0.1);
   }
   
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-  
-  @keyframes matrix {
-    0% { transform: translateY(-100vh); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-  }
-  
   .matrix-char {
     position: fixed;
     color: #00ff00;
@@ -304,7 +269,6 @@
     text-shadow: 0 0 5px #00ff00;
     z-index: 9999;
     pointer-events: none;
-    animation: matrix 3s linear infinite;
   }
 </style>
 

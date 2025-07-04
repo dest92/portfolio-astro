@@ -339,22 +339,6 @@
     width: var(--progress);
     position: relative;
     transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: pulse-skill 2s ease-in-out infinite;
-  }
-  
-  .skill-progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.3) 50%, 
-      transparent 100%
-    );
-    animation: shimmer 2s ease-in-out infinite;
   }
   
   .skill-item:hover {
@@ -408,46 +392,6 @@
     color: #e5e7eb;
   }
   
-  /* Animations */
-  @keyframes pulse-skill {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-  
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .skill-category {
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
-  }
-  
-  .skill-category:nth-child(1) { animation-delay: 0.1s; }
-  .skill-category:nth-child(2) { animation-delay: 0.3s; }
-  .skill-category:nth-child(3) { animation-delay: 0.5s; }
-  .skill-category:nth-child(4) { animation-delay: 0.7s; }
-  
   /* Responsive */
   @media (max-width: 768px) {
     .skills-grid {
@@ -460,54 +404,3 @@
     }
   }
 </style>
-
-<script>
-  // Matrix rain effect
-  function createMatrixRain() {
-    const container = document.getElementById('matrix-rain');
-    if (!container) return;
-    
-    const chars = '01010101';
-    
-    function createDrop() {
-      const drop = document.createElement('div');
-      drop.textContent = chars[Math.floor(Math.random() * chars.length)];
-      drop.style.position = 'absolute';
-      drop.style.color = 'rgba(0, 255, 136, 0.3)';
-      drop.style.fontSize = '14px';
-      drop.style.fontFamily = 'monospace';
-      drop.style.left = Math.random() * 100 + '%';
-      drop.style.top = '-20px';
-      drop.style.animation = 'matrix-fall 3s linear infinite';
-      drop.style.animationDelay = Math.random() * 2 + 's';
-      
-      if (container) {
-        container.appendChild(drop);
-      }
-      
-      setTimeout(() => {
-        if (drop.parentNode) {
-          drop.remove();
-        }
-      }, 3000);
-    }
-    
-    // Create periodic drops
-    setInterval(createDrop, 200);
-  }
-  
-  // Add matrix fall animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes matrix-fall {
-      to {
-        transform: translateY(calc(100vh + 20px));
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-  
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', createMatrixRain);
-</script>
