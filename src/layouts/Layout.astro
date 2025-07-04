@@ -31,36 +31,11 @@ const { title, description } = Astro.props;
   <body class="relative text-black dark:text-white">
     <!-- Background container with cyberpunk effects -->
     <div
-      class="fixed
-        top-0
-        bottom-0
-        left-0
-        right-0
-        z-[-2]
-        min-h-screen
-        w-full
-        bg-gray-50
-        dark:bg-gray-950
-        cyber-background
-        bg-[radial-gradient(ellipse_at_top,rgba(0,255,136,0.1)_0%,rgba(0,255,136,0.05)_25%,transparent_50%),radial-gradient(ellipse_at_bottom,rgba(0,200,255,0.08)_0%,rgba(0,200,255,0.03)_25%,transparent_50%),radial-gradient(circle_at_30%_40%,rgba(255,0,150,0.06)_0%,transparent_50%)]
-        dark:bg-[radial-gradient(ellipse_at_top,rgba(0,255,136,0.15)_0%,rgba(0,255,136,0.08)_25%,transparent_50%),radial-gradient(ellipse_at_bottom,rgba(0,200,255,0.12)_0%,rgba(0,200,255,0.05)_25%,transparent_50%),radial-gradient(circle_at_70%_60%,rgba(255,0,150,0.08)_0%,transparent_50%)]
-        before:content-['']
-        before:absolute
-        before:top-0
-        before:bottom-0
-        before:left-0
-        before:right-0
-        before:bg-[url('/noise.png')]
-        before:opacity-[0.02]
-        before:dark:opacity-[0.04]
-        after:content-['']
-        after:absolute
-        after:top-0
-        after:bottom-0
-        after:left-0
-        after:right-0
-        after:bg-[linear-gradient(90deg,transparent_0%,rgba(0,255,136,0.03)_50%,transparent_100%)]
-        after:animate-pulse"
+      class="fixed top-0 bottom-0 left-0 right-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950 pointer-events-none"
+      style="background: 
+        radial-gradient(ellipse at top, rgba(0,255,136,0.1) 0%, rgba(0,255,136,0.05) 25%, transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(0,200,255,0.08) 0%, rgba(0,200,255,0.03) 25%, transparent 50%),
+        radial-gradient(circle at 30% 40%, rgba(255,0,150,0.06) 0%, transparent 50%);"
     >
     </div>
 
@@ -111,10 +86,12 @@ const { title, description } = Astro.props;
         color: rgba(17, 17, 17, 0.9);
         min-height: 100vh;
         overflow-x: hidden;
+        overflow-y: auto;
         width: 100%;
         margin: 0;
         padding: 0;
         position: relative;
+        touch-action: pan-y;
       }
 
       @media (prefers-reduced-motion: reduce) {
