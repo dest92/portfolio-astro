@@ -2,6 +2,7 @@
 import "@fontsource-variable/onest";
 
 import Header from "../components/Header.astro";
+import VerificationOverlay from "../components/VerificationOverlay.astro";
 
 export interface Props {
   title: string;
@@ -41,6 +42,9 @@ const { title, description } = Astro.props;
 
     <Header />
     <slot />
+
+    <!-- Verification Overlay Global -->
+    <VerificationOverlay />
 
     <style is:global>
       :root {

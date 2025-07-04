@@ -10,6 +10,10 @@ const certificados = [
     fecha: "2023",
     category: "cybersecurity",
     level: "advanced",
+    skills: ["Penetration Testing", "Vulnerability Assessment", "Social Engineering"],
+    duration: "40 horas",
+    credentialID: "CYB-2023-001",
+    featured: true
   },
   {
     id: "cert-2",
@@ -19,6 +23,9 @@ const certificados = [
     fecha: "2023",
     category: "cybersecurity",
     level: "intermediate",
+    skills: ["Threat Intelligence", "OSINT", "Incident Response"],
+    duration: "30 horas",
+    credentialID: "CYB-2023-002"
   },
   {
     id: "cert-3",
@@ -28,6 +35,9 @@ const certificados = [
     fecha: "2023",
     category: "development",
     level: "beginner",
+    skills: ["Mobile Development", "React", "JavaScript"],
+    duration: "25 horas",
+    credentialID: "DEV-2023-001"
   },
   {
     id: "cert-4",
@@ -37,6 +47,10 @@ const certificados = [
     fecha: "2023",
     category: "networking",
     level: "intermediate",
+    skills: ["Network Security", "TCP/IP", "Routing"],
+    duration: "35 horas",
+    credentialID: "NET-2023-001",
+    featured: true
   },
   {
     id: "cert-5",
@@ -46,104 +60,974 @@ const certificados = [
     fecha: "2022",
     category: "development",
     level: "beginner",
+    skills: ["HTML5", "CSS3", "Responsive Design"],
+    duration: "20 horas",
+    credentialID: "DEV-2022-001"
   },
 ];
 
 const getCategoryColor = (category: string) => {
   switch (category) {
     case 'cybersecurity':
-      return 'bg-red-500/10 text-red-400 border-red-400/30';
+      return 'cyber-category-security';
     case 'development':
-      return 'bg-blue-500/10 text-blue-400 border-blue-400/30';
+      return 'cyber-category-dev';
     case 'networking':
-      return 'bg-green-500/10 text-green-400 border-green-400/30';
+      return 'cyber-category-network';
     default:
-      return 'bg-gray-500/10 text-gray-400 border-gray-400/30';
+      return 'cyber-category-default';
   }
 };
 
 const getLevelIcon = (level: string) => {
   switch (level) {
     case 'beginner':
-      return '●';
+      return '▲';
     case 'intermediate':
-      return '●●';
+      return '▲▲';
     case 'advanced':
-      return '●●●';
+      return '▲▲▲';
     default:
-      return '●';
+      return '▲';
+  }
+};
+
+const getLevelColor = (level: string) => {
+  switch (level) {
+    case 'beginner':
+      return 'cyber-level-beginner';
+    case 'intermediate':
+      return 'cyber-level-intermediate';
+    case 'advanced':
+      return 'cyber-level-advanced';
+    default:
+      return 'cyber-level-default';
   }
 };
 ---
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<section class="cyber-certificates-section">
+  <div class="cyber-certificates-grid">
     {
-      certificados.map(({ id, src, description, platform, fecha, category, level }) => (
-        <>
-          <article
-            class="group relative bg-gradient-to-b from-slate-900/90 to-slate-800/80 rounded-lg overflow-hidden border border-white/10 hover:border-green-400/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-xl backdrop-blur-sm"
-            onclick={`document.getElementById('${id}').showModal()`}
-          >
-            {/* Image */}
-            <div class="relative aspect-[4/3] overflow-hidden">
+      certificados.map(({ id, src, description, platform, fecha, category, level, skills, duration, credentialID, featured }, index) => (
+        <article
+          class={`cyber-certificate-card ${featured ? 'cyber-certificate-featured' : ''}`}
+          data-modal-id={id}
+          style={`animation-delay: ${(index + 1) * 0.1}s`}
+        >
+          
+          <!-- Featured Badge -->
+          {featured && (
+            <div class="cyber-featured-badge">
+              <span class="cyber-badge-text">CERTIFICADO DESTACADO</span>
+              <div class="cyber-badge-glow"></div>
+            </div>
+          )}
+          
+          <!-- Holographic Overlay -->
+          <div class="cyber-holo-overlay"></div>
+          
+          <!-- Scanlines Effect -->
+          <div class="cyber-scanlines"></div>
+          
+          <!-- Certificate Image -->
+          <div class="cyber-image-container">
+            <div class="cyber-image-frame">
               <img
                 src={src}
                 alt={`Certificado de ${description}`}
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                class="cyber-certificate-image"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent" />
-              
-              {/* Verified badge */}
-              <div class="absolute top-3 right-3 bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs font-medium border border-green-400/30 backdrop-blur-sm">
-                <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
-                VERIFIED
+              <div class="cyber-image-overlay"></div>
+            </div>
+            
+            <!-- Security Badge -->
+            <div class="cyber-security-badge">
+              <span class="cyber-verified-dot"></span>
+              <span class="cyber-verified-text">VERIFIED</span>
+            </div>
+
+            <!-- Level Indicator -->
+            <div class={`cyber-level-indicator ${getLevelColor(level)}`}>
+              <span class="cyber-level-icons">{getLevelIcon(level)}</span>
+              <span class="cyber-level-text">{level.toUpperCase()}</span>
+            </div>
+            
+            <!-- Data Streams -->
+            <div class="cyber-data-streams">
+              <div class="cyber-stream"></div>
+              <div class="cyber-stream"></div>
+              <div class="cyber-stream"></div>
+            </div>
+          </div>
+
+          <!-- Certificate Content -->
+          <div class="cyber-certificate-content">
+            
+            <!-- Title -->
+            <h3 class="cyber-certificate-title">
+              {description.toUpperCase()}
+            </h3>
+
+            <!-- Platform & Category -->
+            <div class="cyber-metadata-container">
+              <span class={`cyber-platform-tag ${getCategoryColor(category)}`}>
+                <span class="cyber-platform-text">{platform}</span>
+                <div class="cyber-platform-glow"></div>
+              </span>
+              <span class="cyber-category-tag">
+                <span class="cyber-category-text">{category.toUpperCase()}</span>
+              </span>
+            </div>
+
+            <!-- Date & Duration -->
+            <div class="cyber-info-grid">
+              <div class="cyber-info-item">
+                <span class="cyber-info-label">EMITIDO</span>
+                <span class="cyber-info-value">[{fecha}]</span>
+              </div>
+              <div class="cyber-info-item">
+                <span class="cyber-info-label">DURACIÓN</span>
+                <span class="cyber-info-value">{duration}</span>
               </div>
             </div>
 
-            {/* Content */}
-            <div class="p-4 space-y-3">
-              {/* Title */}
-              <h3 class="text-lg font-semibold text-white group-hover:text-green-400 transition-colors duration-300">
-                {description}
-              </h3>
-
-              {/* Badges */}
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getCategoryColor(category)}`}>
-                  {platform}
-                </span>
-                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-400/30">
-                  <span class="mr-1">{getLevelIcon(level)}</span>
-                  {level.toUpperCase()}
-                </span>
-              </div>
-
-              {/* Date */}
-              <div class="text-sm text-gray-400">
-                <span class="font-medium">Issued:</span> {fecha}
-              </div>
-
-              {/* Click to view */}
-              <div class="flex items-center justify-center pt-2 text-sm text-gray-400 group-hover:text-green-400 transition-colors duration-300">
-                <span>Click to view</span>
-                <svg class="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
+            <!-- Skills Preview -->
+            <div class="cyber-skills-container">
+              <span class="cyber-skills-label">SKILLS_ACQUIRED:</span>
+              <div class="cyber-skills-tags">
+                {skills.slice(0, 2).map(skill => (
+                  <span class="cyber-skill-tag">
+                    <span class="cyber-skill-text">{skill}</span>
+                    <div class="cyber-skill-glow"></div>
+                  </span>
+                ))}
+                {skills.length > 2 && (
+                  <span class="cyber-skill-more">
+                    +{skills.length - 2}_MORE
+                  </span>
+                )}
               </div>
             </div>
-          </article>
 
-          <Modal id={id}>
-            <img
-              src={src}
-              alt={`Certificado de ${description}`}
-              class="w-full h-auto rounded-lg"
-            />
-          </Modal>
-        </>
+            <!-- Access Button -->
+            <div class="cyber-access-container">
+              <span class="cyber-access-btn">
+                <span class="cyber-access-text">[ ACCESS_CERTIFICATE ]</span>
+                <div class="cyber-access-arrow">→</div>
+                <div class="cyber-btn-spark"></div>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Cyber Frame -->
+          <div class="cyber-frame">
+            <div class="cyber-corner cyber-corner-tl"></div>
+            <div class="cyber-corner cyber-corner-tr"></div>
+            <div class="cyber-corner cyber-corner-bl"></div>
+            <div class="cyber-corner cyber-corner-br"></div>
+          </div>
+          
+          <!-- Glitch Effect -->
+          <div class="cyber-glitch-overlay"></div>
+          
+          <Modal id={id} certificate={{ id, src, description, platform, fecha, category, level, skills, duration, credentialID }} />
+        </article>
       ))
     }
   </div>
 </section>
+
+<script>
+  // Agregar event listeners cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM cargado, configurando certificados...');
+    
+    // Obtener todas las tarjetas de certificados
+    const certificateCards = document.querySelectorAll('[data-modal-id]');
+    console.log('Tarjetas encontradas:', certificateCards.length);
+    
+    certificateCards.forEach(card => {
+      const modalId = card.getAttribute('data-modal-id');
+      if (modalId) {
+        card.addEventListener('click', () => {
+          console.log('Clic en tarjeta:', modalId);
+          
+          // Usar la función global del modal si está disponible
+          if ((window as any).openCertificateModal) {
+            (window as any).openCertificateModal(modalId);
+          } else {
+            // Fallback: abrir modal directamente
+            const modal = document.getElementById(modalId) as HTMLDialogElement;
+            if (modal) {
+              console.log('Modal encontrado, abriendo...');
+              modal.showModal();
+            } else {
+              console.error('Modal no encontrado:', modalId);
+            }
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Variables CSS para el tema cyberpunk */
+  :root {
+    --cyber-primary: #00ffff;
+    --cyber-secondary: #ff00ff;
+    --cyber-accent: #00ff00;
+    --cyber-warning: #ffff00;
+    --cyber-danger: #ff0040;
+    --cyber-bg-dark: #0a0a0a;
+    --cyber-bg-card: #111111;
+    --cyber-bg-glass: rgba(0, 255, 255, 0.05);
+    --cyber-border: rgba(0, 255, 255, 0.3);
+    --cyber-text-primary: #ffffff;
+    --cyber-text-secondary: #b0b0b0;
+    --cyber-glow: 0 0 20px;
+    --cyber-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Sección principal */
+  .cyber-certificates-section {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  /* Grid de certificados */
+  .cyber-certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Card de certificado */
+  .cyber-certificate-card {
+    position: relative;
+    background: linear-gradient(135deg, 
+      var(--cyber-bg-card) 0%, 
+      rgba(17, 17, 17, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cyber-border);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cyber-fade-in 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    cursor: pointer;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 25px) 0,
+      100% 25px,
+      100% 100%,
+      25px 100%,
+      0 calc(100% - 25px)
+    );
+  }
+
+  .cyber-certificate-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--cyber-primary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-primary);
+  }
+
+  /* Featured certificates */
+  .cyber-certificate-featured {
+    border-color: var(--cyber-secondary);
+    box-shadow: 
+      var(--cyber-shadow),
+      0 0 15px rgba(255, 0, 255, 0.3);
+  }
+
+  .cyber-certificate-featured:hover {
+    border-color: var(--cyber-secondary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-secondary);
+  }
+
+  /* Featured badge */
+  .cyber-featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    background: linear-gradient(45deg, var(--cyber-secondary), rgba(255, 0, 255, 0.8));
+    color: var(--cyber-bg-dark);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-badge-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-badge-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-certificate-card:hover .cyber-badge-glow {
+    transform: translateX(100%);
+  }
+
+  /* Holographic overlay */
+  .cyber-holo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+    z-index: 1;
+  }
+
+  .cyber-certificate-card:hover .cyber-holo-overlay {
+    transform: translateX(100%);
+  }
+
+  /* Scanlines effect */
+  .cyber-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Image container */
+  .cyber-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .cyber-image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cyber-certificate-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    filter: brightness(0.8) contrast(1.2);
+  }
+
+  .cyber-certificate-card:hover .cyber-certificate-image {
+    transform: scale(1.1);
+    filter: brightness(1) contrast(1.3);
+  }
+
+  .cyber-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 255, 255, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-certificate-card:hover .cyber-image-overlay {
+    opacity: 1;
+  }
+
+  /* Security Badge */
+  .cyber-security-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+    color: var(--cyber-accent);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    border: 1px solid var(--cyber-accent);
+    backdrop-filter: blur(10px);
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+  }
+
+  .cyber-verified-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--cyber-accent);
+    border-radius: 50%;
+    animation: cyber-pulse 2s ease-in-out infinite;
+  }
+
+  /* Level Indicator */
+  .cyber-level-indicator {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    backdrop-filter: blur(10px);
+    border: 1px solid;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+  }
+
+  .cyber-level-beginner {
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+    color: var(--cyber-accent);
+    border-color: var(--cyber-accent);
+  }
+
+  .cyber-level-intermediate {
+    background: linear-gradient(45deg, rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.1));
+    color: var(--cyber-warning);
+    border-color: var(--cyber-warning);
+  }
+
+  .cyber-level-advanced {
+    background: linear-gradient(45deg, rgba(255, 0, 64, 0.2), rgba(255, 0, 64, 0.1));
+    color: var(--cyber-danger);
+    border-color: var(--cyber-danger);
+  }
+
+  /* Data streams */
+  .cyber-data-streams {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cyber-stream {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--cyber-primary);
+    animation: cyber-stream-flow 2s linear infinite;
+  }
+
+  .cyber-stream:nth-child(1) { left: 0; animation-delay: 0s; }
+  .cyber-stream:nth-child(2) { left: 2px; animation-delay: 0.7s; }
+  .cyber-stream:nth-child(3) { left: 4px; animation-delay: 1.4s; }
+
+  /* Content */
+  .cyber-certificate-content {
+    position: relative;
+    padding: 2rem;
+    z-index: 3;
+  }
+
+  /* Title */
+  .cyber-certificate-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--cyber-primary);
+    margin: 0 0 1.5rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-certificate-card:hover .cyber-certificate-title {
+    text-shadow: 0 0 20px var(--cyber-primary);
+    animation: cyber-glitch-text 0.3s ease-in-out;
+  }
+
+  /* Metadata */
+  .cyber-metadata-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-platform-tag {
+    position: relative;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    border: 1px solid;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-category-security {
+    background: linear-gradient(45deg, rgba(255, 0, 64, 0.2), rgba(255, 0, 64, 0.1));
+    color: var(--cyber-danger);
+    border-color: var(--cyber-danger);
+  }
+
+  .cyber-category-dev {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+    color: var(--cyber-primary);
+    border-color: var(--cyber-primary);
+  }
+
+  .cyber-category-network {
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+    color: var(--cyber-accent);
+    border-color: var(--cyber-accent);
+  }
+
+  .cyber-category-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(45deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 255, 0.1));
+    color: var(--cyber-secondary);
+    border: 1px solid var(--cyber-secondary);
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+  }
+
+  .cyber-platform-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-platform-tag:hover .cyber-platform-glow {
+    transform: translateX(100%);
+  }
+
+  /* Info Grid */
+  .cyber-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .cyber-info-label {
+    font-size: 0.7rem;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+
+  .cyber-info-value {
+    font-size: 0.9rem;
+    color: var(--cyber-text-primary);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+  }
+
+  /* Skills */
+  .cyber-skills-container {
+    margin-bottom: 2rem;
+  }
+
+  .cyber-skills-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+  }
+
+  .cyber-skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .cyber-skill-tag {
+    position: relative;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.05));
+    color: var(--cyber-primary);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-skill-more {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    color: var(--cyber-text-secondary);
+    border: 1px solid rgba(176, 176, 176, 0.3);
+    clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
+  }
+
+  .cyber-skill-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-skill-tag:hover .cyber-skill-glow {
+    transform: translateX(100%);
+  }
+
+  /* Access Button */
+  .cyber-access-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cyber-access-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    color: var(--cyber-primary);
+    border: 2px solid var(--cyber-primary);
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+    transition: all 0.3s ease;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-access-btn:hover {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    transform: translateY(-2px);
+  }
+
+  .cyber-access-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .cyber-certificate-card:hover .cyber-access-arrow {
+    transform: translateX(5px);
+  }
+
+  .cyber-btn-spark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-access-btn:hover .cyber-btn-spark {
+    transform: translateX(100%);
+  }
+
+  /* Frame */
+  .cyber-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .cyber-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyber-primary);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-corner-tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .cyber-corner-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .cyber-certificate-card:hover .cyber-corner {
+    border-color: var(--cyber-primary);
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    width: 25px;
+    height: 25px;
+  }
+
+  .cyber-certificate-featured:hover .cyber-corner {
+    border-color: var(--cyber-secondary);
+    box-shadow: var(--cyber-glow) var(--cyber-secondary);
+  }
+
+  /* Glitch effect */
+  .cyber-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 0, 255, 0.1) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .cyber-certificate-featured:hover .cyber-glitch-overlay {
+    opacity: 1;
+    animation: cyber-glitch-sweep 0.6s ease-in-out;
+  }
+
+  /* Animaciones */
+  @keyframes cyber-fade-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes cyber-stream-flow {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cyber-glitch-text {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+  }
+
+  @keyframes cyber-glitch-sweep {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cyber-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 5px currentColor;
+      opacity: 1;
+    }
+    50% { 
+      box-shadow: 0 0 15px currentColor;
+      opacity: 0.8;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cyber-certificates-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .cyber-certificate-content {
+      padding: 1.5rem;
+    }
+
+    .cyber-certificate-title {
+      font-size: 1rem;
+    }
+
+    .cyber-metadata-container {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+    .cyber-info-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .cyber-image-container {
+      height: 180px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-certificates-grid {
+      padding: 0 0.5rem;
+    }
+
+    .cyber-certificate-content {
+      padding: 1rem;
+    }
+
+    .cyber-certificate-title {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .cyber-corner {
+      width: 15px;
+      height: 15px;
+    }
+
+    .cyber-certificate-card:hover .cyber-corner {
+      width: 18px;
+      height: 18px;
+    }
+
+    .cyber-featured-badge {
+      font-size: 0.55rem;
+      padding: 0.3rem 0.6rem;
+    }
+
+    .cyber-access-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Mejoras específicas para dispositivos táctiles */
+  @media (hover: none) and (pointer: coarse) {
+    .cyber-access-btn:hover {
+      transform: none;
+    }
+
+    .cyber-access-btn:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+
+    .cyber-btn-spark {
+      display: none;
+    }
+
+    .cyber-certificate-card:hover .cyber-holo-overlay {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+

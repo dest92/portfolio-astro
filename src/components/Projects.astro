@@ -187,7 +187,6 @@ const PROJECTS = [
                 rel="noopener"
                 class="cyber-action-btn cyber-btn-github"
               >
-                <GitHub class="cyber-btn-icon" />
                 <span class="cyber-btn-text">CÓDIGO</span>
                 <div class="cyber-btn-spark"></div>
               </a>
@@ -605,8 +604,8 @@ const PROJECTS = [
   }
 
   .cyber-btn-icon {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     position: relative;
     z-index: 2;
   }
@@ -823,9 +822,10 @@ const PROJECTS = [
       gap: 0;
     }
 
-    .cyber-action-btn .cyber-btn-icon,
-    .cyber-action-btn svg {
-      display: none !important;
+    /* Ajustar tamaño de iconos en móviles */
+    .cyber-action-btn .cyber-btn-icon {
+      width: 14px;
+      height: 14px;
     }
 
     .cyber-image-container {
@@ -877,9 +877,10 @@ const PROJECTS = [
       gap: 0;
     }
 
-    .cyber-action-btn .cyber-btn-icon,
-    .cyber-action-btn svg {
-      display: none !important;
+    /* Ajustar tamaño de iconos en móviles muy pequeños */
+    .cyber-action-btn .cyber-btn-icon {
+      width: 12px;
+      height: 12px;
     }
 
     .cyber-corner {
