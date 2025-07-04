@@ -10,27 +10,27 @@ import Link from "./icons/Link.astro";
 const TAGS = {
   NEXT: {
     name: "Next.js",
-    class: "bg-gradient-to-r from-gray-900 to-black text-white border-white/20",
+    class: "cyber-tag-next",
     icon: NextJS,
   },
   TAILWIND: {
     name: "Tailwind",
-    class: "bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-400/30",
+    class: "cyber-tag-tailwind",
     icon: Tailwind,
   },
   REACT: {
     name: "React.js",
-    class: "bg-gradient-to-r from-blue-600 to-blue-700 text-white border-blue-400/30",
+    class: "cyber-tag-react",
     icon: ReactIcon,
   },
   SUPABASE: {
     name: "Supabase",
-    class: "bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-400/30",
+    class: "cyber-tag-supabase",
     icon: SupabaseIcon,
   },
   ASTRO: {
     name: "Astro",
-    class: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-orange-400/30",
+    class: "cyber-tag-astro",
     icon: BracketIcon,
   },
 };
@@ -115,72 +115,81 @@ const PROJECTS = [
 ];
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  {
-    PROJECTS.map(({ image, title, description, tags, link, github, featured }, index) => (
-      <article class={`
-        relative group overflow-hidden rounded-lg 
-        bg-gradient-to-b from-slate-900/90 to-slate-900/70 
-        backdrop-blur-sm border border-white/10 
-        hover:border-green-400/40 transition-all duration-300 
-        hover:transform hover:scale-105 hover:shadow-2xl
-        ${featured ? 'border-pink-400/40 shadow-pink-400/20' : ''}
-        w-full
-      `}>
-        {/* Featured Badge */}
+<section class="cyber-projects-section">
+  <div class="cyber-projects-grid">
+    {PROJECTS.map(({ image, title, description, tags, link, github, featured }, index) => (
+      <article class={`cyber-project-card ${featured ? 'cyber-project-featured' : ''}`}>
+        
+        <!-- Featured Badge -->
         {featured && (
-          <div class="absolute top-3 right-3 z-10 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
-            Featured
+          <div class="cyber-featured-badge">
+            <span class="cyber-badge-text">FEATURED</span>
+            <div class="cyber-badge-glow"></div>
           </div>
         )}
         
-        {/* Image */}
-        <div class="relative aspect-video overflow-hidden">
-          <img
-            src={image}
-            alt={`Captura de pantalla del proyecto ${title}`}
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <!-- Holographic Overlay -->
+        <div class="cyber-holo-overlay"></div>
+        
+        <!-- Scanlines Effect -->
+        <div class="cyber-scanlines"></div>
+        
+        <!-- Project Image -->
+        <div class="cyber-image-container">
+          <div class="cyber-image-frame">
+            <img
+              src={image}
+              alt={`Captura de pantalla del proyecto ${title}`}
+              class="cyber-project-image"
+              loading="lazy"
+            />
+            <div class="cyber-image-overlay"></div>
+          </div>
+          
+          <!-- Data Streams -->
+          <div class="cyber-data-streams">
+            <div class="cyber-stream"></div>
+            <div class="cyber-stream"></div>
+            <div class="cyber-stream"></div>
+          </div>
         </div>
 
-        {/* Content */}
-        <div class="p-4 sm:p-6 flex flex-col space-y-4">
-          {/* Title */}
-          <h3 class="text-lg sm:text-xl font-bold text-white leading-tight">
-            {title}
+        <!-- Project Content -->
+        <div class="cyber-project-content">
+          
+          <!-- Title -->
+          <h3 class="cyber-project-title">
+            {title.toUpperCase()}
           </h3>
 
-          {/* Tags */}
-          <div class="flex flex-wrap gap-2">
+          <!-- Tags -->
+          <div class="cyber-tags-container">
             {tags.map((tag) => (
-              <span class={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${tag.class}`}>
-                <tag.icon class="w-3 h-3" />
-                <span>{tag.name}</span>
+              <span class={`cyber-tag ${tag.class}`}>
+                <tag.icon class="cyber-tag-icon" />
+                <span class="cyber-tag-text">{tag.name}</span>
+                <div class="cyber-tag-glow"></div>
               </span>
             ))}
           </div>
 
-          {/* Description */}
-          <p class="text-gray-300 text-sm leading-relaxed line-clamp-3">
+          <!-- Description -->
+          <p class="cyber-project-description">
             {description}
           </p>
 
-          {/* Actions */}
-          <div class="flex flex-col sm:flex-row gap-2 mt-auto pt-2">
+          <!-- Actions -->
+          <div class="cyber-actions-container">
             {github && (
               <a
                 href={github}
                 target="_blank"
                 rel="noopener"
-                class="flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium 
-                       bg-green-400/10 text-green-400 border border-green-400/40 
-                       rounded-md hover:bg-green-400/20 transition-all duration-300 
-                       backdrop-blur-sm hover:scale-105"
+                class="cyber-action-btn cyber-btn-github"
               >
-                <GitHub class="w-4 h-4" />
-                <span>Código</span>
+                <GitHub class="cyber-btn-icon" />
+                <span class="cyber-btn-text">CÓDIGO</span>
+                <div class="cyber-btn-spark"></div>
               </a>
             )}
             {link && (
@@ -188,18 +197,726 @@ const PROJECTS = [
                 href={link}
                 target="_blank"
                 rel="noopener"
-                class="flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium 
-                       bg-blue-400/10 text-blue-400 border border-blue-400/40 
-                       rounded-md hover:bg-blue-400/20 transition-all duration-300 
-                       backdrop-blur-sm hover:scale-105"
+                class="cyber-action-btn cyber-btn-demo"
               >
-                <Link class="w-4 h-4" />
-                <span>Ver Proyecto</span>
+                <Link class="cyber-btn-icon" />
+                <span class="cyber-btn-text">VER_PROYECTO</span>
+                <div class="cyber-btn-spark"></div>
               </a>
             )}
           </div>
         </div>
+        
+        <!-- Cyber Frame -->
+        <div class="cyber-frame">
+          <div class="cyber-corner cyber-corner-tl"></div>
+          <div class="cyber-corner cyber-corner-tr"></div>
+          <div class="cyber-corner cyber-corner-bl"></div>
+          <div class="cyber-corner cyber-corner-br"></div>
+        </div>
+        
+        <!-- Glitch Effect -->
+        <div class="cyber-glitch-overlay"></div>
+        
       </article>
-    ))
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Variables CSS para el tema cyberpunk */
+  :root {
+    --cyber-primary: #00ffff;
+    --cyber-secondary: #ff00ff;
+    --cyber-accent: #00ff00;
+    --cyber-warning: #ffff00;
+    --cyber-bg-dark: #0a0a0a;
+    --cyber-bg-card: #111111;
+    --cyber-bg-glass: rgba(0, 255, 255, 0.05);
+    --cyber-border: rgba(0, 255, 255, 0.3);
+    --cyber-text-primary: #ffffff;
+    --cyber-text-secondary: #b0b0b0;
+    --cyber-glow: 0 0 20px;
+    --cyber-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   }
-</div>
+
+  /* Sección principal */
+  .cyber-projects-section {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  /* Grid de proyectos */
+  .cyber-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Card de proyecto */
+  .cyber-project-card {
+    position: relative;
+    background: linear-gradient(135deg, 
+      var(--cyber-bg-card) 0%, 
+      rgba(17, 17, 17, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--cyber-border);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cyber-fade-in 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 25px) 0,
+      100% 25px,
+      100% 100%,
+      25px 100%,
+      0 calc(100% - 25px)
+    );
+  }
+
+  .cyber-project-card:nth-child(1) { animation-delay: 0.1s; }
+  .cyber-project-card:nth-child(2) { animation-delay: 0.2s; }
+  .cyber-project-card:nth-child(3) { animation-delay: 0.3s; }
+  .cyber-project-card:nth-child(4) { animation-delay: 0.4s; }
+  .cyber-project-card:nth-child(5) { animation-delay: 0.5s; }
+  .cyber-project-card:nth-child(6) { animation-delay: 0.6s; }
+  .cyber-project-card:nth-child(7) { animation-delay: 0.7s; }
+  .cyber-project-card:nth-child(8) { animation-delay: 0.8s; }
+  .cyber-project-card:nth-child(9) { animation-delay: 0.9s; }
+
+  .cyber-project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--cyber-primary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-primary);
+  }
+
+  /* Featured projects */
+  .cyber-project-featured {
+    border-color: var(--cyber-secondary);
+    box-shadow: 
+      var(--cyber-shadow),
+      0 0 15px rgba(255, 0, 255, 0.3);
+  }
+
+  .cyber-project-featured:hover {
+    border-color: var(--cyber-secondary);
+    box-shadow: 
+      var(--cyber-shadow),
+      var(--cyber-glow) var(--cyber-secondary);
+  }
+
+  /* Featured badge */
+  .cyber-featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    background: linear-gradient(45deg, var(--cyber-secondary), rgba(255, 0, 255, 0.8));
+    color: var(--cyber-bg-dark);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-badge-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-badge-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-project-card:hover .cyber-badge-glow {
+    transform: translateX(100%);
+  }
+
+  /* Holographic overlay */
+  .cyber-holo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+    z-index: 1;
+  }
+
+  .cyber-project-card:hover .cyber-holo-overlay {
+    transform: translateX(100%);
+  }
+
+  /* Scanlines effect */
+  .cyber-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Image container */
+  .cyber-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .cyber-image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cyber-project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    filter: brightness(0.8) contrast(1.2);
+  }
+
+  .cyber-project-card:hover .cyber-project-image {
+    transform: scale(1.1);
+    filter: brightness(1) contrast(1.3);
+  }
+
+  .cyber-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 255, 255, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-project-card:hover .cyber-image-overlay {
+    opacity: 1;
+  }
+
+  /* Data streams */
+  .cyber-data-streams {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cyber-stream {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--cyber-primary);
+    animation: cyber-stream-flow 2s linear infinite;
+  }
+
+  .cyber-stream:nth-child(1) { left: 0; animation-delay: 0s; }
+  .cyber-stream:nth-child(2) { left: 2px; animation-delay: 0.7s; }
+  .cyber-stream:nth-child(3) { left: 4px; animation-delay: 1.4s; }
+
+  /* Content */
+  .cyber-project-content {
+    position: relative;
+    padding: 2rem;
+    z-index: 3;
+  }
+
+  /* Title */
+  .cyber-project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px var(--cyber-primary);
+    margin: 0 0 1.5rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-project-card:hover .cyber-project-title {
+    text-shadow: 0 0 20px var(--cyber-primary);
+    animation: cyber-glitch-text 0.3s ease-in-out;
+  }
+
+  /* Tags */
+  .cyber-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    border: 1px solid;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
+    overflow: hidden;
+  }
+
+  .cyber-tag-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .cyber-tag-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-tag-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-tag:hover .cyber-tag-glow {
+    transform: translateX(100%);
+  }
+
+  /* Tag styles */
+  .cyber-tag-next {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(51, 51, 51, 0.8));
+    color: var(--cyber-text-primary);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .cyber-tag-tailwind {
+    background: linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+    color: var(--cyber-primary);
+    border-color: var(--cyber-primary);
+  }
+
+  .cyber-tag-react {
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.2), rgba(29, 78, 216, 0.2));
+    color: #60a5fa;
+    border-color: #60a5fa;
+  }
+
+  .cyber-tag-supabase {
+    background: linear-gradient(45deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2));
+    color: var(--cyber-accent);
+    border-color: var(--cyber-accent);
+  }
+
+  .cyber-tag-astro {
+    background: linear-gradient(45deg, rgba(249, 115, 22, 0.2), rgba(239, 68, 68, 0.2));
+    color: #fb923c;
+    border-color: #fb923c;
+  }
+
+  /* Description */
+  .cyber-project-description {
+    color: var(--cyber-text-secondary);
+    line-height: 1.7;
+    font-size: 0.9rem;
+    margin: 0 0 2rem 0;
+    font-family: 'Courier New', monospace;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Actions */
+  .cyber-actions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cyber-action-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    text-decoration: none;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+  }
+
+  .cyber-btn-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-btn-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cyber-btn-spark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cyber-action-btn:hover .cyber-btn-spark {
+    transform: translateX(100%);
+  }
+
+  /* Button styles */
+  .cyber-btn-github {
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.1));
+    color: var(--cyber-accent);
+    border-color: var(--cyber-accent);
+  }
+
+  .cyber-btn-github:hover {
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+    box-shadow: var(--cyber-glow) var(--cyber-accent);
+    transform: translateY(-2px);
+  }
+
+  .cyber-btn-demo {
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+    color: var(--cyber-primary);
+    border-color: var(--cyber-primary);
+  }
+
+  .cyber-btn-demo:hover {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    transform: translateY(-2px);
+  }
+
+  /* Frame */
+  .cyber-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .cyber-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cyber-primary);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-corner-tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .cyber-corner-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .cyber-corner-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .cyber-project-card:hover .cyber-corner {
+    border-color: var(--cyber-primary);
+    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    width: 25px;
+    height: 25px;
+  }
+
+  .cyber-project-featured:hover .cyber-corner {
+    border-color: var(--cyber-secondary);
+    box-shadow: var(--cyber-glow) var(--cyber-secondary);
+  }
+
+  /* Glitch effect */
+  .cyber-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 0, 255, 0.1) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .cyber-project-featured:hover .cyber-glitch-overlay {
+    opacity: 1;
+    animation: cyber-glitch-sweep 0.6s ease-in-out;
+  }
+
+  /* Animaciones */
+  @keyframes cyber-fade-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes cyber-stream-flow {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cyber-glitch-text {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+  }
+
+  @keyframes cyber-glitch-sweep {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cyber-projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .cyber-project-content {
+      padding: 1.5rem;
+    }
+
+    .cyber-project-title {
+      font-size: 1rem;
+    }
+
+    .cyber-project-description {
+      font-size: 0.85rem;
+      -webkit-line-clamp: 3;
+    }
+
+    .cyber-actions-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .cyber-action-btn {
+      justify-content: center;
+      width: 100%;
+      /* Simplificar clip-path en móviles */
+      clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
+      /* Tamaño optimizado para móviles */
+      padding: 0.6rem 1rem;
+      font-size: 0.8rem;
+      touch-action: manipulation;
+      /* Sin gap cuando no hay iconos */
+      gap: 0;
+    }
+
+    .cyber-action-btn .cyber-btn-icon,
+    .cyber-action-btn svg {
+      display: none !important;
+    }
+
+    .cyber-image-container {
+      height: 180px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-projects-grid {
+      padding: 0 0.5rem;
+    }
+
+    .cyber-project-content {
+      padding: 1rem;
+    }
+
+    .cyber-actions-container {
+      gap: 0.4rem;
+    }
+
+    .cyber-project-title {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .cyber-project-description {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .cyber-tag {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.65rem;
+      /* Simplificar clip-path en móviles pequeños */
+      clip-path: polygon(0 0, calc(100% - 3px) 0, 100% 100%, 3px 100%);
+    }
+
+    .cyber-tag-icon {
+      width: 10px;
+      height: 10px;
+    }
+
+    .cyber-action-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.75rem;
+      /* Clip-path más simple para móviles pequeños */
+      clip-path: polygon(0 0, calc(100% - 3px) 0, 100% 100%, 3px 100%);
+      /* Sin gap cuando no hay iconos */
+      gap: 0;
+    }
+
+    .cyber-action-btn .cyber-btn-icon,
+    .cyber-action-btn svg {
+      display: none !important;
+    }
+
+    .cyber-corner {
+      width: 15px;
+      height: 15px;
+    }
+
+    .cyber-project-card:hover .cyber-corner {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Deshabilitar algunos efectos complejos en móviles muy pequeños */
+    .cyber-btn-spark {
+      display: none;
+    }
+  }
+
+  /* Mejoras específicas para dispositivos táctiles */
+  @media (hover: none) and (pointer: coarse) {
+    .cyber-action-btn:hover {
+      transform: none;
+      /* Mantener solo el cambio de color sin transformaciones */
+    }
+
+    .cyber-action-btn:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+
+    /* Simplificar efectos en touch devices */
+    .cyber-btn-spark {
+      display: none;
+    }
+
+    .cyber-project-card:hover .cyber-holo-overlay {
+      transform: translateX(-100%);
+    }
+  }
+</style>

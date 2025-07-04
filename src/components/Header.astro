@@ -1,6 +1,4 @@
 ---
-import DarkModeSwitcher from "./DarkModeSwitcher.astro";
-
 const navItems = [
   {
     title: "Experiencia",
@@ -65,7 +63,7 @@ const navItems = [
         {
           navItems.map((link) => (
             <a
-              class="cyber-nav-link relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 rounded-lg"
+              class="cyber-nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-300 rounded-lg"
               aria-label={link.label}
               href={link.url}
             >
@@ -75,14 +73,10 @@ const navItems = [
             </a>
           ))
         }
-        <div class="ml-4">
-          <DarkModeSwitcher />
-        </div>
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center gap-4">
-        <DarkModeSwitcher />
         <button
           id="mobile-menu-btn"
           class="cyber-mobile-btn relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
@@ -231,6 +225,16 @@ const navItems = [
   .cyber-nav-link {
     position: relative;
     overflow: hidden;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-nav-link:hover {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    border-color: rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
   }
 
   .nav-text {
@@ -247,6 +251,7 @@ const navItems = [
     height: 2px;
     background: linear-gradient(90deg, #00ff88, #00ccff);
     transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
   }
 
   .cyber-nav-link:hover .nav-underline {
@@ -262,7 +267,7 @@ const navItems = [
     height: 100%;
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(0, 255, 136, 0.1) 50%, 
+      rgba(0, 255, 136, 0.15) 50%, 
       transparent 100%
     );
     border-radius: 8px;
