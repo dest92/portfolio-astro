@@ -78,20 +78,12 @@ const { title, description } = Astro.props;
       html {
         font-family: "Onest Variable", system-ui, sans-serif;
         scroll-behavior: smooth;
-        overflow-x: hidden;
-        width: 100%;
       }
 
       body {
         color: rgba(17, 17, 17, 0.9);
-        min-height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        width: 100%;
         margin: 0;
         padding: 0;
-        position: relative;
-        touch-action: pan-y;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -185,17 +177,20 @@ const { title, description } = Astro.props;
         color: #000;
       }
 
-      /* Prevent horizontal scroll issues */
-      .no-scroll-x {
-        overflow-x: hidden !important;
-      }
-
       /* Fix for mobile touch scrolling */
       @media (max-width: 768px) {
         body {
           -webkit-overflow-scrolling: touch;
-          touch-action: pan-y;
         }
+      }
+
+      /* Ensure all background elements don't interfere with scrolling */
+      .cyber-particles,
+      .cyber-circuits,
+      .cyber-grid,
+      .particle,
+      .circuit-line {
+        pointer-events: none !important;
       }
 
       /* Cyberpunk floating particles */
