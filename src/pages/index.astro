@@ -119,36 +119,40 @@ import CyberSkills from "../components/CyberSkills.astro";
 
     <!-- Contact CTA Section -->
     <SectionContainer class="contact-cta-section">
-      <div class="cyber-cta-container">
-        <div class="cta-content">
-          <h2 class="cta-title">¿Listo para colaborar?</h2>
-          <p class="cta-description">
-            Transformemos tus ideas en realidad digital con soluciones seguras e innovadoras
-          </p>
-          <div class="cta-buttons">
-            <a href="mailto:acebalmatias2019@gmail.com" class="cyber-cta-button primary">
-              <MailIcon class="button-icon" />
-              <span>Hablemos</span>
-              <div class="button-glow"></div>
-            </a>
-            <a href="https://www.linkedin.com/in/matiasacebal/" target="_blank" rel="noopener" class="cyber-cta-button secondary">
-              <LinkedinIcon class="button-icon" />
-              <span>LinkedIn</span>
-              <div class="button-glow"></div>
-            </a>
-            <a href="https://github.com/dest92" target="_blank" rel="noopener" class="cyber-cta-button tertiary">
-              <GitHubIcon class="button-icon" />
-              <span>GitHub</span>
-              <div class="button-glow"></div>
-            </a>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="text-center lg:text-left order-2 lg:order-1">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+              ¿Listo para colaborar?
+            </h2>
+            <p class="text-gray-300 text-lg sm:text-xl mb-6 max-w-lg mx-auto lg:mx-0">
+              Transformemos tus ideas en realidad digital con soluciones seguras e innovadoras
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <a href="mailto:acebalmatias2019@gmail.com" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-green-400/40 bg-green-400/10 text-green-600 rounded-lg hover:bg-green-400/20 transition-all duration-300 backdrop-blur-sm">
+                <MailIcon class="w-4 h-4" />
+                <span>Hablemos</span>
+              </a>
+              <a href="https://www.linkedin.com/in/matiasacebal/" target="_blank" rel="noopener" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-blue-400/40 bg-blue-400/10 text-blue-600 rounded-lg hover:bg-blue-400/20 transition-all duration-300 backdrop-blur-sm">
+                <LinkedinIcon class="w-4 h-4" />
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/dest92" target="_blank" rel="noopener" 
+                 class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-gray-400/40 bg-gray-400/10 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-400/20 transition-all duration-300 backdrop-blur-sm">
+                <GitHubIcon class="w-4 h-4" />
+                <span>GitHub</span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="cta-visual">
-          <div class="cyber-globe">
-            <div class="globe-ring ring-1"></div>
-            <div class="globe-ring ring-2"></div>
-            <div class="globe-ring ring-3"></div>
-            <div class="globe-core"></div>
+          <div class="flex justify-center order-1 lg:order-2">
+            <div class="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48">
+              <div class="absolute inset-0 rounded-full border-2 border-green-400/30 animate-spin-slow"></div>
+              <div class="absolute inset-4 rounded-full border-2 border-blue-400/30 animate-spin-slow" style="animation-direction: reverse;"></div>
+              <div class="absolute inset-8 rounded-full border-2 border-purple-400/30 animate-spin-slow"></div>
+              <div class="absolute inset-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 shadow-lg shadow-green-400/20"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -159,7 +163,7 @@ import CyberSkills from "../components/CyberSkills.astro";
 <style>
   .cyber-portfolio {
     position: relative;
-    padding-top: 80px; /* Compensar header fixed */
+    padding-top: 80px;
   }
 
   /* Section Headers */
@@ -255,172 +259,17 @@ import CyberSkills from "../components/CyberSkills.astro";
     overflow: hidden;
   }
 
-  .cyber-cta-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 3rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    padding: 0 1rem;
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  .cta-content {
-    text-align: left;
-  }
-
-  .cta-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    margin: 0 0 1.5rem 0;
-    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.2;
-  }
-
-  .cta-description {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: #4b5563;
-    line-height: 1.6;
-    margin: 0 0 2rem 0;
-    max-width: 500px;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .cyber-cta-button {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.75rem 1.25rem;
-    border: 2px solid;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .cyber-cta-button .button-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .cyber-cta-button .button-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .cyber-cta-button.primary {
-    background: rgba(0, 255, 136, 0.1);
-    border-color: rgba(0, 255, 136, 0.4);
-    color: #059669;
-  }
-
-  .cyber-cta-button.primary .button-glow {
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.1));
-  }
-
-  .cyber-cta-button.secondary {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.4);
-    color: #2563eb;
-  }
-
-  .cyber-cta-button.secondary .button-glow {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
-  }
-
-  .cyber-cta-button.tertiary {
-    background: rgba(107, 114, 128, 0.1);
-    border-color: rgba(107, 114, 128, 0.4);
-    color: #374151;
-  }
-
-  .cyber-cta-button.tertiary .button-glow {
-    background: linear-gradient(135deg, rgba(107, 114, 128, 0.2), rgba(107, 114, 128, 0.1));
-  }
-
-  .cyber-cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  .cyber-cta-button:hover .button-glow {
-    opacity: 1;
-  }
-
-  .cyber-cta-button:hover .button-icon {
-    transform: translateX(4px);
-  }
-
-  /* Cyber Globe Visual */
-  .cta-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .cyber-globe {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .globe-ring {
-    position: absolute;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    border-radius: 50%;
-  }
-  
-  .ring-1 {
-    width: 200px;
-    height: 200px;
-    border-color: rgba(0, 255, 136, 0.4);
-  }
-  
-  .ring-2 {
-    width: 150px;
-    height: 150px;
-    border-color: rgba(59, 130, 246, 0.4);
-  }
-  
-  .ring-3 {
-    width: 100px;
-    height: 100px;
-    border-color: rgba(168, 85, 247, 0.4);
-  }
-  
-  .globe-core {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
-    border-radius: 50%;
-    box-shadow: 
-      0 0 30px rgba(0, 255, 136, 0.5),
-      inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
   }
 
   /* Dark Mode */
@@ -428,54 +277,13 @@ import CyberSkills from "../components/CyberSkills.astro";
     .cyber-section-subtitle {
       color: #9ca3af;
     }
-
-    .cta-description {
-      color: #d1d5db;
-    }
-
-    .cyber-cta-button.tertiary {
-      color: #e5e7eb;
-    }
   }
 
   :global(.dark) .cyber-section-subtitle {
     color: #9ca3af;
   }
 
-  :global(.dark) .cta-description {
-    color: #d1d5db;
-  }
-
-  :global(.dark) .cyber-cta-button.tertiary {
-    color: #e5e7eb;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .cyber-cta-container {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 2.5rem;
-    }
-
-    .cta-content {
-      text-align: center;
-    }
-
-    .terminal-section,
-    .skills-section,
-    .experience-section,
-    .projects-section,
-    .certificates-section,
-    .about-section {
-      padding: 3rem 0;
-    }
-
-    .contact-cta-section {
-      padding: 4rem 0;
-    }
-  }
-
+  /* Mobile Responsive */
   @media (max-width: 768px) {
     .cyber-portfolio {
       padding-top: 70px;
@@ -483,7 +291,7 @@ import CyberSkills from "../components/CyberSkills.astro";
 
     .section-header {
       margin-bottom: 2rem;
-      padding: 0 0.5rem;
+      padding: 0 1rem;
     }
 
     .cyber-section-title {
@@ -497,118 +305,11 @@ import CyberSkills from "../components/CyberSkills.astro";
     .projects-section,
     .certificates-section,
     .about-section {
-      padding: 2.5rem 0;
-    }
-
-    .contact-cta-section {
       padding: 3rem 0;
     }
 
-    .cyber-cta-container {
-      gap: 2rem;
-      padding: 0 0.5rem;
-    }
-
-    .cta-buttons {
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .cyber-cta-button {
-      width: 100%;
-      max-width: 280px;
-      justify-content: center;
-      padding: 0.75rem 1rem;
-    }
-
-    .cyber-globe {
-      width: 140px;
-      height: 140px;
-    }
-
-    .ring-1 {
-      width: 140px;
-      height: 140px;
-    }
-
-    .ring-2 {
-      width: 100px;
-      height: 100px;
-    }
-
-    .ring-3 {
-      width: 60px;
-      height: 60px;
-    }
-
-    .globe-core {
-      width: 35px;
-      height: 35px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .cyber-portfolio {
-      padding-top: 60px;
-    }
-
-    .section-header {
-      margin-bottom: 1.5rem;
-      padding: 0 0.25rem;
-    }
-
-    .terminal-section,
-    .skills-section,
-    .experience-section,
-    .projects-section,
-    .certificates-section,
-    .about-section {
-      padding: 2rem 0;
-    }
-
     .contact-cta-section {
-      padding: 2.5rem 0;
-    }
-
-    .cyber-cta-container {
-      padding: 0 0.25rem;
-    }
-
-    .cyber-cta-button {
-      padding: 0.625rem 0.875rem;
-      font-size: 0.8rem;
-    }
-
-    .cyber-cta-button .button-icon {
-      width: 0.75rem;
-      height: 0.75rem;
-    }
-
-    .cyber-globe {
-      width: 120px;
-      height: 120px;
-    }
-
-    .ring-1 {
-      width: 120px;
-      height: 120px;
-    }
-
-    .ring-2 {
-      width: 85px;
-      height: 85px;
-    }
-
-    .ring-3 {
-      width: 50px;
-      height: 50px;
-    }
-
-    .globe-core {
-      width: 30px;
-      height: 30px;
+      padding: 4rem 0;
     }
   }
 </style>

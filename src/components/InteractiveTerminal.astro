@@ -1,264 +1,93 @@
-<section class="terminal-container">
-  <div class="terminal-window">
-    <!-- Terminal Header -->
-    <div class="terminal-header">
-      <div class="terminal-buttons">
-        <span class="terminal-button close"></span>
-        <span class="terminal-button minimize"></span>
-        <span class="terminal-button maximize"></span>
-      </div>
-      <div class="terminal-title">matias@portfolio:~$</div>
-    </div>
-    
-    <!-- Terminal Body -->
-    <div class="terminal-body">
-      <div class="terminal-content" id="terminal-content">
-        <div class="terminal-line">
-          <span class="terminal-prompt">guest@matias-portfolio:~$</span>
-          <span class="terminal-text">help</span>
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="relative group">
+    <!-- Terminal Window -->
+    <div class="bg-gradient-to-b from-slate-900 to-slate-800 rounded-lg shadow-2xl border border-white/10 hover:border-green-400/30 transition-all duration-300 overflow-hidden backdrop-blur-sm">
+      
+      <!-- Terminal Header -->
+      <div class="bg-gradient-to-r from-slate-800 to-slate-700 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 bg-red-500 rounded-full hover:bg-red-400 transition-colors cursor-pointer"></span>
+          <span class="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-400 transition-colors cursor-pointer"></span>
+          <span class="w-3 h-3 bg-green-500 rounded-full hover:bg-green-400 transition-colors cursor-pointer"></span>
         </div>
-        <div class="terminal-line">
-          <span class="terminal-output">Comandos disponibles:</span>
+        <div class="text-sm font-mono text-gray-300 hidden sm:block">
+          matias@portfolio:~$
         </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  whoami</span>
-          <span class="terminal-output"> - Información personal</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  skills</span>
-          <span class="terminal-output"> - Habilidades técnicas</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  experience</span>
-          <span class="terminal-output"> - Experiencia laboral</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  projects</span>
-          <span class="terminal-output"> - Proyectos destacados</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  contact</span>
-          <span class="terminal-output"> - Información de contacto</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  clear</span>
-          <span class="terminal-output"> - Limpiar terminal</span>
-        </div>
-        <div class="terminal-line">
-          <span class="terminal-output terminal-command">  matrix</span>
-          <span class="terminal-output"> - ¿Te atreves? 😎</span>
-        </div>
+        <div class="w-16"></div> <!-- Spacer -->
       </div>
       
-      <!-- Input Line -->
-      <div class="terminal-input-line">
-        <span class="terminal-prompt">guest@matias-portfolio:~$</span>
-        <input 
-          type="text" 
-          class="terminal-input" 
-          id="terminal-input"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <span class="terminal-cursor" id="cursor">_</span>
+      <!-- Terminal Body -->
+      <div class="p-4 sm:p-6 bg-black/50">
+        <div class="font-mono text-sm sm:text-base">
+          <!-- Content Area -->
+          <div class="max-h-80 sm:max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-green-400/50 scrollbar-track-transparent" id="terminal-content">
+            <div class="space-y-1">
+              <div class="flex flex-wrap">
+                <span class="text-green-400 font-bold">guest@matias-portfolio:~$ </span>
+                <span class="text-white ml-1">help</span>
+              </div>
+              <div class="text-gray-400">
+                Comandos disponibles:
+              </div>
+              <div class="ml-2 space-y-1 text-gray-400">
+                <div><span class="text-cyan-400 font-bold">whoami</span> - Información personal</div>
+                <div><span class="text-cyan-400 font-bold">skills</span> - Habilidades técnicas</div>
+                <div><span class="text-cyan-400 font-bold">experience</span> - Experiencia laboral</div>
+                <div><span class="text-cyan-400 font-bold">projects</span> - Proyectos destacados</div>
+                <div><span class="text-cyan-400 font-bold">contact</span> - Información de contacto</div>
+                <div><span class="text-cyan-400 font-bold">clear</span> - Limpiar terminal</div>
+                <div><span class="text-cyan-400 font-bold">matrix</span> - ¿Te atreves? 😎</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Input Line -->
+          <div class="flex items-center mt-4 pt-4 border-t border-white/10">
+            <span class="text-green-400 font-bold whitespace-nowrap">guest@matias-portfolio:~$ </span>
+            <div class="flex-1 relative ml-2">
+              <input 
+                type="text" 
+                class="w-full bg-transparent border-none outline-none text-white font-mono text-sm sm:text-base placeholder-gray-500 caret-green-400" 
+                id="terminal-input"
+                placeholder="Escribe un comando (ej: whoami)"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <span class="absolute top-0 left-0 text-green-400 font-bold animate-pulse pointer-events-none opacity-75" id="cursor">|</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    
+    <!-- Floating help hint -->
+    <div class="absolute -bottom-8 left-4 text-xs text-gray-400 opacity-70">
+      💡 Tip: Prueba con "whoami" o "skills"
     </div>
   </div>
 </section>
 
 <style>
-  .terminal-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    perspective: 1000px;
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
   }
   
-  .terminal-window {
-    background: linear-gradient(145deg, #1a1a1a 0%, #0d1117 100%);
-    border-radius: 12px;
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transform: rotateX(2deg);
-    transition: all 0.4s ease;
-    overflow: hidden;
+  .scrollbar-thumb-green-400\/50::-webkit-scrollbar {
+    width: 6px;
   }
   
-  .terminal-window:hover {
-    transform: rotateX(0deg) translateY(-5px);
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(0, 255, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  
-  .terminal-header {
-    background: linear-gradient(90deg, #2d3748 0%, #1a202c 100%);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .terminal-buttons {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .terminal-button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-  }
-  
-  .terminal-button.close {
-    background: #ff5f57;
-  }
-  
-  .terminal-button.minimize {
-    background: #ffbd2e;
-  }
-  
-  .terminal-button.maximize {
-    background: #28ca42;
-  }
-  
-  .terminal-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px currentColor;
-  }
-  
-  .terminal-title {
-    flex: 1;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    color: #e2e8f0;
-    font-weight: 600;
-  }
-  
-  .terminal-body {
-    padding: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #00ff00;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.02) 100%);
-    position: relative;
-  }
-  
-  .terminal-content {
-    max-height: 320px;
-    overflow-y: auto;
-    padding-bottom: 1rem;
-  }
-  
-  .terminal-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 255, 0, 0.03) 2px,
-      rgba(0, 255, 0, 0.03) 4px
-    );
-    pointer-events: none;
-  }
-  
-  .terminal-line {
-    margin-bottom: 4px;
-    display: flex;
-    flex-wrap: wrap;
-    opacity: 1;
-  }
-  
-  .terminal-prompt {
-    color: #00ff00;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff00;
-  }
-  
-  .terminal-text {
-    color: #ffffff;
-    margin-left: 8px;
-  }
-  
-  .terminal-output {
-    color: #a0a0a0;
-  }
-  
-  .terminal-command {
-    color: #00ffff !important;
-    font-weight: bold;
-    text-shadow: 0 0 3px #00ffff;
-  }
-  
-  .terminal-input-line {
-    display: flex;
-    align-items: center;
-    margin-top: 16px;
-    position: relative;
-  }
-  
-  .terminal-input {
+  .scrollbar-thumb-green-400\/50::-webkit-scrollbar-track {
     background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    margin-left: 8px;
-    flex: 1;
-    caret-color: transparent;
   }
   
-  .terminal-cursor {
-    color: #00ff00;
-    font-weight: bold;
-    margin-left: 2px;
+  .scrollbar-thumb-green-400\/50::-webkit-scrollbar-thumb {
+    background-color: rgba(34, 197, 94, 0.5);
+    border-radius: 3px;
   }
   
-  .success {
-    color: #00ff00 !important;
-  }
-  
-  .error {
-    color: #ff4444 !important;
-  }
-  
-  .warning {
-    color: #ffaa00 !important;
-  }
-  
-  .info {
-    color: #00aaff !important;
-  }
-  
-  /* Light mode adjustments */
-  @media (prefers-color-scheme: light) {
-    .terminal-window {
-      background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-  }
-  
-  :global(.light) .terminal-window {
-    background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
+  .scrollbar-thumb-green-400\/50::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(34, 197, 94, 0.7);
   }
   
   .matrix-char {
@@ -286,6 +115,7 @@
     commands: TerminalCommands;
     addLine: (content: any, isInput?: boolean) => void;
     executeCommand: (cmd: string) => void;
+    updateCursorPosition: () => void;
     init: () => void;
   }
 
@@ -298,73 +128,73 @@
     
     commands: {
       whoami: () => [
-        { text: "════════════════════════════════════════", class: "info" },
-        { text: "│           MATÍAS ACEBAL                │", class: "success" },
-        { text: "════════════════════════════════════════", class: "info" },
-        { text: "Rol: Desarrollador FullStack & Analista en Sistemas", class: "" },
-        { text: "Edad: 22 años", class: "" },
-        { text: "Ubicación: Argentina 🇦🇷", class: "" },
-        { text: "Estado: Finalizando Ingeniería en Sistemas", class: "" },
-        { text: "Especialidad: Desarrollo Web & Ciberseguridad", class: "warning" },
-        { text: "Años programando: 5+ años", class: "" },
-        { text: "Proyecto destacado: FitLife Manager (600+ usuarios)", class: "success" },
+        { text: "════════════════════════════════════════", class: "text-cyan-400" },
+        { text: "│           MATÍAS ACEBAL                │", class: "text-green-400 font-bold" },
+        { text: "════════════════════════════════════════", class: "text-cyan-400" },
+        { text: "Rol: Desarrollador FullStack & Analista en Sistemas", class: "text-white" },
+        { text: "Edad: 22 años", class: "text-white" },
+        { text: "Ubicación: Argentina 🇦🇷", class: "text-white" },
+        { text: "Estado: Finalizando Ingeniería en Sistemas", class: "text-white" },
+        { text: "Especialidad: Desarrollo Web & Ciberseguridad", class: "text-yellow-400" },
+        { text: "Años programando: 5+ años", class: "text-white" },
+        { text: "Proyecto destacado: FitLife Manager (600+ usuarios)", class: "text-green-400" },
       ],
       
       skills: () => [
-        { text: "╔═══════════════════════════════════════╗", class: "info" },
-        { text: "║            HABILIDADES TÉCNICAS       ║", class: "info" },
-        { text: "╚═══════════════════════════════════════╝", class: "info" },
-        { text: "Frontend: React, Vue.js, HTML5, CSS3, JavaScript, TypeScript", class: "success" },
-        { text: "Backend: Node.js, Python, PHP, Java", class: "success" },
-        { text: "Bases de datos: MySQL, PostgreSQL, MongoDB", class: "success" },
-        { text: "DevOps: Docker, Git, Linux, AWS", class: "warning" },
-        { text: "Ciberseguridad: Auditorías web, Pentesting, OWASP", class: "error" },
-        { text: "Otras: Astro, Tailwind CSS, Express.js", class: "" },
+        { text: "╔═══════════════════════════════════════╗", class: "text-cyan-400" },
+        { text: "║            HABILIDADES TÉCNICAS       ║", class: "text-cyan-400" },
+        { text: "╚═══════════════════════════════════════╝", class: "text-cyan-400" },
+        { text: "Frontend: React, Vue.js, HTML5, CSS3, JavaScript, TypeScript", class: "text-green-400" },
+        { text: "Backend: Node.js, Python, PHP, Java", class: "text-green-400" },
+        { text: "Bases de datos: MySQL, PostgreSQL, MongoDB", class: "text-green-400" },
+        { text: "DevOps: Docker, Git, Linux, AWS", class: "text-yellow-400" },
+        { text: "Ciberseguridad: Auditorías web, Pentesting, OWASP", class: "text-red-400" },
+        { text: "Otras: Astro, Tailwind CSS, Express.js", class: "text-white" },
       ],
       
       experience: () => [
-        { text: "🚀 EXPERIENCIA PROFESIONAL", class: "info" },
-        { text: "────────────────────────────────────", class: "info" },
-        { text: "💼 Desarrollador FullStack Freelance (2021-presente)", class: "success" },
-        { text: "   • Liderazgo de FitLife Manager", class: "" },
-        { text: "   • 600+ usuarios activos", class: "" },
-        { text: "   • Arquitectura escalable", class: "" },
-        { text: "", class: "" },
-        { text: "🔒 Especialista en Ciberseguridad (2022-presente)", class: "warning" },
-        { text: "   • Auditorías de seguridad web", class: "" },
-        { text: "   • Pruebas de penetración", class: "" },
-        { text: "   • Consultoría en OWASP", class: "" },
+        { text: "🚀 EXPERIENCIA PROFESIONAL", class: "text-cyan-400" },
+        { text: "────────────────────────────────────", class: "text-cyan-400" },
+        { text: "💼 Desarrollador FullStack Freelance (2021-presente)", class: "text-green-400" },
+        { text: "   • Liderazgo de FitLife Manager", class: "text-white" },
+        { text: "   • 600+ usuarios activos", class: "text-white" },
+        { text: "   • Arquitectura escalable", class: "text-white" },
+        { text: "", class: "text-white" },
+        { text: "🔒 Especialista en Ciberseguridad (2022-presente)", class: "text-yellow-400" },
+        { text: "   • Auditorías de seguridad web", class: "text-white" },
+        { text: "   • Pruebas de penetración", class: "text-white" },
+        { text: "   • Consultoría en OWASP", class: "text-white" },
       ],
       
       projects: () => [
-        { text: "🎯 PROYECTOS DESTACADOS", class: "info" },
-        { text: "═══════════════════════════════════", class: "info" },
-        { text: "🏋️ FitLife Manager", class: "success" },
-        { text: "   └─ Sistema completo para gimnasios", class: "" },
-        { text: "   └─ 600+ usuarios activos", class: "" },
-        { text: "   └─ Tech: React, Node.js, MySQL", class: "" },
-        { text: "", class: "" },
-        { text: "🔐 Security Audit Tools", class: "warning" },
-        { text: "   └─ Herramientas de auditoría web", class: "" },
-        { text: "   └─ Automatización de pentesting", class: "" },
-        { text: "   └─ Tech: Python, Bash, Linux", class: "" },
-        { text: "", class: "" },
-        { text: "🌐 Portfolio Cyberpunk", class: "error" },
-        { text: "   └─ Este mismo sitio web", class: "" },
-        { text: "   └─ Terminal interactiva", class: "" },
-        { text: "   └─ Tech: Astro, TypeScript, CSS", class: "" },
+        { text: "🎯 PROYECTOS DESTACADOS", class: "text-cyan-400" },
+        { text: "═══════════════════════════════════", class: "text-cyan-400" },
+        { text: "🏋️ FitLife Manager", class: "text-green-400" },
+        { text: "   └─ Sistema completo para gimnasios", class: "text-white" },
+        { text: "   └─ 600+ usuarios activos", class: "text-white" },
+        { text: "   └─ Tech: React, Node.js, MySQL", class: "text-white" },
+        { text: "", class: "text-white" },
+        { text: "🔐 Security Audit Tools", class: "text-yellow-400" },
+        { text: "   └─ Herramientas de auditoría web", class: "text-white" },
+        { text: "   └─ Automatización de pentesting", class: "text-white" },
+        { text: "   └─ Tech: Python, Bash, Linux", class: "text-white" },
+        { text: "", class: "text-white" },
+        { text: "🌐 Portfolio Cyberpunk", class: "text-red-400" },
+        { text: "   └─ Este mismo sitio web", class: "text-white" },
+        { text: "   └─ Terminal interactiva", class: "text-white" },
+        { text: "   └─ Tech: Astro, TypeScript, CSS", class: "text-white" },
       ],
       
       contact: () => [
-        { text: "📞 INFORMACIÓN DE CONTACTO", class: "info" },
-        { text: "══════════════════════════════════", class: "info" },
-        { text: "📧 Email: acebalmatias2019@gmail.com", class: "success" },
-        { text: "💼 LinkedIn: linkedin.com/in/matiasacebal", class: "success" },
-        { text: "🐱 GitHub: github.com/dest92", class: "success" },
-        { text: "📄 CV: [Enlace disponible en el sitio]", class: "warning" },
-        { text: "", class: "" },
-        { text: "💡 ¿Tienes un proyecto interesante?", class: "info" },
-        { text: "¡Contáctame y hablemos! 🚀", class: "success" },
+        { text: "📞 INFORMACIÓN DE CONTACTO", class: "text-cyan-400" },
+        { text: "══════════════════════════════════", class: "text-cyan-400" },
+        { text: "📧 Email: acebalmatias2019@gmail.com", class: "text-green-400" },
+        { text: "💼 LinkedIn: linkedin.com/in/matiasacebal", class: "text-green-400" },
+        { text: "🐱 GitHub: github.com/dest92", class: "text-green-400" },
+        { text: "📄 CV: [Enlace disponible en el sitio]", class: "text-yellow-400" },
+        { text: "", class: "text-white" },
+        { text: "💡 ¿Tienes un proyecto interesante?", class: "text-cyan-400" },
+        { text: "¡Contáctame y hablemos! 🚀", class: "text-green-400" },
       ],
       
       clear: () => 'CLEAR',
@@ -372,7 +202,7 @@
       matrix: () => {
         // Create matrix effect
         const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
           setTimeout(() => {
             const char = document.createElement('div');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
@@ -382,27 +212,27 @@
             char.style.animationDelay = Math.random() * 2 + 's';
             document.body.appendChild(char);
             
-            setTimeout(() => char.remove(), 3000);
-          }, i * 100);
+            setTimeout(() => char.remove(), 2000);
+          }, i * 50);
         }
         
         return [
-          { text: "Iniciando secuencia Matrix...", class: "success" },
-          { text: "Wake up, Neo... 🕶️", class: "error" },
-          { text: "The Matrix has you...", class: "warning" },
-          { text: "Follow the white rabbit 🐰", class: "info" },
+          { text: "Iniciando secuencia Matrix...", class: "text-green-400" },
+          { text: "Wake up, Neo... 🕶️", class: "text-red-400" },
+          { text: "The Matrix has you...", class: "text-yellow-400" },
+          { text: "Follow the white rabbit 🐰", class: "text-cyan-400" },
         ];
       },
       
       help: () => [
-        { text: "Comandos disponibles:", class: "info" },
-        { text: "  whoami     - Información personal", class: "" },
-        { text: "  skills     - Habilidades técnicas", class: "" },
-        { text: "  experience - Experiencia laboral", class: "" },
-        { text: "  projects   - Proyectos destacados", class: "" },
-        { text: "  contact    - Información de contacto", class: "" },
-        { text: "  clear      - Limpiar terminal", class: "" },
-        { text: "  matrix     - ¿Te atreves? 😎", class: "" },
+        { text: "Comandos disponibles:", class: "text-cyan-400" },
+        { text: "  whoami     - Información personal", class: "text-white" },
+        { text: "  skills     - Habilidades técnicas", class: "text-white" },
+        { text: "  experience - Experiencia laboral", class: "text-white" },
+        { text: "  projects   - Proyectos destacados", class: "text-white" },
+        { text: "  contact    - Información de contacto", class: "text-white" },
+        { text: "  clear      - Limpiar terminal", class: "text-white" },
+        { text: "  matrix     - ¿Te atreves? 😎", class: "text-white" },
       ]
     },
     
@@ -410,18 +240,17 @@
       if (!this.content) return;
       
       const line = document.createElement('div');
-      line.className = 'terminal-line';
+      line.className = 'mb-1';
       
       if (isInput) {
-        line.innerHTML = `<span class="terminal-prompt">guest@matias-portfolio:~$</span><span class="terminal-text">${content}</span>`;
+        line.innerHTML = `<span class="text-green-400 font-bold">guest@matias-portfolio:~$ </span><span class="text-white">${content}</span>`;
       } else if (typeof content === 'string') {
-        line.innerHTML = `<span class="terminal-output">${content}</span>`;
+        line.innerHTML = `<span class="text-gray-400">${content}</span>`;
       } else {
-        line.innerHTML = `<span class="terminal-output ${content.class || ''}">${content.text}</span>`;
+        line.innerHTML = `<span class="${content.class || 'text-gray-400'}">${content.text}</span>`;
       }
       
       this.content.appendChild(line);
-      // Scroll only within terminal, not the page
       this.content.scrollTop = this.content.scrollHeight;
     },
     
@@ -443,18 +272,22 @@
         
         if (Array.isArray(result)) {
           result.forEach((line, index) => {
-            setTimeout(() => this.addLine(line), index * 50);
+            setTimeout(() => this.addLine(line), index * 30);
           });
         } else {
           this.addLine(result);
         }
       } else {
-        this.addLine(`bash: ${command}: command not found`);
-        this.addLine("Escribe 'help' para ver los comandos disponibles");
+        this.addLine({ text: `bash: ${command}: command not found`, class: "text-red-400" });
+        this.addLine({ text: "Escribe 'help' para ver los comandos disponibles", class: "text-yellow-400" });
       }
       
       this.history.push(cmd);
       this.historyIndex = this.history.length;
+    },
+    
+    updateCursorPosition() {
+      // Cursor is now handled by CSS animation
     },
     
     init() {
@@ -481,9 +314,9 @@
         }
       });
       
-      // Keep focus on terminal when clicked (but don't auto focus)
+      // Auto focus on terminal click
       document.addEventListener('click', (e) => {
-        if (e.target && (e.target as HTMLElement).closest('.terminal-window')) {
+        if (e.target && (e.target as HTMLElement).closest('.bg-gradient-to-b')) {
           if (this.input) {
             this.input.focus();
           }
