@@ -8,6 +8,8 @@ const certificados = [
     description: "Hacking Ético",
     platform: "Platzi",
     fecha: "2023",
+    category: "cybersecurity",
+    level: "advanced",
   },
   {
     id: "cert-2",
@@ -15,6 +17,8 @@ const certificados = [
     description: "Inteligencia para la ciberseguridad",
     platform: "Platzi",
     fecha: "2023",
+    category: "cybersecurity",
+    level: "intermediate",
   },
   {
     id: "cert-3",
@@ -22,6 +26,8 @@ const certificados = [
     description: "Introducción a React Native",
     platform: "Platzi",
     fecha: "2023",
+    category: "development",
+    level: "beginner",
   },
   {
     id: "cert-4",
@@ -29,6 +35,8 @@ const certificados = [
     description: "Redes de Computadoras",
     platform: "Platzi",
     fecha: "2023",
+    category: "networking",
+    level: "intermediate",
   },
   {
     id: "cert-5",
@@ -36,47 +44,120 @@ const certificados = [
     description: "Desarrollo Web con HTML",
     platform: "Udemy",
     fecha: "2022",
+    category: "development",
+    level: "beginner",
   },
 ];
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'cybersecurity':
+      return 'from-red-500 to-red-600 border-red-400/30';
+    case 'development':
+      return 'from-blue-500 to-blue-600 border-blue-400/30';
+    case 'networking':
+      return 'from-green-500 to-green-600 border-green-400/30';
+    default:
+      return 'from-gray-500 to-gray-600 border-gray-400/30';
+  }
+};
+
+const getLevelIcon = (level: string) => {
+  switch (level) {
+    case 'beginner':
+      return '●';
+    case 'intermediate':
+      return '●●';
+    case 'advanced':
+      return '●●●';
+    default:
+      return '●';
+  }
+};
 ---
 
 <section class="px-4">
-  <div class="max-w-4xl mx-auto">
-    <h2
-      class="text-3xl font-bold mb-12 flex items-center gap-x-3 text-gray-800 dark:text-white/80"
-    >
-      <!-- ... header existente ... -->
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="cyber-certificates-grid">
       {
-        certificados.map(({ id, src, description, platform, fecha }) => (
+        certificados.map(({ id, src, description, platform, fecha, category, level }) => (
           <>
             <article
-              class="group relative bg-white/50 dark:bg-gray-900/40 backdrop-blur-lg rounded-xl overflow-hidden border border-gray-200/50 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 cursor-pointer"
+              class="cyber-certificate-card"
               onclick={`document.getElementById('${id}').showModal()`}
+              data-category={category}
             >
-              <div class="relative aspect-video overflow-hidden">
-                <img
-                  src={src}
-                  alt={`Certificado de ${description}`}
-                  class="w-full h-full object-cover object-center transition duration-500 ease-in-out group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60" />
+              {/* Cyber corners */}
+              <div class="cert-corners">
+                <div class="corner top-left"></div>
+                <div class="corner top-right"></div>
+                <div class="corner bottom-left"></div>
+                <div class="corner bottom-right"></div>
               </div>
 
-              <div class="relative p-6">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="text-xs font-medium px-2 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border border-yellow-200/50 dark:border-yellow-500/20">
-                    {platform}
-                  </span>
-                  <span class="text-xs text-gray-600 dark:text-gray-400">{fecha}</span>
+              {/* Holographic effect */}
+              <div class="holographic-overlay"></div>
+
+              {/* Certificate content */}
+              <div class="cert-content">
+                {/* Image container */}
+                <div class="cert-image-container">
+                  <div class="cert-frame">
+                    <img
+                      src={src}
+                      alt={`Certificado de ${description}`}
+                      class="cert-image"
+                      loading="lazy"
+                    />
+                    <div class="cert-scanlines"></div>
+                    <div class="cert-glow-effect"></div>
+                  </div>
+                  
+                  {/* Status indicator */}
+                  <div class="cert-status">
+                    <div class="status-dot"></div>
+                    <span>VERIFIED</span>
+                  </div>
                 </div>
 
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-                  {description}
-                </h3>
+                {/* Info section */}
+                <div class="cert-info">
+                  <div class="cert-header">
+                    <h3 class="cert-title">{description}</h3>
+                    <div class="title-circuit"></div>
+                  </div>
+
+                  <div class="cert-meta">
+                    <div class="cert-badges">
+                      <span class={`cyber-badge platform bg-gradient-to-r ${getCategoryColor(category)}`}>
+                        <span class="badge-text">{platform}</span>
+                      </span>
+                      <span class="cyber-badge level">
+                        <span class="level-indicator">{getLevelIcon(level)}</span>
+                        <span class="level-text">{level.toUpperCase()}</span>
+                      </span>
+                    </div>
+                    
+                    <div class="cert-date">
+                      <span class="date-label">ISSUED:</span>
+                      <span class="date-value">{fecha}</span>
+                    </div>
+                  </div>
+
+                  {/* Access button */}
+                  <div class="cert-access">
+                    <div class="access-line"></div>
+                    <span class="access-text">CLICK TO VIEW</span>
+                    <div class="access-arrow">⟹</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating elements */}
+              <div class="floating-elements">
+                <div class="floating-hex hex-1">⬢</div>
+                <div class="floating-hex hex-2">⬡</div>
+                <div class="floating-hex hex-3">⬢</div>
               </div>
             </article>
 
@@ -95,12 +176,494 @@ const certificados = [
 </section>
 
 <style>
+  .cyber-certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .cyber-certificate-card {
+    position: relative;
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.9) 0%, 
+      rgba(0, 30, 60, 0.8) 50%, 
+      rgba(0, 0, 0, 0.9) 100%
+    );
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(15px);
+    animation: cert-float 8s ease-in-out infinite;
+  }
+
+  .cyber-certificate-card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    border-color: rgba(0, 255, 136, 0.8);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 0 50px rgba(0, 255, 136, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .cyber-certificate-card[data-category="cybersecurity"]:hover {
+    border-color: rgba(239, 68, 68, 0.8);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 0 50px rgba(239, 68, 68, 0.3);
+  }
+
+  .cert-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(0, 255, 136, 0.7);
+    transition: all 0.3s ease;
+  }
+
+  .corner.top-left {
+    top: 12px;
+    left: 12px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .corner.top-right {
+    top: 12px;
+    right: 12px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .corner.bottom-left {
+    bottom: 12px;
+    left: 12px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .corner.bottom-right {
+    bottom: 12px;
+    right: 12px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .cyber-certificate-card:hover .corner {
+    border-color: rgba(0, 255, 136, 1);
+    width: 32px;
+    height: 32px;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  }
+
+  .holographic-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.1) 25%,
+      rgba(0, 200, 255, 0.1) 50%,
+      rgba(255, 0, 128, 0.1) 75%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .cyber-certificate-card:hover .holographic-overlay {
+    opacity: 1;
+    animation: holographic-shift 2s ease-in-out infinite;
+  }
+
+  .cert-content {
+    position: relative;
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 2;
+  }
+
+  .cert-image-container {
+    position: relative;
+    aspect-ratio: 16/10;
+  }
+
+  .cert-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 255, 136, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .cert-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    filter: brightness(0.9) contrast(1.1) saturate(1.2);
+  }
+
+  .cyber-certificate-card:hover .cert-image {
+    transform: scale(1.05);
+    filter: brightness(1.1) contrast(1.2) saturate(1.3);
+  }
+
+  .cert-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(0, 255, 136, 0.1) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-certificate-card:hover .cert-scanlines {
+    opacity: 1;
+  }
+
+  .cert-glow-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.2) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .cyber-certificate-card:hover .cert-glow-effect {
+    opacity: 1;
+  }
+
+  .cert-status {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 255, 136, 0.5);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .cert-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-header {
+    position: relative;
+  }
+
+  .cert-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    line-height: 1.3;
+  }
+
+  .title-circuit {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #00ff88, #00ccff, #ff0080);
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .title-circuit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: circuit-flow 2s ease-in-out infinite;
+  }
+
+  .cert-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cert-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .cyber-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-badge.platform {
+    color: white;
+  }
+
+  .cyber-badge.level {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 255, 0.2));
+    border-color: rgba(0, 255, 136, 0.4);
+    color: #00ff88;
+  }
+
+  .cyber-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  }
+
+  .level-indicator {
+    color: #00ff88;
+    font-size: 0.8rem;
+  }
+
+  .cert-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .date-label {
+    color: #00ff88;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .date-value {
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 255, 136, 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+  }
+
+  .cert-access {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+
+  .cyber-certificate-card:hover .cert-access {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .access-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  }
+
+  .access-text {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .access-arrow {
+    color: #00ff88;
+    font-size: 1rem;
+    animation: arrow-pulse 1.5s ease-in-out infinite;
+  }
+
+  .floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .floating-hex {
+    position: absolute;
+    color: rgba(0, 255, 136, 0.2);
+    font-size: 1.2rem;
+    animation: float-hex 6s ease-in-out infinite;
+  }
+
+  .hex-1 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 0s;
+  }
+
+  .hex-2 {
+    bottom: 30%;
+    left: 15%;
+    animation-delay: 2s;
+  }
+
+  .hex-3 {
+    top: 60%;
+    right: 20%;
+    animation-delay: 4s;
+  }
+
+  /* Animations */
+  @keyframes cert-float {
+    0%, 100% {
+      transform: translateY(0) rotateZ(0deg);
+    }
+    33% {
+      transform: translateY(-3px) rotateZ(0.5deg);
+    }
+    66% {
+      transform: translateY(2px) rotateZ(-0.5deg);
+    }
+  }
+
+  @keyframes holographic-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+  }
+
+  @keyframes circuit-flow {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes arrow-pulse {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(3px);
+    }
+  }
+
+  @keyframes float-hex {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translateY(-15px) rotate(180deg);
+      opacity: 0.6;
+    }
+  }
+
+  /* Modal improvements */
   dialog::backdrop {
     animation: fade-in 0.5s ease;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
   }
 
   dialog[open] {
     animation: scale-in 0.3s ease-out;
+    border: 2px solid rgba(0, 255, 136, 0.5);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 30, 60, 0.8));
+    backdrop-filter: blur(20px);
   }
 
   dialog:not([open]) {
@@ -116,7 +679,7 @@ const certificados = [
     }
     to {
       opacity: 1;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(10px);
     }
   }
 
@@ -128,6 +691,59 @@ const certificados = [
     to {
       transform: scale(1);
       opacity: 1;
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .cyber-certificates-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .cert-content {
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .cert-title {
+      font-size: 1rem;
+    }
+
+    .cert-badges {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .corner {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cyber-certificates-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .cert-content {
+      padding: 0.75rem;
+    }
+
+    .corner {
+      width: 16px;
+      height: 16px;
+    }
+
+    .cert-title {
+      font-size: 0.9rem;
+    }
+
+    .cyber-badge {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.65rem;
     }
   }
 </style>

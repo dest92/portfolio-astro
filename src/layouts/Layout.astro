@@ -2,29 +2,34 @@
 import "@fontsource-variable/onest";
 
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 
-interface Props {
+export interface Props {
   title: string;
   description: string;
 }
 
-const { description, title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body class="relative text-black dark:text-white overflow-x-hidden">
+  <body class="relative text-black dark:text-white">
+    <!-- Background container with cyberpunk effects -->
     <div
       class="fixed
         top-0
@@ -59,9 +64,28 @@ const { description, title } = Astro.props;
     >
     </div>
 
+    <!-- Cyberpunk floating particles -->
+    <div class="cyber-particles fixed inset-0 z-[-1] pointer-events-none">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+      <div class="particle particle-5"></div>
+      <div class="particle particle-6"></div>
+    </div>
+
+    <!-- Circuit lines -->
+    <div class="cyber-circuits fixed inset-0 z-[-1] pointer-events-none">
+      <div class="circuit-line circuit-1"></div>
+      <div class="circuit-line circuit-2"></div>
+      <div class="circuit-line circuit-3"></div>
+    </div>
+
+    <!-- Grid overlay -->
+    <div class="cyber-grid fixed inset-0 z-[-1] pointer-events-none"></div>
+
     <Header />
     <slot />
-    <Footer />
 
     <style is:global>
       :root {
@@ -72,10 +96,15 @@ const { description, title } = Astro.props;
         --cyber-glow: rgba(0, 255, 136, 0.3);
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       html {
         font-family: "Onest Variable", system-ui, sans-serif;
         scroll-behavior: smooth;
         overflow-x: hidden;
+        width: 100%;
       }
 
       body {
@@ -85,6 +114,10 @@ const { description, title } = Astro.props;
         min-height: 100vh;
         overscroll-behavior: none;
         overflow-x: hidden;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: relative;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -106,6 +139,7 @@ const { description, title } = Astro.props;
 
       ::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
       }
 
       ::-webkit-scrollbar-thumb {
@@ -116,12 +150,30 @@ const { description, title } = Astro.props;
 
       ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(180deg, var(--cyber-secondary), var(--cyber-primary));
+        box-shadow: 0 0 15px var(--cyber-glow);
       }
 
+      /* Responsive utilities */
+      @media (max-width: 768px) {
+        html {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        html {
+          font-size: 13px;
+        }
+      }
+
+      /* Fix for z-index issues */
       #header-nav {
         animation: blur linear both 0.5s;
         animation-timeline: scroll();
         animation-range: 0 500px;
+        z-index: 1000;
+        position: fixed;
+        will-change: transform;
       }
 
       @keyframes blur {
@@ -157,6 +209,334 @@ const { description, title } = Astro.props;
       ::-moz-selection {
         background: var(--cyber-primary);
         color: #000;
+      }
+
+      /* Prevent horizontal scroll issues */
+      .no-scroll-x {
+        overflow-x: hidden !important;
+      }
+
+      /* Fix for mobile touch scrolling */
+      @media (max-width: 768px) {
+        body {
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-y;
+        }
+      }
+
+      /* Cyberpunk floating particles */
+      .cyber-particles {
+        opacity: 0.6;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--cyber-primary);
+        border-radius: 50%;
+        box-shadow: 0 0 6px var(--cyber-primary);
+        animation: float-particle 20s linear infinite;
+      }
+
+      .particle-1 {
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+        animation-duration: 25s;
+      }
+
+      .particle-2 {
+        top: 30%;
+        right: 10%;
+        animation-delay: 5s;
+        animation-duration: 18s;
+        background: var(--cyber-secondary);
+        box-shadow: 0 0 6px var(--cyber-secondary);
+      }
+
+      .particle-3 {
+        bottom: 20%;
+        left: 15%;
+        animation-delay: 10s;
+        animation-duration: 22s;
+      }
+
+      .particle-4 {
+        top: 70%;
+        right: 25%;
+        animation-delay: 15s;
+        animation-duration: 16s;
+        background: var(--cyber-accent);
+        box-shadow: 0 0 6px var(--cyber-accent);
+      }
+
+      .particle-5 {
+        bottom: 40%;
+        right: 5%;
+        animation-delay: 8s;
+        animation-duration: 24s;
+      }
+
+      .particle-6 {
+        top: 50%;
+        left: 30%;
+        animation-delay: 12s;
+        animation-duration: 20s;
+        background: var(--cyber-secondary);
+        box-shadow: 0 0 6px var(--cyber-secondary);
+      }
+
+      @keyframes float-particle {
+        0% {
+          transform: translate(0, 0) scale(0.5);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100vw, -100vh) scale(0.5);
+          opacity: 0;
+        }
+      }
+
+      /* Circuit lines */
+      .cyber-circuits {
+        opacity: 0.3;
+      }
+
+      .circuit-line {
+        position: absolute;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          var(--cyber-primary) 20%, 
+          var(--cyber-primary) 80%, 
+          transparent 100%
+        );
+        animation: circuit-flow 15s ease-in-out infinite;
+      }
+
+      .circuit-1 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        animation-delay: 0s;
+      }
+
+      .circuit-2 {
+        top: 0;
+        right: 30%;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(180deg, 
+          transparent 0%, 
+          var(--cyber-secondary) 20%, 
+          var(--cyber-secondary) 80%, 
+          transparent 100%
+        );
+        animation-delay: 5s;
+        animation-duration: 20s;
+      }
+
+      .circuit-3 {
+        bottom: 40%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          var(--cyber-accent) 30%, 
+          var(--cyber-accent) 70%, 
+          transparent 100%
+        );
+        animation-delay: 10s;
+        animation-duration: 18s;
+      }
+
+      @keyframes circuit-flow {
+        0%, 100% {
+          opacity: 0.1;
+          transform: scaleX(0.5);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scaleX(1);
+        }
+      }
+
+      /* Cyber grid */
+      .cyber-grid {
+        background-image: 
+          linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.4;
+        animation: grid-pulse 10s ease-in-out infinite;
+      }
+
+      @keyframes grid-pulse {
+        0%, 100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+
+      /* Enhanced glow effects */
+      .cyber-text-glow {
+        text-shadow: 
+          0 0 5px var(--cyber-primary),
+          0 0 10px var(--cyber-primary),
+          0 0 15px var(--cyber-primary);
+      }
+
+      .cyber-border-glow {
+        border: 1px solid var(--cyber-primary);
+        box-shadow: 
+          0 0 5px var(--cyber-primary),
+          inset 0 0 5px rgba(0, 255, 136, 0.1);
+      }
+
+      /* Glitch effect */
+      .cyber-glitch {
+        position: relative;
+        animation: glitch 2s infinite;
+      }
+
+      .cyber-glitch::before,
+      .cyber-glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .cyber-glitch::before {
+        animation: glitch-1 0.5s infinite;
+        color: var(--cyber-secondary);
+        z-index: -1;
+      }
+
+      .cyber-glitch::after {
+        animation: glitch-2 0.5s infinite;
+        color: var(--cyber-accent);
+        z-index: -2;
+      }
+
+      @keyframes glitch {
+        0%, 100% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(-2px, -2px);
+        }
+        60% {
+          transform: translate(2px, 2px);
+        }
+        80% {
+          transform: translate(2px, -2px);
+        }
+      }
+
+      @keyframes glitch-1 {
+        0% {
+          clip-path: inset(40% 0 61% 0);
+        }
+        20% {
+          clip-path: inset(92% 0 1% 0);
+        }
+        40% {
+          clip-path: inset(43% 0 1% 0);
+        }
+        60% {
+          clip-path: inset(25% 0 58% 0);
+        }
+        80% {
+          clip-path: inset(54% 0 7% 0);
+        }
+        100% {
+          clip-path: inset(58% 0 43% 0);
+        }
+      }
+
+      @keyframes glitch-2 {
+        0% {
+          clip-path: inset(25% 0 58% 0);
+        }
+        20% {
+          clip-path: inset(54% 0 7% 0);
+        }
+        40% {
+          clip-path: inset(58% 0 43% 0);
+        }
+        60% {
+          clip-path: inset(40% 0 61% 0);
+        }
+        80% {
+          clip-path: inset(92% 0 1% 0);
+        }
+        100% {
+          clip-path: inset(43% 0 1% 0);
+        }
+      }
+
+      /* Dark mode adjustments */
+      @media (prefers-color-scheme: dark) {
+        .cyber-particles {
+          opacity: 0.8;
+        }
+
+        .cyber-circuits {
+          opacity: 0.5;
+        }
+
+        .cyber-grid {
+          background-image: 
+            linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+          opacity: 0.6;
+        }
+      }
+
+      /* Responsive adjustments for cyber effects */
+      @media (max-width: 768px) {
+        .cyber-particles {
+          opacity: 0.4;
+        }
+
+        .cyber-circuits {
+          opacity: 0.2;
+        }
+
+        .cyber-grid {
+          background-size: 30px 30px;
+          opacity: 0.3;
+        }
+
+        .particle {
+          width: 1px;
+          height: 1px;
+        }
+      }
+
+      /* Performance optimizations */
+      .cyber-particles,
+      .cyber-circuits,
+      .cyber-grid {
+        will-change: transform, opacity;
+        transform: translateZ(0);
       }
     </style>
   </body>
