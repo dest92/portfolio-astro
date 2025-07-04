@@ -142,13 +142,20 @@
   
   .terminal-body {
     padding: 20px;
-    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
     font-family: 'Courier New', monospace;
     font-size: 14px;
     line-height: 1.6;
     color: #00ff00;
     background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.02) 100%);
     position: relative;
+  }
+  
+  .terminal-content {
+    max-height: 320px;
+    overflow-y: auto;
+    padding-bottom: 1rem;
   }
   
   .terminal-body::before {
@@ -450,7 +457,8 @@
       }
       
       this.content.appendChild(line);
-      line.scrollIntoView({ behavior: 'smooth' });
+      // Scroll only within terminal, not the page
+      this.content.scrollTop = this.content.scrollHeight;
     },
     
     executeCommand(cmd: string) {

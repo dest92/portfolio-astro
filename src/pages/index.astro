@@ -42,21 +42,6 @@ import CyberSkills from "../components/CyberSkills.astro";
       <InteractiveTerminal />
     </SectionContainer>
 
-    <!-- Skills Section with Animated Bars -->
-    <SectionContainer id="skills" class="skills-section">
-      <div class="section-header">
-        <h2 class="cyber-section-title">
-          <span class="title-icon">⚡</span>
-          <span class="title-text">Habilidades Técnicas</span>
-          <div class="title-glow"></div>
-        </h2>
-        <p class="cyber-section-subtitle">
-          Tecnologías y herramientas que domino para crear soluciones robustas y seguras
-        </p>
-      </div>
-      <CyberSkills />
-    </SectionContainer>
-
     <!-- Experience Section with Updated Design -->
     <SectionContainer id="experience" class="experience-section">
       <div class="section-header">
@@ -100,6 +85,21 @@ import CyberSkills from "../components/CyberSkills.astro";
         </p>
       </div>
       <Certificates />
+    </SectionContainer>
+
+    <!-- Skills Section with Animated Bars -->
+    <SectionContainer id="skills" class="skills-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="title-icon">⚡</span>
+          <span class="title-text">Habilidades Técnicas</span>
+          <div class="title-glow"></div>
+        </h2>
+        <p class="cyber-section-subtitle">
+          Tecnologías y herramientas que domino para crear soluciones robustas y seguras
+        </p>
+      </div>
+      <CyberSkills />
     </SectionContainer>
 
     <!-- About Me Section -->
@@ -305,8 +305,8 @@ import CyberSkills from "../components/CyberSkills.astro";
   }
 
   .cyber-cta-button .button-icon {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     transition: transform 0.3s ease;
   }
 

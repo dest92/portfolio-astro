@@ -19,8 +19,7 @@ import NavLink from "./NavLink.astro";
             </svg>
           </div>
           <span class="brand-text">
-            <span class="brand-name">Matías</span>
-            <span class="brand-suffix">.dev</span>
+            <span class="brand-name">Matías Acebal</span>
           </span>
         </a>
       </div>
@@ -33,12 +32,6 @@ import NavLink from "./NavLink.astro";
           <div class="nav-glow"></div>
         </NavLink>
         
-        <NavLink href="#skills" class="cyber-nav-link">
-          <span class="nav-icon">⚡</span>
-          <span class="nav-text">Skills</span>
-          <div class="nav-glow"></div>
-        </NavLink>
-        
         <NavLink href="#experience" class="cyber-nav-link">
           <span class="nav-icon">💼</span>
           <span class="nav-text">Experiencia</span>
@@ -46,8 +39,20 @@ import NavLink from "./NavLink.astro";
         </NavLink>
         
         <NavLink href="#proyectos" class="cyber-nav-link">
-          <span class="nav-icon">🚀</span>
+          <span class="nav-icon">�</span>
           <span class="nav-text">Proyectos</span>
+          <div class="nav-glow"></div>
+        </NavLink>
+        
+        <NavLink href="#certificaciones" class="cyber-nav-link">
+          <span class="nav-icon">🏆</span>
+          <span class="nav-text">Certificados</span>
+          <div class="nav-glow"></div>
+        </NavLink>
+        
+        <NavLink href="#skills" class="cyber-nav-link">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-text">Skills</span>
           <div class="nav-glow"></div>
         </NavLink>
         
@@ -92,10 +97,6 @@ import NavLink from "./NavLink.astro";
             <span class="mobile-icon">🖥️</span>
             <span>Terminal Interactiva</span>
           </a>
-          <a href="#skills" class="mobile-nav-link">
-            <span class="mobile-icon">⚡</span>
-            <span>Habilidades</span>
-          </a>
           <a href="#experience" class="mobile-nav-link">
             <span class="mobile-icon">💼</span>
             <span>Experiencia</span>
@@ -103,6 +104,14 @@ import NavLink from "./NavLink.astro";
           <a href="#proyectos" class="mobile-nav-link">
             <span class="mobile-icon">🚀</span>
             <span>Proyectos</span>
+          </a>
+          <a href="#certificaciones" class="mobile-nav-link">
+            <span class="mobile-icon">🏆</span>
+            <span>Certificaciones</span>
+          </a>
+          <a href="#skills" class="mobile-nav-link">
+            <span class="mobile-icon">⚡</span>
+            <span>Habilidades</span>
           </a>
           <a href="#sobre-mi" class="mobile-nav-link">
             <span class="mobile-icon">👨‍💻</span>
@@ -124,13 +133,40 @@ import NavLink from "./NavLink.astro";
   .cyber-header {
     backdrop-filter: blur(20px);
     transition: all 0.3s ease;
+    will-change: auto;
+    z-index: 1000;
   }
   
   .cyber-nav {
-    background: rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.05) 0%, 
+      rgba(0, 255, 136, 0.02) 50%, 
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    border-bottom: 1px solid rgba(0, 255, 136, 0.15);
     padding: 1rem 0;
     position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .cyber-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 255, 136, 0.05) 50%, 
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cyber-header.scrolled .cyber-nav::before {
+    opacity: 1;
   }
   
   .nav-container {
@@ -161,12 +197,12 @@ import NavLink from "./NavLink.astro";
     height: 2rem;
     color: #00ff88;
     transition: all 0.3s ease;
+    flex-shrink: 0;
   }
   
   .brand-text {
     display: flex;
-    align-items: baseline;
-    gap: 0.25rem;
+    align-items: center;
   }
   
   .brand-name {
@@ -174,14 +210,10 @@ import NavLink from "./NavLink.astro";
     font-weight: 700;
     color: #1f2937;
     transition: color 0.3s ease;
+    white-space: nowrap;
   }
   
-  .brand-suffix {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #00ff88;
-    font-family: 'Courier New', monospace;
-  }
+
   
   .brand-link:hover .brand-icon {
     transform: scale(1.1);
@@ -236,14 +268,17 @@ import NavLink from "./NavLink.astro";
   .cyber-nav-link:hover {
     color: #059669;
     transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
   }
   
   .cyber-nav-link:hover .nav-glow {
     opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
   }
   
   .cyber-nav-link:hover .nav-icon {
     transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
   }
   
   /* Actions */
@@ -430,11 +465,17 @@ import NavLink from "./NavLink.astro";
   /* Dark Mode */
   @media (prefers-color-scheme: dark) {
     .cyber-nav {
-      background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.2) 0%, 
+        rgba(0, 40, 30, 0.15) 50%, 
+        rgba(0, 0, 0, 0.2) 100%
+      );
+      border-bottom: 1px solid rgba(0, 255, 136, 0.25);
     }
     
     .brand-name {
       color: #e5e7eb;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
     }
     
     .cyber-nav-link {
@@ -443,15 +484,22 @@ import NavLink from "./NavLink.astro";
     
     .cyber-nav-link:hover {
       color: #10b981;
+      text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
     }
   }
   
   :global(.dark) .cyber-nav {
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.2) 0%, 
+      rgba(0, 40, 30, 0.15) 50%, 
+      rgba(0, 0, 0, 0.2) 100%
+    );
+    border-bottom: 1px solid rgba(0, 255, 136, 0.25);
   }
   
   :global(.dark) .brand-name {
     color: #e5e7eb;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
   }
   
   :global(.dark) .cyber-nav-link {
@@ -460,6 +508,7 @@ import NavLink from "./NavLink.astro";
   
   :global(.dark) .cyber-nav-link:hover {
     color: #10b981;
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
   }
   
   /* Responsive Design */
@@ -498,13 +547,21 @@ import NavLink from "./NavLink.astro";
   
   /* Header scroll effect */
   .cyber-header.scrolled {
-    background: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(0, 255, 136, 0.3);
-    backdrop-filter: blur(20px);
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.85) 0%, 
+      rgba(0, 20, 15, 0.9) 50%, 
+      rgba(0, 0, 0, 0.85) 100%
+    );
+    border-bottom: 1px solid rgba(0, 255, 136, 0.4);
+    backdrop-filter: blur(25px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(0, 255, 136, 0.1);
   }
   
   .cyber-header.scrolled .cyber-nav {
     padding: 0.75rem 0;
+    border-bottom: none;
   }
 </style>
 

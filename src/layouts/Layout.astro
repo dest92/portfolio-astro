@@ -24,29 +24,38 @@ const { description, title } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="relative text-black dark:text-white">
+  <body class="relative text-black dark:text-white overflow-x-hidden">
     <div
-      class="absolute
+      class="fixed
         top-0
         bottom-0
+        left-0
+        right-0
         z-[-2]
         min-h-screen
         w-full
         bg-gray-50
         dark:bg-gray-950
-        animate-gradient-background
-        bg-[radial-gradient(100%_100%_at_50%_0%,rgba(217,216,255,0.7)_0%,rgba(217,216,255,0.3)_45%,transparent_70%),radial-gradient(100%_100%_at_50%_100%,rgba(255,216,248,0.7)_0%,rgba(255,216,248,0.3)_45%,transparent_70%),radial-gradient(80%_80%_at_50%_50%,rgba(255,255,255,0.4)_0%,transparent_100%)]
-        dark:bg-[radial-gradient(100%_100%_at_50%_0%,rgba(120,119,198,0.5)_0%,rgba(120,119,198,0.2)_45%,transparent_70%),radial-gradient(100%_100%_at_50%_100%,rgba(172,119,198,0.5)_0%,rgba(172,119,198,0.2)_45%,transparent_70%),radial-gradient(80%_80%_at_50%_50%,rgba(0,0,0,0.2)_0%,transparent_100%)]
-        [background-size:200%_200%]
+        cyber-background
+        bg-[radial-gradient(ellipse_at_top,rgba(0,255,136,0.1)_0%,rgba(0,255,136,0.05)_25%,transparent_50%),radial-gradient(ellipse_at_bottom,rgba(0,200,255,0.08)_0%,rgba(0,200,255,0.03)_25%,transparent_50%),radial-gradient(circle_at_30%_40%,rgba(255,0,150,0.06)_0%,transparent_50%)]
+        dark:bg-[radial-gradient(ellipse_at_top,rgba(0,255,136,0.15)_0%,rgba(0,255,136,0.08)_25%,transparent_50%),radial-gradient(ellipse_at_bottom,rgba(0,200,255,0.12)_0%,rgba(0,200,255,0.05)_25%,transparent_50%),radial-gradient(circle_at_70%_60%,rgba(255,0,150,0.08)_0%,transparent_50%)]
+        before:content-['']
+        before:absolute
+        before:top-0
+        before:bottom-0
+        before:left-0
+        before:right-0
+        before:bg-[url('/noise.png')]
+        before:opacity-[0.02]
+        before:dark:opacity-[0.04]
         after:content-['']
         after:absolute
         after:top-0
         after:bottom-0
         after:left-0
         after:right-0
-        after:bg-[url('/noise.png')]
-        after:opacity-[0.015]
-        after:dark:opacity-[0.03]"
+        after:bg-[linear-gradient(90deg,transparent_0%,rgba(0,255,136,0.03)_50%,transparent_100%)]
+        after:animate-pulse"
     >
     </div>
 
@@ -57,11 +66,16 @@ const { description, title } = Astro.props;
     <style is:global>
       :root {
         color-scheme: light dark;
+        --cyber-primary: #00ff88;
+        --cyber-secondary: #00ccff;
+        --cyber-accent: #ff0080;
+        --cyber-glow: rgba(0, 255, 136, 0.3);
       }
 
       html {
         font-family: "Onest Variable", system-ui, sans-serif;
         scroll-behavior: smooth;
+        overflow-x: hidden;
       }
 
       body {
@@ -70,6 +84,7 @@ const { description, title } = Astro.props;
         flex-direction: column;
         min-height: 100vh;
         overscroll-behavior: none;
+        overflow-x: hidden;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -84,6 +99,25 @@ const { description, title } = Astro.props;
         }
       }
 
+      /* Cyber scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--cyber-primary), var(--cyber-secondary));
+        border-radius: 4px;
+        box-shadow: 0 0 10px var(--cyber-glow);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, var(--cyber-secondary), var(--cyber-primary));
+      }
+
       #header-nav {
         animation: blur linear both 0.5s;
         animation-timeline: scroll();
@@ -93,69 +127,36 @@ const { description, title } = Astro.props;
       @keyframes blur {
         to {
           backdrop-filter: blur(20px);
-          border-width: 1px;
-          border-color: rgba(0, 0, 0);
-          padding: 0.25rem 0.75rem;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          background-color: rgb(229, 229, 229);
-          border-radius: 9999px;
+          background: rgba(0, 0, 0, 0.8);
+          border-bottom: 1px solid rgba(0, 255, 136, 0.3);
         }
       }
 
       @media (prefers-color-scheme: dark) {
         @keyframes blur {
-          from {
-            border: 0px;
-          }
           to {
-            box-shadow:
-              0px 5px 50px -5px rgba(0, 0, 0, 0.1),
-              0px 0px 0 1px rgba(0, 0, 0, 0.3);
-            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(20px);
-            border-width: 1px;
-            border-color: rgba(0, 0, 0);
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.4);
+            box-shadow: 0px 5px 50px -5px rgba(0, 255, 136, 0.2);
           }
         }
       }
 
-      @keyframes gradient-background {
-        0% {
-          background-position: 50% 0%;
-        }
-        25% {
-          background-position: 50% 50%;
-        }
-        50% {
-          background-position: 50% 100%;
-        }
-        75% {
-          background-position: 50% 50%;
-        }
-        100% {
-          background-position: 50% 0%;
-        }
+      /* Cyber glow utility */
+      .cyber-glow {
+        box-shadow: 0 0 20px var(--cyber-glow);
       }
 
-      .animate-gradient-background {
-        animation: gradient-background 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      /* Selection colors */
+      ::selection {
+        background: var(--cyber-primary);
+        color: #000;
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        .animate-gradient-background {
-          animation: none;
-        }
+      ::-moz-selection {
+        background: var(--cyber-primary);
+        color: #000;
       }
     </style>
   </body>
