@@ -59,7 +59,7 @@ const getLevelColor = (level: string) => {
 
 <dialog
   id={id}
-  class="modal backdrop:bg-black/80 backdrop:backdrop-blur-sm bg-transparent p-4 max-w-6xl w-full max-h-[95vh] overflow-y-auto rounded-2xl border border-cyan-400/50 shadow-2xl shadow-cyan-500/20"
+  class="modal backdrop:bg-black/80 backdrop:backdrop-blur-sm bg-transparent p-4 max-w-6xl w-full max-h-[95vh] overflow-y-auto rounded-2xl border border-cyan-400/50 shadow-2xl shadow-cyan-500/20 mobile-modal-scroll"
 >
   <div class="relative bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 rounded-xl overflow-hidden border border-cyan-400/30 backdrop-blur-lg">
     
@@ -82,7 +82,7 @@ const getLevelColor = (level: string) => {
           </h2>
         </div>
         <button
-          class="cyber-close-btn group relative bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-sm rounded-full p-2 text-red-400 hover:text-red-300 transition-all duration-300 border border-red-400/50 hover:border-red-400/80 hover:shadow-lg hover:shadow-red-500/30"
+          class="cyber-close-btn group relative bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-sm rounded-full p-3 text-red-400 hover:text-red-300 transition-all duration-300 border border-red-400/50 hover:border-red-400/80 hover:shadow-lg hover:shadow-red-500/30 mobile-close-btn"
           onclick="window.closeModalWithAnimation(this.closest('dialog'))"
         >
           <svg
@@ -100,7 +100,7 @@ const getLevelColor = (level: string) => {
 
     {/* Content */}
     <div class="relative p-6">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mobile-modal-layout">
         
         {/* Certificate Image */}
         <div class="relative group">
@@ -448,10 +448,13 @@ const getLevelColor = (level: string) => {
     .modal {
       max-width: 95vw;
       max-height: 95vh;
+      margin: 0.5rem;
+      padding: 0.5rem;
     }
     
     .grid-cols-1.lg\\:grid-cols-2 {
       grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
     
     .grid-cols-1.sm\\:grid-cols-2 {
@@ -466,28 +469,189 @@ const getLevelColor = (level: string) => {
       max-width: 95vw;
       margin: 1rem;
     }
+
+    /* Ajustes específicos para el contenido del modal */
+    .modal .p-6 {
+      padding: 1rem;
+    }
+
+    .modal .text-2xl {
+      font-size: 1.25rem;
+    }
+
+    .modal .text-xl {
+      font-size: 1.125rem;
+    }
+
+    /* Mejorar la legibilidad en móvil */
+    .modal .space-y-6 {
+      gap: 1rem;
+    }
+
+    .modal .space-y-4 {
+      gap: 0.75rem;
+    }
+
+    .modal .space-y-3 {
+      gap: 0.5rem;
+    }
+
+    /* Ajustar botones en móvil */
+    .modal .cyber-button {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    /* Ajustar el header del modal */
+    .modal .p-6.border-b {
+      padding: 1rem;
+    }
+
+    /* Ajustar el footer del modal */
+    .modal .p-6.border-t {
+      padding: 1rem;
+    }
   }
 
   @media (max-width: 480px) {
     .modal {
-      margin: 1rem;
-      max-width: calc(100vw - 2rem);
+      margin: 0.25rem;
+      max-width: calc(100vw - 0.5rem);
+      max-height: calc(100vh - 0.5rem);
     }
     
-    .p-6 {
-      padding: 1rem;
+    .modal .p-6 {
+      padding: 0.75rem;
     }
     
-    .text-2xl {
-      font-size: 1.5rem;
+    .modal .text-2xl {
+      font-size: 1.125rem;
     }
     
-    .text-xl {
-      font-size: 1.25rem;
+    .modal .text-xl {
+      font-size: 1rem;
     }
 
-    .text-4xl {
-      font-size: 2rem;
+    .modal .text-4xl {
+      font-size: 1.5rem;
+    }
+
+    /* Ajustes adicionales para pantallas muy pequeñas */
+    .modal .grid-cols-1.lg\\:grid-cols-2 {
+      gap: 1rem;
+    }
+
+    .modal .cyber-button {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    /* Mejorar el espaciado en móvil */
+    .modal .space-y-6 {
+      gap: 0.75rem;
+    }
+
+    .modal .space-y-4 {
+      gap: 0.5rem;
+    }
+
+    .modal .space-y-3 {
+      gap: 0.375rem;
+    }
+
+    /* Ajustar el header y footer */
+    .modal .p-6.border-b,
+    .modal .p-6.border-t {
+      padding: 0.75rem;
+    }
+
+    /* Ajustar el código del credential ID */
+    .modal code {
+      font-size: 0.75rem;
+      word-break: break-all;
+    }
+
+    /* Ajustar las skills tags */
+    .modal .flex.flex-wrap.gap-2 {
+      gap: 0.375rem;
+    }
+
+    .modal .px-3.py-2 {
+      padding: 0.375rem 0.5rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Ajustes para dispositivos táctiles */
+  @media (hover: none) and (pointer: coarse) {
+    .modal .cyber-button:hover {
+      transform: none;
+    }
+
+    .modal .cyber-button:active {
+      transform: scale(0.98);
+    }
+  }
+
+  /* Layout específico para móvil */
+  .mobile-modal-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-modal-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* Mejorar la imagen en móvil */
+  @media (max-width: 768px) {
+    .mobile-modal-layout .group {
+      order: -1;
+    }
+
+    .mobile-modal-layout .space-y-6 {
+      order: 1;
+    }
+
+    /* Mejorar el botón de cerrar en móvil */
+    .mobile-close-btn {
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mobile-close-btn {
+      min-width: 48px;
+      min-height: 48px;
+    }
+  }
+
+  /* Mejorar el scroll en móvil */
+  .mobile-modal-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-modal-scroll {
+      max-height: calc(100vh - 2rem);
+      margin: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mobile-modal-scroll {
+      max-height: calc(100vh - 1rem);
+      margin: 0.5rem;
     }
   }
 </style> 

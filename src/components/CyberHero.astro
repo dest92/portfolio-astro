@@ -3,7 +3,7 @@
     <div class="grid-overlay"></div>
     <div class="cyber-particles" id="cyber-particles"></div>
   </div>
-  
+
   <div class="hero-content">
     <div class="profile-section">
       <div class="profile-image-container">
@@ -16,13 +16,13 @@
         <div class="profile-ring"></div>
         <div class="profile-glow"></div>
       </div>
-      
+
       <div class="status-indicator">
         <div class="status-dot"></div>
         <span class="status-text">Available for work</span>
       </div>
     </div>
-    
+
     <div class="text-section">
       <div class="greeting-line">
         <span class="greeting-text">¡Hola! Soy</span>
@@ -31,11 +31,11 @@
           <span class="cursor-blink">|</span>
         </div>
       </div>
-      
+
       <h1 class="hero-title">
         <span class="title-line">Matías Acebal</span>
       </h1>
-      
+
       <div class="role-tags">
         <span class="role-tag primary justify-center">
           <span class="tag-icon">💻</span>
@@ -50,66 +50,47 @@
           Analista en Sistemas
         </span>
       </div>
-      
+
       <p class="hero-description">
-        Combinando innovación técnica con seguridad avanzada para crear 
-        <span class="highlight">soluciones robustas</span> que transforman ideas en 
+        Combinando innovación técnica con seguridad avanzada para crear
+        <span class="highlight">soluciones robustas</span> que transforman ideas
+        en
         <span class="highlight">experiencias digitales excepcionales</span>.
       </p>
-      
+
       <div class="cta-section">
         <button class="cyber-button primary" id="explore-btn">
           <span class="button-text">Explorar Portfolio</span>
           <div class="button-glow"></div>
-          <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            class="button-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M7 17L17 7"></path>
             <path d="M7 7h10v10"></path>
           </svg>
         </button>
-        
+
         <button class="cyber-button secondary" id="contact-btn">
           <span class="button-text">Hablemos</span>
           <div class="button-glow"></div>
-          <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <svg
+            class="button-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
         </button>
       </div>
-      
-      <div class="stats-section">
-        <div class="stat-item">
-          <span class="stat-number">5+</span>
-          <span class="stat-label">Años programando</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">600+</span>
-          <span class="stat-label">Usuarios en FitLife</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Proyectos completados</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Floating elements -->
-  <div class="floating-elements">
-    <div class="floating-icon" style="--delay: 0s; --duration: 6s;">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 7v10c0 5.55 3.84 10 8 9 4.16 1 8-3.45 8-9V7l-10-5z"/>
-      </svg>
-    </div>
-    <div class="floating-icon" style="--delay: 2s; --duration: 8s;">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-    </div>
-    <div class="floating-icon" style="--delay: 4s; --duration: 7s;">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-      </svg>
     </div>
   </div>
 </section>
@@ -124,7 +105,7 @@
     overflow: hidden;
     padding: 2rem;
   }
-  
+
   .hero-background {
     position: absolute;
     top: 0;
@@ -133,20 +114,22 @@
     bottom: 0;
     z-index: 1;
   }
-  
+
   .grid-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-      linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+    background-image: linear-gradient(
+        rgba(0, 255, 136, 0.1) 1px,
+        transparent 1px
+      ),
       linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.3;
   }
-  
+
   .cyber-particles {
     position: absolute;
     top: 0;
@@ -154,7 +137,7 @@
     right: 0;
     bottom: 0;
   }
-  
+
   .hero-content {
     position: relative;
     z-index: 2;
@@ -165,20 +148,20 @@
     gap: 4rem;
     align-items: center;
   }
-  
+
   .profile-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
   }
-  
+
   .profile-image-container {
     position: relative;
     width: 200px;
     height: 200px;
   }
-  
+
   .profile-image {
     width: 100%;
     height: 100%;
@@ -189,7 +172,7 @@
     transition: all 0.4s ease;
     border: 3px solid rgba(0, 255, 136, 0.3);
   }
-  
+
   .profile-ring {
     position: absolute;
     top: -10px;
@@ -198,21 +181,29 @@
     bottom: -10px;
     border: 2px solid rgba(0, 255, 136, 0.5);
     border-radius: 50%;
-    background: conic-gradient(transparent, rgba(0, 255, 136, 0.3), transparent);
+    background: conic-gradient(
+      transparent,
+      rgba(0, 255, 136, 0.3),
+      transparent
+    );
     z-index: 2;
   }
-  
+
   .profile-glow {
     position: absolute;
     top: -20px;
     left: -20px;
     right: -20px;
     bottom: -20px;
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.2) 0%,
+      transparent 70%
+    );
     border-radius: 50%;
     z-index: 1;
   }
-  
+
   .status-indicator {
     display: flex;
     align-items: center;
@@ -223,7 +214,7 @@
     border-radius: 20px;
     backdrop-filter: blur(10px);
   }
-  
+
   .status-dot {
     width: 8px;
     height: 8px;
@@ -231,50 +222,50 @@
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
   }
-  
+
   .status-text {
     font-size: 0.875rem;
     font-weight: 500;
     color: #059669;
   }
-  
+
   .text-section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
-  
+
   .greeting-line {
     display: flex;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
   }
-  
+
   .greeting-text {
     font-size: 1.5rem;
     color: #6b7280;
     font-weight: 500;
   }
-  
+
   .typing-effect {
     display: flex;
     align-items: center;
   }
-  
+
   .typed-text {
     font-size: 1.5rem;
     font-weight: 600;
     color: #00ff88;
     text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
   }
-  
+
   .cursor-blink {
     font-size: 1.5rem;
     color: #00ff88;
     margin-left: 2px;
   }
-  
+
   .hero-title {
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 800;
@@ -285,13 +276,13 @@
     background-clip: text;
     text-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
   }
-  
+
   .role-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
+
   .role-tag {
     display: flex;
     align-items: center;
@@ -306,44 +297,49 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .role-tag::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
     transition: left 0.5s ease;
   }
-  
+
   .role-tag:hover::before {
     left: 100%;
   }
-  
+
   .role-tag.primary {
     background: rgba(59, 130, 246, 0.1);
     border-color: rgba(59, 130, 246, 0.3);
     color: #2563eb;
   }
-  
+
   .role-tag.secondary {
     background: rgba(239, 68, 68, 0.1);
     border-color: rgba(239, 68, 68, 0.3);
     color: #dc2626;
   }
-  
+
   .role-tag.tertiary {
     background: rgba(168, 85, 247, 0.1);
     border-color: rgba(168, 85, 247, 0.3);
     color: #7c3aed;
   }
-  
+
   .tag-icon {
     font-size: 1rem;
   }
-  
+
   .hero-description {
     font-size: 1.25rem;
     line-height: 1.8;
@@ -351,19 +347,19 @@
     margin: 0;
     max-width: 600px;
   }
-  
+
   .highlight {
     color: #059669;
     font-weight: 600;
     text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
   }
-  
+
   .cta-section {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
   }
-  
+
   .cyber-button {
     position: relative;
     display: flex;
@@ -380,12 +376,12 @@
     overflow: hidden;
     text-decoration: none;
   }
-  
+
   .cyber-button .button-text {
     position: relative;
     z-index: 2;
   }
-  
+
   .cyber-button .button-icon {
     width: 1.25rem;
     height: 1.25rem;
@@ -393,7 +389,7 @@
     position: relative;
     z-index: 2;
   }
-  
+
   .button-glow {
     position: absolute;
     top: 0;
@@ -403,124 +399,83 @@
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   .cyber-button.primary {
     background: rgba(0, 255, 136, 0.1);
     border-color: rgba(0, 255, 136, 0.4);
     color: #059669;
   }
-  
+
   .cyber-button.primary .button-glow {
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.1));
+    background: linear-gradient(
+      135deg,
+      rgba(0, 255, 136, 0.2),
+      rgba(0, 255, 136, 0.1)
+    );
   }
-  
+
   .cyber-button.secondary {
     background: rgba(59, 130, 246, 0.1);
     border-color: rgba(59, 130, 246, 0.4);
     color: #2563eb;
   }
-  
+
   .cyber-button.secondary .button-glow {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.2),
+      rgba(59, 130, 246, 0.1)
+    );
   }
-  
+
   .cyber-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
-  
+
   .cyber-button:hover .button-glow {
     opacity: 1;
   }
-  
+
   .cyber-button:hover .button-icon {
     transform: translateX(4px);
   }
-  
-  .stats-section {
-    display: flex;
-    gap: 3rem;
-    flex-wrap: wrap;
-  }
-  
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .stat-label {
-    font-size: 0.875rem;
-    color: #6b7280;
-    font-weight: 500;
-  }
-  
-  .floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  .floating-icon {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    color: rgba(0, 255, 136, 0.2);
-  }
-  
-  .floating-icon:nth-child(1) { top: 20%; left: 10%; }
-  .floating-icon:nth-child(2) { top: 60%; right: 15%; }
-  .floating-icon:nth-child(3) { bottom: 30%; left: 20%; }
-  
+
   /* Dark mode */
   @media (prefers-color-scheme: dark) {
     .greeting-text {
       color: #9ca3af;
     }
-    
+
     .hero-description {
       color: #d1d5db;
     }
-    
+
     .stat-label {
       color: #9ca3af;
     }
-    
+
     .status-text {
       color: #10b981;
     }
   }
-  
+
   :global(.dark) .greeting-text {
     color: #9ca3af;
   }
-  
+
   :global(.dark) .hero-description {
     color: #d1d5db;
   }
-  
+
   :global(.dark) .stat-label {
     color: #9ca3af;
   }
-  
+
   :global(.dark) .status-text {
     color: #10b981;
   }
-  
+
   /* Responsive */
   @media (max-width: 1024px) {
     .hero-content {
@@ -529,7 +484,7 @@
       gap: 2.5rem;
       padding: 0 1rem;
     }
-    
+
     .profile-image-container {
       width: 140px;
       height: 140px;
@@ -551,42 +506,38 @@
     .hero-description {
       font-size: 1rem;
     }
-
-    .hero-stats {
-      justify-content: center;
-    }
   }
-  
+
   @media (max-width: 768px) {
     .cyber-hero {
       padding: 1rem;
       min-height: 80vh;
     }
-    
+
     .hero-content {
       gap: 2rem;
       padding: 0 0.5rem;
     }
-    
+
     .profile-image-container {
       width: 120px;
       height: 120px;
     }
-    
+
     .greeting-line {
       flex-direction: column;
       gap: 0.5rem;
       align-items: center;
     }
-    
+
     .greeting-text {
       font-size: 1.125rem;
     }
-    
+
     .typed-text {
       font-size: 1.125rem;
     }
-    
+
     .hero-description {
       font-size: 0.9rem;
       line-height: 1.5;
@@ -595,32 +546,17 @@
     .cta-section {
       justify-content: center;
     }
-    
-    .hero-stats {
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-    }
-    
-    .stat-item {
-      min-width: auto;
-      text-align: center;
-    }
-    
+
     .hero-actions {
       flex-direction: column;
       align-items: center;
       gap: 1rem;
     }
-    
+
     .cyber-button {
       width: 100%;
       max-width: 280px;
       justify-content: center;
-    }
-
-    .floating-icon {
-      display: none;
     }
   }
 
@@ -656,35 +592,27 @@
       padding: 0.75rem 1.5rem;
       font-size: 0.85rem;
     }
-
-    .stat-number {
-      font-size: 1.5rem;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-    }
   }
 </style>
 
 <script>
   // Typing effect
   const texts = [
-    'Matías Acebal',
-    'FullStack Developer', 
-    'Security Expert',
-    'System Analyst'
+    "Matías Acebal",
+    "FullStack Developer",
+    "Security Expert",
+    "System Analyst",
   ];
   let textIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  
+
   function typeWriter() {
-    const typedTextElement = document.getElementById('typed-text');
+    const typedTextElement = document.getElementById("typed-text");
     if (!typedTextElement) return;
-    
+
     const currentText = texts[textIndex];
-    
+
     if (isDeleting) {
       typedTextElement.textContent = currentText.substring(0, charIndex - 1);
       charIndex--;
@@ -692,13 +620,13 @@
       typedTextElement.textContent = currentText.substring(0, charIndex + 1);
       charIndex++;
     }
-    
+
     let typeSpeed = 150;
-    
+
     if (isDeleting) {
       typeSpeed /= 2;
     }
-    
+
     if (!isDeleting && charIndex === currentText.length) {
       typeSpeed = 2000;
       isDeleting = true;
@@ -707,32 +635,32 @@
       textIndex = (textIndex + 1) % texts.length;
       typeSpeed = 500;
     }
-    
+
     setTimeout(typeWriter, typeSpeed);
   }
-  
+
   // Button actions
   function initializeButtons() {
-    const exploreBtn = document.getElementById('explore-btn');
-    const contactBtn = document.getElementById('contact-btn');
-    
+    const exploreBtn = document.getElementById("explore-btn");
+    const contactBtn = document.getElementById("contact-btn");
+
     if (exploreBtn) {
-      exploreBtn.addEventListener('click', () => {
-        document.querySelector('#experience')?.scrollIntoView({ 
-          behavior: 'smooth' 
+      exploreBtn.addEventListener("click", () => {
+        document.querySelector("#experience")?.scrollIntoView({
+          behavior: "smooth",
         });
       });
     }
-    
+
     if (contactBtn) {
-      contactBtn.addEventListener('click', () => {
-        window.location.href = 'mailto:acebalmatias2019@gmail.com';
+      contactBtn.addEventListener("click", () => {
+        window.location.href = "mailto:acebalmatias2019@gmail.com";
       });
     }
   }
-  
+
   // Initialize everything
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     typeWriter();
     initializeButtons();
   });

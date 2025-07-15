@@ -1,5 +1,5 @@
 ---
-import GitHub from "./icons/GitHubIcon.astro";
+
 import NextJS from "./icons/NextJSIcon.astro";
 import Tailwind from "./icons/TailwindIcon.astro";
 import ReactIcon from "./icons/ReactIcon.astro";
@@ -117,7 +117,7 @@ const PROJECTS = [
 
 <section class="cyber-projects-section">
   <div class="cyber-projects-grid">
-    {PROJECTS.map(({ image, title, description, tags, link, github, featured }, index) => (
+    {PROJECTS.map(({ image, title, description, tags, link, github, featured }) => (
       <article class={`cyber-project-card ${featured ? 'cyber-project-featured' : ''}`}>
         
         <!-- Featured Badge -->

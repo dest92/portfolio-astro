@@ -3,7 +3,12 @@ const navItems = [
   {
     title: "Experiencia",
     label: "experiencia",
-    url: "/#experiencia",
+    url: "/#experience",
+  },
+  {
+    title: "Educación",
+    label: "educacion",
+    url: "/#education",
   },
   {
     title: "Proyectos",
@@ -13,12 +18,7 @@ const navItems = [
   {
     title: "Certificados",
     label: "certificados",
-    url: "/#certificados",
-  },
-  {
-    title: "Skills",
-    label: "skills",
-    url: "/#skills",
+    url: "/#certificaciones",
   },
   {
     title: "Sobre mí",
@@ -28,7 +28,7 @@ const navItems = [
   {
     title: "Contacto",
     label: "contacto",
-    url: "mailto:destripadorh@gmail.com",
+    url: "mailto:acebalmatias2019@gmail.com",
   },
 ];
 ---
@@ -620,7 +620,10 @@ const navItems = [
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (e) => {
         e.preventDefault();
-        const target = document.querySelector(anchor.getAttribute("href") || "");
+        const href = anchor.getAttribute("href");
+        if (!href) return;
+        
+        const target = document.querySelector(href);
         if (target) {
           const headerHeight = header?.offsetHeight || 0;
           const targetPosition = (target as HTMLElement).offsetTop - headerHeight - 20;

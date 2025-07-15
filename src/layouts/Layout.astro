@@ -21,6 +21,9 @@ const { title, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add("dark");
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,10 +32,10 @@ const { title, description } = Astro.props;
     />
   </head>
 
-  <body class="relative text-black dark:text-white">
+  <body class="relative text-white bg-gray-950">
     <!-- Background container with cyberpunk effects -->
     <div
-      class="fixed top-0 bottom-0 left-0 right-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950 pointer-events-none"
+      class="fixed top-0 bottom-0 left-0 right-0 z-[-2] min-h-screen w-full bg-gray-950 pointer-events-none"
       style="background: 
         radial-gradient(ellipse at top, rgba(0,255,136,0.1) 0%, rgba(0,255,136,0.05) 25%, transparent 50%),
         radial-gradient(ellipse at bottom, rgba(0,200,255,0.08) 0%, rgba(0,200,255,0.03) 25%, transparent 50%),
@@ -48,7 +51,6 @@ const { title, description } = Astro.props;
 
     <style is:global>
       :root {
-        color-scheme: light dark;
         --cyber-primary: #00ff88;
         --cyber-secondary: #00ccff;
         --cyber-accent: #ff0080;
@@ -64,15 +66,9 @@ const { title, description } = Astro.props;
       }
 
       body {
-        color: rgba(17, 17, 17, 0.9);
+        color: rgba(255, 255, 255, 0.9);
         margin: 0;
         padding: 0;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        body {
-          color: rgba(255, 255, 255, 0.9);
-        }
       }
 
       /* Cyber scrollbar */
@@ -163,21 +159,19 @@ const { title, description } = Astro.props;
       }
 
       /* Dark mode adjustments */
-      @media (prefers-color-scheme: dark) {
-        .cyber-particles {
-          opacity: 0.8;
-        }
+      .cyber-particles {
+        opacity: 0.8;
+      }
 
-        .cyber-circuits {
-          opacity: 0.5;
-        }
+      .cyber-circuits {
+        opacity: 0.5;
+      }
 
-        .cyber-grid {
-          background-image: 
-            linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
-          opacity: 0.6;
-        }
+      .cyber-grid {
+        background-image: 
+          linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+        opacity: 0.6;
       }
 
       /* Responsive adjustments for cyber effects */
