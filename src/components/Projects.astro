@@ -6,6 +6,7 @@ import ReactIcon from "./icons/ReactIcon.astro";
 import SupabaseIcon from "./icons/SupabaseIcon.astro";
 import BracketIcon from "./icons/BracketIcon.astro";
 import Link from "./icons/Link.astro";
+import NestJS from "./icons/NestJSIcon.astro";
 
 const TAGS = {
   NEXT: {
@@ -33,9 +34,23 @@ const TAGS = {
     class: "cyber-tag-astro",
     icon: BracketIcon,
   },
+  NESTJS: {
+    name: "NestJS",
+    class: "cyber-tag-nestjs",
+    icon: NestJS,
+  },
 };
 
 const PROJECTS = [
+  {
+    title: "Agora Colab",
+    description: "Plataforma web colaborativa en tiempo real. Utilicé NestJS para el backend y NextJS para el frontend. Microservicios.",
+    link: "https://agora-colab.vercel.app/",
+    github: "https://github.com/dest92/agora-colab",
+    image: "/projects/colab.png",
+    tags: [TAGS.NEXT, TAGS.TAILWIND, TAGS.NESTJS],
+    featured: true,
+  },
   {
     title: "Fake Profile Generator",
     description:
@@ -44,7 +59,7 @@ const PROJECTS = [
     github: "https://github.com/dest92/fake-profile-generator",
     image: "/projects/fake.png",
     tags: [TAGS.NEXT, TAGS.TAILWIND],
-    featured: true,
+    featured: false,
   },
   {
     title: "Ez-IP",
@@ -563,6 +578,12 @@ const PROJECTS = [
     background: linear-gradient(45deg, rgba(249, 115, 22, 0.2), rgba(239, 68, 68, 0.2));
     color: #fb923c;
     border-color: #fb923c;
+  }
+
+  .cyber-tag-nestjs {
+    background: linear-gradient(45deg, rgba(224, 35, 78, 0.2), rgba(255, 51, 85, 0.2));
+    color: #e0234e;
+    border-color: #e0234e;
   }
 
   /* Description */
