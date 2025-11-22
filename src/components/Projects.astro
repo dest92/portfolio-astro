@@ -7,6 +7,11 @@ import SupabaseIcon from "./icons/SupabaseIcon.astro";
 import BracketIcon from "./icons/BracketIcon.astro";
 import Link from "./icons/Link.astro";
 import NestJS from "./icons/NestJSIcon.astro";
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || 'es') as keyof typeof ui;
+const t = useTranslations(lang);
 
 const TAGS = {
   NEXT: {
@@ -44,7 +49,7 @@ const TAGS = {
 const PROJECTS = [
   {
     title: "Agora Colab",
-    description: "Plataforma web colaborativa en tiempo real. Utilicé NestJS para el backend y NextJS para el frontend. Microservicios.",
+    description: t('projects.agora.description'),
     link: "https://agora-colab.vercel.app/",
     github: "https://github.com/dest92/agora-colab",
     image: "/projects/colab.png",
@@ -53,8 +58,7 @@ const PROJECTS = [
   },
   {
     title: "Fake Profile Generator",
-    description:
-      "Aplicación web que permite a los usuarios crear perfiles falsos con correos electrónicos temporales verificados para proteger su privacidad en línea. La aplicación genera direcciones de correo electrónico temporales que pueden ser utilizadas para registrarse en sitios web sin comprometer la información personal del usuario. También permite recibir correos simples",
+    description: t('projects.fake.description'),
     link: "https://fake-profile-generator.vercel.app",
     github: "https://github.com/dest92/fake-profile-generator",
     image: "/projects/fake.png",
@@ -63,8 +67,7 @@ const PROJECTS = [
   },
   {
     title: "Ez-IP",
-    description:
-      "Sitio web para obtener información rápida sobre cualquier dirección IP.",
+    description: t('projects.ezip.description'),
     link: "https://ez-ip.vercel.app",
     github: "https://github.com/dest92/ez-ip",
     image: "/projects/ezip.jpeg",
@@ -72,7 +75,7 @@ const PROJECTS = [
   },
   {
     title: "GreenPrint Landing Page",
-    description: "Landing page para la empresa GreenPrint",
+    description: t('projects.greenprint.landing.description'),
     link: "https://greenprint-landing.vercel.app/",
     github: "https://github.com/dest92/greenprint-landing",
     image: "/projects/landing.png",
@@ -80,7 +83,7 @@ const PROJECTS = [
   },
   {
     title: "GreenPrint Ecommerce",
-    description: "Ecommerce básico para la empresa GreenPrint",
+    description: t('projects.greenprint.ecommerce.description'),
     link: "https://greenprint-ecommerce.vercel.app",
     github: "https://github.com/dest92/greenprint-ecommerce",
     image: "/projects/ecommerce.png",
@@ -88,8 +91,7 @@ const PROJECTS = [
   },
   {
     title: "Epic Clash - Juego de combates épicos",
-    description:
-      "Epic Clash es un juego de combate por turnos donde dos facciones luchan hasta que muere un equipo entero. Las facciones están compuestas por héroes y monstruos, y los jugadores pueden componer sus equipos con cualquier combinación de estos personajes. Cuando los personajes atacan, se muestran mensajes de combate, brindando una experiencia inmersiva.",
+    description: t('projects.epicclash.description'),
     link: "https://epic-clash.vercel.app/",
     github: "https://github.com/dest92/epic-clash",
     image: "/projects/EpicClash.jpg",
@@ -98,8 +100,7 @@ const PROJECTS = [
   },
   {
     title: "Ley de Bases - Votación en tiempo real",
-    description:
-      "Aplicación web para votar y visualizar votos de los ciudadanos sobre la Ley de Bases del Congreso de los Diputados. Utilicé Supabase para la base de datos para almacenar los votos y que se actualicen en tiempo real.",
+    description: t('projects.leybases.description'),
     link: "https://ley-bases.vercel.app/",
     github: "https://github.com/dest92/ley-omnibus-voting",
     image: "/projects/bases.png",
@@ -107,7 +108,7 @@ const PROJECTS = [
   },
   {
     title: "Reload Landing Page",
-    description: "Landing page de la comunidad de CS2 Reload Gaming.",
+    description: t('projects.reload.description'),
     link: "https://reload-landing.vercel.app/",
     github: "https://github.com/dest92/reload-landing",
     image: "/projects/reload.png",
@@ -115,15 +116,13 @@ const PROJECTS = [
   },
   {
     title: "Fitlife Manager",
-    description:
-      "Desarrollo y despliegue de un sistema integral de control. El sistema permite gestionar clientes, pagos, elementos de entrenamiento, entre otras funcionalidades.",
+    description: t('projects.fitlifemanager.description'),
     image: "/projects/manager.png",
     tags: [TAGS.TAILWIND, TAGS.REACT, TAGS.SUPABASE, TAGS.NEXT],
   },
   {
     title: "Fitlife GO",
-    description:
-      "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
+    description: t('projects.fitlifego.description'),
     image: "/projects/go.png",
     tags: [TAGS.TAILWIND, TAGS.REACT, TAGS.SUPABASE, TAGS.NEXT],
   },

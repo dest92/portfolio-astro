@@ -1,3 +1,11 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
+---
+
 <section class="cyber-hero">
   <div class="hero-background">
     <div class="grid-overlay"></div>
@@ -19,13 +27,13 @@
 
       <div class="status-indicator">
         <div class="status-dot"></div>
-        <span class="status-text">Available for work</span>
+        <span class="status-text">{t("hero.status")}</span>
       </div>
     </div>
 
     <div class="text-section">
       <div class="greeting-line">
-        <span class="greeting-text">¡Hola! Soy</span>
+        <span class="greeting-text">{t("hero.greeting")}</span>
         <div class="typing-effect">
           <span class="typed-text" id="typed-text"></span>
           <span class="cursor-blink">|</span>
@@ -39,28 +47,28 @@
       <div class="role-tags">
         <span class="role-tag primary justify-center">
           <span class="tag-icon">💻</span>
-          Desarrollador FullStack
+          {t("hero.role.fullstack")}
         </span>
         <span class="role-tag secondary justify-center">
           <span class="tag-icon">🔒</span>
-          Especialista en Ciberseguridad
+          {t("hero.role.security")}
         </span>
         <span class="role-tag tertiary justify-center">
           <span class="tag-icon">⚙️</span>
-          Analista en Sistemas
+          {t("hero.role.systems")}
         </span>
       </div>
 
       <p class="hero-description">
-        Combinando innovación técnica con seguridad avanzada para crear
-        <span class="highlight">soluciones robustas</span> que transforman ideas
-        en
-        <span class="highlight">experiencias digitales excepcionales</span>.
+        {t("hero.description.1")}
+        <span class="highlight">{t("hero.description.highlight1")}</span>
+        {t("hero.description.2")}
+        <span class="highlight">{t("hero.description.highlight2")}</span>.
       </p>
 
       <div class="cta-section">
         <button class="cyber-button primary" id="explore-btn">
-          <span class="button-text">Explorar Portfolio</span>
+          <span class="button-text">{t("hero.cta.explore")}</span>
           <div class="button-glow"></div>
           <svg
             class="button-icon"
@@ -75,7 +83,7 @@
         </button>
 
         <button class="cyber-button secondary" id="contact-btn">
-          <span class="button-text">Hablemos</span>
+          <span class="button-text">{t("hero.cta.contact")}</span>
           <div class="button-glow"></div>
           <svg
             class="button-icon"

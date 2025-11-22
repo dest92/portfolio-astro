@@ -1,11 +1,16 @@
 ---
 import Modal from "./Modal.astro";
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || 'es') as keyof typeof ui;
+const t = useTranslations(lang);
 
 const certificados = [
   {
     id: "cert-1",
     src: "/projects/hack.png",
-    description: "Hacking Ético",
+    description: t('certificates.hack.description'),
     platform: "Platzi",
     fecha: "2023",
     category: "cybersecurity",
@@ -18,7 +23,7 @@ const certificados = [
   {
     id: "cert-2",
     src: "/projects/inteligencia.png",
-    description: "Inteligencia para la ciberseguridad",
+    description: t('certificates.intel.description'),
     platform: "Platzi",
     fecha: "2023",
     category: "cybersecurity",
@@ -30,7 +35,7 @@ const certificados = [
   {
     id: "cert-3",
     src: "/projects/reactnative.png",
-    description: "Introducción a React Native",
+    description: t('certificates.reactnative.description'),
     platform: "Platzi",
     fecha: "2023",
     category: "development",
@@ -42,7 +47,7 @@ const certificados = [
   {
     id: "cert-4",
     src: "/projects/redes.png",
-    description: "Redes de Computadoras",
+    description: t('certificates.redes.description'),
     platform: "Platzi",
     fecha: "2023",
     category: "networking",
@@ -55,7 +60,7 @@ const certificados = [
   {
     id: "cert-5",
     src: "/projects/html.jpg",
-    description: "Desarrollo Web con HTML",
+    description: t('certificates.html.description'),
     platform: "Udemy",
     fecha: "2022",
     category: "development",
@@ -119,7 +124,7 @@ const getLevelColor = (level: string) => {
           <!-- Featured Badge -->
           {featured && (
             <div class="cyber-featured-badge">
-              <span class="cyber-badge-text">CERTIFICADO DESTACADO</span>
+              <span class="cyber-badge-text">{t('certificates.featured')}</span>
               <div class="cyber-badge-glow"></div>
             </div>
           )}
@@ -145,7 +150,7 @@ const getLevelColor = (level: string) => {
             <!-- Security Badge -->
             <div class="cyber-security-badge">
               <span class="cyber-verified-dot"></span>
-              <span class="cyber-verified-text">VERIFIED</span>
+              <span class="cyber-verified-text">{t('certificates.verified')}</span>
             </div>
 
             <!-- Level Indicator -->
@@ -184,18 +189,18 @@ const getLevelColor = (level: string) => {
             <!-- Date & Duration -->
             <div class="cyber-info-grid">
               <div class="cyber-info-item">
-                <span class="cyber-info-label">EMITIDO</span>
+                <span class="cyber-info-label">{t('certificates.issued')}</span>
                 <span class="cyber-info-value">[{fecha}]</span>
               </div>
               <div class="cyber-info-item">
-                <span class="cyber-info-label">DURACIÓN</span>
+                <span class="cyber-info-label">{t('certificates.duration')}</span>
                 <span class="cyber-info-value">{duration}</span>
               </div>
             </div>
 
             <!-- Skills Preview -->
             <div class="cyber-skills-container">
-              <span class="cyber-skills-label">SKILLS_ACQUIRED:</span>
+              <span class="cyber-skills-label">{t('certificates.skills_acquired')}</span>
               <div class="cyber-skills-tags">
                 {skills.slice(0, 2).map(skill => (
                   <span class="cyber-skill-tag">
@@ -205,7 +210,7 @@ const getLevelColor = (level: string) => {
                 ))}
                 {skills.length > 2 && (
                   <span class="cyber-skill-more">
-                    +{skills.length - 2}_MORE
+                    +{skills.length - 2}{t('certificates.more')}
                   </span>
                 )}
               </div>
@@ -214,7 +219,7 @@ const getLevelColor = (level: string) => {
             <!-- Access Button -->
             <div class="cyber-access-container">
               <span class="cyber-access-btn">
-                <span class="cyber-access-text">[ ACCESS_CERTIFICATE ]</span>
+                <span class="cyber-access-text">{t('certificates.access')}</span>
                 <div class="cyber-access-arrow">→</div>
                 <div class="cyber-btn-spark"></div>
               </span>

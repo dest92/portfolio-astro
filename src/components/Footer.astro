@@ -1,5 +1,11 @@
 ---
 import NavLink from "./NavLink.astro";
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
 ---
 
 <footer class="mt-32 flex-none">
@@ -14,12 +20,20 @@ import NavLink from "./NavLink.astro";
               <div
                 class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200"
               >
-                <NavLink href="/#">Inicio</NavLink>
-                <NavLink href="/#experience">Experiencia</NavLink>
-                <NavLink href="/#proyectos">Proyectos</NavLink>
+                <NavLink href={getRelativeLocaleUrl(lang, "/")}
+                  >{t("nav.home")}</NavLink
+                >
+                <NavLink href={getRelativeLocaleUrl(lang, "#experience")}
+                  >{t("nav.experience")}</NavLink
+                >
+                <NavLink href={getRelativeLocaleUrl(lang, "#proyectos")}
+                  >{t("nav.projects")}</NavLink
+                >
               </div>
               <p class="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Matías Acebal. All rights reserved.
+                &copy; {new Date().getFullYear()} Matías Acebal. {
+                  t("footer.rights")
+                }
               </p>
             </div>
           </div>

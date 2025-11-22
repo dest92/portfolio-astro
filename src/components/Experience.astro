@@ -1,51 +1,55 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
+
 const EXPERIENCE = [
   {
-    date: "Mayo 2025 - Noviembre 2025",
+    date: t("experience.cooper.date"),
     company: "Cooper",
-    title: "Software Engineer",
-    description: "Implementación de features como sistema de notificaciones, optimización de backend y frontend, refactorizaciones, análisis de sistemas",
+    title: t("experience.cooper.title"),
+    description: t("experience.cooper.description"),
     link: "https://somoscooper.com",
   },
   {
-    date: "Enero 2023 - Abril 2024",
+    date: t("experience.beachampion.date"),
     company: "Be a Champion",
-    title: "Desarrollador FullStack",
-    description:
-      "Como Desarrollador Full Stack, mi enfoque se centró en el desarrollo de componentes con React usando NextJS como framework,server actions, revalidación de caché, refactorizaciones importantes de código, optimización, metodologías ágiles, planeación de sprints, backend con AWS.",
+    title: t("experience.beachampion.title"),
+    description: t("experience.beachampion.description"),
     link: "https://www.beachampion.gg/",
   },
   {
-    date: "2023",
-    title: " Desarrollador FullStack Freelancer",
+    date: t("experience.fitlifemanager.date"),
+    title: t("experience.fitlifemanager.title"),
     company: "Fitlife Manager",
-    description:
-      "Desarrollo y despliegue de un sistema integral de control. El sistema permite gestionar clientes, pagos, elementos de entrenamiento, entre otras funcionalidades.",
+    description: t("experience.fitlifemanager.description"),
   },
   {
-    date: "2023",
-    title: "Desarrollador FullStack Freelancer - Fitlife Go",
+    date: t("experience.fitlifego.date"),
+    title: t("experience.fitlifego.title"),
     company: "Fitlife GO",
-    description:
-      "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
+    description: t("experience.fitlifego.description"),
     link: "https://fitlifego.vercel.app/",
   },
   {
-    date: "2020 - Diciembre 2024",
-    title: "Auditor Web",
+    date: t("experience.ldd.date"),
+    title: t("experience.ldd.title"),
     company: "LDD Diario",
-    description:
-      "Auditorías web, pruebas de penetración, revisión de logs e instalación de plugins Wordpress para segurizar la página web.",
+    description: t("experience.ldd.description"),
   },
 ];
 ---
 
 <section class="experience-section">
   <div class="experience-container">
-    {EXPERIENCE.map((experience) => (
-      <ExperienceItem {...experience} link={experience.link} />
-    ))}
+    {
+      EXPERIENCE.map((experience) => (
+        <ExperienceItem {...experience} link={experience.link} />
+      ))
+    }
   </div>
 </section>
 

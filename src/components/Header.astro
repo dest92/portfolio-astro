@@ -1,32 +1,41 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+
 const navItems = [
   {
-    title: "Experiencia",
+    title: t("nav.experience"),
     label: "experiencia",
-    url: "/#experience",
+    url: getRelativeLocaleUrl(lang, "#experience"),
   },
   {
-    title: "Educación",
+    title: t("nav.education"),
     label: "educacion",
-    url: "/#education",
+    url: getRelativeLocaleUrl(lang, "#education"),
   },
   {
-    title: "Proyectos",
+    title: t("nav.projects"),
     label: "proyectos",
-    url: "/#proyectos",
+    url: getRelativeLocaleUrl(lang, "#proyectos"),
   },
   {
-    title: "Certificados",
+    title: t("nav.certificates"),
     label: "certificados",
-    url: "/#certificaciones",
+    url: getRelativeLocaleUrl(lang, "#certificaciones"),
   },
   {
-    title: "Sobre mí",
+    title: t("nav.about"),
     label: "sobre-mi",
-    url: "/#sobre-mi",
+    url: getRelativeLocaleUrl(lang, "#sobre-mi"),
   },
   {
-    title: "Contacto",
+    title: t("nav.contact"),
     label: "contacto",
     url: "mailto:acebalmatias2019@gmail.com",
   },
@@ -59,24 +68,28 @@ const navItems = [
       </div>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-1">
-        {
-          navItems.map((link) => (
-            <a
-              class="cyber-nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-300 rounded-lg"
-              aria-label={link.label}
-              href={link.url}
-            >
-              <span class="nav-text">{link.title}</span>
-              <div class="nav-underline"></div>
-              <div class="nav-glow"></div>
-            </a>
-          ))
-        }
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-1">
+          {
+            navItems.map((link) => (
+              <a
+                class="cyber-nav-link relative px-4 py-2 text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-300 rounded-lg"
+                aria-label={link.label}
+                href={link.url}
+              >
+                <span class="nav-text">{link.title}</span>
+                <div class="nav-underline" />
+                <div class="nav-glow" />
+              </a>
+            ))
+          }
+        </div>
+        <LanguageSwitcher />
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center gap-4">
+        <LanguageSwitcher />
         <button
           id="mobile-menu-btn"
           class="cyber-mobile-btn relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
@@ -108,14 +121,14 @@ const navItems = [
               >
                 <div class="flex items-center gap-3">
                   <div class="mobile-nav-icon">
-                    <div class="icon-dot"></div>
+                    <div class="icon-dot" />
                   </div>
                   <span class="mobile-nav-text font-medium">{link.title}</span>
                   <div class="mobile-nav-arrow ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     →
                   </div>
                 </div>
-                <div class="mobile-nav-circuit"></div>
+                <div class="mobile-nav-circuit" />
               </a>
             ))
           }
@@ -128,23 +141,25 @@ const navItems = [
 <style>
   .cyber-header {
     position: relative;
-    background: linear-gradient(135deg, 
-      rgba(0, 0, 0, 0.1) 0%, 
-      rgba(0, 20, 40, 0.15) 50%, 
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 20, 40, 0.15) 50%,
       rgba(0, 0, 0, 0.1) 100%
     );
   }
 
   .cyber-header::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(0, 255, 136, 0.05) 50%, 
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.05) 50%,
       transparent 100%
     );
     opacity: 0;
@@ -187,11 +202,19 @@ const navItems = [
     background: linear-gradient(135deg, #00ff88, #00ccff);
     border-radius: 2px;
   }
-  
-  .matrix-dot:nth-child(1) { opacity: 0.7; }
-  .matrix-dot:nth-child(2) { opacity: 0.8; }
-  .matrix-dot:nth-child(3) { opacity: 0.9; }
-  .matrix-dot:nth-child(4) { opacity: 1; }
+
+  .matrix-dot:nth-child(1) {
+    opacity: 0.7;
+  }
+  .matrix-dot:nth-child(2) {
+    opacity: 0.8;
+  }
+  .matrix-dot:nth-child(3) {
+    opacity: 0.9;
+  }
+  .matrix-dot:nth-child(4) {
+    opacity: 1;
+  }
 
   .brand-text {
     background: linear-gradient(135deg, #fff, #00ff88);
@@ -208,7 +231,11 @@ const navItems = [
     transform: translate(-50%, -50%);
     width: 120%;
     height: 120%;
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.2) 0%,
+      transparent 70%
+    );
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -265,9 +292,10 @@ const navItems = [
     transform: translate(-50%, -50%);
     width: 0;
     height: 100%;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(0, 255, 136, 0.15) 50%, 
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.15) 50%,
       transparent 100%
     );
     border-radius: 8px;
@@ -312,9 +340,16 @@ const navItems = [
     transition: all 0.3s ease;
   }
 
-  .line-1 { top: 0; }
-  .line-2 { top: 50%; transform: translateY(-50%); }
-  .line-3 { bottom: 0; }
+  .line-1 {
+    top: 0;
+  }
+  .line-2 {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .line-3 {
+    bottom: 0;
+  }
 
   .cyber-mobile-btn.active .line-1 {
     top: 50%;
@@ -337,10 +372,11 @@ const navItems = [
     right: -1px;
     bottom: -1px;
     border-radius: 8px;
-    background: linear-gradient(45deg, 
-      rgba(0, 255, 136, 0.2) 0%, 
-      transparent 25%, 
-      transparent 75%, 
+    background: linear-gradient(
+      45deg,
+      rgba(0, 255, 136, 0.2) 0%,
+      transparent 25%,
+      transparent 75%,
       rgba(0, 255, 136, 0.2) 100%
     );
     opacity: 0;
@@ -369,15 +405,16 @@ const navItems = [
   }
 
   .mobile-menu-content::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      #00ff88 50%, 
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #00ff88 50%,
       transparent 100%
     );
     animation: scan-line 3s ease-in-out infinite;
@@ -417,9 +454,10 @@ const navItems = [
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(0, 255, 136, 0.5) 50%, 
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.5) 50%,
       transparent 100%
     );
     transform: scaleX(0);
@@ -441,7 +479,8 @@ const navItems = [
   }
 
   @keyframes scan-line {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(-100%);
     }
     50% {
@@ -457,7 +496,8 @@ const navItems = [
   }
 
   @keyframes dot-pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.5;
       transform: scale(0.8);
     }
@@ -565,7 +605,7 @@ const navItems = [
 
     // Scroll effect
     let ticking = false;
-    
+
     function updateHeader() {
       const scrolled = window.scrollY > 100;
       header?.classList.toggle("scrolled", scrolled);
@@ -588,12 +628,13 @@ const navItems = [
       isMenuOpen = !isMenuOpen;
       mobileMenuBtn?.classList.toggle("active", isMenuOpen);
       mobileMenu?.classList.toggle("show", isMenuOpen);
-      
+
       // Animate menu items
       if (isMenuOpen) {
         mobileNavItems.forEach((item, index) => {
           (item as HTMLElement).style.animationDelay = `${index * 0.1}s`;
-          (item as HTMLElement).style.animation = "slide-in 0.5s ease-out forwards";
+          (item as HTMLElement).style.animation =
+            "slide-in 0.5s ease-out forwards";
         });
       }
     }
@@ -622,12 +663,13 @@ const navItems = [
         e.preventDefault();
         const href = anchor.getAttribute("href");
         if (!href) return;
-        
+
         const target = document.querySelector(href);
         if (target) {
           const headerHeight = header?.offsetHeight || 0;
-          const targetPosition = (target as HTMLElement).offsetTop - headerHeight - 20;
-          
+          const targetPosition =
+            (target as HTMLElement).offsetTop - headerHeight - 20;
+
           window.scrollTo({
             top: targetPosition,
             behavior: "smooth",
@@ -637,4 +679,3 @@ const navItems = [
     });
   });
 </script>
-
