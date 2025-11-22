@@ -10,10 +10,11 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
+const lang = Astro.currentLocale || "es";
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -82,13 +83,21 @@ const { title, description } = Astro.props;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, var(--cyber-primary), var(--cyber-secondary));
+        background: linear-gradient(
+          180deg,
+          var(--cyber-primary),
+          var(--cyber-secondary)
+        );
         border-radius: 4px;
         box-shadow: 0 0 10px var(--cyber-glow);
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, var(--cyber-secondary), var(--cyber-primary));
+        background: linear-gradient(
+          180deg,
+          var(--cyber-secondary),
+          var(--cyber-primary)
+        );
         box-shadow: 0 0 15px var(--cyber-glow);
       }
 
@@ -145,7 +154,7 @@ const { title, description } = Astro.props;
 
       /* Enhanced glow effects */
       .cyber-text-glow {
-        text-shadow: 
+        text-shadow:
           0 0 5px var(--cyber-primary),
           0 0 10px var(--cyber-primary),
           0 0 15px var(--cyber-primary);
@@ -153,7 +162,7 @@ const { title, description } = Astro.props;
 
       .cyber-border-glow {
         border: 1px solid var(--cyber-primary);
-        box-shadow: 
+        box-shadow:
           0 0 5px var(--cyber-primary),
           inset 0 0 5px rgba(0, 255, 136, 0.1);
       }
@@ -168,8 +177,10 @@ const { title, description } = Astro.props;
       }
 
       .cyber-grid {
-        background-image: 
-          linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+        background-image: linear-gradient(
+            rgba(0, 255, 136, 0.05) 1px,
+            transparent 1px
+          ),
           linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
         opacity: 0.6;
       }

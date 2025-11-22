@@ -1,10 +1,18 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
+---
+
 <section id="education" class="education-section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Educación</h2>
-      <div class="section-subtitle">Mi formación académica</div>
+      <h2 class="section-title">{t("education.title")}</h2>
+      <div class="section-subtitle">{t("education.subtitle")}</div>
     </div>
-    
+
     <div class="education-notification">
       <div class="notification-header">
         <div class="notification-dots">
@@ -12,21 +20,21 @@
           <span class="dot yellow"></span>
           <span class="dot green"></span>
         </div>
-        <span class="notification-title">EDUCATION_STATUS</span>
+        <span class="notification-title">{t("education.status.title")}</span>
       </div>
       <div class="notification-content">
         <span class="terminal-prompt">$</span>
-        <span class="terminal-command">cat education.txt</span>
+        <span class="terminal-command">{t("education.command")}</span>
         <div class="terminal-output">
-          <span class="output-line">[INFO] Institution: Universidad Adventista del Plata</span>
-          <span class="output-line">[DEGREE] Ingeniería en Sistemas de Información</span>
-          <span class="output-line">[PERIOD] Marzo 2021 - Presente</span>
-          <span class="output-line">[STATUS] En curso</span>
-          <span class="output-line">[PROGRESS] ████████████████████ 95%</span>
+          <span class="output-line">{t("education.info")}</span>
+          <span class="output-line">{t("education.degree")}</span>
+          <span class="output-line">{t("education.period")}</span>
+          <span class="output-line">{t("education.status")}</span>
+          <span class="output-line">{t("education.progress")}</span>
           <span class="output-line"></span>
-          <span class="output-line">[COMPLETED] Analista en Sistemas de Información</span>
-          <span class="output-line">[PERIOD] Marzo 2021 - Diciembre 2023</span>
-          <span class="output-line">[STATUS] Finalizado ✓</span>
+          <span class="output-line">{t("education.completed")}</span>
+          <span class="output-line">{t("education.completed.period")}</span>
+          <span class="output-line">{t("education.completed.status")}</span>
         </div>
       </div>
     </div>
@@ -36,20 +44,26 @@
 <style>
   .education-section {
     padding: 4rem 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 255, 136, 0.02));
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 255, 136, 0.02)
+    );
     position: relative;
     overflow: hidden;
   }
 
   .education-section::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-      linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    background-image: linear-gradient(
+        rgba(0, 255, 136, 0.03) 1px,
+        transparent 1px
+      ),
       linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
     background-size: 100px 100px;
     opacity: 0.5;
@@ -72,7 +86,7 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
     color: #00ff41;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0 0 1rem 0;
@@ -88,13 +102,17 @@
   .education-notification {
     max-width: 600px;
     margin: 0 auto;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 23, 42, 0.8));
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(15, 23, 42, 0.8)
+    );
     border: 1px solid rgba(0, 255, 136, 0.4);
     border-radius: 12px;
     backdrop-filter: blur(10px);
     overflow: hidden;
     position: relative;
-    box-shadow: 
+    box-shadow:
       0 0 30px rgba(0, 255, 136, 0.2),
       inset 0 0 30px rgba(0, 255, 136, 0.05);
     transition: all 0.3s ease;
@@ -102,25 +120,35 @@
 
   .education-notification:hover {
     transform: translateY(-5px);
-    box-shadow: 
+    box-shadow:
       0 10px 40px rgba(0, 255, 136, 0.3),
       inset 0 0 30px rgba(0, 255, 136, 0.1);
   }
 
   .education-notification::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.8), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 136, 0.8),
+      transparent
+    );
     animation: scan-line 3s ease-in-out infinite;
   }
 
   @keyframes scan-line {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 
   .notification-header {
@@ -144,12 +172,21 @@
     border: 1px solid currentColor;
   }
 
-  .dot.red { background: #ef4444; border-color: #dc2626; }
-  .dot.yellow { background: #f59e0b; border-color: #d97706; }
-  .dot.green { background: #10b981; border-color: #059669; }
+  .dot.red {
+    background: #ef4444;
+    border-color: #dc2626;
+  }
+  .dot.yellow {
+    background: #f59e0b;
+    border-color: #d97706;
+  }
+  .dot.green {
+    background: #10b981;
+    border-color: #059669;
+  }
 
   .notification-title {
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: 0.875rem;
     color: #00ff88;
     font-weight: 600;
@@ -159,7 +196,7 @@
 
   .notification-content {
     padding: 1.5rem;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: 1rem;
     line-height: 1.6;
   }
@@ -237,4 +274,4 @@
       font-size: 0.7rem;
     }
   }
-</style> 
+</style>
