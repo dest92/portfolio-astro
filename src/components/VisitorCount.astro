@@ -1,0 +1,262 @@
+---
+let visits = 2000;
+---
+
+<div class="visitor-count-container">
+  <div class="visitor-count-wrapper">
+    <div class="visitor-count-icon">
+      <div class="icon-pulse"></div>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        <path
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+        ></path>
+      </svg>
+    </div>
+    <div class="visitor-count-content">
+      <span class="visitor-count-label">Visitas</span>
+      <span class="visitor-count-number" id="visitor-count" data-visits={visits}
+        >0</span
+      >
+    </div>
+    <div class="visitor-count-glow"></div>
+  </div>
+</div>
+
+<style>
+  .visitor-count-container {
+    position: fixed;
+    top: 100px;
+    right: 2rem;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .visitor-count-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .visitor-count-wrapper:hover {
+    background: rgba(0, 255, 136, 0.15);
+    border-color: rgba(0, 255, 136, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+  }
+
+  .visitor-count-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    color: #00ff88;
+  }
+
+  .visitor-count-icon svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
+  }
+
+  .icon-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.4) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.2;
+    }
+  }
+
+  .visitor-count-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .visitor-count-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #059669;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: "Courier New", monospace;
+  }
+
+  .visitor-count-number {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    font-family: "Courier New", monospace;
+    line-height: 1;
+  }
+
+  .visitor-count-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 255, 136, 0.1),
+      transparent,
+      rgba(0, 255, 136, 0.1)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 12px;
+  }
+
+  .visitor-count-wrapper:hover .visitor-count-glow {
+    opacity: 1;
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .visitor-count-label {
+      color: #10b981;
+    }
+  }
+
+  :global(.dark) .visitor-count-label {
+    color: #10b981;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .visitor-count-container {
+      top: 80px;
+      right: 1.5rem;
+    }
+
+    .visitor-count-wrapper {
+      padding: 0.625rem 1rem;
+      gap: 0.625rem;
+    }
+
+    .visitor-count-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .visitor-count-label {
+      font-size: 0.7rem;
+    }
+
+    .visitor-count-number {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .visitor-count-container {
+      top: 70px;
+      right: 1rem;
+    }
+
+    .visitor-count-wrapper {
+      padding: 0.5rem 0.875rem;
+      gap: 0.5rem;
+    }
+
+    .visitor-count-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .visitor-count-label {
+      font-size: 0.65rem;
+    }
+
+    .visitor-count-number {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .visitor-count-container {
+      top: 65px;
+      right: 0.75rem;
+    }
+
+    .visitor-count-wrapper {
+      padding: 0.5rem 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .visitor-count-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .visitor-count-label {
+      font-size: 0.6rem;
+    }
+
+    .visitor-count-number {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  // Simulated visitor count - replace with actual API call
+  function updateVisitorCount() {
+    const countElement = document.getElementById("visitor-count");
+    if (!countElement) return;
+
+    // Simulate loading with animation
+    let count = 0;
+    const targetCount = Number(countElement.dataset.visits) || 0; // Replace with actual count
+    const duration = 2000;
+    const increment = targetCount / (duration / 16);
+
+    const timer = setInterval(() => {
+      count += increment;
+      if (count >= targetCount) {
+        count = targetCount;
+        clearInterval(timer);
+      }
+      countElement.textContent = Math.floor(count).toString();
+    }, 16);
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", updateVisitorCount);
+</script>
