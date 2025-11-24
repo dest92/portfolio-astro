@@ -7,6 +7,7 @@ export const defaultLang = 'es';
 
 export const ui = {
   es: {
+    'visitorCount': 'Visitas',
     'nav.home': 'Inicio',
     'nav.experience': 'Experiencia',
     'nav.education': 'Educación',
@@ -184,6 +185,7 @@ export const ui = {
     'terminal.matrix.init': 'Iniciando secuencia Matrix...',
   },
   en: {
+    visitorCount: 'Visits',
     'nav.home': 'Home',
     'nav.experience': 'Experience',
     'nav.education': 'Education',

@@ -3,7 +3,12 @@ interface Props {
   visits: number;
 }
 
+import { useTranslations } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
 const { visits } = Astro.props;
+const lang = (Astro.currentLocale || "es") as keyof typeof ui;
+const t = useTranslations(lang);
 ---
 
 <div class="visitor-count-container">
@@ -23,7 +28,7 @@ const { visits } = Astro.props;
       </svg>
     </div>
     <div class="visitor-count-content">
-      <span class="visitor-count-label">Visitas</span>
+      <span class="visitor-count-label">{t("visitorCount")}</span>
       <span class="visitor-count-number" id="visitor-count" data-visits={visits}
         >0</span
       >
