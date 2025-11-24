@@ -1,5 +1,9 @@
 ---
-let visits = 2000;
+interface Props {
+  visits: number;
+}
+
+const { visits } = Astro.props;
 ---
 
 <div class="visitor-count-container">
@@ -30,11 +34,24 @@ let visits = 2000;
 
 <style>
   .visitor-count-container {
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 120px;
     right: 2rem;
     z-index: 50;
     pointer-events: none;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out 0.5s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .visitor-count-wrapper {
@@ -236,27 +253,37 @@ let visits = 2000;
 </style>
 
 <script>
-  // Simulated visitor count - replace with actual API call
   function updateVisitorCount() {
     const countElement = document.getElementById("visitor-count");
     if (!countElement) return;
 
-    // Simulate loading with animation
-    let count = 0;
-    const targetCount = Number(countElement.dataset.visits) || 0; // Replace with actual count
-    const duration = 2000;
-    const increment = targetCount / (duration / 16);
+    const targetCount = Number(countElement.dataset.visits) || 0;
+    if (targetCount === 0) {
+      countElement.textContent = "0";
+      return;
+    }
 
-    const timer = setInterval(() => {
-      count += increment;
-      if (count >= targetCount) {
-        count = targetCount;
-        clearInterval(timer);
+    const duration = 2000;
+    const startTime = performance.now();
+    let lastDisplayed = -1;
+
+    function animate(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentCount = Math.floor(progress * targetCount);
+
+      if (currentCount !== lastDisplayed) {
+        countElement!.textContent = currentCount.toString();
+        lastDisplayed = currentCount;
       }
-      countElement.textContent = Math.floor(count).toString();
-    }, 16);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
   }
 
-  // Initialize on page load
   document.addEventListener("DOMContentLoaded", updateVisitorCount);
 </script>

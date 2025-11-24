@@ -1,12 +1,19 @@
 ---
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
+import VisitorCount from "./VisitorCount.astro";
 
+interface Props {
+  visits: number;
+}
+
+const { visits } = Astro.props;
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
 ---
 
 <section class="cyber-hero">
+  <VisitorCount visits={visits} />
   <div class="hero-background">
     <div class="grid-overlay"></div>
     <div class="cyber-particles" id="cyber-particles"></div>

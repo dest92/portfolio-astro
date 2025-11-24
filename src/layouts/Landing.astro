@@ -13,8 +13,12 @@ import CyberHero from "../components/CyberHero.astro";
 import InteractiveTerminal from "../components/InteractiveTerminal.astro";
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
-import VisitorCount from "../components/VisitorCount.astro";
 
+interface Props {
+  visits: number;
+}
+
+const { visits } = Astro.props;
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
 ---
@@ -22,8 +26,7 @@ const t = useTranslations(lang);
 <Layout title={t("site.title")} description={t("site.description")}>
   <main class="cyber-portfolio">
     <!-- Hero Section with Cyberpunk Design -->
-    <VisitorCount />
-    <CyberHero />
+    <CyberHero visits={visits} />
 
     <!-- Interactive Terminal Section -->
     <SectionContainer id="terminal" class="terminal-section">
