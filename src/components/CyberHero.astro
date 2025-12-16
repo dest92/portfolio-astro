@@ -1,69 +1,41 @@
 ---
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
-import VisitorCount from "./VisitorCount.astro";
+// import VisitorCount from "./VisitorCount.astro";
 
-interface Props {
-  visits: number;
-}
+// interface Props {
+//   visits: number;
+// }
 
-const { visits } = Astro.props;
+// const { visits } = Astro.props;
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
 ---
 
 <section class="cyber-hero">
-  <VisitorCount visits={visits} />
+  <!-- <VisitorCount visits={visits} /> -->
   <div class="hero-background">
-    <div class="grid-overlay"></div>
+    <div class="cyber-grid"></div>
     <div class="cyber-particles" id="cyber-particles"></div>
+    <div class="scanline"></div>
   </div>
 
   <div class="hero-content">
-    <div class="profile-section">
-      <div class="profile-image-container">
-        <img
-          src="https://avatars.githubusercontent.com/u/70166802?v=4"
-          alt="Foto de perfil de Matías Acebal"
-          class="profile-image"
-          loading="eager"
-        />
-        <div class="profile-ring"></div>
-        <div class="profile-glow"></div>
-      </div>
-
-      <div class="status-indicator">
-        <div class="status-dot"></div>
-        <span class="status-text">{t("hero.status")}</span>
-      </div>
-    </div>
-
     <div class="text-section">
-      <div class="greeting-line">
-        <span class="greeting-text">{t("hero.greeting")}</span>
-        <div class="typing-effect">
-          <span class="typed-text" id="typed-text"></span>
-          <span class="cursor-blink">|</span>
-        </div>
+      <div class="terminal-badge">
+        <span class="blink-dot"></span>
+        <span class="status-text">[{t("hero.status")}]</span>
       </div>
 
-      <h1 class="hero-title">
-        <span class="title-line">Matías Acebal</span>
-      </h1>
-
-      <div class="role-tags">
-        <span class="role-tag primary justify-center">
-          <span class="tag-icon">💻</span>
-          {t("hero.role.fullstack")}
-        </span>
-        <span class="role-tag secondary justify-center">
-          <span class="tag-icon">🔒</span>
-          {t("hero.role.security")}
-        </span>
-        <span class="role-tag tertiary justify-center">
-          <span class="tag-icon">⚙️</span>
-          {t("hero.role.systems")}
-        </span>
+      <div class="hero-headings">
+        <h2 class="hero-greeting">&gt; {t("hero.greeting")}</h2>
+        <h1 class="hero-title glitch-text" data-text="Matías Acebal">
+          Matías Acebal
+        </h1>
+        <h3 class="hero-subtitle">
+          <span class="prompt-char">&gt;</span>
+          <span class="typing-cursor">{t("hero.role.fullstack")}</span>
+        </h3>
       </div>
 
       <p class="hero-description">
@@ -73,422 +45,491 @@ const t = useTranslations(lang);
         <span class="highlight">{t("hero.description.highlight2")}</span>.
       </p>
 
+      <div class="tech-stack-preview">
+        <div class="tech-pill">System_Architecture</div>
+        <div class="tech-pill">FullStack_Dev</div>
+        <div class="tech-pill">Secure_Design</div>
+      </div>
+
       <div class="cta-section">
         <button class="cyber-button primary" id="explore-btn">
-          <span class="button-text">{t("hero.cta.explore")}</span>
-          <div class="button-glow"></div>
-          <svg
-            class="button-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M7 17L17 7"></path>
-            <path d="M7 7h10v10"></path>
-          </svg>
+          <span class="button-content">
+            <span class="button-text">{t("hero.cta.explore")}</span>
+            <svg
+              class="button-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M7 17L17 7"></path>
+              <path d="M7 7h10v10"></path>
+            </svg>
+          </span>
+          <div class="button-glitch"></div>
         </button>
 
         <button class="cyber-button secondary" id="contact-btn">
-          <span class="button-text">{t("hero.cta.contact")}</span>
-          <div class="button-glow"></div>
-          <svg
-            class="button-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-            ></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
+          <span class="button-content">
+            <span class="button-text">{t("hero.cta.contact")}</span>
+            <svg
+              class="button-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </span>
         </button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-container">
+        <div class="hologram-effect"></div>
+        <img
+          src="https://avatars.githubusercontent.com/u/70166802?v=4"
+          alt="Matías Acebal"
+          class="profile-image"
+          loading="eager"
+        />
+        <div class="cyber-ring ring-1"></div>
+        <div class="cyber-ring ring-2"></div>
+        <div class="cyber-ring ring-3"></div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* Variables Globales para este componente */
+  :root {
+    --neon-green: #00ff41;
+    --dark-bg: #0d0d0d;
+    --cyber-black: #050505;
+    --terminal-font: "Courier New", Courier, monospace;
+  }
+
   .cyber-hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     padding: 2rem;
+    background-color: var(--cyber-black);
+    color: #e0e0e0;
+    font-family: var(--terminal-font);
   }
 
+  /* Background Effects */
   .hero-background {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 1;
+    background: #050505;
   }
 
-  .grid-overlay {
+  .cyber-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(circle at 50% 50%, black 60%, transparent 90%);
+  }
+
+  .scanline {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(
-        rgba(0, 255, 136, 0.1) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 255, 65, 0.02) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 2;
   }
 
-  .cyber-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
+  /* Content Layout */
   .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     max-width: 1200px;
     width: 100%;
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: 4rem;
     align-items: center;
-  }
-
-  .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .profile-image-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-  }
-
-  .profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    position: relative;
-    z-index: 3;
-    transition: all 0.4s ease;
-    border: 3px solid rgba(0, 255, 136, 0.3);
-  }
-
-  .profile-ring {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border: 2px solid rgba(0, 255, 136, 0.5);
-    border-radius: 50%;
-    background: conic-gradient(
-      transparent,
-      rgba(0, 255, 136, 0.3),
-      transparent
-    );
-    z-index: 2;
-  }
-
-  .profile-glow {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background: radial-gradient(
-      circle,
-      rgba(0, 255, 136, 0.2) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    z-index: 1;
-  }
-
-  .status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(0, 255, 136, 0.1);
-    border: 1px solid rgba(0, 255, 136, 0.3);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    background: #00ff88;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-  }
-
-  .status-text {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #059669;
   }
 
   .text-section {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
-  .greeting-line {
-    display: flex;
+  /* Terminal Badge */
+  .terminal-badge {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 4px;
+    width: fit-content;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
   }
 
-  .greeting-text {
-    font-size: 1.5rem;
-    color: #6b7280;
-    font-weight: 500;
+  .blink-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff41;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff41;
+    animation: blink 1.5s infinite;
   }
 
-  .typing-effect {
-    display: flex;
-    align-items: center;
+  .status-text {
+    font-family: var(--terminal-font);
+    font-size: 0.9rem;
+    color: #00ff41;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
   }
 
-  .typed-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #00ff88;
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-  }
-
-  .cursor-blink {
-    font-size: 1.5rem;
-    color: #00ff88;
-    margin-left: 2px;
+  /* Headings */
+  .hero-greeting {
+    font-family: var(--terminal-font);
+    font-size: 1.25rem;
+    color: #00ff41;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
   }
 
   .hero-title {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    font-weight: 800;
+    font-family: "Courier New", monospace;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #e0e0e0;
     margin: 0;
-    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    position: relative;
+    text-shadow: 2px 2px 0px #00ff41;
   }
 
-  .role-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .role-tag {
+  .hero-subtitle {
+    font-family: var(--terminal-font);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #00ff41;
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border: 1px solid;
-    position: relative;
-    overflow: hidden;
   }
 
-  .role-tag::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s ease;
+  .prompt-char {
+    color: #00ff41;
   }
 
-  .role-tag:hover::before {
-    left: 100%;
+  .typing-cursor {
+    border-right: 3px solid #00ff41;
+    padding-right: 5px;
+    animation: blink-caret 1s step-end infinite;
   }
 
-  .role-tag.primary {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.3);
-    color: #2563eb;
-  }
-
-  .role-tag.secondary {
-    background: rgba(239, 68, 68, 0.1);
-    border-color: rgba(239, 68, 68, 0.3);
-    color: #dc2626;
-  }
-
-  .role-tag.tertiary {
-    background: rgba(168, 85, 247, 0.1);
-    border-color: rgba(168, 85, 247, 0.3);
-    color: #7c3aed;
-  }
-
-  .tag-icon {
-    font-size: 1rem;
-  }
-
+  /* Description */
   .hero-description {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #4b5563;
-    margin: 0;
+    font-family: var(--terminal-font);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #a0a0a0;
     max-width: 600px;
+    margin: 1rem 0;
+    border-left: 3px solid rgba(0, 255, 65, 0.3);
+    padding-left: 1.5rem;
   }
 
   .highlight {
-    color: #059669;
-    font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+    color: #00ff41;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
   }
 
+  /* Tech Stack */
+  .tech-stack-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-pill {
+    padding: 0.4rem 1rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    color: #00ff41;
+    font-family: var(--terminal-font);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .tech-pill:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .tech-pill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: #00ff41;
+  }
+
+  /* Buttons */
   .cta-section {
     display: flex;
     gap: 1.5rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
   }
 
   .cyber-button {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
     padding: 1rem 2rem;
-    border: 2px solid;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    overflow: hidden;
+    font-family: var(--terminal-font);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
     text-decoration: none;
   }
 
-  .cyber-button .button-text {
+  .button-content {
     position: relative;
     z-index: 2;
-  }
-
-  .cyber-button .button-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    transition: transform 0.3s ease;
-    position: relative;
-    z-index: 2;
-  }
-
-  .button-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .cyber-button.primary {
-    background: rgba(0, 255, 136, 0.1);
-    border-color: rgba(0, 255, 136, 0.4);
-    color: #059669;
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+    clip-path: polygon(
+      10px 0,
+      100% 0,
+      100% calc(100% - 10px),
+      calc(100% - 10px) 100%,
+      0 100%,
+      0 10px
+    );
   }
 
-  .cyber-button.primary .button-glow {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 255, 136, 0.2),
-      rgba(0, 255, 136, 0.1)
-    );
+  .cyber-button.primary:hover {
+    background: #00cc33;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(0, 255, 65, 0.2);
   }
 
   .cyber-button.secondary {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.4);
-    color: #2563eb;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    background: rgba(0, 255, 65, 0.05);
   }
 
-  .cyber-button.secondary .button-glow {
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.2),
-      rgba(59, 130, 246, 0.1)
+  .cyber-button.secondary:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  }
+
+  .button-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  /* Profile Section */
+  .profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .profile-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 10;
+    filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(0.2)
+      hue-rotate(90deg);
+    border: 2px solid #00ff41;
+    position: relative;
+  }
+
+  .hologram-effect {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      transparent 0%,
+      rgba(0, 255, 65, 0.1) 1px,
+      transparent 2px
     );
+    z-index: 11;
+    pointer-events: none;
+    border-radius: 50%;
   }
 
-  .cyber-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  .cyber-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 65, 0.3);
   }
 
-  .cyber-button:hover .button-glow {
-    opacity: 1;
+  .ring-1 {
+    width: 100%;
+    height: 100%;
+    border-left-color: #00ff41;
+    border-right-color: #00ff41;
+    animation: spin 10s linear infinite;
   }
 
-  .cyber-button:hover .button-icon {
-    transform: translateX(4px);
+  .ring-2 {
+    width: 120%;
+    height: 120%;
+    border: 1px dashed rgba(0, 255, 65, 0.2);
+    animation: spin-reverse 15s linear infinite;
   }
 
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    .greeting-text {
-      color: #9ca3af;
+  .ring-3 {
+    width: 140%;
+    height: 140%;
+    border: 2px solid transparent;
+    border-top-color: rgba(0, 255, 65, 0.4);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
     }
-
-    .hero-description {
-      color: #d1d5db;
-    }
-
-    .stat-label {
-      color: #9ca3af;
-    }
-
-    .status-text {
-      color: #10b981;
+    50% {
+      opacity: 0.3;
     }
   }
 
-  :global(.dark) .greeting-text {
-    color: #9ca3af;
+  @keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
   }
 
-  :global(.dark) .hero-description {
-    color: #d1d5db;
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spin-reverse {
+    to {
+      transform: rotate(-360deg);
+    }
   }
 
-  :global(.dark) .stat-label {
-    color: #9ca3af;
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(0.9);
+      opacity: 0.5;
+    }
   }
 
-  :global(.dark) .status-text {
-    color: #10b981;
+  /* Glitch Effect */
+  .glitch-text {
+    position: relative;
+  }
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff00c1;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-1 5s infinite linear alternate-reverse;
+  }
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00fff9;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 5s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-anim-1 {
+    0% {
+      clip: rect(30px, 9999px, 10px, 0);
+    }
+    100% {
+      clip: rect(70px, 9999px, 90px, 0);
+    }
+  }
+  @keyframes glitch-anim-2 {
+    0% {
+      clip: rect(10px, 9999px, 80px, 0);
+    }
+    100% {
+      clip: rect(90px, 9999px, 10px, 0);
+    }
   }
 
   /* Responsive */
@@ -496,164 +537,57 @@ const t = useTranslations(lang);
     .hero-content {
       grid-template-columns: 1fr;
       text-align: center;
-      gap: 2.5rem;
-      padding: 0 1rem;
+      gap: 3rem;
     }
 
-    .profile-image-container {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto;
-    }
-
-    .role-tags {
+    .hero-headings,
+    .text-section,
+    .cta-section,
+    .tech-stack-preview {
+      align-items: center;
       justify-content: center;
     }
 
-    .greeting-text {
-      font-size: 1.25rem;
-    }
-
-    .typed-text {
-      font-size: 1.25rem;
-    }
-
     .hero-description {
-      font-size: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .profile-section {
+      order: -1;
+    }
+
+    .profile-container {
+      width: 280px;
+      height: 280px;
+    }
+    .profile-image {
+      width: 220px;
+      height: 220px;
     }
   }
 
-  @media (max-width: 768px) {
-    .cyber-hero {
-      padding: 1rem;
-      min-height: 80vh;
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 2.8rem;
     }
-
-    .hero-content {
-      gap: 2rem;
-      padding: 0 0.5rem;
-    }
-
-    .profile-image-container {
-      width: 120px;
-      height: 120px;
-    }
-
-    .greeting-line {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    .greeting-text {
-      font-size: 1.125rem;
-    }
-
-    .typed-text {
-      font-size: 1.125rem;
-    }
-
-    .hero-description {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .cta-section {
-      justify-content: center;
-    }
-
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
     .cyber-button {
       width: 100%;
-      max-width: 280px;
       justify-content: center;
     }
-  }
-
-  @media (max-width: 480px) {
-    .cyber-hero {
-      padding: 0.75rem;
-      min-height: 75vh;
+    .profile-container {
+      width: 250px;
+      height: 250px;
     }
-
-    .hero-content {
-      gap: 1.5rem;
-      padding: 0 0.25rem;
-    }
-
-    .profile-image-container {
-      width: 100px;
-      height: 100px;
-    }
-
-    .greeting-text {
-      font-size: 1rem;
-    }
-
-    .typed-text {
-      font-size: 1rem;
-    }
-
-    .hero-description {
-      font-size: 0.85rem;
-    }
-
-    .cyber-button {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.85rem;
+    .profile-image {
+      width: 200px;
+      height: 200px;
     }
   }
 </style>
 
 <script>
-  // Typing effect
-  const texts = [
-    "Matías Acebal",
-    "FullStack Developer",
-    "Security Expert",
-    "System Analyst",
-  ];
-  let textIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-
-  function typeWriter() {
-    const typedTextElement = document.getElementById("typed-text");
-    if (!typedTextElement) return;
-
-    const currentText = texts[textIndex];
-
-    if (isDeleting) {
-      typedTextElement.textContent = currentText.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typedTextElement.textContent = currentText.substring(0, charIndex + 1);
-      charIndex++;
-    }
-
-    let typeSpeed = 150;
-
-    if (isDeleting) {
-      typeSpeed /= 2;
-    }
-
-    if (!isDeleting && charIndex === currentText.length) {
-      typeSpeed = 2000;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      textIndex = (textIndex + 1) % texts.length;
-      typeSpeed = 500;
-    }
-
-    setTimeout(typeWriter, typeSpeed);
-  }
-
   // Button actions
   function initializeButtons() {
     const exploreBtn = document.getElementById("explore-btn");
@@ -674,9 +608,7 @@ const t = useTranslations(lang);
     }
   }
 
-  // Initialize everything
   document.addEventListener("DOMContentLoaded", () => {
-    typeWriter();
     initializeButtons();
   });
 </script>

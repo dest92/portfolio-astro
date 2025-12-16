@@ -9,8 +9,13 @@ const t = useTranslations(lang);
 <section id="education" class="education-section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">{t("education.title")}</h2>
-      <div class="section-subtitle">{t("education.subtitle")}</div>
+      <h2 class="section-title">
+        <span class="text-prefix">&gt;</span>
+        <span class="glitch-text" data-text={t("education.title")}>
+          {t("education.title")}
+        </span>
+      </h2>
+      <div class="section-subtitle">[{t("education.subtitle")}]</div>
     </div>
 
     <div class="education-notification">
@@ -32,45 +37,33 @@ const t = useTranslations(lang);
           <span class="output-line">{t("education.status")}</span>
           <span class="output-line">{t("education.progress")}</span>
           <span class="output-line"></span>
-          <span class="output-line">{t("education.completed")}</span>
+          <span class="output-line highlight">{t("education.completed")}</span>
           <span class="output-line">{t("education.completed.period")}</span>
-          <span class="output-line">{t("education.completed.status")}</span>
+          <span class="output-line success"
+            >{t("education.completed.status")}</span
+          >
         </div>
       </div>
+      <div class="scanline"></div>
     </div>
   </div>
 </section>
 
 <style>
+  :root {
+    --edu-primary: #00ff41;
+    --edu-bg: #050505;
+    --edu-border: rgba(0, 255, 65, 0.3);
+  }
+
   .education-section {
-    padding: 4rem 0;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.02),
-      rgba(0, 255, 136, 0.02)
-    );
+    padding: 6rem 0;
     position: relative;
     overflow: hidden;
   }
 
-  .education-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(
-        rgba(0, 255, 136, 0.03) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
-    background-size: 100px 100px;
-    opacity: 0.5;
-  }
-
   .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
@@ -83,81 +76,103 @@ const t = useTranslations(lang);
   }
 
   .section-title {
+    display: inline-block;
     font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    color: #00ff41;
-    font-family: "Courier New", monospace;
-    letter-spacing: 0.1em;
+    font-weight: 900;
+    color: #fff;
+    font-family: var(--terminal-font);
+    letter-spacing: -0.05em;
     text-transform: uppercase;
     margin: 0 0 1rem 0;
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    position: relative;
+  }
+
+  .text-prefix {
+    color: var(--edu-primary);
+    margin-right: 0.5rem;
+  }
+
+  /* Glitch Text Effect Reused */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff00c1;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-1 5s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00fff9;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 5s infinite linear alternate-reverse;
   }
 
   .section-subtitle {
-    font-size: 1.125rem;
-    color: #9ca3af;
+    font-size: 1rem;
+    color: var(--edu-primary);
+    font-family: var(--terminal-font);
+    letter-spacing: 0.1em;
     font-weight: 500;
+    opacity: 0.8;
   }
 
   .education-notification {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.9),
-      rgba(15, 23, 42, 0.8)
-    );
-    border: 1px solid rgba(0, 255, 136, 0.4);
-    border-radius: 12px;
+    background: rgba(10, 10, 10, 0.9);
+    border: 1px solid var(--edu-border);
+    border-radius: 6px;
     backdrop-filter: blur(10px);
     overflow: hidden;
     position: relative;
-    box-shadow:
-      0 0 30px rgba(0, 255, 136, 0.2),
-      inset 0 0 30px rgba(0, 255, 136, 0.05);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
     transition: all 0.3s ease;
   }
 
   .education-notification:hover {
-    transform: translateY(-5px);
-    box-shadow:
-      0 10px 40px rgba(0, 255, 136, 0.3),
-      inset 0 0 30px rgba(0, 255, 136, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+    border-color: #00ff41;
   }
 
-  .education-notification::before {
-    content: "";
+  .scanline {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 2px;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 255, 136, 0.8),
-      transparent
+      to bottom,
+      transparent 50%,
+      rgba(0, 255, 65, 0.02) 50%
     );
-    animation: scan-line 3s ease-in-out infinite;
-  }
-
-  @keyframes scan-line {
-    0%,
-    100% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
   }
 
   .notification-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
-    background: rgba(0, 255, 136, 0.1);
-    border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 0.75rem 1rem;
+    background: rgba(0, 255, 65, 0.1);
+    border-bottom: 1px solid var(--edu-border);
   }
 
   .notification-dots {
@@ -166,72 +181,78 @@ const t = useTranslations(lang);
   }
 
   .dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: 1px solid currentColor;
   }
 
   .dot.red {
-    background: #ef4444;
-    border-color: #dc2626;
+    background: #ff5f56;
   }
   .dot.yellow {
-    background: #f59e0b;
-    border-color: #d97706;
+    background: #ffbd2e;
   }
   .dot.green {
-    background: #10b981;
-    border-color: #059669;
+    background: #27c93f;
   }
 
   .notification-title {
-    font-family: "Courier New", monospace;
-    font-size: 0.875rem;
-    color: #00ff88;
+    font-family: var(--terminal-font);
+    font-size: 0.8rem;
+    color: #00ff41;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.05em;
   }
 
   .notification-content {
     padding: 1.5rem;
-    font-family: "Courier New", monospace;
+    font-family: var(--terminal-font);
     font-size: 1rem;
     line-height: 1.6;
+    color: #e0e0e0;
   }
 
   .terminal-prompt {
-    color: #00ff88;
+    color: #00ff41;
     font-weight: bold;
     margin-right: 0.5rem;
   }
 
   .terminal-command {
-    color: #ffffff;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 600;
   }
 
   .terminal-output {
     margin-top: 1rem;
     padding-left: 1rem;
+    border-left: 2px solid rgba(0, 255, 65, 0.2);
   }
 
   .output-line {
     display: block;
-    color: #00ff88;
-    margin-bottom: 0.5rem;
+    color: #a0a0a0;
+    margin-bottom: 0.25rem;
     font-size: 0.9rem;
   }
 
-  .output-line:last-child {
-    margin-bottom: 0;
+  .output-line.highlight {
+    color: #fff;
+    font-weight: 700;
+    margin-top: 0.5rem;
+  }
+
+  .output-line.success {
+    color: #00ff41;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .education-section {
-      padding: 3rem 0;
+      padding: 4rem 0;
     }
 
     .container {
@@ -242,19 +263,19 @@ const t = useTranslations(lang);
       margin: 0 1rem;
     }
 
-    .notification-content {
-      padding: 1rem;
-      font-size: 0.875rem;
+    .section-title {
+      font-size: 2rem;
     }
 
-    .output-line {
-      font-size: 0.8rem;
+    .notification-content {
+      padding: 1rem;
+      font-size: 0.85rem;
     }
   }
 
   @media (max-width: 480px) {
     .education-section {
-      padding: 2rem 0;
+      padding: 3rem 0;
     }
 
     .container {
@@ -263,15 +284,6 @@ const t = useTranslations(lang);
 
     .education-notification {
       margin: 0 0.5rem;
-    }
-
-    .notification-content {
-      padding: 0.75rem;
-      font-size: 0.75rem;
-    }
-
-    .output-line {
-      font-size: 0.7rem;
     }
   }
 </style>

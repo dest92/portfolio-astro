@@ -158,13 +158,6 @@ const getLevelColor = (level: string) => {
               <span class="cyber-level-icons">{getLevelIcon(level)}</span>
               <span class="cyber-level-text">{level.toUpperCase()}</span>
             </div>
-            
-            <!-- Data Streams -->
-            <div class="cyber-data-streams">
-              <div class="cyber-stream"></div>
-              <div class="cyber-stream"></div>
-              <div class="cyber-stream"></div>
-            </div>
           </div>
 
           <!-- Certificate Content -->
@@ -172,7 +165,7 @@ const getLevelColor = (level: string) => {
             
             <!-- Title -->
             <h3 class="cyber-certificate-title">
-              {description.toUpperCase()}
+              &gt; {description.toUpperCase()}
             </h3>
 
             <!-- Platform & Category -->
@@ -234,9 +227,6 @@ const getLevelColor = (level: string) => {
             <div class="cyber-corner cyber-corner-br"></div>
           </div>
           
-          <!-- Glitch Effect -->
-          <div class="cyber-glitch-overlay"></div>
-          
           <Modal id={id} certificate={{ id, src, description, platform, fecha, category, level, skills, duration, credentialID }} />
         </article>
       ))
@@ -247,17 +237,13 @@ const getLevelColor = (level: string) => {
 <script>
   // Agregar event listeners cuando el DOM esté listo
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM cargado, configurando certificados...');
-    
     // Obtener todas las tarjetas de certificados
     const certificateCards = document.querySelectorAll('[data-modal-id]');
-    console.log('Tarjetas encontradas:', certificateCards.length);
     
     certificateCards.forEach(card => {
       const modalId = card.getAttribute('data-modal-id');
       if (modalId) {
         card.addEventListener('click', () => {
-          console.log('Clic en tarjeta:', modalId);
           
           // Usar la función global del modal si está disponible
           if ((window as any).openCertificateModal) {
@@ -266,10 +252,7 @@ const getLevelColor = (level: string) => {
             // Fallback: abrir modal directamente
             const modal = document.getElementById(modalId) as HTMLDialogElement;
             if (modal) {
-              console.log('Modal encontrado, abriendo...');
               modal.showModal();
-            } else {
-              console.error('Modal no encontrado:', modalId);
             }
           }
         });
@@ -281,19 +264,14 @@ const getLevelColor = (level: string) => {
 <style>
   /* Variables CSS para el tema cyberpunk */
   :root {
-    --cyber-primary: #00ffff;
-    --cyber-secondary: #ff00ff;
-    --cyber-accent: #00ff00;
-    --cyber-warning: #ffff00;
-    --cyber-danger: #ff0040;
-    --cyber-bg-dark: #0a0a0a;
-    --cyber-bg-card: #111111;
-    --cyber-bg-glass: rgba(0, 255, 255, 0.05);
-    --cyber-border: rgba(0, 255, 255, 0.3);
-    --cyber-text-primary: #ffffff;
-    --cyber-text-secondary: #b0b0b0;
-    --cyber-glow: 0 0 20px;
-    --cyber-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    --cert-primary: #00ff41;
+    --cert-secondary: #008f11;
+    --cert-accent: #050505;
+    --cert-warning: #f59e0b;
+    --cert-danger: #ef4444;
+    --cert-bg: #050505;
+    --cert-card-bg: rgba(10, 10, 10, 0.9);
+    --cert-border: rgba(0, 255, 65, 0.3);
   }
 
   /* Sección principal */
@@ -315,12 +293,9 @@ const getLevelColor = (level: string) => {
   /* Card de certificado */
   .cyber-certificate-card {
     position: relative;
-    background: linear-gradient(135deg, 
-      var(--cyber-bg-card) 0%, 
-      rgba(17, 17, 17, 0.95) 100%
-    );
+    background: var(--cert-card-bg);
     backdrop-filter: blur(20px);
-    border: 1px solid var(--cyber-border);
+    border: 1px solid var(--cert-border);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     opacity: 0;
@@ -338,26 +313,15 @@ const getLevelColor = (level: string) => {
   }
 
   .cyber-certificate-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: var(--cyber-primary);
-    box-shadow: 
-      var(--cyber-shadow),
-      var(--cyber-glow) var(--cyber-primary);
+    transform: translateY(-10px);
+    border-color: var(--cert-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
   }
 
   /* Featured certificates */
   .cyber-certificate-featured {
-    border-color: var(--cyber-secondary);
-    box-shadow: 
-      var(--cyber-shadow),
-      0 0 15px rgba(255, 0, 255, 0.3);
-  }
-
-  .cyber-certificate-featured:hover {
-    border-color: var(--cyber-secondary);
-    box-shadow: 
-      var(--cyber-shadow),
-      var(--cyber-glow) var(--cyber-secondary);
+    border-color: #00ff41;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
   }
 
   /* Featured badge */
@@ -366,16 +330,15 @@ const getLevelColor = (level: string) => {
     top: 15px;
     right: 15px;
     z-index: 10;
-    background: linear-gradient(45deg, var(--cyber-secondary), rgba(255, 0, 255, 0.8));
-    color: var(--cyber-bg-dark);
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
     padding: 0.4rem 0.8rem;
     font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Courier New', monospace;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
-    overflow: hidden;
+    font-family: var(--terminal-font);
+    border: 1px solid #00ff41;
   }
 
   .cyber-badge-text {
@@ -408,12 +371,13 @@ const getLevelColor = (level: string) => {
     background: linear-gradient(
       45deg,
       transparent 30%,
-      rgba(0, 255, 255, 0.1) 50%,
+      rgba(0, 255, 65, 0.05) 50%,
       transparent 70%
     );
     transform: translateX(-100%);
     transition: transform 0.8s ease;
     z-index: 1;
+    pointer-events: none;
   }
 
   .cyber-certificate-card:hover .cyber-holo-overlay {
@@ -432,8 +396,8 @@ const getLevelColor = (level: string) => {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 255, 0.03) 2px,
-        rgba(0, 255, 255, 0.03) 4px
+        rgba(0, 255, 65, 0.02) 2px,
+        rgba(0, 255, 65, 0.02) 4px
       );
     pointer-events: none;
     z-index: 2;
@@ -472,43 +436,38 @@ const getLevelColor = (level: string) => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 255, 255, 0.1) 100%
-    );
-    opacity: 0;
+    background: rgba(0, 255, 65, 0.1);
+    opacity: 0.5;
     transition: opacity 0.3s ease;
   }
 
   .cyber-certificate-card:hover .cyber-image-overlay {
-    opacity: 1;
+    opacity: 0;
   }
 
   /* Security Badge */
   .cyber-security-badge {
     position: absolute;
-    top: 12px;
+    bottom: 12px;
     right: 12px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
-    color: var(--cyber-accent);
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
     padding: 0.4rem 0.8rem;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
-    border: 1px solid var(--cyber-accent);
+    font-family: var(--terminal-font);
+    border: 1px solid #00ff41;
     backdrop-filter: blur(10px);
-    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
   }
 
   .cyber-verified-dot {
     width: 6px;
     height: 6px;
-    background: var(--cyber-accent);
+    background: #00ff41;
     border-radius: 50%;
     animation: cyber-pulse 2s ease-in-out infinite;
   }
@@ -525,51 +484,29 @@ const getLevelColor = (level: string) => {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
+    font-family: var(--terminal-font);
     backdrop-filter: blur(10px);
     border: 1px solid;
     clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
   }
 
   .cyber-level-beginner {
-    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
-    color: var(--cyber-accent);
-    border-color: var(--cyber-accent);
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
+    border-color: #00ff41;
   }
 
   .cyber-level-intermediate {
-    background: linear-gradient(45deg, rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.1));
-    color: var(--cyber-warning);
-    border-color: var(--cyber-warning);
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border-color: #f59e0b;
   }
 
   .cyber-level-advanced {
-    background: linear-gradient(45deg, rgba(255, 0, 64, 0.2), rgba(255, 0, 64, 0.1));
-    color: var(--cyber-danger);
-    border-color: var(--cyber-danger);
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: #ef4444;
   }
-
-  /* Data streams */
-  .cyber-data-streams {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 6px;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .cyber-stream {
-    position: absolute;
-    width: 2px;
-    height: 8px;
-    background: var(--cyber-primary);
-    animation: cyber-stream-flow 2s linear infinite;
-  }
-
-  .cyber-stream:nth-child(1) { left: 0; animation-delay: 0s; }
-  .cyber-stream:nth-child(2) { left: 2px; animation-delay: 0.7s; }
-  .cyber-stream:nth-child(3) { left: 4px; animation-delay: 1.4s; }
 
   /* Content */
   .cyber-certificate-content {
@@ -582,18 +519,17 @@ const getLevelColor = (level: string) => {
   .cyber-certificate-title {
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--cyber-primary);
+    color: #fff;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px var(--cyber-primary);
+    letter-spacing: 1px;
+    font-family: var(--terminal-font);
+    text-shadow: 2px 2px 0 rgba(0, 255, 65, 0.3);
     margin: 0 0 1.5rem 0;
     transition: all 0.3s ease;
   }
 
   .cyber-certificate-card:hover .cyber-certificate-title {
-    text-shadow: 0 0 20px var(--cyber-primary);
-    animation: cyber-glitch-text 0.3s ease-in-out;
+    color: #00ff41;
   }
 
   /* Metadata */
@@ -612,28 +548,9 @@ const getLevelColor = (level: string) => {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Courier New', monospace;
+    font-family: var(--terminal-font);
     border: 1px solid;
-    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
     overflow: hidden;
-  }
-
-  .cyber-category-security {
-    background: linear-gradient(45deg, rgba(255, 0, 64, 0.2), rgba(255, 0, 64, 0.1));
-    color: var(--cyber-danger);
-    border-color: var(--cyber-danger);
-  }
-
-  .cyber-category-dev {
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
-    color: var(--cyber-primary);
-    border-color: var(--cyber-primary);
-  }
-
-  .cyber-category-network {
-    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
-    color: var(--cyber-accent);
-    border-color: var(--cyber-accent);
   }
 
   .cyber-category-tag {
@@ -642,26 +559,10 @@ const getLevelColor = (level: string) => {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(45deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 255, 0.1));
-    color: var(--cyber-secondary);
-    border: 1px solid var(--cyber-secondary);
-    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
-  }
-
-  .cyber-platform-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  .cyber-platform-tag:hover .cyber-platform-glow {
-    transform: translateX(100%);
+    font-family: var(--terminal-font);
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
+    border: 1px solid #00ff41;
   }
 
   /* Info Grid */
@@ -680,16 +581,16 @@ const getLevelColor = (level: string) => {
 
   .cyber-info-label {
     font-size: 0.7rem;
-    color: var(--cyber-primary);
+    color: #00ff41;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
+    font-family: var(--terminal-font);
     letter-spacing: 1px;
   }
 
   .cyber-info-value {
     font-size: 0.9rem;
-    color: var(--cyber-text-primary);
-    font-family: 'Courier New', monospace;
+    color: #e0e0e0;
+    font-family: var(--terminal-font);
     font-weight: 700;
   }
 
@@ -701,9 +602,9 @@ const getLevelColor = (level: string) => {
   .cyber-skills-label {
     display: block;
     font-size: 0.7rem;
-    color: var(--cyber-primary);
+    color: #00ff41;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
+    font-family: var(--terminal-font);
     letter-spacing: 1px;
     margin-bottom: 0.8rem;
   }
@@ -720,12 +621,11 @@ const getLevelColor = (level: string) => {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.05));
-    color: var(--cyber-primary);
-    border: 1px solid rgba(0, 255, 255, 0.3);
+    font-family: var(--terminal-font);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
-    overflow: hidden;
   }
 
   .cyber-skill-more {
@@ -733,10 +633,9 @@ const getLevelColor = (level: string) => {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
-    color: var(--cyber-text-secondary);
+    font-family: var(--terminal-font);
+    color: #888;
     border: 1px solid rgba(176, 176, 176, 0.3);
-    clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
   }
 
   .cyber-skill-glow {
@@ -770,19 +669,18 @@ const getLevelColor = (level: string) => {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Courier New', monospace;
-    color: var(--cyber-primary);
-    border: 2px solid var(--cyber-primary);
-    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+    font-family: var(--terminal-font);
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    background: rgba(0, 255, 65, 0.05);
     transition: all 0.3s ease;
     cursor: pointer;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
-    overflow: hidden;
   }
 
   .cyber-access-btn:hover {
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
-    box-shadow: var(--cyber-glow) var(--cyber-primary);
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
     transform: translateY(-2px);
   }
 
@@ -805,11 +703,7 @@ const getLevelColor = (level: string) => {
     transition: transform 0.6s ease;
   }
 
-  .cyber-access-btn:hover .cyber-btn-spark {
-    transform: translateX(100%);
-  }
-
-  /* Frame */
+   /* Frame */
   .cyber-frame {
     position: absolute;
     top: 0;
@@ -821,75 +715,23 @@ const getLevelColor = (level: string) => {
 
   .cyber-corner {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--cyber-primary);
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(0, 255, 65, 0.5);
     transition: all 0.3s ease;
   }
 
-  .cyber-corner-tl {
-    top: 10px;
-    left: 10px;
-    border-right: none;
-    border-bottom: none;
-  }
-
-  .cyber-corner-tr {
-    top: 10px;
-    right: 10px;
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .cyber-corner-bl {
-    bottom: 10px;
-    left: 10px;
-    border-right: none;
-    border-top: none;
-  }
-
-  .cyber-corner-br {
-    bottom: 10px;
-    right: 10px;
-    border-left: none;
-    border-top: none;
-  }
+  .cyber-corner-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+  .cyber-corner-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+  .cyber-corner-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+  .cyber-corner-br { bottom: 0; right: 0; border-left: none; border-top: none; }
 
   .cyber-certificate-card:hover .cyber-corner {
-    border-color: var(--cyber-primary);
-    box-shadow: var(--cyber-glow) var(--cyber-primary);
     width: 25px;
     height: 25px;
+    border-color: #00ff41;
   }
-
-  .cyber-certificate-featured:hover .cyber-corner {
-    border-color: var(--cyber-secondary);
-    box-shadow: var(--cyber-glow) var(--cyber-secondary);
-  }
-
-  /* Glitch effect */
-  .cyber-glitch-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 0, 255, 0.1) 50%,
-      transparent 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-  }
-
-  .cyber-certificate-featured:hover .cyber-glitch-overlay {
-    opacity: 1;
-    animation: cyber-glitch-sweep 0.6s ease-in-out;
-  }
-
+  
   /* Animaciones */
   @keyframes cyber-fade-in {
     to {
@@ -897,24 +739,12 @@ const getLevelColor = (level: string) => {
       transform: translateY(0);
     }
   }
-
-  @keyframes cyber-stream-flow {
-    0% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(200px);
-      opacity: 0;
-    }
+  
+  @keyframes cyber-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
-
+  
   @keyframes cyber-glitch-text {
     0%, 100% { transform: translateX(0); }
     20% { transform: translateX(-2px); }
@@ -923,116 +753,15 @@ const getLevelColor = (level: string) => {
     80% { transform: translateX(1px); }
   }
 
-  @keyframes cyber-glitch-sweep {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-  }
-
-  @keyframes cyber-pulse {
-    0%, 100% { 
-      box-shadow: 0 0 5px currentColor;
-      opacity: 1;
-    }
-    50% { 
-      box-shadow: 0 0 15px currentColor;
-      opacity: 0.8;
-    }
-  }
-
-  /* Responsive Design */
+  /* Responsive */
   @media (max-width: 768px) {
     .cyber-certificates-grid {
       grid-template-columns: 1fr;
-      gap: 1.5rem;
       padding: 0 1rem;
     }
-
+    
     .cyber-certificate-content {
       padding: 1.5rem;
     }
-
-    .cyber-certificate-title {
-      font-size: 1rem;
-    }
-
-    .cyber-metadata-container {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: stretch;
-    }
-
-    .cyber-info-grid {
-      grid-template-columns: 1fr;
-      gap: 0.8rem;
-    }
-
-    .cyber-image-container {
-      height: 180px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .cyber-certificates-grid {
-      padding: 0 0.5rem;
-    }
-
-    .cyber-certificate-content {
-      padding: 1rem;
-    }
-
-    .cyber-certificate-title {
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-    }
-
-    .cyber-corner {
-      width: 15px;
-      height: 15px;
-    }
-
-    .cyber-certificate-card:hover .cyber-corner {
-      width: 18px;
-      height: 18px;
-    }
-
-    .cyber-featured-badge {
-      font-size: 0.55rem;
-      padding: 0.3rem 0.6rem;
-    }
-
-    .cyber-access-btn {
-      padding: 0.6rem 1rem;
-      font-size: 0.75rem;
-    }
-  }
-
-  /* Mejoras específicas para dispositivos táctiles */
-  @media (hover: none) and (pointer: coarse) {
-    .cyber-access-btn:hover {
-      transform: none;
-    }
-
-    .cyber-access-btn:active {
-      transform: scale(0.98);
-      transition: transform 0.1s ease;
-    }
-
-    .cyber-btn-spark {
-      display: none;
-    }
-
-    .cyber-certificate-card:hover .cyber-holo-overlay {
-      transform: translateX(-100%);
-    }
   }
 </style>
-

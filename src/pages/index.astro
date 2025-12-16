@@ -1,9 +1,10 @@
 ---
-import { trackVisit } from "../lib/visitTracker";
+// import { trackVisit } from "../lib/visitTracker";
 import Landing from "../layouts/Landing.astro";
 
 // Rastrear visita y obtener contador
-const { visits } = await trackVisit(Astro.cookies);
+// const { visits } = await trackVisit(Astro.cookies);
+// const visits = 0;
 ---
 
-<Landing visits={visits} />
+<Landing />
