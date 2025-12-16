@@ -1,5 +1,9 @@
 ---
+import { trackVisit } from "../../lib/visitTracker";
 import Landing from "../../layouts/Landing.astro";
+
+// Rastrear visita y obtener contador
+const { visits } = await trackVisit(Astro.cookies);
 ---
 
-<Landing />
+<Landing visits={visits} />

@@ -34,14 +34,10 @@ const lang = Astro.currentLocale || "es";
   </head>
 
   <body class="relative text-white bg-gray-950">
-    <!-- Background container with cyberpunk effects -->
-    <div
-      class="fixed top-0 bottom-0 left-0 right-0 z-[-2] min-h-screen w-full bg-gray-950 pointer-events-none"
-      style="background: 
-        radial-gradient(ellipse at top, rgba(0,255,136,0.1) 0%, rgba(0,255,136,0.05) 25%, transparent 50%),
-        radial-gradient(ellipse at bottom, rgba(0,200,255,0.08) 0%, rgba(0,200,255,0.03) 25%, transparent 50%),
-        radial-gradient(circle at 30% 40%, rgba(255,0,150,0.06) 0%, transparent 50%);"
-    >
+    <!-- Global Cyberpunk Background -->
+    <div class="cyber-background-container">
+      <div class="cyber-grid-global"></div>
+      <div class="scanline-global"></div>
     </div>
 
     <Header />
@@ -52,10 +48,12 @@ const lang = Astro.currentLocale || "es";
 
     <style is:global>
       :root {
-        --cyber-primary: #00ff88;
-        --cyber-secondary: #00ccff;
-        --cyber-accent: #ff0080;
-        --cyber-glow: rgba(0, 255, 136, 0.3);
+        --cyber-primary: #00ff41;
+        --cyber-secondary: #008f11;
+        --cyber-accent: #050505;
+        --cyber-text: #e0e0e0;
+        --cyber-dim: rgba(0, 255, 65, 0.1);
+        --terminal-font: "Courier New", Courier, monospace;
       }
 
       * {
@@ -63,67 +61,72 @@ const lang = Astro.currentLocale || "es";
       }
 
       html {
-        font-family: "Onest Variable", system-ui, sans-serif;
+        font-family: var(--terminal-font);
+        background-color: #050505;
       }
 
       body {
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--cyber-text);
         margin: 0;
         padding: 0;
+        background-color: #050505;
+      }
+
+      .cyber-background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -2;
+        pointer-events: none;
+        background: #050505;
+      }
+
+      .cyber-grid-global {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.5;
+      }
+
+      .scanline-global {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent 50%,
+          rgba(0, 255, 65, 0.01) 50%
+        );
+        background-size: 100% 3px;
+        z-index: -1;
+        pointer-events: none;
       }
 
       /* Cyber scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 10px;
       }
 
       ::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
+        background: #0a0a0a;
+        border-left: 1px solid #1a1a1a;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: linear-gradient(
-          180deg,
-          var(--cyber-primary),
-          var(--cyber-secondary)
-        );
-        border-radius: 4px;
-        box-shadow: 0 0 10px var(--cyber-glow);
+        background: #003300;
+        border: 1px solid #00ff41;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(
-          180deg,
-          var(--cyber-secondary),
-          var(--cyber-primary)
-        );
-        box-shadow: 0 0 15px var(--cyber-glow);
-      }
-
-      /* Responsive utilities */
-      @media (max-width: 768px) {
-        html {
-          font-size: 14px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        html {
-          font-size: 13px;
-        }
-      }
-
-      /* Fix for z-index issues */
-      #header-nav {
-        z-index: 1000;
-        position: fixed;
-        will-change: transform;
-      }
-
-      /* Cyber glow utility */
-      .cyber-glow {
-        box-shadow: 0 0 20px var(--cyber-glow);
+        background: #004400;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
       }
 
       /* Selection colors */
@@ -137,81 +140,23 @@ const lang = Astro.currentLocale || "es";
         color: #000;
       }
 
+      /* Heading Global Styles */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--terminal-font);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
       /* Fix for mobile touch scrolling */
       @media (max-width: 768px) {
         body {
           -webkit-overflow-scrolling: touch;
         }
-      }
-
-      /* Performance optimizations */
-      @media (max-width: 768px) {
-        * {
-          animation-duration: 0s !important;
-          transition-duration: 0.1s !important;
-        }
-      }
-
-      /* Enhanced glow effects */
-      .cyber-text-glow {
-        text-shadow:
-          0 0 5px var(--cyber-primary),
-          0 0 10px var(--cyber-primary),
-          0 0 15px var(--cyber-primary);
-      }
-
-      .cyber-border-glow {
-        border: 1px solid var(--cyber-primary);
-        box-shadow:
-          0 0 5px var(--cyber-primary),
-          inset 0 0 5px rgba(0, 255, 136, 0.1);
-      }
-
-      /* Dark mode adjustments */
-      .cyber-particles {
-        opacity: 0.8;
-      }
-
-      .cyber-circuits {
-        opacity: 0.5;
-      }
-
-      .cyber-grid {
-        background-image: linear-gradient(
-            rgba(0, 255, 136, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
-        opacity: 0.6;
-      }
-
-      /* Responsive adjustments for cyber effects */
-      @media (max-width: 768px) {
-        .cyber-particles {
-          opacity: 0.4;
-        }
-
-        .cyber-circuits {
-          opacity: 0.2;
-        }
-
-        .cyber-grid {
-          background-size: 30px 30px;
-          opacity: 0.3;
-        }
-
-        .particle {
-          width: 1px;
-          height: 1px;
-        }
-      }
-
-      /* Performance optimizations */
-      .cyber-particles,
-      .cyber-circuits,
-      .cyber-grid {
-        will-change: transform, opacity;
-        transform: translateZ(0);
       }
     </style>
   </body>

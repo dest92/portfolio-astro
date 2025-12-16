@@ -10,478 +10,373 @@ import AboutMe from "../components/AboutMe.astro";
 import Certificates from "../components/Certificates.astro";
 import Education from "../components/Education.astro";
 import CyberHero from "../components/CyberHero.astro";
-import InteractiveTerminal from "../components/InteractiveTerminal.astro";
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
 
+// interface Props {
+//   visits: number;
+// }
+
+// const { visits } = Astro.props;
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
 ---
 
 <Layout title={t("site.title")} description={t("site.description")}>
-    <main class="cyber-portfolio">
-        <!-- Hero Section with Cyberpunk Design -->
-        <CyberHero />
+  <main class="cyber-portfolio">
+    <!-- Hero Section with Cyberpunk Design -->
+    <CyberHero />
 
-        <!-- Interactive Terminal Section -->
-        <SectionContainer id="terminal" class="terminal-section">
-            <div class="section-header">
-                <h2 class="cyber-section-title">
-                    <span class="title-text">{t("terminal.title")}</span>
-                    <div class="title-glow"></div>
-                </h2>
-                <p class="cyber-section-subtitle">
-                    {t("terminal.subtitle")}
-                    <code>whoami</code>, <code>skills</code>, {t("common.or")}
-                    <code>help</code>
-                </p>
+    <!-- Experience Section with Updated Design -->
+    <SectionContainer id="experience" class="experience-section mt-10">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="text-prefix">&gt;</span>
+          <span class="glitch-text" data-text={t("experience.title")}>
+            {t("experience.title")}
+          </span>
+        </h2>
+        <p class="cyber-section-subtitle">
+          [{t("experience.subtitle")}]
+        </p>
+      </div>
+      <Experience />
+    </SectionContainer>
+
+    <!-- Education Section -->
+    <Education />
+
+    <!-- Projects Section -->
+    <SectionContainer id="proyectos" class="projects-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="text-prefix">&gt;</span>
+          <span class="glitch-text" data-text={t("projects.title")}>
+            {t("projects.title")}
+          </span>
+        </h2>
+        <p class="cyber-section-subtitle">
+          [{t("projects.subtitle")}]
+        </p>
+      </div>
+      <Projects />
+    </SectionContainer>
+
+    <!-- Certificates Section -->
+    <SectionContainer id="certificaciones" class="certificates-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="text-prefix">&gt;</span>
+          <span class="glitch-text" data-text={t("certificates.title")}>
+            {t("certificates.title")}
+          </span>
+        </h2>
+        <p class="cyber-section-subtitle">
+          [{t("certificates.subtitle")}]
+        </p>
+      </div>
+      <Certificates />
+    </SectionContainer>
+
+    <!-- About Me Section -->
+    <SectionContainer id="sobre-mi" class="about-section">
+      <div class="section-header">
+        <h2 class="cyber-section-title">
+          <span class="text-prefix">&gt;</span>
+          <span class="glitch-text" data-text={t("about.title")}>
+            {t("about.title")}
+          </span>
+        </h2>
+        <p class="cyber-section-subtitle">
+          [{t("about.subtitle")}]
+        </p>
+      </div>
+      <AboutMe />
+    </SectionContainer>
+
+    <!-- Contact CTA Section -->
+    <SectionContainer class="contact-cta-section">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+        >
+          <div class="text-center lg:text-left order-2 lg:order-1">
+            <h2
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
+            >
+              <span class="text-[#00ff41]">&gt; </span>
+              <span class="glitch-text" data-text={t("contact.title")}>
+                {t("contact.title")}
+              </span>
+            </h2>
+            <p
+              class="text-gray-400 text-lg sm:text-xl mb-6 max-w-lg mx-auto lg:mx-0 font-mono"
+            >
+              // {t("contact.subtitle")}
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
+            >
+              <a
+                href="mailto:acebalmatias2019@gmail.com"
+                class="cyber-button cursor-pointer"
+              >
+                <MailIcon class="w-4 h-4 mr-2" />
+                <span>{t("contact.cta")}</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/matiasacebal/"
+                target="_blank"
+                rel="noopener"
+                class="cyber-button secondary"
+              >
+                <LinkedinIcon class="w-4 h-4 mr-2" />
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://github.com/dest92"
+                target="_blank"
+                rel="noopener"
+                class="cyber-button secondary"
+              >
+                <GitHubIcon class="w-4 h-4 mr-2" />
+                <span>GitHub</span>
+              </a>
             </div>
-            <InteractiveTerminal />
-        </SectionContainer>
-
-        <!-- Experience Section with Updated Design -->
-        <SectionContainer id="experience" class="experience-section mt-10">
-            <div class="section-header">
-                <h2 class="cyber-section-title">
-                    <span class="title-text">{t("experience.title")}</span>
-                    <div class="title-glow"></div>
-                </h2>
-                <p class="cyber-section-subtitle">
-                    {t("experience.subtitle")}
-                </p>
-            </div>
-            <Experience />
-        </SectionContainer>
-
-        <!-- Education Section -->
-        <Education />
-
-        <!-- Projects Section -->
-        <SectionContainer id="proyectos" class="projects-section">
-            <div class="section-header">
-                <h2 class="cyber-section-title">
-                    <span class="title-text">{t("projects.title")}</span>
-                    <div class="title-glow"></div>
-                </h2>
-                <p class="cyber-section-subtitle">
-                    {t("projects.subtitle")}
-                </p>
-            </div>
-            <Projects />
-        </SectionContainer>
-
-        <!-- Certificates Section -->
-        <SectionContainer id="certificaciones" class="certificates-section">
-            <div class="section-header">
-                <h2 class="cyber-section-title">
-                    <span class="title-text">{t("certificates.title")}</span>
-                    <div class="title-glow"></div>
-                </h2>
-                <p class="cyber-section-subtitle">
-                    {t("certificates.subtitle")}
-                </p>
-            </div>
-            <Certificates />
-        </SectionContainer>
-
-        <!-- About Me Section -->
-        <SectionContainer id="sobre-mi" class="about-section">
-            <div class="section-header">
-                <h2 class="cyber-section-title">
-                    <span class="title-text">{t("about.title")}</span>
-                    <div class="title-glow"></div>
-                </h2>
-                <p class="cyber-section-subtitle">
-                    {t("about.subtitle")}
-                </p>
-            </div>
-            <AboutMe />
-        </SectionContainer>
-
-        <!-- Contact CTA Section -->
-        <SectionContainer class="contact-cta-section">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                    class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+          </div>
+          <div class="flex justify-center order-1 lg:order-2">
+            <div class="relative w-40 h-40">
+              <div
+                class="absolute inset-0 rounded-full border-2 border-green-500/30 animate-spin-slow"
+              >
+              </div>
+              <div
+                class="absolute inset-4 rounded-full border-2 border-green-500/50 animate-spin-reverse"
+              >
+              </div>
+              <div
+                class="absolute inset-8 rounded-full border border-green-400 animate-pulse"
+              >
+              </div>
+              <div
+                class="absolute inset-[3rem] bg-green-500/10 rounded-full flex items-center justify-center"
+              >
+                <span class="text-green-400 text-2xl font-mono animate-blink"
+                  >@</span
                 >
-                    <div class="text-center lg:text-left order-2 lg:order-1">
-                        <h2
-                            class="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4"
-                        >
-                            {t("contact.title")}
-                        </h2>
-                        <p
-                            class="text-gray-300 text-lg sm:text-xl mb-6 max-w-lg mx-auto lg:mx-0"
-                        >
-                            {t("contact.subtitle")}
-                        </p>
-                        <div
-                            class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
-                        >
-                            <a
-                                href="mailto:acebalmatias2019@gmail.com"
-                                class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-green-400/40 bg-green-400/10 text-green-600 rounded-lg hover:bg-green-400/20 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                <MailIcon class="w-4 h-4" />
-                                <span>{t("contact.cta")}</span>
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/matiasacebal/"
-                                target="_blank"
-                                rel="noopener"
-                                class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-blue-400/40 bg-blue-400/10 text-blue-600 rounded-lg hover:bg-blue-400/20 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                <LinkedinIcon class="w-4 h-4" />
-                                <span>LinkedIn</span>
-                            </a>
-                            <a
-                                href="https://github.com/dest92"
-                                target="_blank"
-                                rel="noopener"
-                                class="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border border-gray-400/40 bg-gray-400/10 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-400/20 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                <GitHubIcon class="w-4 h-4" />
-                                <span>GitHub</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex justify-center order-1 lg:order-2">
-                        <div
-                            class="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
-                        >
-                            <div
-                                class="absolute inset-0 rounded-full border-2 border-green-400/30 animate-spin-slow"
-                            >
-                            </div>
-                            <div
-                                class="absolute inset-4 rounded-full border-2 border-blue-400/30 animate-spin-slow"
-                                style="animation-direction: reverse;"
-                            >
-                            </div>
-                            <div
-                                class="absolute inset-8 rounded-full border-2 border-purple-400/30 animate-spin-slow"
-                            >
-                            </div>
-                            <div
-                                class="absolute inset-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 shadow-lg shadow-green-400/20"
-                            >
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </SectionContainer>
-    </main>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
 </Layout>
 
 <style>
-    /* Prevenir overflow horizontal global */
-    html,
-    body {
-        overflow-x: hidden;
-        max-width: 100%;
-    }
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
 
-    .cyber-portfolio {
-        position: relative;
-        padding-top: 80px;
-        overflow-x: hidden;
-        width: 100%;
-    }
+  .cyber-portfolio {
+    position: relative;
+    padding-top: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
 
-    /* Section Headers */
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+
+  .cyber-section-title {
+    display: inline-block;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    margin: 0 0 1rem 0;
+    position: relative;
+    color: #fff;
+    font-family: var(--terminal-font);
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .text-prefix {
+    color: var(--cyber-primary);
+    margin-right: 0.5rem;
+  }
+
+  .cyber-section-subtitle {
+    font-size: 1rem;
+    color: var(--cyber-primary);
+    font-family: var(--terminal-font);
+    letter-spacing: 0.1em;
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+  }
+
+  /* Glitch Text Effect Reused */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff00c1;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-1 5s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00fff9;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 5s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-anim-1 {
+    0% {
+      clip: rect(30px, 9999px, 10px, 0);
+    }
+    100% {
+      clip: rect(70px, 9999px, 90px, 0);
+    }
+  }
+
+  @keyframes glitch-anim-2 {
+    0% {
+      clip: rect(10px, 9999px, 80px, 0);
+    }
+    100% {
+      clip: rect(90px, 9999px, 10px, 0);
+    }
+  }
+
+  /* Section Spacing */
+  .experience-section,
+  .projects-section,
+  .certificates-section,
+  .about-section {
+    padding: 6rem 0;
+    position: relative;
+  }
+
+  .contact-cta-section {
+    padding: 6rem 0;
+    background: linear-gradient(to top, rgba(0, 255, 65, 0.05), transparent);
+    border-top: 1px dashed rgba(0, 255, 65, 0.2);
+  }
+
+  /* Common Button Styles */
+  .cyber-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--cyber-primary);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: var(--terminal-font);
+    border: none;
+    clip-path: polygon(
+      10px 0,
+      100% 0,
+      100% calc(100% - 10px),
+      calc(100% - 10px) 100%,
+      0 100%,
+      0 10px
+    );
+    transition: all 0.3s ease;
+  }
+
+  .cyber-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(0, 255, 65, 0.3);
+  }
+
+  .cyber-button.secondary {
+    background: transparent;
+    border: 1px solid var(--cyber-primary);
+    color: var(--cyber-primary);
+    clip-path: none;
+  }
+
+  .cyber-button.secondary:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Animations */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 10s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-slow 15s linear infinite reverse;
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
     .section-header {
-        text-align: center;
-        margin-bottom: 3rem;
-        position: relative;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 1rem;
-        /* Eliminar todos los efectos que puedan crear recuadros */
+      margin-bottom: 3rem;
     }
 
     .cyber-section-title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        font-weight: 800;
-        margin: 0 0 1rem 0;
-        position: relative;
-        color: #00ff41;
-        font-family: "Courier New", monospace;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        /* Eliminar text-shadow que podría estar creando efectos no deseados */
+      font-size: 2rem;
     }
-
-    /* Eliminar todos los pseudo-elementos que puedan estar creando bordes */
-    .cyber-section-title::before,
-    .cyber-section-title::after {
-        display: none !important;
-    }
-
-    /* Eliminar animaciones que ya no son necesarias */
-    @keyframes cyber-pulse {
-        /* Animación deshabilitada */
-    }
-
-    @keyframes cyber-blink {
-        /* Animación deshabilitada */
-    }
-
-    @keyframes glow-pulse {
-        /* Animación deshabilitada */
-    }
-
-    .title-text {
-        /* Texto limpio sin efectos adicionales */
-    }
-
-    .title-icon {
-        font-size: clamp(1.25rem, 3vw, 1.75rem);
-        /* Eliminar filtros que puedan crear efectos no deseados */
-    }
-
-    .title-icon-svg {
-        width: clamp(1.25rem, 3vw, 1.75rem);
-        height: clamp(1.25rem, 3vw, 1.75rem);
-        color: #059669;
-    }
-
-    /* Eliminar completamente el title-glow y todos los efectos relacionados */
-    .title-glow {
-        display: none !important;
-    }
-
-    .cyber-section-subtitle {
-        font-size: clamp(0.9rem, 2.5vw, 1.125rem);
-        color: #a1a1aa;
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-        padding: 0 0.5rem;
-        font-family: "Courier New", monospace;
-        letter-spacing: 0.05em;
-        text-align: center;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    .cyber-section-subtitle code {
-        background: rgba(0, 255, 65, 0.15);
-        color: #00ff41;
-        padding: 0.4rem 0.8rem;
-        border: 1px solid rgba(0, 255, 65, 0.4);
-        border-radius: 6px;
-        font-family: "Courier New", monospace;
-        font-weight: 700;
-        font-size: 0.9em;
-        text-shadow:
-            0 0 15px rgba(0, 255, 65, 0.8),
-            0 0 30px rgba(0, 255, 65, 0.4);
-        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-        position: relative;
-        z-index: 1;
-        animation: code-glow 3s ease-in-out infinite alternate;
-        display: inline-block;
-        white-space: nowrap;
-    }
-
-    @keyframes code-glow {
-        0% {
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-            text-shadow:
-                0 0 15px rgba(0, 255, 65, 0.8),
-                0 0 30px rgba(0, 255, 65, 0.4);
-        }
-        100% {
-            box-shadow: 0 0 35px rgba(0, 255, 65, 0.6);
-            text-shadow:
-                0 0 25px rgba(0, 255, 65, 1),
-                0 0 50px rgba(0, 255, 65, 0.6);
-        }
-    }
-
-    /* Section Spacing */
-    .terminal-section,
-    .skills-section,
-    .experience-section,
-    .projects-section,
-    .certificates-section,
-    .about-section {
-        padding: 4rem 0;
-        position: relative;
-        overflow: hidden; /* Prevenir desbordamiento de contenido */
-    }
-
-    /* Contact CTA Section */
-    .contact-cta-section {
-        padding: 5rem 0;
-        background: linear-gradient(
-            135deg,
-            rgba(0, 255, 136, 0.05) 0%,
-            transparent 50%,
-            rgba(0, 255, 136, 0.05) 100%
-        );
-        position: relative;
-        overflow: hidden;
-    }
-
-    @keyframes spin-slow {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    .animate-spin-slow {
-        animation: spin-slow 8s linear infinite;
-    }
-
-    /* Dark Mode */
-    @media (prefers-color-scheme: dark) {
-        .cyber-section-subtitle {
-            color: #9ca3af;
-        }
-    }
-
-    :global(.dark) .cyber-section-subtitle {
-        color: #9ca3af;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-        .cyber-portfolio {
-            padding-top: 70px;
-        }
-
-        .section-header {
-            margin-bottom: 2rem;
-            padding: 0 1rem;
-        }
-
-        .cyber-section-title {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        /* Eliminar referencias a pseudo-elementos en móvil */
-        .cyber-section-title::before,
-        .cyber-section-title::after {
-            display: none !important;
-        }
-
-        /* Mejorar estilos de elementos code en móvil */
-        .cyber-section-subtitle code {
-            padding: 0.3rem 0.6rem;
-            font-size: 0.85em;
-            border-radius: 4px;
-            display: inline-block;
-            margin: 0.2rem 0.1rem;
-            line-height: 1.3;
-            font-weight: 600;
-            /* Reducir efectos en móvil para mejor legibilidad */
-            animation: none;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
-            white-space: nowrap;
-            max-width: calc(100vw - 4rem);
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .cyber-section-subtitle code:hover {
-            animation: code-glow 2s ease-in-out infinite alternate;
-            transform: scale(1.05);
-            transition: all 0.3s ease;
-        }
-
-        .cyber-section-subtitle {
-            padding: 0 1rem;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 100%;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        .terminal-section,
-        .skills-section,
-        .experience-section,
-        .projects-section,
-        .certificates-section,
-        .about-section {
-            padding: 3rem 0;
-        }
-
-        .contact-cta-section {
-            padding: 4rem 0;
-        }
-    }
-
-    /* Estilos adicionales para pantallas muy pequeñas */
-    @media (max-width: 480px) {
-        /* Eliminar referencias a pseudo-elementos en móvil pequeño */
-        .cyber-section-title::before,
-        .cyber-section-title::after {
-            display: none !important;
-        }
-
-        .cyber-section-subtitle code {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8em;
-            margin: 0.15rem 0.05rem;
-            max-width: calc(100vw - 2rem);
-        }
-
-        .section-header {
-            padding: 0 0.5rem;
-            max-width: 100%;
-        }
-
-        .cyber-section-subtitle {
-            padding: 0 0.5rem;
-            font-size: 0.9rem;
-        }
-    }
-
-    /* Contenedores específicos para prevenir overflow */
-    .max-w-6xl,
-    .max-w-7xl,
-    .max-w-\[1400px\] {
-        max-width: calc(100vw - 2rem);
-    }
-
-    @media (min-width: 1400px) {
-        .max-w-\[1400px\] {
-            max-width: 1400px;
-        }
-    }
+  }
 </style>
 
 <script>
-    // Ensure page starts at top
-    window.addEventListener("beforeunload", () => {
-        window.scrollTo(0, 0);
-    });
+  window.addEventListener("beforeunload", () => {
+    window.scrollTo(0, 0);
+  });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        // Scroll to top on page load
-        window.scrollTo(0, 0);
-
-        // Prevent any auto-scroll from hash or previous position
-        if (window.location.hash) {
-            window.location.hash = "";
-        }
-
-        // Force scroll to top after a brief delay to override any other scroll behavior
-        setTimeout(() => {
-            window.scrollTo(0, 0);
-        }, 100);
-    });
+  document.addEventListener("DOMContentLoaded", () => {
+    window.scrollTo(0, 0);
+    if (window.location.hash) window.location.hash = "";
+    setTimeout(() => window.scrollTo(0, 0), 100);
+  });
 </script>
