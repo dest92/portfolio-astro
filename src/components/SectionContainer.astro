@@ -1,9 +1,39 @@
----
----
+<div class="section-wrapper w-full relative">
+  <section
+    id={Astro.props.id}
+    class={`section-container max-w-[1400px] m-auto py-10 px-4 relative ${Astro.props.class ?? ""}`}
+  >
+    <slot />
+  </section>
+</div>
 
-<section
-  id={Astro.props.id}
-  class={`max-w-[1400px] m-auto py-10 px-4 ${Astro.props.class ?? ""}`}
->
-  <slot />
-</section>
+<style>
+  .section-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-wrapper.intersecting {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Simple intersection observer for entry animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("intersecting");
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
+
+  document.querySelectorAll(".section-wrapper").forEach((wrapper) => {
+    observer.observe(wrapper);
+  });
+</script>

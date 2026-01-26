@@ -16,7 +16,12 @@ const t = useTranslations(lang);
   <!-- <VisitorCount visits={visits} /> -->
   <div class="hero-background">
     <div class="cyber-grid"></div>
-    <div class="cyber-particles" id="cyber-particles"></div>
+    <div class="mesh-gradient">
+      <div class="mesh-sphere" id="sphere-1"></div>
+      <div class="mesh-sphere" id="sphere-2"></div>
+      <div class="mesh-sphere" id="sphere-3"></div>
+    </div>
+    <canvas class="cyber-particles" id="hero-canvas"></canvas>
     <div class="scanline"></div>
   </div>
 
@@ -123,7 +128,7 @@ const t = useTranslations(lang);
     justify-content: center;
     overflow: hidden;
     padding: 2rem;
-    background-color: var(--cyber-black);
+    /* background-color: var(--cyber-black); */
     color: #e0e0e0;
     font-family: var(--terminal-font);
   }
@@ -134,16 +139,86 @@ const t = useTranslations(lang);
     inset: 0;
     z-index: 1;
     background: #050505;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  }
+
+  .mesh-gradient {
+    position: absolute;
+    inset: 0;
+    filter: blur(100px);
+    opacity: 0.4;
+    z-index: 1;
+  }
+
+  .mesh-sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: move-spheres 20s infinite alternate;
+  }
+
+  #sphere-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--neon-green) 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+    opacity: 0.6;
+  }
+
+  #sphere-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #004d1a 0%, transparent 70%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+    opacity: 0.4;
+  }
+
+  #sphere-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #001a00 0%, transparent 70%);
+    top: 50%;
+    left: 40%;
+    animation-delay: -10s;
+    opacity: 0.3;
+  }
+
+  @keyframes move-spheres {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(100px, 50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-50px, 100px) scale(0.9);
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
   }
 
   .cyber-grid {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
-    mask-image: radial-gradient(circle at 50% 50%, black 60%, transparent 90%);
+      linear-gradient(rgba(0, 255, 65, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(
+      circle at 50% 50%,
+      black 40%,
+      rgba(0, 0, 0, 0.3) 70%,
+      transparent 100%
+    );
+    z-index: 2;
+    perspective: 1000px;
+    transform: rotateX(20deg);
+    transform-origin: top;
   }
 
   .scanline {
@@ -155,11 +230,21 @@ const t = useTranslations(lang);
     background: linear-gradient(
       to bottom,
       transparent 50%,
-      rgba(0, 255, 65, 0.02) 50%
+      rgba(0, 255, 65, 0.03) 50%
     );
     background-size: 100% 4px;
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
+    animation: scanline-scroll 10s linear infinite;
+  }
+
+  @keyframes scanline-scroll {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 100%;
+    }
   }
 
   /* Content Layout */
@@ -399,10 +484,17 @@ const t = useTranslations(lang);
     border-radius: 50%;
     object-fit: cover;
     z-index: 10;
-    filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(0.2)
-      hue-rotate(90deg);
-    border: 2px solid #00ff41;
+    filter: grayscale(100%) contrast(1.2) brightness(1.1)
+      drop-shadow(0 0 10px rgba(0, 255, 65, 0.3));
+    border: 2px solid var(--neon-green);
     position: relative;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .profile-image:hover {
+    filter: grayscale(0%) contrast(1.1) brightness(1.2)
+      drop-shadow(0 0 20px rgba(0, 255, 65, 0.5));
+    transform: scale(1.05);
   }
 
   .hologram-effect {
@@ -608,7 +700,86 @@ const t = useTranslations(lang);
     }
   }
 
+  function initializeParticles() {
+    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let particles: Particle[] = [];
+    const particleCount = 50;
+
+    class Particle {
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        else if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        else if (this.y < 0) this.y = canvas.height;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.fillStyle = `rgba(0, 255, 65, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function init() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      resize();
+      init();
+    });
+
+    resize();
+    init();
+    animate();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initializeButtons();
+    initializeParticles();
   });
 </script>

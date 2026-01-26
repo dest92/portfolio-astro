@@ -28,7 +28,7 @@ const t = useTranslations(lang);
     <CyberHero />
 
     <!-- Experience Section with Updated Design -->
-    <SectionContainer id="experience" class="experience-section mt-10">
+    <SectionContainer id="experience" class="experience-section mt-10 section-glass">
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -47,7 +47,7 @@ const t = useTranslations(lang);
     <Education />
 
     <!-- Projects Section -->
-    <SectionContainer id="proyectos" class="projects-section">
+    <SectionContainer id="proyectos" class="projects-section section-glass">
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -63,7 +63,7 @@ const t = useTranslations(lang);
     </SectionContainer>
 
     <!-- Certificates Section -->
-    <SectionContainer id="certificaciones" class="certificates-section">
+    <SectionContainer id="certificaciones" class="certificates-section section-glass">
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -79,7 +79,7 @@ const t = useTranslations(lang);
     </SectionContainer>
 
     <!-- About Me Section -->
-    <SectionContainer id="sobre-mi" class="about-section">
+    <SectionContainer id="sobre-mi" class="about-section section-glass">
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -280,6 +280,45 @@ const t = useTranslations(lang);
   .about-section {
     padding: 6rem 0;
     position: relative;
+  }
+
+  /* Glassmorphism effect for sections */
+  .section-glass {
+    position: relative;
+  }
+
+  .section-glass::before {
+    content: '';
+    position: absolute;
+    inset: -2rem;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 20, 10, 0.7) 0%,
+      rgba(5, 5, 5, 0.85) 50%,
+      rgba(0, 30, 15, 0.7) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    border-radius: 20px;
+    z-index: -1;
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 1px rgba(0, 255, 65, 0.05);
+  }
+
+  .section-glass::after {
+    content: '';
+    position: absolute;
+    inset: -2rem;
+    background: radial-gradient(
+      circle at 30% 50%,
+      rgba(0, 255, 65, 0.03) 0%,
+      transparent 50%
+    );
+    border-radius: 20px;
+    z-index: -1;
+    pointer-events: none;
   }
 
   .contact-cta-section {

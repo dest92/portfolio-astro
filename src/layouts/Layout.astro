@@ -1,5 +1,4 @@
 ---
-import "@fontsource-variable/onest";
 
 import Header from "../components/Header.astro";
 import VerificationOverlay from "../components/VerificationOverlay.astro";
@@ -33,11 +32,45 @@ const lang = Astro.currentLocale || "es";
     />
   </head>
 
-  <body class="relative text-white bg-gray-950">
+  <body class="relative text-white ">
     <!-- Global Cyberpunk Background -->
     <div class="cyber-background-container">
+      <!-- Animated Grid -->
       <div class="cyber-grid-global"></div>
+      
+      <!-- Fog Effect Layers -->
+      <div class="fog-layer fog-1"></div>
+      <div class="fog-layer fog-2"></div>
+      <div class="fog-layer fog-3"></div>
+      
+      <!-- Dynamic Gradient Blobs -->
+      <div class="global-glows">
+        <div class="glow-blob blob-1"></div>
+        <div class="glow-blob blob-2"></div>
+        <div class="glow-blob blob-3"></div>
+        <div class="glow-blob blob-4"></div>
+        <div class="glow-blob blob-5"></div>
+        <div class="glow-blob blob-6"></div>
+        <div class="glow-blob blob-7"></div>
+        <div class="glow-blob blob-8"></div>
+      </div>
+      
+      <!-- Floating Particles Canvas -->
+      <canvas id="bg-particles" class="bg-particles-canvas"></canvas>
+      
+      <!-- Cyberpunk Lines -->
+      <div class="cyber-lines">
+        <div class="cyber-line line-1"></div>
+        <div class="cyber-line line-2"></div>
+        <div class="cyber-line line-3"></div>
+        <div class="cyber-line line-4"></div>
+      </div>
+      
+      <!-- Scanline Effect -->
       <div class="scanline-global"></div>
+      
+      <!-- Vignette -->
+      <div class="vignette-overlay"></div>
     </div>
 
     <Header />
@@ -45,6 +78,123 @@ const lang = Astro.currentLocale || "es";
 
     <!-- Verification Overlay Global -->
     <VerificationOverlay />
+
+    <script is:inline>
+      // Background Particles Animation
+      class BackgroundParticles {
+        constructor() {
+          this.canvas = document.getElementById('bg-particles');
+          if (!this.canvas) return;
+          
+          this.ctx = this.canvas.getContext('2d');
+          this.particles = [];
+          this.particleCount = 80;
+          this.connectionDistance = 150;
+          
+          this.init();
+          this.animate();
+          this.handleResize();
+        }
+
+        init() {
+          this.canvas.width = window.innerWidth;
+          this.canvas.height = window.innerHeight;
+          
+          for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push(new Particle(this.canvas.width, this.canvas.height));
+          }
+        }
+
+        handleResize() {
+          window.addEventListener('resize', () => {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+            this.particles = [];
+            for (let i = 0; i < this.particleCount; i++) {
+              this.particles.push(new Particle(this.canvas.width, this.canvas.height));
+            }
+          });
+        }
+
+        drawConnections() {
+          for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+              const dx = this.particles[i].x - this.particles[j].x;
+              const dy = this.particles[i].y - this.particles[j].y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+
+              if (distance < this.connectionDistance) {
+                const opacity = (1 - distance / this.connectionDistance) * 0.15;
+                this.ctx.strokeStyle = `rgba(0, 255, 65, ${opacity})`;
+                this.ctx.lineWidth = 0.5;
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                this.ctx.stroke();
+              }
+            }
+          }
+        }
+
+        animate() {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          
+          this.drawConnections();
+          
+          this.particles.forEach(particle => {
+            particle.update(this.canvas.width, this.canvas.height);
+            particle.draw(this.ctx);
+          });
+
+          requestAnimationFrame(() => this.animate());
+        }
+      }
+
+      class Particle {
+        constructor(canvasWidth, canvasHeight) {
+          this.x = Math.random() * canvasWidth;
+          this.y = Math.random() * canvasHeight;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.3;
+          this.size = Math.random() * 2 + 0.5;
+          this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        update(canvasWidth, canvasHeight) {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > canvasWidth) this.vx *= -1;
+          if (this.y < 0 || this.y > canvasHeight) this.vy *= -1;
+
+          // Keep particles within bounds
+          this.x = Math.max(0, Math.min(canvasWidth, this.x));
+          this.y = Math.max(0, Math.min(canvasHeight, this.y));
+        }
+
+        draw(ctx) {
+          ctx.fillStyle = `rgba(0, 255, 65, ${this.opacity})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Add glow effect
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = 'rgba(0, 255, 65, 0.5)';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      // Initialize particles when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          new BackgroundParticles();
+        });
+      } else {
+        new BackgroundParticles();
+      }
+    </script>
 
     <style is:global>
       :root {
@@ -69,7 +219,14 @@ const lang = Astro.currentLocale || "es";
         color: var(--cyber-text);
         margin: 0;
         padding: 0;
-        background-color: #050505;
+        background-color: transparent;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
       }
 
       .cyber-background-container {
@@ -80,7 +237,8 @@ const lang = Astro.currentLocale || "es";
         bottom: 0;
         z-index: -2;
         pointer-events: none;
-        background: #050505;
+        background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+        overflow: hidden;
       }
 
       .cyber-grid-global {
@@ -89,8 +247,223 @@ const lang = Astro.currentLocale || "es";
         background-image:
           linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
           linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        opacity: 0.5;
+        background-size: 80px 80px;
+        opacity: 1;
+        animation: grid-pulse 8s ease-in-out infinite;
+      }
+
+      @keyframes grid-pulse {
+        0%, 100% {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.02);
+        }
+      }
+
+      /* Fog Layers for Depth */
+      .fog-layer {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 255, 65, 0.02) 50%, transparent 100%);
+        animation: fog-drift 30s ease-in-out infinite;
+      }
+
+      .fog-1 {
+        animation-delay: 0s;
+        animation-duration: 25s;
+      }
+
+      .fog-2 {
+        animation-delay: -8s;
+        animation-duration: 35s;
+        transform: scale(1.2);
+      }
+
+      .fog-3 {
+        animation-delay: -16s;
+        animation-duration: 40s;
+        transform: scale(0.9);
+      }
+
+      @keyframes fog-drift {
+        0%, 100% {
+          opacity: 0.1;
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          opacity: 0.15;
+          transform: translate(50px, 30px) scale(1.1);
+        }
+        50% {
+          opacity: 0.12;
+          transform: translate(20px, -20px) scale(0.95);
+        }
+        75% {
+          opacity: 0.18;
+          transform: translate(-30px, 40px) scale(1.05);
+        }
+      }
+
+      .global-glows {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .glow-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(160px);
+        opacity: 0;
+        animation: float-glow-smooth 45s ease-in-out infinite;
+        will-change: transform, opacity;
+      }
+
+      .blob-1 {
+        width: 1400px;
+        height: 1400px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 65, 0.4) 0%,
+          rgba(0, 255, 65, 0.1) 40%,
+          transparent 70%
+        );
+        top: -20%;
+        left: -15%;
+        animation-duration: 40s;
+        animation-delay: 0s;
+      }
+
+      .blob-2 {
+        width: 1200px;
+        height: 1200px;
+        background: radial-gradient(
+          circle, 
+          rgba(0, 143, 17, 0.35) 0%,
+          rgba(0, 80, 26, 0.15) 40%,
+          transparent 70%
+        );
+        top: 20%;
+        right: -15%;
+        animation-duration: 50s;
+        animation-delay: -10s;
+      }
+
+      .blob-3 {
+        width: 1300px;
+        height: 1300px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 200, 50, 0.3) 0%,
+          rgba(0, 100, 30, 0.1) 40%,
+          transparent 70%
+        );
+        bottom: -10%;
+        left: 10%;
+        animation-duration: 55s;
+        animation-delay: -20s;
+      }
+
+      .blob-4 {
+        width: 1000px;
+        height: 1000px;
+        background: radial-gradient(
+          circle, 
+          rgba(0, 51, 0, 0.4) 0%,
+          rgba(0, 30, 0, 0.15) 40%,
+          transparent 70%
+        );
+        bottom: 10%;
+        right: 5%;
+        animation-duration: 45s;
+        animation-delay: -30s;
+      }
+
+      .blob-5 {
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 65, 0.25) 0%,
+          rgba(0, 150, 40, 0.08) 40%,
+          transparent 70%
+        );
+        top: 40%;
+        left: 20%;
+        animation-duration: 60s;
+        animation-delay: -15s;
+      }
+
+      .blob-6 {
+        width: 1100px;
+        height: 1100px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 180, 45, 0.3) 0%,
+          rgba(0, 90, 25, 0.1) 40%,
+          transparent 70%
+        );
+        top: 60%;
+        right: 25%;
+        animation-duration: 48s;
+        animation-delay: -25s;
+      }
+
+      .blob-7 {
+        width: 850px;
+        height: 850px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 100, 0.2) 0%,
+          rgba(0, 120, 35, 0.08) 40%,
+          transparent 70%
+        );
+        top: 80%;
+        left: 40%;
+        animation-duration: 52s;
+        animation-delay: -35s;
+      }
+
+      .blob-8 {
+        width: 950px;
+        height: 950px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 150, 40, 0.25) 0%,
+          rgba(0, 70, 20, 0.1) 40%,
+          transparent 70%
+        );
+        top: 5%;
+        right: 40%;
+        animation-duration: 58s;
+        animation-delay: -18s;
+      }
+
+      @keyframes float-glow-smooth {
+        0% {
+          transform: translate(0, 0) scale(1) rotate(0deg);
+          opacity: 0.15;
+        }
+        25% {
+          transform: translate(120px, -80px) scale(1.15) rotate(90deg);
+          opacity: 0.28;
+        }
+        50% {
+          transform: translate(80px, 60px) scale(0.9) rotate(180deg);
+          opacity: 0.22;
+        }
+        75% {
+          transform: translate(-100px, 40px) scale(1.1) rotate(270deg);
+          opacity: 0.25;
+        }
+        100% {
+          transform: translate(0, 0) scale(1) rotate(360deg);
+          opacity: 0.15;
+        }
       }
 
       .scanline-global {
@@ -102,10 +475,104 @@ const lang = Astro.currentLocale || "es";
         background: linear-gradient(
           to bottom,
           transparent 50%,
-          rgba(0, 255, 65, 0.01) 50%
+          rgba(0, 255, 65, 0.015) 50%
         );
-        background-size: 100% 3px;
-        z-index: -1;
+        background-size: 100% 4px;
+        z-index: 1;
+        pointer-events: none;
+        animation: scanline-move 8s linear infinite;
+      }
+
+      @keyframes scanline-move {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(4px);
+        }
+      }
+
+      /* Particles Canvas */
+      .bg-particles-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.6;
+      }
+
+      /* Cyberpunk Lines */
+      .cyber-lines {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .cyber-line {
+        position: absolute;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 255, 65, 0.4) 50%,
+          transparent 100%
+        );
+        height: 1px;
+        width: 100%;
+        animation: line-slide 8s ease-in-out infinite;
+      }
+
+      .line-1 {
+        top: 20%;
+        animation-delay: 0s;
+        animation-duration: 12s;
+      }
+
+      .line-2 {
+        top: 45%;
+        animation-delay: -3s;
+        animation-duration: 15s;
+      }
+
+      .line-3 {
+        top: 65%;
+        animation-delay: -6s;
+        animation-duration: 10s;
+      }
+
+      .line-4 {
+        top: 85%;
+        animation-delay: -9s;
+        animation-duration: 14s;
+      }
+
+      @keyframes line-slide {
+        0%, 100% {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+        25% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateX(0%);
+        }
+        75% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Vignette Overlay */
+      .vignette-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 0%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.4) 100%
+        );
+        z-index: 1;
         pointer-events: none;
       }
 
