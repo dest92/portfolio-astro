@@ -112,6 +112,8 @@ export const ui = {
       "Desarrollo y despliegue de un sistema integral de control. El sistema permite gestionar clientes, pagos, elementos de entrenamiento, entre otras funcionalidades.",
     "projects.fitlifego.description":
       "Sistema para que los clientes del gimnasio puedan gestionar su información o marquen su asistencia al gimnasio mediante el escaneo de código QR, cuyo escáner se encuentra en el mismo sistema.",
+    "projects.psicopas.description":
+      "Un espacio dedicado a la Alta Sensibilidad, para acompañarte con servicios, información y recursos creados para guiar tu camino de autoconocimiento y bienestar.",
     "projects.view_code": "CÓDIGO",
     "projects.view_project": "VER PROYECTO",
     "projects.featured": "DESTACADO",
@@ -325,6 +327,8 @@ export const ui = {
       "Development and deployment of a comprehensive control system. The system allows managing clients, payments, training elements, among other functionalities.",
     "projects.fitlifego.description":
       "System for gym clients to manage their information or mark their attendance at the gym by scanning a QR code, whose scanner is located in the same system.",
+    "projects.psicopas.description":
+      "A space dedicated to High Sensitivity, to accompany you with services, information, and resources created to guide your path of self-knowledge and well-being.",
     "projects.view_code": "CODE",
     "projects.view_project": "VIEW PROJECT",
     "projects.featured": "FEATURED",
