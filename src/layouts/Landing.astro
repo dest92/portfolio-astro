@@ -28,7 +28,10 @@ const t = useTranslations(lang);
     <CyberHero />
 
     <!-- Experience Section with Updated Design -->
-    <SectionContainer id="experience" class="experience-section mt-10 section-glass">
+    <SectionContainer
+      id="experience"
+      class="experience-section mt-10 section-glass"
+    >
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -63,7 +66,10 @@ const t = useTranslations(lang);
     </SectionContainer>
 
     <!-- Certificates Section -->
-    <SectionContainer id="certificaciones" class="certificates-section section-glass">
+    <SectionContainer
+      id="certificaciones"
+      class="certificates-section section-glass"
+    >
       <div class="section-header">
         <h2 class="cyber-section-title">
           <span class="text-prefix">&gt;</span>
@@ -174,16 +180,9 @@ const t = useTranslations(lang);
 </Layout>
 
 <style>
-  html,
-  body {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-
   .cyber-portfolio {
     position: relative;
     padding-top: 0;
-    overflow-x: hidden;
     width: 100%;
   }
 
@@ -288,7 +287,7 @@ const t = useTranslations(lang);
   }
 
   .section-glass::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: -2rem;
     background: linear-gradient(
@@ -302,13 +301,13 @@ const t = useTranslations(lang);
     border: 1px solid rgba(0, 255, 65, 0.1);
     border-radius: 20px;
     z-index: -1;
-    box-shadow: 
+    box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.37),
       inset 0 1px 1px rgba(0, 255, 65, 0.05);
   }
 
   .section-glass::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: -2rem;
     background: radial-gradient(

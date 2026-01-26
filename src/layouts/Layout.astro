@@ -1,5 +1,4 @@
 ---
-
 import Header from "../components/Header.astro";
 import VerificationOverlay from "../components/VerificationOverlay.astro";
 
@@ -32,17 +31,17 @@ const lang = Astro.currentLocale || "es";
     />
   </head>
 
-  <body class="relative text-white ">
+  <body class="relative text-white">
     <!-- Global Cyberpunk Background -->
     <div class="cyber-background-container">
       <!-- Animated Grid -->
       <div class="cyber-grid-global"></div>
-      
+
       <!-- Fog Effect Layers -->
       <div class="fog-layer fog-1"></div>
       <div class="fog-layer fog-2"></div>
       <div class="fog-layer fog-3"></div>
-      
+
       <!-- Dynamic Gradient Blobs -->
       <div class="global-glows">
         <div class="glow-blob blob-1"></div>
@@ -54,10 +53,10 @@ const lang = Astro.currentLocale || "es";
         <div class="glow-blob blob-7"></div>
         <div class="glow-blob blob-8"></div>
       </div>
-      
+
       <!-- Floating Particles Canvas -->
       <canvas id="bg-particles" class="bg-particles-canvas"></canvas>
-      
+
       <!-- Cyberpunk Lines -->
       <div class="cyber-lines">
         <div class="cyber-line line-1"></div>
@@ -65,10 +64,10 @@ const lang = Astro.currentLocale || "es";
         <div class="cyber-line line-3"></div>
         <div class="cyber-line line-4"></div>
       </div>
-      
+
       <!-- Scanline Effect -->
       <div class="scanline-global"></div>
-      
+
       <!-- Vignette -->
       <div class="vignette-overlay"></div>
     </div>
@@ -83,14 +82,13 @@ const lang = Astro.currentLocale || "es";
       // Background Particles Animation
       class BackgroundParticles {
         constructor() {
-          this.canvas = document.getElementById('bg-particles');
+          this.canvas = document.getElementById("bg-particles");
           if (!this.canvas) return;
-          
-          this.ctx = this.canvas.getContext('2d');
+
+          this.ctx = this.canvas.getContext("2d");
           this.particles = [];
-          this.particleCount = 80;
           this.connectionDistance = 150;
-          
+
           this.init();
           this.animate();
           this.handleResize();
@@ -99,24 +97,34 @@ const lang = Astro.currentLocale || "es";
         init() {
           this.canvas.width = window.innerWidth;
           this.canvas.height = window.innerHeight;
-          
+
+          // Mobile check
+          const isMobile = window.innerWidth < 768;
+          this.particleCount = isMobile ? 20 : 80; // Significantly reduced for mobile
+
+          this.particles = [];
           for (let i = 0; i < this.particleCount; i++) {
-            this.particles.push(new Particle(this.canvas.width, this.canvas.height));
+            this.particles.push(
+              new Particle(this.canvas.width, this.canvas.height),
+            );
           }
         }
 
         handleResize() {
-          window.addEventListener('resize', () => {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
-            this.particles = [];
-            for (let i = 0; i < this.particleCount; i++) {
-              this.particles.push(new Particle(this.canvas.width, this.canvas.height));
-            }
+          let resizeTimeout;
+          window.addEventListener("resize", () => {
+            // Debounce resize
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              this.init(); // Re-init to adjust particle count based on new width
+            }, 200);
           });
         }
 
         drawConnections() {
+          // Skip connections on mobile for performance
+          if (window.innerWidth < 768) return;
+
           for (let i = 0; i < this.particles.length; i++) {
             for (let j = i + 1; j < this.particles.length; j++) {
               const dx = this.particles[i].x - this.particles[j].x;
@@ -138,10 +146,10 @@ const lang = Astro.currentLocale || "es";
 
         animate() {
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-          
+
           this.drawConnections();
-          
-          this.particles.forEach(particle => {
+
+          this.particles.forEach((particle) => {
             particle.update(this.canvas.width, this.canvas.height);
             particle.draw(this.ctx);
           });
@@ -180,15 +188,15 @@ const lang = Astro.currentLocale || "es";
 
           // Add glow effect
           ctx.shadowBlur = 10;
-          ctx.shadowColor = 'rgba(0, 255, 65, 0.5)';
+          ctx.shadowColor = "rgba(0, 255, 65, 0.5)";
           ctx.fill();
           ctx.shadowBlur = 0;
         }
       }
 
       // Initialize particles when DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
           new BackgroundParticles();
         });
       } else {
@@ -213,6 +221,7 @@ const lang = Astro.currentLocale || "es";
       html {
         font-family: var(--terminal-font);
         background-color: #050505;
+        overflow-x: hidden;
       }
 
       body {
@@ -222,6 +231,7 @@ const lang = Astro.currentLocale || "es";
         background-color: transparent;
         min-height: 100vh;
         position: relative;
+        /* overflow-x: hidden; Removed to allow overflow-y: visible and prevent double scrollbar */
       }
 
       main {
@@ -237,7 +247,11 @@ const lang = Astro.currentLocale || "es";
         bottom: 0;
         z-index: -2;
         pointer-events: none;
-        background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+        background: radial-gradient(
+          ellipse at center,
+          #0a0a0a 0%,
+          #000000 100%
+        );
         overflow: hidden;
       }
 
@@ -253,7 +267,8 @@ const lang = Astro.currentLocale || "es";
       }
 
       @keyframes grid-pulse {
-        0%, 100% {
+        0%,
+        100% {
           opacity: 0.3;
           transform: scale(1);
         }
@@ -267,7 +282,12 @@ const lang = Astro.currentLocale || "es";
       .fog-layer {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 255, 65, 0.02) 50%, transparent 100%);
+        background: radial-gradient(
+          ellipse at center,
+          transparent 0%,
+          rgba(0, 255, 65, 0.02) 50%,
+          transparent 100%
+        );
         animation: fog-drift 30s ease-in-out infinite;
       }
 
@@ -289,7 +309,8 @@ const lang = Astro.currentLocale || "es";
       }
 
       @keyframes fog-drift {
-        0%, 100% {
+        0%,
+        100% {
           opacity: 0.1;
           transform: translate(0, 0) scale(1);
         }
@@ -342,7 +363,7 @@ const lang = Astro.currentLocale || "es";
         width: 1200px;
         height: 1200px;
         background: radial-gradient(
-          circle, 
+          circle,
           rgba(0, 143, 17, 0.35) 0%,
           rgba(0, 80, 26, 0.15) 40%,
           transparent 70%
@@ -372,7 +393,7 @@ const lang = Astro.currentLocale || "es";
         width: 1000px;
         height: 1000px;
         background: radial-gradient(
-          circle, 
+          circle,
           rgba(0, 51, 0, 0.4) 0%,
           rgba(0, 30, 0, 0.15) 40%,
           transparent 70%
@@ -546,7 +567,8 @@ const lang = Astro.currentLocale || "es";
       }
 
       @keyframes line-slide {
-        0%, 100% {
+        0%,
+        100% {
           opacity: 0;
           transform: translateX(-100%);
         }
@@ -617,6 +639,50 @@ const lang = Astro.currentLocale || "es";
         font-family: var(--terminal-font);
         text-transform: uppercase;
         letter-spacing: 0.05em;
+      }
+
+      /* Mobile Optimizations - Reduce GPU load */
+      @media (max-width: 768px) {
+        .fog-layer,
+        .cyber-grid-global,
+        .cyber-lines,
+        .glow-blob,
+        .blob-1,
+        .blob-2,
+        .blob-3,
+        .blob-4,
+        .blob-5,
+        .blob-6,
+        .blob-7,
+        .blob-8 {
+          display: none !important;
+          animation: none !important;
+        }
+
+        /* Simplified background for mobile */
+        .cyber-background-container {
+          background: radial-gradient(
+            circle at center,
+            #0a1a0f 0%,
+            #000000 100%
+          );
+        }
+
+        /* Add a static subtle glow instead of multiple blobs */
+        .global-glows::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 255, 65, 0.1) 0%,
+            transparent 60%
+          );
+          pointer-events: none;
+        }
       }
 
       /* Fix for mobile touch scrolling */

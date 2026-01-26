@@ -676,6 +676,33 @@ const t = useTranslations(lang);
       width: 200px;
       height: 200px;
     }
+
+    /* Mobile Performance Optimizations */
+    .mesh-sphere {
+      /* Simplify spheres on mobile */
+      filter: blur(20px); /* Reduce blur radius */
+      animation-duration: 0s !important; /* Stop animation */
+      opacity: 0.2;
+    }
+
+    .cyber-grid {
+      mask-image: none; /* Remove expensive mask */
+      background-image: linear-gradient(
+        rgba(0, 255, 65, 0.05) 1px,
+        transparent 1px
+      );
+      background-size: 40px 40px;
+      transform: none; /* Remove 3D transform */
+      opacity: 0.3;
+    }
+
+    .scanline {
+      display: none; /* Remove scanline animation */
+    }
+
+    .hologram-effect {
+      display: none; /* Remove hologram effect */
+    }
   }
 </style>
 
@@ -708,7 +735,9 @@ const t = useTranslations(lang);
     if (!ctx) return;
 
     let particles: Particle[] = [];
-    const particleCount = 50;
+    // Optimize particle count for mobile
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 15 : 50;
 
     class Particle {
       x: number;
