@@ -279,7 +279,7 @@ const PROJECTS = [
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--proj-border);
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s, box-shadow 0.4s;
     opacity: 1; /* Let SectionContainer handle entrance */
     transform: none;
     contain: content; /* Performance optimization */
@@ -393,7 +393,7 @@ const PROJECTS = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, filter 0.4s ease;
     filter: grayscale(100%) contrast(1.2) brightness(0.8);
   }
 
@@ -521,7 +521,7 @@ const PROJECTS = [
     font-family: var(--terminal-font);
     text-decoration: none;
     border: 1px solid var(--proj-primary);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     background: rgba(0, 255, 65, 0.1);
     color: var(--proj-primary);
   }
@@ -552,7 +552,7 @@ const PROJECTS = [
     width: 15px;
     height: 15px;
     border: 2px solid rgba(0, 255, 65, 0.5);
-    transition: all 0.3s ease;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
   }
 
   .cyber-corner-tl { top: 0; left: 0; border-right: none; border-bottom: none; }

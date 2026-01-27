@@ -210,7 +210,18 @@ const navItems = [
     overflow: hidden;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     border: 1px solid transparent;
-    transition: all 0.3s ease;
+    transition:
+      text-shadow 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+    outline: none;
+  }
+
+  .cyber-nav-link:focus-visible {
+    border-color: rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    background: rgba(0, 255, 255, 0.1);
   }
 
   .cyber-nav-link:hover {
@@ -271,7 +282,17 @@ const navItems = [
     border: 1px solid rgba(0, 255, 136, 0.3);
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    transition:
+      text-shadow 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+    outline: none;
+  }
+
+  .cyber-mobile-btn:focus-visible {
+    border-color: rgba(0, 255, 136, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
   }
 
   .cyber-mobile-btn:hover {
@@ -293,7 +314,11 @@ const navItems = [
     height: 2px;
     background: linear-gradient(90deg, #00ff88, #00ccff);
     border-radius: 1px;
-    transition: all 0.3s ease;
+    transition:
+      text-shadow 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .line-1 {

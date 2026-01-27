@@ -24,8 +24,7 @@ export const ui = {
     "hero.role.fullstack": "Ingeniero en Sistemas",
     "hero.role.security": "Desarrollador FullStack",
     "hero.role.systems": "Arquitecto de Software",
-    "hero.description.1":
-      "Impulsando la transformación digital con",
+    "hero.description.1": "Impulsando la transformación digital con",
     "hero.description.highlight1": "ingeniería de software de precisión",
     "hero.description.2": "y diseñando",
     "hero.description.highlight2": "sistemas escalables y seguros",
@@ -166,7 +165,7 @@ export const ui = {
     "terminal.tip": "Tip:",
     "terminal.try": "Prueba con",
     "terminal.cmd.notfound": "orden no encontrada",
-    "terminal.cmd.help": "Escribe 'help' para ver los comandos disponibles",
+    "terminal.cmd.help": "Escribe ‘help’ para ver los comandos disponibles",
 
     // Terminal Outputs
     "terminal.whoami.role":
@@ -221,7 +220,7 @@ export const ui = {
     "terminal.contact.interest": "¿Tienes un proyecto interesante?",
     "terminal.contact.talk": "¡Contáctame y hablemos! 🚀",
 
-    "terminal.matrix.init": "Iniciando secuencia Matrix...",
+    "terminal.matrix.init": "Iniciando secuencia Matrix…",
   },
   en: {
     visitorCount: "Visits",
@@ -241,8 +240,7 @@ export const ui = {
     "hero.role.fullstack": "Systems Engineer",
     "hero.role.security": "FullStack Developer",
     "hero.role.systems": "Software Architect",
-    "hero.description.1":
-      "Driving digital transformation with",
+    "hero.description.1": "Driving digital transformation with",
     "hero.description.highlight1": "precision software engineering",
     "hero.description.2": "and designing",
     "hero.description.highlight2": "scalable and secure systems",
@@ -380,7 +378,7 @@ export const ui = {
     "terminal.tip": "Tip:",
     "terminal.try": "Try with",
     "terminal.cmd.notfound": "command not found",
-    "terminal.cmd.help": "Type 'help' to see available commands",
+    "terminal.cmd.help": "Type ‘help’ to see available commands",
 
     // Terminal Outputs
     "terminal.whoami.role": "Role: FullStack Developer & Systems Analyst",
@@ -430,6 +428,6 @@ export const ui = {
     "terminal.contact.interest": "Have an interesting project?",
     "terminal.contact.talk": "Contact me and let's talk! 🚀",
 
-    "terminal.matrix.init": "Starting Matrix sequence...",
+    "terminal.matrix.init": "Starting Matrix sequence…",
   },
 } as const;
