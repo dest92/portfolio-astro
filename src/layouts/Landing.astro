@@ -306,6 +306,14 @@ const t = useTranslations(lang);
       inset 0 1px 1px rgba(0, 255, 65, 0.05);
   }
 
+  @media (max-width: 768px) {
+    .section-glass::before {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(5, 5, 5, 0.9); /* Solid fallback */
+    }
+  }
+
   .section-glass::after {
     content: "";
     position: absolute;

@@ -11,12 +11,31 @@
   .section-wrapper {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+    contain: layout style;
   }
 
   .section-wrapper.intersecting {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .section-wrapper {
+      /* Faster transition on mobile */
+      transition-duration: 0.4s;
+      transform: translateY(10px); /* Less movement on mobile */
+    }
+
+    /* If the user scrolls VERY fast, we might want to just show it */
+    :global(.fast-scroll) .section-wrapper {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 </style>
 
@@ -27,13 +46,47 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("intersecting");
+          // No need to unobserve if we want it to stay?
+          // Actually, unobserving is better for performance.
+          observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.1 },
+    {
+      threshold: 0,
+      rootMargin: "0px 0px 200px 0px", // Trigger 200px BEFORE it enters the viewport
+    },
   );
 
   document.querySelectorAll(".section-wrapper").forEach((wrapper) => {
     observer.observe(wrapper);
   });
+
+  // Fast scroll detection to skip animations
+  let lastScrollTop = 0;
+  let isFastScrolling = false;
+  let fastScrollTimeout: ReturnType<typeof setTimeout>;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      const diff = Math.abs(st - lastScrollTop);
+
+      if (diff > 100) {
+        // Threshold for "fast" scroll
+        if (!isFastScrolling) {
+          document.body.classList.add("fast-scroll");
+          isFastScrolling = true;
+        }
+        clearTimeout(fastScrollTimeout);
+        fastScrollTimeout = setTimeout(() => {
+          document.body.classList.remove("fast-scroll");
+          isFastScrolling = false;
+        }, 500);
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+    },
+    { passive: true },
+  );
 </script>

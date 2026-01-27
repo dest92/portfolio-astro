@@ -122,7 +122,8 @@ const t = useTranslations(lang);
 
   .cyber-hero {
     position: relative;
-    min-height: 90vh;
+    min-height: 90vh; /* Fallback */
+    min-height: 90svh; /* Mobile stable height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,6 +132,7 @@ const t = useTranslations(lang);
     /* background-color: var(--cyber-black); */
     color: #e0e0e0;
     font-family: var(--terminal-font);
+    width: 100%;
   }
 
   /* Background Effects */
@@ -737,7 +739,7 @@ const t = useTranslations(lang);
     let particles: Particle[] = [];
     // Optimize particle count for mobile
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 15 : 50;
+    const particleCount = isMobile ? 10 : 40;
 
     class Particle {
       x: number;
@@ -797,7 +799,12 @@ const t = useTranslations(lang);
       requestAnimationFrame(animate);
     }
 
+    let currentWidth = window.innerWidth;
     window.addEventListener("resize", () => {
+      // Ignore vertical-only resizes (address bar toggle)
+      if (window.innerWidth === currentWidth) return;
+      currentWidth = window.innerWidth;
+
       resize();
       init();
     });

@@ -161,6 +161,16 @@ const { title, company, description, link, date } = Astro.props;
     padding: 1.5rem;
     transition: all 0.3s ease;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 150px;
+  }
+
+  @media (max-width: 768px) {
+    .cyber-card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(10, 10, 10, 0.95);
+    }
   }
 
   /* Alternancia */
@@ -189,6 +199,13 @@ const { title, company, description, link, date } = Astro.props;
     transition: transform 0.8s ease;
     z-index: 1;
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .holographic-overlay,
+    .scanlines {
+      display: none !important;
+    }
   }
 
   /* Efecto de scanlines */

@@ -259,7 +259,7 @@ const PROJECTS = [
   /* Grid de proyectos */
   .cyber-projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced min-width for mobile */
     gap: 3rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -271,12 +271,15 @@ const PROJECTS = [
     position: relative;
     background: var(--proj-bg-card);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--proj-border);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: cyber-fade-in 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 1; /* Let SectionContainer handle entrance */
+    transform: none;
+    contain: content; /* Performance optimization */
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 500px;
     clip-path: polygon(
       0 0,
       calc(100% - 25px) 0,
@@ -287,16 +290,23 @@ const PROJECTS = [
     );
   }
 
-  .cyber-project-card:nth-child(1) { animation-delay: 0.1s; }
-  .cyber-project-card:nth-child(2) { animation-delay: 0.2s; }
-  .cyber-project-card:nth-child(3) { animation-delay: 0.3s; }
-  .cyber-project-card:nth-child(4) { animation-delay: 0.4s; }
-  .cyber-project-card:nth-child(5) { animation-delay: 0.5s; }
+  /* Disable heavy blur on mobile */
+  @media (max-width: 768px) {
+    .cyber-project-card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(10, 10, 10, 0.95); /* More opaque */
+    }
+  }
 
-  .cyber-project-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--proj-primary);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+  .cyber-project-card { animation: none !important; }
+
+  @media (hover: hover) {
+    .cyber-project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--proj-primary);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+    }
   }
 
   /* Featured projects */
@@ -345,7 +355,7 @@ const PROJECTS = [
     transform: translateX(100%);
   }
 
-  /* Scanlines effect */
+  /* Scanlines effect - Disable on mobile */
   .cyber-scanlines {
     position: absolute;
     inset: 0;
@@ -358,6 +368,12 @@ const PROJECTS = [
       );
     pointer-events: none;
     z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .cyber-scanlines, .cyber-holo-overlay, .cyber-data-streams {
+      display: none !important;
+    }
   }
 
   /* Image container */

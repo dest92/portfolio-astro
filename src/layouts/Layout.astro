@@ -16,7 +16,7 @@ const lang = Astro.currentLocale || "es";
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -88,6 +88,8 @@ const lang = Astro.currentLocale || "es";
           this.ctx = this.canvas.getContext("2d");
           this.particles = [];
           this.connectionDistance = 150;
+          this.width = window.innerWidth;
+          this.height = window.innerHeight;
 
           this.init();
           this.animate();
@@ -95,12 +97,15 @@ const lang = Astro.currentLocale || "es";
         }
 
         init() {
-          this.canvas.width = window.innerWidth;
-          this.canvas.height = window.innerHeight;
+          this.width = window.innerWidth;
+          this.height = window.innerHeight;
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
 
           // Mobile check
-          const isMobile = window.innerWidth < 768;
-          this.particleCount = isMobile ? 20 : 80; // Significantly reduced for mobile
+          const isMobile = this.width < 768;
+          // Significantly reduced for mobile
+          this.particleCount = isMobile ? 15 : 60;
 
           this.particles = [];
           for (let i = 0; i < this.particleCount; i++) {
@@ -113,17 +118,20 @@ const lang = Astro.currentLocale || "es";
         handleResize() {
           let resizeTimeout;
           window.addEventListener("resize", () => {
+            // Ignore vertical-only resizes (address bar toggle) on mobile
+            if (window.innerWidth === this.width) return;
+
             // Debounce resize
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-              this.init(); // Re-init to adjust particle count based on new width
+              this.init();
             }, 200);
           });
         }
 
         drawConnections() {
           // Skip connections on mobile for performance
-          if (window.innerWidth < 768) return;
+          if (this.width < 768) return;
 
           for (let i = 0; i < this.particles.length; i++) {
             for (let j = i + 1; j < this.particles.length; j++) {
@@ -186,11 +194,13 @@ const lang = Astro.currentLocale || "es";
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           ctx.fill();
 
-          // Add glow effect
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "rgba(0, 255, 65, 0.5)";
-          ctx.fill();
-          ctx.shadowBlur = 0;
+          // Add glow effect - Only on desktop or very sparingly
+          if (window.innerWidth > 768) {
+            ctx.shadowBlur = 5; // Reduced blur radius
+            ctx.shadowColor = "rgba(0, 255, 65, 0.3)";
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
         }
       }
 
@@ -231,7 +241,9 @@ const lang = Astro.currentLocale || "es";
         background-color: transparent;
         min-height: 100vh;
         position: relative;
-        /* overflow-x: hidden; Removed to allow overflow-y: visible and prevent double scrollbar */
+        width: 100%;
+        overflow-y: visible !important; /* Force visible to let html handle scroll */
+        overflow-x: clip; /* Better than hidden for body if needed, otherwise visible */
       }
 
       main {
