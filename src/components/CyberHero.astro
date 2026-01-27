@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
+import { Image } from "astro:assets";
 // import VisitorCount from "./VisitorCount.astro";
 
 // interface Props {
@@ -10,6 +11,8 @@ import { ui } from "../i18n/ui";
 // const { visits } = Astro.props;
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
+
+export const prerender = true;
 ---
 
 <section class="cyber-hero">
@@ -21,7 +24,6 @@ const t = useTranslations(lang);
       <div class="mesh-sphere" id="sphere-2"></div>
       <div class="mesh-sphere" id="sphere-3"></div>
     </div>
-    <canvas class="cyber-particles" id="hero-canvas"></canvas>
     <div class="scanline"></div>
   </div>
 
@@ -97,11 +99,15 @@ const t = useTranslations(lang);
     <div class="profile-section">
       <div class="profile-container">
         <div class="hologram-effect"></div>
-        <img
+        <Image
           src="https://avatars.githubusercontent.com/u/70166802?v=4"
           alt="Matías Acebal"
           class="profile-image"
           loading="eager"
+          width={280}
+          height={280}
+          fetchpriority="high"
+          decoding="async"
         />
         <div class="cyber-ring ring-1"></div>
         <div class="cyber-ring ring-2"></div>
@@ -584,45 +590,33 @@ const t = useTranslations(lang);
   }
 
   /* Glitch Effect */
-  .glitch-text {
-    position: relative;
-  }
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
   .glitch-text::before {
     left: 2px;
     text-shadow: -1px 0 #ff00c1;
-    clip: rect(44px, 450px, 56px, 0);
+    clip-path: inset(44px 0 56px 0);
     animation: glitch-anim-1 5s infinite linear alternate-reverse;
   }
   .glitch-text::after {
     left: -2px;
     text-shadow: -1px 0 #00fff9;
-    clip: rect(44px, 450px, 56px, 0);
+    clip-path: inset(44px 0 56px 0);
     animation: glitch-anim-2 5s infinite linear alternate-reverse;
   }
 
   @keyframes glitch-anim-1 {
     0% {
-      clip: rect(30px, 9999px, 10px, 0);
+      clip-path: inset(30% 0 70% 0);
     }
     100% {
-      clip: rect(70px, 9999px, 90px, 0);
+      clip-path: inset(70% 0 10% 0);
     }
   }
   @keyframes glitch-anim-2 {
     0% {
-      clip: rect(10px, 9999px, 80px, 0);
+      clip-path: inset(10% 0 80% 0);
     }
     100% {
-      clip: rect(90px, 9999px, 10px, 0);
+      clip-path: inset(90% 0 10% 0);
     }
   }
 
@@ -680,30 +674,57 @@ const t = useTranslations(lang);
     }
 
     /* Mobile Performance Optimizations */
+    .cyber-hero {
+      background: #050505;
+    }
+
+    .mesh-gradient,
+    .scanline {
+      display: none !important;
+    }
+
+    .profile-container {
+      width: 250px;
+      height: 250px;
+    }
+    .profile-image {
+      width: 200px;
+      height: 200px;
+    }
+
+    /* Restore visuals with composited-only properties */
     .mesh-sphere {
-      /* Simplify spheres on mobile */
-      filter: blur(20px); /* Reduce blur radius */
-      animation-duration: 0s !important; /* Stop animation */
-      opacity: 0.2;
+      display: block !important;
+      animation: none !important;
+      opacity: 0.15;
+      will-change: transform;
+    }
+
+    .cyber-ring {
+      display: block !important;
+      will-change: transform;
+    }
+
+    .hologram-effect {
+      display: block !important;
+      opacity: 0.5;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      display: none !important; /* Keep glitch off on mobile, it's too much */
     }
 
     .cyber-grid {
-      mask-image: none; /* Remove expensive mask */
+      mask-image: none;
       background-image: linear-gradient(
         rgba(0, 255, 65, 0.05) 1px,
         transparent 1px
       );
       background-size: 40px 40px;
-      transform: none; /* Remove 3D transform */
+      transform: none;
       opacity: 0.3;
-    }
-
-    .scanline {
-      display: none; /* Remove scanline animation */
-    }
-
-    .hologram-effect {
-      display: none; /* Remove hologram effect */
+      animation: none !important;
     }
   }
 </style>
@@ -729,93 +750,7 @@ const t = useTranslations(lang);
     }
   }
 
-  function initializeParticles() {
-    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let particles: Particle[] = [];
-    // Optimize particle count for mobile
-    const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 10 : 40;
-
-    class Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5 + 0.2;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x > canvas.width) this.x = 0;
-        else if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        else if (this.y < 0) this.y = canvas.height;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.fillStyle = `rgba(0, 255, 65, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    function init() {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animate() {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    let currentWidth = window.innerWidth;
-    window.addEventListener("resize", () => {
-      // Ignore vertical-only resizes (address bar toggle)
-      if (window.innerWidth === currentWidth) return;
-      currentWidth = window.innerWidth;
-
-      resize();
-      init();
-    });
-
-    resize();
-    init();
-    animate();
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     initializeButtons();
-    initializeParticles();
   });
 </script>

@@ -2,9 +2,12 @@
 import Modal from "./Modal.astro";
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
+import { Image } from "astro:assets";
 
 const lang = (Astro.currentLocale || 'es') as keyof typeof ui;
 const t = useTranslations(lang);
+
+export const prerender = true;
 
 const certificados = [
   {
@@ -138,11 +141,13 @@ const getLevelColor = (level: string) => {
           <!-- Certificate Image -->
           <div class="cyber-image-container">
             <div class="cyber-image-frame">
-              <img
+              <Image
                 src={src}
                 alt={`Certificado de ${description}`}
                 class="cyber-certificate-image"
                 loading="lazy"
+                width={400}
+                height={250}
               />
               <div class="cyber-image-overlay"></div>
             </div>

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 interface Props {
   id: string;
   certificate: {
@@ -122,10 +123,12 @@ const getLevelColor = (level: string) => {
           <div
             class="relative rounded-xl overflow-hidden border-2 border-[#00ff41]/30 hover:border-[#00ff41]/60 transition-all duration-500 cyber-glow-image"
           >
-            <img
+            <Image
               src={certificate.src}
               alt={`Certificado de ${certificate.description}`}
               class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              width={800}
+              height={500}
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent"

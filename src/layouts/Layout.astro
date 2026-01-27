@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import VerificationOverlay from "../components/VerificationOverlay.astro";
+import "@fontsource-variable/onest";
 
 export interface Props {
   title: string;
@@ -23,12 +24,7 @@ const lang = Astro.currentLocale || "es";
     <script is:inline>
       document.documentElement.classList.add("dark");
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    {/* Font is now handled by @fontsource-variable/onest import */}
   </head>
 
   <body class="relative text-white">
@@ -42,16 +38,12 @@ const lang = Astro.currentLocale || "es";
       <div class="fog-layer fog-2"></div>
       <div class="fog-layer fog-3"></div>
 
-      <!-- Dynamic Gradient Blobs -->
+      <!-- Dynamic Gradient Blobs - Reduced count for performance -->
       <div class="global-glows">
         <div class="glow-blob blob-1"></div>
         <div class="glow-blob blob-2"></div>
         <div class="glow-blob blob-3"></div>
         <div class="glow-blob blob-4"></div>
-        <div class="glow-blob blob-5"></div>
-        <div class="glow-blob blob-6"></div>
-        <div class="glow-blob blob-7"></div>
-        <div class="glow-blob blob-8"></div>
       </div>
 
       <!-- Floating Particles Canvas -->
@@ -102,10 +94,14 @@ const lang = Astro.currentLocale || "es";
           this.canvas.width = this.width;
           this.canvas.height = this.height;
 
-          // Mobile check
+          // Critical: Disable completely on mobile to save CPU/TBT
           const isMobile = this.width < 768;
-          // Significantly reduced for mobile
-          this.particleCount = isMobile ? 15 : 60;
+          if (isMobile) {
+            this.canvas.style.display = "none";
+            return;
+          }
+
+          this.particleCount = 60;
 
           this.particles = [];
           for (let i = 0; i < this.particleCount; i++) {
@@ -153,6 +149,8 @@ const lang = Astro.currentLocale || "es";
         }
 
         animate() {
+          if (this.width < 768) return; // Never run loop on mobile
+
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
           this.drawConnections();
@@ -416,66 +414,6 @@ const lang = Astro.currentLocale || "es";
         animation-delay: -30s;
       }
 
-      .blob-5 {
-        width: 900px;
-        height: 900px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 255, 65, 0.25) 0%,
-          rgba(0, 150, 40, 0.08) 40%,
-          transparent 70%
-        );
-        top: 40%;
-        left: 20%;
-        animation-duration: 60s;
-        animation-delay: -15s;
-      }
-
-      .blob-6 {
-        width: 1100px;
-        height: 1100px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 180, 45, 0.3) 0%,
-          rgba(0, 90, 25, 0.1) 40%,
-          transparent 70%
-        );
-        top: 60%;
-        right: 25%;
-        animation-duration: 48s;
-        animation-delay: -25s;
-      }
-
-      .blob-7 {
-        width: 850px;
-        height: 850px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 255, 100, 0.2) 0%,
-          rgba(0, 120, 35, 0.08) 40%,
-          transparent 70%
-        );
-        top: 80%;
-        left: 40%;
-        animation-duration: 52s;
-        animation-delay: -35s;
-      }
-
-      .blob-8 {
-        width: 950px;
-        height: 950px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 150, 40, 0.25) 0%,
-          rgba(0, 70, 20, 0.1) 40%,
-          transparent 70%
-        );
-        top: 5%;
-        right: 40%;
-        animation-duration: 58s;
-        animation-delay: -18s;
-      }
-
       @keyframes float-glow-smooth {
         0% {
           transform: translate(0, 0) scale(1) rotate(0deg);
@@ -690,10 +628,16 @@ const lang = Astro.currentLocale || "es";
           bottom: 0;
           background: radial-gradient(
             circle at 50% 50%,
-            rgba(0, 255, 65, 0.1) 0%,
-            transparent 60%
+            rgba(0, 255, 65, 0.05) 0%,
+            transparent 70%
           );
           pointer-events: none;
+        }
+
+        /* Minimize all expensive properties */
+        .scanline-global,
+        .vignette-overlay {
+          display: none !important;
         }
       }
 

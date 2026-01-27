@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
+import { Image } from "astro:assets";
 
 const lang = (Astro.currentLocale || "es") as keyof typeof ui;
 const t = useTranslations(lang);
@@ -22,7 +23,13 @@ const t = useTranslations(lang);
           <div class="cyber-avatar-container">
             <div class="cyber-avatar-ring"></div>
             <div class="cyber-avatar-glow"></div>
-            <img src="/me.jpg" alt="Matías Acebal" class="cyber-avatar" />
+            <Image
+              src="/me.jpg"
+              alt="Matías Acebal"
+              class="cyber-avatar"
+              width={120}
+              height={120}
+            />
             <div class="cyber-avatar-pulse"></div>
           </div>
 

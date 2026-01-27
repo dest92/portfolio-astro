@@ -8,9 +8,12 @@ import Link from "./icons/Link.astro";
 import NestJS from "./icons/NestJSIcon.astro";
 import { useTranslations } from "../i18n/utils";
 import { ui } from "../i18n/ui";
+import { Image } from "astro:assets";
 
 const lang = (Astro.currentLocale || 'es') as keyof typeof ui;
 const t = useTranslations(lang);
+
+export const prerender = true;
 
 const TAGS = {
   NEXT: {
@@ -158,11 +161,13 @@ const PROJECTS = [
         <!-- Project Image -->
         <div class="cyber-image-container">
           <div class="cyber-image-frame">
-            <img
+            <Image
               src={image}
               alt={`Captura de pantalla del proyecto ${title}`}
               class="cyber-project-image"
               loading="lazy"
+              width={600}
+              height={300}
             />
             <div class="cyber-image-overlay"></div>
           </div>
