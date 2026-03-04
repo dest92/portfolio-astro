@@ -116,6 +116,8 @@ export const ui = {
     "projects.view_code": "CÓDIGO",
     "projects.view_project": "VER PROYECTO",
     "projects.featured": "DESTACADO",
+    "projects.ambulancias.description":
+      "Landing page profesional para Ambulancias Pacífico, diseñada para destacar sus servicios de atención médica de emergencia con un enfoque moderno y accesible.",
 
     // Certificates
     "certificates.title": "Certificaciones y Cursos",
@@ -330,7 +332,8 @@ export const ui = {
     "projects.view_code": "CODE",
     "projects.view_project": "VIEW PROJECT",
     "projects.featured": "FEATURED",
-
+    "projects.ambulancias.description":
+      "Professional landing page for Ambulancias Pacífico, designed to highlight their emergency medical care services with a modern and accessible approach.",
     // Certificates
     "certificates.title": "Certifications & Courses",
     "certificates.subtitle":
